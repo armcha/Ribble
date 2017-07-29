@@ -1,0 +1,50 @@
+allprojects {
+  repositories {
+    jcenter()
+  }
+}
+
+ext {
+
+  //Android
+  androidBuildToolsVersion = "26.0.1"
+  androidMinSdkVersion = 16
+  androidTargetSdkVersion = 26
+  androidCompileSdkVersion = 26
+
+  //Libraries
+  butterKnifeVersion = '8.7.0'
+  butterKnifeCompilerVersion = '8.7.0'
+  rxJavaVersion = '2.1.2'
+  rxAndroidVersion = '2.0.1'
+  supportLibVersion = '26.0.0'
+  rxBindingVersion = '1.0.0'
+  retrofitVersion = '2.3.0'
+  loggerVersion = '2.1.0'
+
+  presentationDependencies = [
+      butterKnife:         "com.jakewharton:butterknife:${butterKnifeVersion}",
+      butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeCompilerVersion}",
+      rxJava:              "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+      rxAndroid:           "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+      rxBinding:           "com.jakewharton.rxbinding:rxbinding-support-v4:${rxBindingVersion}",
+      retrofit:            "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+      logger:              "com.github.armcha:Logger:${loggerVersion}",
+      support:             "com.android.support:support-v4:${supportLibVersion}",
+      appcompat:           "com.android.support:appcompat-v7:${supportLibVersion}",
+      cardview:            "com.android.support:cardview-v7:${supportLibVersion}",
+      design:              "com.android.support:design:${supportLibVersion}",
+      constraintLayout:    "com.android.support.constraint:constraint-layout:1.0.2",
+  ]
+
+  domainDependencies = [
+      rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+  ]
+
+  dataDependencies = [
+      //okHttp:             "com.squareup.okhttp:okhttp:${okHttpVersion}",
+      //gson:               "com.google.code.gson:gson:${gsonVersion}",
+      rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+      rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+  ]
+}

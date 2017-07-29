@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+    defaultConfig {
+        applicationId globalConfiguration.getAt("androidApplicationId")
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def presentationDependencies = rootProject.ext.presentationDependencies
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Support
+    implementation presentationDependencies.support
+    implementation presentationDependencies.appcompat
+    implementation presentationDependencies.cardview
+    implementation presentationDependencies.design
+    implementation presentationDependencies.constraintLayout
+
+    //RX
+    implementation presentationDependencies.rxJava
+    implementation presentationDependencies.rxAndroid
+    implementation presentationDependencies.rxBinding
+
+    //Network
+    implementation presentationDependencies.retrofit
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    //Butter knife
+    implementation presentationDependencies.butterKnife
+    annotationProcessor presentationDependencies.butterKnifeCompiler
+
+    //Logging
+    implementation presentationDependencies.logger
+
+    //Testing
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
+}

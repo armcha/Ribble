@@ -2,7 +2,7 @@ package com.luseen.ribble.di.component
 
 import com.luseen.ribble.di.module.ActivityModule
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.presentation.HomeActivity
+import com.luseen.ribble.presentation.home.HomeActivity
 import dagger.Component
 
 /**

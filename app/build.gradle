@@ -48,9 +48,13 @@ ext.rxBindingVersion = '2.0.0'
 ext.retrofitVersion = '2.3.0'
 ext.loggerVersion = '2.1.0'
 ext.daggerVersion = '2.11'
+ext.archVersion = '1.0.0-alpha7'
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Base MVP
+    implementation project(':baseMVP')
 
     //Support
     implementation "com.android.support:support-v4:${supportLibVersion}"
@@ -58,6 +62,11 @@ dependencies {
     implementation "com.android.support:cardview-v7:${supportLibVersion}"
     implementation "com.android.support:design:${supportLibVersion}"
     implementation "com.android.support.constraint:constraint-layout:1.0.2"
+
+    //Architecture components
+    implementation "android.arch.lifecycle:runtime:${archVersion}"
+    implementation "android.arch.lifecycle:extensions:${archVersion}"
+    kapt "android.arch.lifecycle:compiler:${archVersion}"
 
     //RX
     implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"

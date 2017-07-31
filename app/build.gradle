@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -23,10 +22,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    packagingOptions {
-        exclude 'META-INF/rxjava.properties'
-    }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -37,6 +32,10 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+}
+
+kapt {
+    generateStubs = true
 }
 
 ext.okhttpVersion = '3.8.1'

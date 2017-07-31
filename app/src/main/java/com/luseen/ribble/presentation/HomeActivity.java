@@ -2,14 +2,16 @@ package com.luseen.ribble.presentation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 
 import com.luseen.logger.Logger;
 import com.luseen.ribble.App;
 import com.luseen.ribble.R;
 import com.luseen.ribble.data.entity.Shot;
-import com.luseen.ribble.data.network.Api;
 import com.luseen.ribble.data.network.ApiService;
 import com.luseen.ribble.data.pref.Preferences;
+import com.luseen.ribble.di.component.ActivityComponent;
+import com.luseen.ribble.di.module.ActivityModule;
 import com.luseen.ribble.presentation.base.BaseActivity;
 
 import java.util.List;
@@ -28,14 +30,19 @@ public class HomeActivity extends BaseActivity {
     @Inject
     protected Preferences preferences;
 
+    @Inject
+    protected LayoutInflater inflater;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        getAppComponent().inject(this);
+        getActivityComponent().inject(this);
 
         Logger.log(apiService);
         Logger.log(preferences);
+        Logger.log(inflater);
         apiService.getShots(20,"c14f402db06bc15be330b7a4fd049d1ca88fe5fa23892c073ca97dc422cfe9ee")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

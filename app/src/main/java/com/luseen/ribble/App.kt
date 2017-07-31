@@ -3,10 +3,12 @@ package com.luseen.ribble
 import android.app.Application
 import com.luseen.logger.LogType
 import com.luseen.logger.Logger
-import com.luseen.ribble.di.component.ApplicationComponent
-import com.luseen.ribble.di.component.DaggerApplicationComponent
-import com.luseen.ribble.di.module.ApiModule
-import com.luseen.ribble.di.module.ApplicationModule
+import com.luseen.ribble.di.component.AppComponent
+import com.luseen.ribble.di.component.DaggerAppComponent
+import com.luseen.ribble.di.module.AppModule
+import com.luseen.ribble.di.module.HostModule
+import com.luseen.ribble.di.module.OkHttpModule
+import com.luseen.ribble.di.module.RetroFitModule
 
 
 /**
@@ -14,7 +16,7 @@ import com.luseen.ribble.di.module.ApplicationModule
  */
 class App : Application() {
 
-    lateinit var applicationComponent: ApplicationComponent
+    lateinit var appComponent: AppComponent
 
     companion object {
         @JvmStatic
@@ -36,10 +38,13 @@ class App : Application() {
                 .build()
     }
 
-    private fun initApplicationComponent(){
-        applicationComponent =  DaggerApplicationComponent.builder()
-                .applicationModule(ApplicationModule(this))
+    private fun initApplicationComponent() {
+        appComponent = DaggerAppComponent.builder()
+                .appModule(AppModule(this))
+                .hostModule(HostModule())
+                .okHttpModule(OkHttpModule())
+                .retroFitModule(RetroFitModule())
                 .build()
-        applicationComponent.inject(this)
+        appComponent.inject(this)
     }
 }

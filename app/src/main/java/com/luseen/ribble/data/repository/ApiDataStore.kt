@@ -1,5 +1,6 @@
 package com.luseen.ribble.data.repository
 
+import com.luseen.ribble.data.entity.Shot
 import io.reactivex.Observable
 
 /**
@@ -7,7 +8,7 @@ import io.reactivex.Observable
  */
 class ApiDataStore : ShotDataStore {
 
-    override fun getShotList(): Observable<List<Any>> {
+    override fun getShotList(): Observable<List<Shot>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

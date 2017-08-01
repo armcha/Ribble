@@ -9,9 +9,11 @@ interface HomeContract {
 
     interface View : BaseContract.View {
 
+        fun openShotFragment()
     }
 
     interface Presenter : BaseContract.Presenter<View> {
+
 
     }
 }

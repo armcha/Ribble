@@ -1,5 +1,6 @@
 package com.luseen.ribble.data.repository
 
+import com.luseen.ribble.data.entity.Shot
 import io.reactivex.Observable
 
 /**
@@ -7,7 +8,7 @@ import io.reactivex.Observable
  */
 class LocaleDataStore : ShotDataStore {
 
-    override fun getShotList(): Observable<List<Any>> {
+    override fun getShotList(): Observable<List<Shot>> {
         return null!!
     }
 }

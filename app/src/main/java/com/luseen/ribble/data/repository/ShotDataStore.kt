@@ -1,5 +1,6 @@
 package com.luseen.ribble.data.repository
 
+import com.luseen.ribble.data.entity.Shot
 import io.reactivex.Observable
 
 /**
@@ -7,5 +8,5 @@ import io.reactivex.Observable
  */
 interface ShotDataStore {
 
-    fun getShotList(): Observable<List<Any>>
+    fun getShotList(): Observable<List<Shot>>
 }

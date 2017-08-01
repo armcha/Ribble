@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Module
 class RetroFitModule {
 
-    @Singleton
+    @Singleton  
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit {
         return Retrofit.Builder()

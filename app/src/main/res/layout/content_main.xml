@@ -8,4 +8,9 @@
     tools:context="com.luseen.ribble.presentation.home.HomeActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container"/>
+
 </android.support.constraint.ConstraintLayout>

@@ -1,8 +1,7 @@
 package com.luseen.ribble.data.network
 
-import com.luseen.ribble.data.entity.Shot
+import com.luseen.ribble.data.entity.ShotEntity
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,5 +11,6 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("shots?")
-    fun getShots(@Query("per_page") limit: Int = 100, @Query("access_token") token: String):Flowable<MutableList<Shot>>
+    fun getShots(@Query("per_page") limit: Int,
+                 @Query("access_token") token: String = ApiConstants.TOKEN):Flowable<List<ShotEntity>>
 }

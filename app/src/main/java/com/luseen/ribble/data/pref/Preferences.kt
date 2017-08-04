@@ -14,4 +14,6 @@ class Preferences @Inject constructor(app: Application) {
     init {
         Logger.log(app)
     }
+
+    fun getSomeBool():Boolean = true //TODO fix
 }

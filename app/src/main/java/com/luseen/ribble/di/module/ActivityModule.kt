@@ -28,16 +28,4 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun providesFragmentManager(activity: AppCompatActivity): FragmentManager {
         return activity.supportFragmentManager
     }
-
-//    @PerActivity
-//    @Provides
-//    fun providesHomePresenter(presenter: HomeContract.Presenter): HomeContract.Presenter {
-//        return presenter
-//    }
-//
-//    @PerActivity
-//    @Provides
-//    fun providesShotPresenter(presenter: ShotPresenter): ShotPresenter {
-//        return presenter
-//    }
 }

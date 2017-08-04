@@ -2,8 +2,8 @@ package com.luseen.ribble.di.component
 
 import com.luseen.ribble.di.module.ActivityModule
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.presentation.home.HomeActivity
-import com.luseen.ribble.presentation.shot.ShotFragment
+import com.luseen.ribble.presentation.screens.home.HomeActivity
+import com.luseen.ribble.presentation.screens.shot.ShotFragment
 import dagger.Component
 
 /**
@@ -11,7 +11,7 @@ import dagger.Component
  */
 
 @PerActivity
-@Component(dependencies = arrayOf(AppComponent::class), modules = arrayOf(ActivityModule::class))
+@Component(dependencies = arrayOf(ApplicationComponent::class), modules = arrayOf(ActivityModule::class))
 interface ActivityComponent {
 
     fun inject(homeActivity: HomeActivity)

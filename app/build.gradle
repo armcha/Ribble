@@ -46,7 +46,7 @@ ext.rxAndroidVersion = '2.0.1'
 ext.supportLibVersion = '26.0.0'
 ext.rxBindingVersion = '2.0.0'
 ext.retrofitVersion = '2.3.0'
-ext.loggerVersion = '2.1.0'
+ext.loggerVersion = '2.2.0'
 ext.daggerVersion = '2.11'
 ext.archVersion = '1.0.0-alpha7'
 dependencies {

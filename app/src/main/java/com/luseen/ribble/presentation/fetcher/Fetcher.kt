@@ -12,30 +12,30 @@ import javax.inject.Singleton
  * Created by Chatikyan on 04.08.2017.
  */
 @Singleton
-class Fetcher @Inject constructor(){
+class Fetcher @Inject constructor(){ //TODO move to appModule
 
     fun <T> fetch(flowable: Flowable<T>, resultListener: ResultListener) {
         with(resultListener) {
-            onStart()
+            onRequestStart()
             flowable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        onSuccess(it)
+                        onRequestSuccess(it)
                     }, {
-                        onError(it.message)
+                        onRequestError(it.message)
                     })
         }
     }
 
     fun <T> fetch(observable: Observable<T>, resultListener: ResultListener) {
         with(resultListener) {
-            onStart()
+            onRequestStart()
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        onSuccess(it)
+                        onRequestSuccess(it)
                     }, {
-                        onError(it.message)
+                        onRequestError(it.message)
                     })
         }
     }

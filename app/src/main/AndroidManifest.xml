@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.luseen.ribble.presentation.screens.home.HomeActivity"
+            android:name=".presentation.screen.home.HomeActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,6 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.screen.shot_detail.ShotDetailActivity"></activity>
     </application>
 
 </manifest>

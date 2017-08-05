@@ -1,5 +1,6 @@
 package com.luseen.ribble.domain.repository
 
+import com.luseen.ribble.presentation.model.Like
 import com.luseen.ribble.presentation.model.Shot
 import io.reactivex.Flowable
 
@@ -9,6 +10,8 @@ import io.reactivex.Flowable
 interface ShotRepository {
 
     fun getShotList(count:Int): Flowable<List<Shot>>
+
+    fun getShotLikes(shotId:String): Flowable<List<Like>>
 
     fun getSomeDataFromPref(): Boolean
 }

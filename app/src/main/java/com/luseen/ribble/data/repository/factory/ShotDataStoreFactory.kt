@@ -15,4 +15,8 @@ class ShotDataStoreFactory @Inject constructor(private val apiDataStore: ApiData
         //TODO() Add local
         return apiDataStore
     }
+
+    fun createApiDataStore(): ShotDataStore {
+        return apiDataStore
+    }
 }

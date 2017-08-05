@@ -1,5 +1,6 @@
 package com.luseen.ribble.data.repository.data_store
 
+import com.luseen.ribble.data.entity.LikeEntity
 import com.luseen.ribble.data.entity.ShotEntity
 import io.reactivex.Flowable
 
@@ -9,4 +10,6 @@ import io.reactivex.Flowable
 interface ShotDataStore {
 
     fun getShotList(count:Int): Flowable<List<ShotEntity>>
+
+    fun getShotLikes(shotId:String): Flowable<List<LikeEntity>>
 }

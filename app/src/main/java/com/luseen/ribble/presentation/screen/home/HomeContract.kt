@@ -1,4 +1,4 @@
-package com.luseen.ribble.presentation.screens.home
+package com.luseen.ribble.presentation.screen.home
 
 import com.luseen.ribble.presentation.base_mvp.base.BaseContract
 

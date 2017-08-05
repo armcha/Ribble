@@ -1,5 +1,6 @@
 package com.luseen.ribble.data.repository.data_store
 
+import com.luseen.ribble.data.entity.LikeEntity
 import com.luseen.ribble.data.entity.ShotEntity
 import com.luseen.ribble.data.network.ApiService
 import io.reactivex.Flowable
@@ -15,5 +16,9 @@ class ApiDataStore @Inject constructor(private val apiService: ApiService) : Sho
     override fun getShotList(count: Int): Flowable<List<ShotEntity>> {
         return apiService.getShots(count)
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getShotLikes(shotId: String): Flowable<List<LikeEntity>> {
+        return apiService.getShotLikes(shotId)
     }
 }

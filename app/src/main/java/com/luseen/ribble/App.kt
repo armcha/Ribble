@@ -14,7 +14,12 @@ import com.luseen.ribble.di.module.ApplicationModule
  */
 class App : Application() {
 
-    lateinit var applicationComponent: ApplicationComponent
+    val applicationComponent: ApplicationComponent by lazy {
+        DaggerApplicationComponent.builder()
+                .applicationModule(ApplicationModule(this))
+                .apiModule(ApiModule())
+                .build()
+    }
 
     companion object {
         @JvmStatic
@@ -24,7 +29,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        initApplicationComponent()
+        applicationComponent.inject(this)
         initLogger()
     }
 
@@ -33,15 +38,7 @@ class App : Application() {
                 .isLoggable(BuildConfig.DEBUG)
                 .logType(LogType.ERROR)
                 .tag("Ribble")
+                .setIsKotlin(true)
                 .build()
-    }
-
-    private fun initApplicationComponent() {
-        applicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(ApplicationModule(this))
-                .apiModule(ApiModule())
-                .build()
-
-        applicationComponent.inject(this)
     }
 }

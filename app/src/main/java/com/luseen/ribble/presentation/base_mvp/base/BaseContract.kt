@@ -9,5 +9,5 @@ interface BaseContract {
 
     interface View : BaseMVPContract.View
 
-    interface Presenter<V : View> : BaseMVPContract.Presenter<V>
+    interface Presenter<V : BaseMVPContract.View> : BaseMVPContract.Presenter<V>
 }

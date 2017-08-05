@@ -5,9 +5,9 @@ package com.luseen.ribble.presentation.base_mvp.result_listener
  */
 interface ResultListener {
 
-    fun onStart()
+    fun onRequestStart()
 
-    fun <T> onSuccess(data: T)
+    fun <T> onRequestSuccess(data: T)
 
-    fun onError(errorMessage: String?)
+    fun onRequestError(errorMessage: String?)
 }

@@ -1,4 +1,4 @@
-package com.luseen.ribble.presentation.screens.home
+package com.luseen.ribble.presentation.screen.home
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
@@ -15,6 +15,13 @@ class HomePresenter @Inject constructor() : BasePresenter<HomeContract.View>(),
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_CREATE)
     fun onCreate() {
+        //view.openShotFragment()
+
+    }
+
+    override fun onPresenterCreate() {
+        super.onPresenterCreate()
         view.openShotFragment()
     }
+
 }

@@ -1,4 +1,4 @@
-package com.luseen.ribble.presentation.screens.home
+package com.luseen.ribble.presentation.screen.home
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
-import com.luseen.ribble.presentation.screens.shot.ShotFragment
+import com.luseen.ribble.presentation.screen.shot.ShotFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import javax.inject.Inject

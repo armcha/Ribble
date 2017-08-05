@@ -10,10 +10,14 @@ import com.luseen.ribble.di.module.ActivityModule
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>> : BaseMVPActivity<V, P>() {
 
-    lateinit var activityComponent: ActivityComponent
+    val activityComponent: ActivityComponent by lazy {
+        DaggerActivityComponent.builder()
+                .activityModule(ActivityModule(this))
+                .applicationComponent(getAppComponent())
+                .build()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        initActivityComponent()
         injectDependencies()
         super.onCreate(savedInstanceState)
     }
@@ -23,12 +27,4 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
     private fun getAppComponent(): ApplicationComponent {
         return App.instance.applicationComponent
     }
-
-    private fun initActivityComponent() {
-        activityComponent = DaggerActivityComponent.builder()
-                .activityModule(ActivityModule(this))
-                .applicationComponent(getAppComponent())
-                .build()
-    }
-
 }

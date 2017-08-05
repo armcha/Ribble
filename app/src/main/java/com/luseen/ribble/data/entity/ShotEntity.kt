@@ -9,6 +9,9 @@ import com.google.gson.annotations.SerializedName
  */
 class ShotEntity {
 
+    @SerializedName("id")
+    @Expose
+    val id: String? = null
     @SerializedName("title")
     @Expose
     val title: String? = null

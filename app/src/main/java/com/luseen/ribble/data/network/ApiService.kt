@@ -16,9 +16,13 @@ interface ApiService {
     fun getShots(@Query("per_page") limit: Int,
                  @Query("access_token") token: String = ApiConstants.TOKEN): Flowable<List<ShotEntity>>
 
-    @GET("shots/{shot_id}/comments?")
-    fun getShotComments(@Path("shot_id") shotId: String)
-
     @GET("shots/{shot_id}/likes?")
-    fun getShotLikes(@Path("shot_id") shotId: String): Flowable<List<LikeEntity>>
+    fun getShotLikes(@Path("shot_id") shotId: String,
+                     @Query("per_page") limit: Int = 500,
+                     @Query("access_token") token: String = ApiConstants.TOKEN): Flowable<List<LikeEntity>>
+
+    @GET("shots/{shot_id}/comments?")
+    fun getShotComments(@Path("shot_id") shotId: String,
+                        @Query("access_token") token: String = ApiConstants.TOKEN)
+
 }

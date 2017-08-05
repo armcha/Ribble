@@ -13,7 +13,7 @@ class ShotMapper {
     @JvmName("translateShotEntity")
     fun translate(shotEntityList: List<ShotEntity>): List<Shot> {
         return shotEntityList.map {
-            Shot(it.title)
+            Shot(it.title, it.id)
         }
     }
 

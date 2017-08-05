@@ -9,5 +9,8 @@ interface ShotDetailContract {
 
     interface View : BaseContract.View
 
-    interface Presenter : BaseContract.Presenter<View>
+    interface Presenter : BaseContract.Presenter<View> {
+
+        fun fetchLikes(shotId: String?)
+    }
 }

@@ -4,19 +4,22 @@ import com.luseen.ribble.data.db.DbHelper
 import com.luseen.ribble.data.entity.LikeEntity
 import com.luseen.ribble.data.entity.ShotEntity
 import io.reactivex.Flowable
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by Chatikyan on 29.07.2017.
  */
-class LocaleDataStore : ShotDataStore {
+@Singleton
+class LocaleDataStore @Inject constructor() : ShotDataStore {
 
     private var dbHelper: DbHelper? = null
 
     override fun getShotList(count: Int): Flowable<List<ShotEntity>> {
-        return null!!
+        null!!
     }
 
     override fun getShotLikes(shotId: String): Flowable<List<LikeEntity>> {
-        throw UnsupportedOperationException("Always get it from Api")
+        throw UnsupportedOperationException("Always get likes from Api")
     }
 }

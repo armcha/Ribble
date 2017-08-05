@@ -15,7 +15,7 @@ class ApiDataStore @Inject constructor(private val apiService: ApiService) : Sho
 
     override fun getShotList(count: Int): Flowable<List<ShotEntity>> {
         return apiService.getShots(count)
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO("not implemented")
     }
 
     override fun getShotLikes(shotId: String): Flowable<List<LikeEntity>> {

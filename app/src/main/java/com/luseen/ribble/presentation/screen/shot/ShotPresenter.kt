@@ -40,7 +40,7 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
     }
 
     override fun onRequestError(errorMessage: String?) {
-        Logger.log("onError ${errorMessage}")
+        Logger.log("onError $errorMessage")
         view?.showError()
         view?.hideLoading()
     }

@@ -2,6 +2,7 @@ package com.luseen.ribble.di.module
 
 import com.luseen.ribble.BuildConfig
 import com.luseen.ribble.data.network.ApiConstants
+import com.luseen.ribble.data.network.ApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -30,7 +31,7 @@ class ApiModule {
         val okHttpBuilder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
             val logging = HttpLoggingInterceptor()
-            logging.level = HttpLoggingInterceptor.Level.BODY
+            logging.level = HttpLoggingInterceptor.Level.BASIC
             okHttpBuilder.addInterceptor(logging)
         }
         okHttpBuilder.readTimeout(15.toLong(), TimeUnit.SECONDS)
@@ -47,5 +48,11 @@ class ApiModule {
                 .baseUrl(baseUrl)
                 .client(okHttpClient)
                 .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }

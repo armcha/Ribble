@@ -14,6 +14,7 @@ interface ApiService {
 
     @GET("shots?")
     fun getShots(@Query("per_page") limit: Int,
+                 @Query("sort") sortType: String,
                  @Query("access_token") token: String = ApiConstants.TOKEN): Flowable<List<ShotEntity>>
 
     @GET("shots/{shot_id}/likes?")

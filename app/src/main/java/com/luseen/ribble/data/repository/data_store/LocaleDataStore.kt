@@ -15,7 +15,7 @@ class LocaleDataStore @Inject constructor() : ShotDataStore {
 
     private var dbHelper: DbHelper? = null
 
-    override fun getShotList(count: Int): Flowable<List<ShotEntity>> {
+    override fun getShotList(shotType:String,count: Int): Flowable<List<ShotEntity>> {
         null!!
     }
 

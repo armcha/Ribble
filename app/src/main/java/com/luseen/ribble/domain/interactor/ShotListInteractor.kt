@@ -1,6 +1,7 @@
 package com.luseen.ribble.domain.interactor
 
 import com.luseen.ribble.data.ShotDataRepository
+import com.luseen.ribble.data.network.ApiConstants
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.presentation.model.Shot
 import io.reactivex.Flowable
@@ -12,7 +13,12 @@ import javax.inject.Inject
 @PerActivity
 class ShotListInteractor @Inject constructor(private val shotRepository: ShotDataRepository) {
 
-    fun getShotList(count:Int = 50): Flowable<List<Shot>> {
-        return shotRepository.getShotList(count)
+    fun getPopularShotList(count: Int = 500): Flowable<List<Shot>> {
+        return shotRepository.getShotList(ApiConstants.TYPE_POPULAR, count)
     }
+
+    fun getRecentShotList(count: Int = 500): Flowable<List<Shot>> {
+        return shotRepository.getShotList(ApiConstants.TYPE_RECENT, count)
+    }
+
 }

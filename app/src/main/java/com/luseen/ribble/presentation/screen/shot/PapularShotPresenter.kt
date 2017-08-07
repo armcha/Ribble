@@ -13,7 +13,7 @@ import javax.inject.Inject
  * Created by Chatikyan on 01.08.2017.
  */
 @PerActivity
-class ShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor) : ApiPresenter<ShotContract.View>(), ShotContract.Presenter {
+class PapularShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor) : ApiPresenter<PapularShotContract.View>(), PapularShotContract.Presenter {
 
     private var shotList: MutableList<Shot> = arrayListOf()
 
@@ -24,7 +24,7 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        fetch(shotListInteractor.getShotList())
+        fetch(shotListInteractor.getRecentShotList())
     }
 
     override fun onRequestStart() {

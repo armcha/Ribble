@@ -3,9 +3,7 @@ package com.luseen.ribble.presentation.screen.shot
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.luseen.logger.Logger
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.adapter.ShotRecyclerViewAdapter
@@ -17,29 +15,29 @@ import kotlinx.android.synthetic.main.fragment_shot.*
 import javax.inject.Inject
 
 
-class ShotFragment : BaseFragment<ShotContract.View, ShotContract.Presenter>(),
-        ShotContract.View, ShotClickListener {
+class PapularShotFragment : BaseFragment<PapularShotContract.View, PapularShotContract.Presenter>(),
+        PapularShotContract.View, ShotClickListener {
 
     @Inject
-    protected lateinit var shotPresenter: ShotPresenter
-
-    override fun initPresenter(): ShotContract.Presenter = shotPresenter
-
-    private var shotList: MutableList<Shot> = arrayListOf()
+    protected lateinit var papularShotPresenter: PapularShotPresenter
 
     private var recyclerAdapter: ShotRecyclerViewAdapter? = null
+    private var shotList: MutableList<Shot> = mutableListOf()
 
     companion object {
         const val SHOT_EXTRA_ID = "shot_extra_id"
-        fun newInstance(): ShotFragment {
-            return ShotFragment()
+
+        fun newInstance(): PapularShotFragment {
+            val fragment = PapularShotFragment()
+            return fragment
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_shot, container, false)
-    }
+    override fun initPresenter(): PapularShotContract.Presenter = papularShotPresenter
+
+    override fun layoutResId(): Int = R.layout.fragment_shot
+
+    override fun injectDependencies() = activityComponent.inject(this)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,13 +50,9 @@ class ShotFragment : BaseFragment<ShotContract.View, ShotContract.Presenter>(),
     }
 
     private fun setUpRecyclerView(shotList: MutableList<Shot>) {
-        recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)//TODO
+        recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)
         shotRecyclerView.layoutManager = LinearLayoutManager(activity)
         shotRecyclerView.adapter = recyclerAdapter
-    }
-
-    override fun injectDependencies() {
-        activityComponent.inject(this)
     }
 
     override fun onShotClicked(shot: Shot) {

@@ -19,9 +19,9 @@ class ShotDataRepository @Inject constructor(private var shotDataStoreFactory: S
                                              private var preferences: Preferences,
                                              private var mapper: ShotMapper) : ShotRepository {
 
-    override fun getShotList(count: Int): Flowable<List<Shot>> {
+    override fun getShotList(shotType: String, count: Int): Flowable<List<Shot>> {
         val shotDataStore: ShotDataStore = shotDataStoreFactory.create()
-        return shotDataStore.getShotList(count).map { mapper.translate(it) }
+        return shotDataStore.getShotList(shotType, count).map { mapper.translate(it) }
     }
 
     override fun getShotLikes(shotId: String): Flowable<List<Like>> {

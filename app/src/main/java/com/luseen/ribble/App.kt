@@ -5,7 +5,6 @@ import com.luseen.logger.LogType
 import com.luseen.logger.Logger
 import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.component.DaggerApplicationComponent
-import com.luseen.ribble.di.module.ApiModule
 import com.luseen.ribble.di.module.ApplicationModule
 
 
@@ -17,7 +16,6 @@ class App : Application() {
     val applicationComponent: ApplicationComponent by lazy {
         DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
-                .apiModule(ApiModule())
                 .build()
     }
 

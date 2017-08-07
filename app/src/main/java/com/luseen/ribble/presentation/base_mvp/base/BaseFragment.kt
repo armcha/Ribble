@@ -1,6 +1,10 @@
 package com.luseen.ribble.presentation.base_mvp.base
 
 import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.luseen.arch.BaseMVPFragment
 import com.luseen.ribble.di.component.ActivityComponent
 
@@ -21,5 +25,11 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         }
     }
 
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater!!.inflate(layoutResId(), container, false)
+    }
+
     protected abstract fun injectDependencies()
+
+    protected abstract fun layoutResId(): Int
 }

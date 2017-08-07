@@ -13,8 +13,8 @@ import javax.inject.Singleton
 @Singleton
 class ApiDataStore @Inject constructor(private val apiService: ApiService) : ShotDataStore {
 
-    override fun getShotList(count: Int): Flowable<List<ShotEntity>> {
-        return apiService.getShots(count)
+    override fun getShotList(shotType: String, count: Int): Flowable<List<ShotEntity>> {
+        return apiService.getShots(count, shotType)
         //TODO("not implemented")
     }
 

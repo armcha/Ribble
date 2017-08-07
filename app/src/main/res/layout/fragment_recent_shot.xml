@@ -1,0 +1,12 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.luseen.ribble.presentation.screen.popular_shot.RecentShotFragment">
+
+    <com.luseen.ribble.presentation.widget.ArcView
+        android:layout_width="175dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center" />
+
+</FrameLayout>

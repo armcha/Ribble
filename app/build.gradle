@@ -66,6 +66,7 @@ dependencies {
     //Architecture components
     implementation "android.arch.lifecycle:runtime:${archVersion}"
     implementation "android.arch.lifecycle:extensions:${archVersion}"
+    implementation 'com.android.support:support-v4:26.0.0'
     kapt "android.arch.lifecycle:compiler:${archVersion}"
 
     //RX

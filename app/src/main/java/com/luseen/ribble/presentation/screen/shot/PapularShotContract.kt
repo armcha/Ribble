@@ -6,7 +6,7 @@ import com.luseen.ribble.presentation.model.Shot
 /**
  * Created by Chatikyan on 01.08.2017.
  */
-interface ShotContract {
+interface PapularShotContract {
 
     interface View : BaseContract.View {
 
@@ -19,6 +19,8 @@ interface ShotContract {
         fun onShotListReceive(shotList: MutableList<Shot>)
     }
 
-    interface Presenter : BaseContract.Presenter<View>
+    interface Presenter : BaseContract.Presenter<View>{
+
+    }
 
 }

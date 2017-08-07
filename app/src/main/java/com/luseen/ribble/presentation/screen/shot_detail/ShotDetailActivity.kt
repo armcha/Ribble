@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
 import com.luseen.ribble.presentation.model.Shot
-import com.luseen.ribble.presentation.screen.shot.ShotFragment
+import com.luseen.ribble.presentation.screen.shot.PapularShotFragment
 import javax.inject.Inject
 
 class ShotDetailActivity : BaseActivity<ShotDetailContract.View, ShotDetailContract.Presenter>(), ShotDetailContract.View {
@@ -19,7 +19,7 @@ class ShotDetailActivity : BaseActivity<ShotDetailContract.View, ShotDetailContr
     companion object {
         fun startIntent(context: Context, shot: Shot): Intent {
             val intent = Intent(context, ShotDetailActivity::class.java)
-            intent.putExtra(ShotFragment.SHOT_EXTRA_ID, shot)
+            intent.putExtra(PapularShotFragment.SHOT_EXTRA_ID, shot)
             return intent
         }
     }
@@ -29,7 +29,7 @@ class ShotDetailActivity : BaseActivity<ShotDetailContract.View, ShotDetailContr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shot_detail)
-        shot = intent.getParcelableExtra(ShotFragment.SHOT_EXTRA_ID)
+        shot = intent.getParcelableExtra(PapularShotFragment.SHOT_EXTRA_ID)
         presenter.fetchLikes(shot.id)
     }
 

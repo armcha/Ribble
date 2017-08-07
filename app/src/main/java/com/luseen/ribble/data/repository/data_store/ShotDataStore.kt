@@ -9,7 +9,7 @@ import io.reactivex.Flowable
  */
 interface ShotDataStore {
 
-    fun getShotList(count:Int): Flowable<List<ShotEntity>>
+    fun getShotList(shotType:String,count:Int): Flowable<List<ShotEntity>>
 
     fun getShotLikes(shotId:String): Flowable<List<LikeEntity>>
 }

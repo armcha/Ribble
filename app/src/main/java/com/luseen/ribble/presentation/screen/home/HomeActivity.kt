@@ -32,12 +32,11 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
 
     private fun initViews() {
         setSupportActionBar(toolbar)
-//        val toggle = ActionBarDrawerToggle(
-//                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        //drawerLayout.addDrawerListener(toggle)
-        //toggle.syncState()
         supportActionBar?.setDisplayShowTitleEnabled(false)
         navView.setNavigationItemSelectedListener(this)
+        arcView.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
     }
 
     override fun injectDependencies() {

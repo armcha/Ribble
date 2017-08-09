@@ -4,35 +4,45 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import com.luseen.ribble.R
 import com.luseen.ribble.utils.log
+import com.luseen.ribble.utils.makeColor
 
 class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
-    val path = Path()
-    val rect = RectF()
-    val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val SHADOW_OFFSET = 15F
+    private val START_ANGLE = 270F
+    private val SWEEP_ANGLE = 180F
+
+    private val path = Path()
+    private val rect = RectF()
+    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     init {
         setBackgroundColor(Color.TRANSPARENT)
         with(paint) {
-            color = Color.RED //TODO change
+            color = makeColor(context, R.color.colorAccent)
             style = Paint.Style.FILL
             strokeCap = Paint.Cap.ROUND
+            isDither = true
+            setShadowLayer(SHADOW_OFFSET, 0F, 3F, Color.GRAY)
         }
+        setLayerType(LAYER_TYPE_SOFTWARE, paint)
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         log("onDraw")
         val arcStartPoint = 2.5F
-        rect.set(width.toFloat() / arcStartPoint, 0F, width.toFloat(), height.toFloat())
+        val width = width.toFloat() - SHADOW_OFFSET
+        val height = height.toFloat() - SHADOW_OFFSET
+        rect.set(width / arcStartPoint, 0F + SHADOW_OFFSET, width, height)
         with(path) {
-            val halfWidth = width.toFloat() / 2
-            lineTo(halfWidth + halfWidth / arcStartPoint, 0F)
-            addArc(rect, 270F, 180F)
-            lineTo(halfWidth + halfWidth / arcStartPoint, height.toFloat())
-            lineTo(0F, height.toFloat())
-            lineTo(0F, 0F)
+            val halfWidth = width / 2
+            lineTo(halfWidth + halfWidth / arcStartPoint, SHADOW_OFFSET)
+            addArc(rect, START_ANGLE, SWEEP_ANGLE)
+            lineTo(0F, height)
+            lineTo(0F, SHADOW_OFFSET)
         }
         canvas.drawPath(path, paint)
     }

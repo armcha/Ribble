@@ -37,9 +37,11 @@ class ShotRootFragment : BaseFragment<ShotRootContract.View, ShotRootContract.Pr
 
     fun setUpPagerAdapter() {
         shotViewPager.adapter = shotPagerAdapter
-        tabLayout.setupWithViewPager(shotViewPager)
-        tabLayout.tabMode = CustomTabLayout.MODE_FIXED
-        tabLayout.setSelectedTabIndicatorHeight(20)
-        shotViewPager.setCurrentItem(1)
+        with(tabLayout) {
+            setupWithViewPager(shotViewPager)
+            tabMode = CustomTabLayout.MODE_FIXED
+            setSelectedTabIndicatorHeight(20)
+        }
+        //shotViewPager.setCurrentItem(1)
     }
 }

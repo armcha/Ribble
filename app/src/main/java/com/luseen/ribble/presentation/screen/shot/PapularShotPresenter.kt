@@ -24,7 +24,7 @@ class PapularShotPresenter @Inject constructor(private val shotListInteractor: S
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        fetch(shotListInteractor.getRecentShotList())
+        fetch(shotListInteractor.getRecentShotList(10))
     }
 
     override fun onRequestStart() {

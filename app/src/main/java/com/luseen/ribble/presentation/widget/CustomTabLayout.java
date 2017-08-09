@@ -1934,11 +1934,16 @@ public class CustomTabLayout extends HorizontalScrollView {
         @Override
         public void draw(Canvas canvas) {
             super.draw(canvas);
-
             // Thick colored underline below the current selection
             if (mIndicatorLeft >= 0 && mIndicatorRight > mIndicatorLeft) {
-                canvas.drawRect(mIndicatorLeft + (getWidth() / 3.3f), getHeight() - mSelectedIndicatorHeight,
-                        mIndicatorRight - (getWidth() / 3.3f), getHeight(), mSelectedIndicatorPaint);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    // TODO: 08.08.2017 add DP size
+                    canvas.drawRoundRect(mIndicatorLeft + (getWidth() / 3.3f), getHeight() - mSelectedIndicatorHeight,
+                            mIndicatorRight - (getWidth() / 3.3f), getHeight(), 15F, 15F, mSelectedIndicatorPaint);
+                } else {
+                    canvas.drawRect(mIndicatorLeft + (getWidth() / 3.3f), getHeight() - mSelectedIndicatorHeight,
+                            mIndicatorRight - (getWidth() / 3.3f), getHeight(), mSelectedIndicatorPaint);
+                }
             }
         }
     }

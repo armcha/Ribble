@@ -9,27 +9,32 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="@android:color/transparent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="?attr/colorPrimary"
+            android:background="@color/bg_color"
             app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <com.luseen.ribble.presentation.widget.ArcView
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="85dp"
+                android:layout_height="63dp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/arcView"
                 android:background="@android:color/white">
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:tint="@android:color/white"
-                    android:src="@drawable/ic_menu_send" />
+                    app:srcCompat="@drawable/equal"
+                    android:tint="@android:color/white" />
 
             </com.luseen.ribble.presentation.widget.ArcView>
 

@@ -2,7 +2,7 @@ package com.luseen.ribble.presentation.screen.shot
 
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.luseen.logger.Logger
 import com.luseen.ribble.R
@@ -51,7 +51,7 @@ class PapularShotFragment : BaseFragment<PapularShotContract.View, PapularShotCo
 
     private fun setUpRecyclerView(shotList: MutableList<Shot>) {
         recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)
-        shotRecyclerView.layoutManager = LinearLayoutManager(activity)
+        shotRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         shotRecyclerView.adapter = recyclerAdapter
     }
 

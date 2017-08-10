@@ -18,7 +18,7 @@ android {
     }
 }
 
-ext.archVersion = '1.0.0-alpha7'
+ext.archVersion = '1.0.0-alpha8'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.0.0'

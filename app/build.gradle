@@ -15,6 +15,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        buildConfigField "String", "DRIBBBLE_CLIENT_ID", "\"${dribbble_client_id}\""
+        buildConfigField "String", "DRIBBBLE_CLIENT_SECRET", "\"${dribbble_client_secret}\""
+        buildConfigField "String", "DRIBBBLE_CLIENT_ACCESS_TOKEN", "\"${dribbble_client_access_token}\""
     }
 
     compileOptions {
@@ -48,7 +51,7 @@ ext.rxBindingVersion = '2.0.0'
 ext.retrofitVersion = '2.3.0'
 ext.loggerVersion = '2.2.0'
 ext.daggerVersion = '2.11'
-ext.archVersion = '1.0.0-alpha7'
+ext.archVersion = '1.0.0-alpha8'
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -10,11 +10,11 @@ import retrofit2.http.Query
 /**
  * Created by Chatikyan on 29.07.2017.
  */
-interface ApiService {
+interface ShotApiService {
 
     @GET("shots?")
-    fun getShots(@Query("per_page") limit: Int,
-                 @Query("sort") sortType: String,
+    fun getShots(@Query("sort") sortType: String,
+                 @Query("per_page") limit: Int,
                  @Query("access_token") token: String = ApiConstants.TOKEN): Flowable<List<ShotEntity>>
 
     @GET("shots/{shot_id}/likes?")

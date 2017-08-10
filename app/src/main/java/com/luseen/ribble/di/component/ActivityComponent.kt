@@ -1,6 +1,7 @@
 package com.luseen.ribble.di.component
 
 import com.luseen.ribble.di.module.ActivityModule
+import com.luseen.ribble.di.module.UserModule
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.presentation.screen.home.HomeActivity
 import com.luseen.ribble.presentation.screen.shot.PapularShotFragment
@@ -16,9 +17,11 @@ import dagger.Subcomponent
 @Subcomponent(modules = arrayOf(ActivityModule::class))
 interface ActivityComponent {
 
+    fun plus(userModule: UserModule): UserComponent
+
     fun inject(homeActivity: HomeActivity)
 
-    fun inject(papularShotFragment: PapularShotFragment)
+    fun inject(popularShotFragment: PapularShotFragment)
 
     fun inject(shotDetailActivity: ShotDetailActivity)
 

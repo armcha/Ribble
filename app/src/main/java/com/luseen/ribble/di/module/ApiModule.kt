@@ -2,7 +2,7 @@ package com.luseen.ribble.di.module
 
 import com.luseen.ribble.BuildConfig
 import com.luseen.ribble.data.network.ApiConstants
-import com.luseen.ribble.data.network.ApiService
+import com.luseen.ribble.data.network.ShotApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -11,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -21,8 +22,9 @@ class ApiModule {
 
     @Singleton
     @Provides
-    fun baseUrl():String{
-        return ApiConstants.ENDPOINT
+    @Named("shotEndpoint")
+    fun shotEndpoint(): String {
+        return ApiConstants.SHOT_ENDPOINT
     }
 
     @Singleton
@@ -41,18 +43,26 @@ class ApiModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit {
-        return Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+    @Named("shotRetrofit")
+    fun provideShotRetrofit(retrofitBuilder: Retrofit.Builder,
+                            @Named("shotEndpoint") baseUrl: String): Retrofit {
+        return retrofitBuilder
                 .baseUrl(baseUrl)
-                .client(okHttpClient)
                 .build()
     }
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun provideRetrofitBuilder(okHttpClient: OkHttpClient): Retrofit.Builder {
+        return Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient)
+    }
+
+    @Singleton
+    @Provides
+    fun provideShotApiService(@Named("shotRetrofit") retrofit: Retrofit): ShotApiService {
+        return retrofit.create(ShotApiService::class.java)
     }
 }

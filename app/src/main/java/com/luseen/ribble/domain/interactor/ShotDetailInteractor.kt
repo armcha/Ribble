@@ -1,6 +1,6 @@
 package com.luseen.ribble.domain.interactor
 
-import com.luseen.ribble.data.ShotDataRepository
+import com.luseen.ribble.data.repository.ShotDataRepository
 import com.luseen.ribble.di.scope.PerActivity
 import javax.inject.Inject
 

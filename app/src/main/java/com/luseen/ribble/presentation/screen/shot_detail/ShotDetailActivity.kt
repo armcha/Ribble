@@ -36,4 +36,6 @@ class ShotDetailActivity : BaseActivity<ShotDetailContract.View, ShotDetailContr
     override fun injectDependencies() {
         activityComponent.inject(this)
     }
+
+
 }

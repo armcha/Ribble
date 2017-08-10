@@ -16,13 +16,31 @@
             android:name=".presentation.screen.home.HomeActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity
+            android:name=".presentation.screen.auth.AuthActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <data
+                    android:host="dribbble-auth-callback"
+                    android:scheme="ribbble" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.screen.shot_detail.ShotDetailActivity"></activity>
+        <activity android:name=".presentation.screen.shot_detail.ShotDetailActivity" />
     </application>
 
 </manifest>

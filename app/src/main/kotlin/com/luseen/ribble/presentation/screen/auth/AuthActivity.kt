@@ -1,9 +1,9 @@
 package com.luseen.ribble.presentation.screen.auth
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import com.luseen.ribble.R
-import com.luseen.ribble.data.network.ApiConstants
 import com.luseen.ribble.di.component.UserComponent
 import com.luseen.ribble.di.module.UserModule
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
@@ -26,20 +26,15 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
         login.setOnClickListener {
             presenter.makeLogin()
         }
-
-        val LOGIN_URL = ApiConstants.AUTH_ENDPOINT + "/authorize?client_id " + ApiConstants.CLIENT_ID +
-                "&redirect_uri=ribbble%3A%2F%2Fdribbble-auth-callback&scope=public+write+comment+upload"
-
-        //startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(LOGIN_URL)))
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        log("Result")
+    override fun startOAuthIntent(uri: Uri) {
+        startActivity(Intent(Intent.ACTION_VIEW, uri))
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        presenter.checkLogin(intent)
         log("onNewIntent$intent")
     }
 

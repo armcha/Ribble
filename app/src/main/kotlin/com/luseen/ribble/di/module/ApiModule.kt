@@ -3,6 +3,7 @@ package com.luseen.ribble.di.module
 import com.luseen.ribble.BuildConfig
 import com.luseen.ribble.data.network.ApiConstants
 import com.luseen.ribble.data.network.ShotApiService
+import com.luseen.ribble.data.network.UserApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -64,5 +65,11 @@ class ApiModule {
     @Provides
     fun provideShotApiService(@Named("shotRetrofit") retrofit: Retrofit): ShotApiService {
         return retrofit.create(ShotApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserApiService(@Named("shotRetrofit") retrofit: Retrofit): UserApiService {
+        return retrofit.create(UserApiService::class.java)
     }
 }

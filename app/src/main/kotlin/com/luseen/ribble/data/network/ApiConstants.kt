@@ -21,9 +21,6 @@ object ApiConstants {
 
     const val CLIENT_SECRET = BuildConfig.DRIBBBLE_CLIENT_SECRET
 
-//    const val TOKEN = "<YOUR TOKEN>"
-//
-//    const val CLIENT_ID = "<YOUR CLIENT ID>"
-//
-//    const val CLIENT_SECRET = "<YOUR SECRET>"
+    const val LOGIN_OAUTH_URL = "${AUTH_ENDPOINT}authorize?client_id=$CLIENT_ID&redirect_uri=" +
+            "ribbble%3A%2F%2Fdribbble-auth-callback&scope=public+write+comment+upload"
 }

@@ -46,7 +46,7 @@ ext.butterKnifeVersion = '8.7.0'
 ext.butterKnifeCompilerVersion = '8.7.0'
 ext.rxJavaVersion = '2.1.2'
 ext.rxAndroidVersion = '2.0.1'
-ext.supportLibVersion = '26.0.0'
+ext.supportLibVersion = '26.0.1'
 ext.rxBindingVersion = '2.0.0'
 ext.retrofitVersion = '2.3.0'
 ext.loggerVersion = '2.2.0'
@@ -69,7 +69,6 @@ dependencies {
     //Architecture components
     implementation "android.arch.lifecycle:runtime:${archVersion}"
     implementation "android.arch.lifecycle:extensions:${archVersion}"
-    implementation 'com.android.support:support-v4:26.0.0'
     kapt "android.arch.lifecycle:compiler:${archVersion}"
 
     //RX

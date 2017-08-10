@@ -1,8 +1,12 @@
 package com.luseen.ribble.data.repository
 
+import com.luseen.ribble.data.entity.TokenEntity
+import com.luseen.ribble.data.mapper.UserMapper
+import com.luseen.ribble.data.network.TokenApiService
 import com.luseen.ribble.data.network.UserApiService
 import com.luseen.ribble.di.scope.PerUser
 import com.luseen.ribble.domain.repository.UserRepository
+import com.luseen.ribble.presentation.model.User
 import io.reactivex.Flowable
 import javax.inject.Inject
 
@@ -10,9 +14,19 @@ import javax.inject.Inject
  * Created by Chatikyan on 10.08.2017.
  */
 @PerUser
-class UserDataRepository @Inject constructor(private val userApiService: UserApiService) : UserRepository {
+class UserDataRepository @Inject constructor(
+        private val tokenApiService: TokenApiService,
+        private val userApiService: UserApiService,
+        private val userMapper: UserMapper) : UserRepository {
 
-    override fun getToken(authCode: String): Flowable<String> {
-        return userApiService.getToken(authCode)
+    fun getToken(authCode: String): Flowable<TokenEntity> {
+        return tokenApiService.getToken(authCode)
     }
+
+    override fun getUser(): Flowable<User> {
+        return userApiService.getUser().map {
+            userMapper.translate(it)
+        }
+    }
+
 }

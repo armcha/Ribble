@@ -1,7 +1,8 @@
 package com.luseen.ribble.di.module
 
+import com.luseen.ribble.data.mapper.UserMapper
 import com.luseen.ribble.data.network.ApiConstants
-import com.luseen.ribble.data.network.UserApiService
+import com.luseen.ribble.data.network.TokenApiService
 import com.luseen.ribble.di.scope.PerUser
 import dagger.Module
 import dagger.Provides
@@ -33,7 +34,11 @@ class UserModule {
 
     @PerUser
     @Provides
-    fun provideAuthApiService(@Named("authRetrofit") retrofit: Retrofit): UserApiService {
-        return retrofit.create(UserApiService::class.java)
+    fun provideAuthApiService(@Named("authRetrofit") retrofit: Retrofit): TokenApiService {
+        return retrofit.create(TokenApiService::class.java)
     }
+
+    @PerUser
+    @Provides
+    fun provideUserMapper(): UserMapper = UserMapper()
 }

@@ -1,5 +1,6 @@
 package com.luseen.ribble.domain.repository
 
+import com.luseen.ribble.presentation.model.User
 import io.reactivex.Flowable
 
 /**
@@ -7,6 +8,5 @@ import io.reactivex.Flowable
  */
 interface UserRepository {
 
-    fun getToken(authCode: String): Flowable<String>
-
+    fun getUser(): Flowable<User>
 }

@@ -11,6 +11,10 @@ import com.luseen.logger.Logger
  */
 
 
+inline fun log(message: () -> Any?) {
+    Logger.log(message())
+}
+
 fun log(message: Any?) {
     Logger.log(message)
 }

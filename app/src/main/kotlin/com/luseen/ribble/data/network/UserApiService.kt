@@ -1,7 +1,8 @@
 package com.luseen.ribble.data.network
 
+import com.luseen.ribble.data.entity.UserEntity
 import io.reactivex.Flowable
-import retrofit2.http.POST
+import retrofit2.http.GET
 import retrofit2.http.Query
 
 /**
@@ -9,8 +10,6 @@ import retrofit2.http.Query
  */
 interface UserApiService {
 
-    @POST("token")
-    fun getToken(@Query("code") authCode: String,
-                 @Query("client_id") clientId: String = ApiConstants.CLIENT_ID,
-                 @Query("client_secret") clientSecret: String = ApiConstants.CLIENT_SECRET): Flowable<String>
+    @GET("user")
+    fun getUser(@Query("access_token") token: String = ApiConstants.TOKEN):Flowable<UserEntity>
 }

@@ -2,6 +2,7 @@ package com.luseen.ribble.domain.interactor
 
 import com.luseen.ribble.data.repository.UserDataRepository
 import com.luseen.ribble.di.scope.PerUser
+import com.luseen.ribble.presentation.model.User
 import io.reactivex.Flowable
 import javax.inject.Inject
 
@@ -11,7 +12,10 @@ import javax.inject.Inject
 @PerUser
 class UserInteractor @Inject constructor(private val userDataRepository: UserDataRepository) {
 
-    fun getToken(code: String): Flowable<String> {
+    fun getUser(code: String): Flowable<User> {
         return userDataRepository.getToken(code)
+                .flatMap {
+                    userDataRepository.getUser()
+                }
     }
 }

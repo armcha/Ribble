@@ -1,5 +1,7 @@
 package com.luseen.ribble.presentation.screen.auth
 
+import android.content.Intent
+import android.net.Uri
 import com.luseen.ribble.presentation.base_mvp.base.BaseContract
 
 /**
@@ -9,9 +11,14 @@ interface AuthContract {
 
     interface View : BaseContract.View {
 
+        fun startOAuthIntent(uri: Uri)
+
     }
 
     interface Presenter : BaseContract.Presenter<View> {
+
         fun makeLogin()
+
+        fun checkLogin(resultIntent: Intent?)
     }
 }

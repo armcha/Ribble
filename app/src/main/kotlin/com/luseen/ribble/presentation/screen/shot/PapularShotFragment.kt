@@ -46,10 +46,10 @@ class PapularShotFragment : BaseFragment<PapularShotContract.View, PapularShotCo
 
     private fun updateAdapter(shotList: MutableList<Shot>) {
         if (shotList.size > 0)
-            recyclerAdapter?.update(shotList) ?: setUpRecyclerView(shotList)
+            recyclerAdapter?.update(shotList) ?: this setUpRecyclerView shotList
     }
 
-    private fun setUpRecyclerView(shotList: MutableList<Shot>) {
+    private infix fun setUpRecyclerView(shotList: MutableList<Shot>) {
         recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)
         shotRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         shotRecyclerView.adapter = recyclerAdapter

@@ -21,7 +21,7 @@ class ShotDetailPresenter @Inject constructor(private val shotDetailInteractor: 
     }
 
     override fun fetchLikes(shotId: String?) {
-        fetch(shotLikeInteractor.getShotLikes(shotId!!))
+        this fetch shotLikeInteractor.getShotLikes(shotId!!)
     }
 
     override fun onRequestStart() {

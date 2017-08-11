@@ -1,4 +1,4 @@
-package com.luseen.ribble.data.entity
+package com.luseen.ribble.data.response
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by Chatikyan on 10.08.2017.
  */
-class TokenEntity {
+class TokenResponse {
 
     @SerializedName("access_token")
     @Expose

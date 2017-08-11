@@ -1,6 +1,6 @@
 package com.luseen.ribble.data.mapper
 
-import com.luseen.ribble.data.entity.UserEntity
+import com.luseen.ribble.data.response.UserResponse
 import com.luseen.ribble.presentation.model.User
 
 /**
@@ -8,7 +8,7 @@ import com.luseen.ribble.presentation.model.User
  */
 class UserMapper {
 
-    fun translate(userEntity: UserEntity): User {
-        return User(userEntity.name, userEntity.avatarUrl, userEntity.username)
+    fun translate(userResponse: UserResponse): User {
+        return User(userResponse.name, userResponse.avatarUrl, userResponse.username)
     }
 }

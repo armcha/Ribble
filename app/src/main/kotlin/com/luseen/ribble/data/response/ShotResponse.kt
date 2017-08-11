@@ -1,4 +1,4 @@
-package com.luseen.ribble.data.entity
+package com.luseen.ribble.data.response
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by Chatikyan on 30.07.2017.
  */
-class ShotEntity {
+class ShotResponse {
 
     @SerializedName("id")
     @Expose

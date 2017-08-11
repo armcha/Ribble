@@ -19,7 +19,7 @@ fun log(message: Any?) {
     Logger.log(message)
 }
 
-fun makeColor(context: Context, colorId: Int) = ContextCompat.getColor(context, colorId)
+infix fun Context.takeColor(colorId: Int) = ContextCompat.getColor(this, colorId)
 
 fun UI(action: () -> Unit) {
     Handler(Looper.getMainLooper()).post {

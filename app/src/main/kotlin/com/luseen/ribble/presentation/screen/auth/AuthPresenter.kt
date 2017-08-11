@@ -24,7 +24,7 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
     override fun checkLogin(resultIntent: Intent?) {
         val userCode = resultIntent?.data?.getQueryParameter("code")
         if (userCode != null)
-            fetch(userInteractor.getUser(userCode))
+            this fetch userInteractor.getUser(userCode)
     }
 
     override fun onRequestStart() {

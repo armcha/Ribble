@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import com.luseen.ribble.R
 import com.luseen.ribble.utils.log
-import com.luseen.ribble.utils.makeColor
+import com.luseen.ribble.utils.takeColor
 
 class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
@@ -21,7 +21,7 @@ class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(c
     init {
         setBackgroundColor(Color.TRANSPARENT)
         with(paint) {
-            color = makeColor(context, R.color.colorAccent)
+            color = context takeColor  R.color.colorAccent
             style = Paint.Style.FILL
             strokeCap = Paint.Cap.ROUND
             isDither = true
@@ -36,7 +36,7 @@ class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(c
         val arcStartPoint = 2.5F
         val width = width.toFloat() - SHADOW_OFFSET
         val height = height.toFloat() - SHADOW_OFFSET
-        rect.set(width / arcStartPoint, 0F + SHADOW_OFFSET, width, height)
+        rect.set(width / arcStartPoint, SHADOW_OFFSET, width, height)
         with(path) {
             val halfWidth = width / 2
             lineTo(halfWidth + halfWidth / arcStartPoint, SHADOW_OFFSET)
@@ -46,5 +46,4 @@ class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(c
         }
         canvas.drawPath(path, paint)
     }
-
 }

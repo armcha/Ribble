@@ -16,11 +16,11 @@ abstract class ApiPresenter<V : BaseContract.View> : BasePresenter<V>(), ResultL
     @Inject
     protected lateinit var fetcher: Fetcher
 
-    fun <T> fetch(flowable: Flowable<T>) {
+    infix fun <T> fetch(flowable: Flowable<T>) {
         fetcher.fetch(flowable, this)
     }
 
-    fun <T> fetch(observable: Observable<T>) {
+    infix fun <T> fetch(observable: Observable<T>) {
         fetcher.fetch(observable, this)
     }
 }

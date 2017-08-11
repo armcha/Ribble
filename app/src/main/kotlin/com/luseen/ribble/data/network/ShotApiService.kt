@@ -1,7 +1,7 @@
 package com.luseen.ribble.data.network
 
-import com.luseen.ribble.data.entity.LikeEntity
-import com.luseen.ribble.data.entity.ShotEntity
+import com.luseen.ribble.data.response.LikeResponse
+import com.luseen.ribble.data.response.ShotResponse
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,12 +15,12 @@ interface ShotApiService {
     @GET("shots?")
     fun getShots(@Query("sort") sortType: String,
                  @Query("per_page") limit: Int,
-                 @Query("access_token") token: String = ApiConstants.TOKEN): Flowable<List<ShotEntity>>
+                 @Query("access_token") token: String = ApiConstants.TOKEN): Flowable<List<ShotResponse>>
 
     @GET("shots/{shot_id}/likes?")
     fun getShotLikes(@Path("shot_id") shotId: String,
                      @Query("per_page") limit: Int = 500,
-                     @Query("access_token") token: String = ApiConstants.TOKEN): Flowable<List<LikeEntity>>
+                     @Query("access_token") token: String = ApiConstants.TOKEN): Flowable<List<LikeResponse>>
 
     @GET("shots/{shot_id}/comments?")
     fun getShotComments(@Path("shot_id") shotId: String,

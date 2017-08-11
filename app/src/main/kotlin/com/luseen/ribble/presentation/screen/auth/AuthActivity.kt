@@ -39,6 +39,7 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
     }
 
     override fun injectDependencies() {
+        //FIXME
         userComponent = activityComponent.plus(UserModule())
         userComponent?.inject(this)
     }

@@ -3,7 +3,7 @@ package com.luseen.ribble.presentation.screen.auth
 import android.content.Intent
 import android.net.Uri
 import com.luseen.ribble.data.network.ApiConstants
-import com.luseen.ribble.di.scope.PerUser
+import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
 import com.luseen.ribble.presentation.model.User
@@ -13,7 +13,7 @@ import javax.inject.Inject
 /**
  * Created by Chatikyan on 10.08.2017.
  */
-@PerUser
+@PerActivity
 class AuthPresenter @Inject constructor(private val userInteractor: UserInteractor)
     : ApiPresenter<AuthContract.View>(), AuthContract.Presenter {
 
@@ -33,6 +33,7 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
 
     override fun <T> onRequestSuccess(data: T) {
         val user = data as User
+        userInteractor.saveUserLoggedIn()
         log {
             user.name
         }
@@ -40,6 +41,8 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
         log {
             user.username
         }
+
+        view?.openHomeActivity()
     }
 
     override fun onRequestError(errorMessage: String?) {

@@ -13,6 +13,7 @@ interface AuthContract {
 
         fun startOAuthIntent(uri: Uri)
 
+        fun openHomeActivity()
     }
 
     interface Presenter : BaseContract.Presenter<View> {

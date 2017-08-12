@@ -2,13 +2,15 @@ package com.luseen.ribble.data.mapper
 
 import com.luseen.ribble.data.response.LikeResponse
 import com.luseen.ribble.data.response.ShotResponse
+import com.luseen.ribble.data.response.UserResponse
 import com.luseen.ribble.presentation.model.Like
 import com.luseen.ribble.presentation.model.Shot
+import com.luseen.ribble.presentation.model.User
 
 /**
  * Created by Chatikyan on 03.08.2017.
  */
-class ShotMapper {
+class Mapper {
 
     @JvmName("translateShotEntity")
     fun translate(shotResponseList: List<ShotResponse>): List<Shot> {
@@ -22,5 +24,9 @@ class ShotMapper {
         return likeResponseList.map {
             Like(it.id)
         }
+    }
+
+    fun translate(userResponse: UserResponse): User {
+        return User(userResponse.name, userResponse.avatarUrl, userResponse.username)
     }
 }

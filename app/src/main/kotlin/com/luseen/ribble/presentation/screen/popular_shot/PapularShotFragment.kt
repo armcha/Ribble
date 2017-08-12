@@ -1,4 +1,4 @@
-package com.luseen.ribble.presentation.screen.shot
+package com.luseen.ribble.presentation.screen.popular_shot
 
 
 import android.os.Bundle

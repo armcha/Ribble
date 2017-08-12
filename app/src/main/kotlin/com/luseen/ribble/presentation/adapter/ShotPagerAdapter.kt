@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.presentation.screen.popular_shot.RecentShotFragment
-import com.luseen.ribble.presentation.screen.shot.PapularShotFragment
+import com.luseen.ribble.presentation.screen.popular_shot.PapularShotFragment
+import com.luseen.ribble.presentation.screen.recent_shot.RecentShotFragment
 import javax.inject.Inject
 
 /**

@@ -6,7 +6,7 @@ import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.adapter.ShotPagerAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
-import com.luseen.ribble.presentation.screen.shot.ShotRootContract
+import com.luseen.ribble.presentation.screen.popular_shot.ShotRootContract
 import com.luseen.ribble.presentation.widget.CustomTabLayout
 import kotlinx.android.synthetic.main.fragment_shot_root.*
 import javax.inject.Inject

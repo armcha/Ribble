@@ -8,7 +8,7 @@ import retrofit2.http.Query
 /**
  * Created by Chatikyan on 10.08.2017.
  */
-interface TokenApiService {
+interface AuthApiService {
 
     @POST("token")
     fun getToken(@Query("code") authCode: String,

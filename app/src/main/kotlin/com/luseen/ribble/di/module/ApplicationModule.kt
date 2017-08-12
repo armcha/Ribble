@@ -1,7 +1,8 @@
 package com.luseen.ribble.di.module
 
 import android.app.Application
-import com.luseen.ribble.data.mapper.ShotMapper
+import com.luseen.ribble.data.mapper.Mapper
+import com.luseen.ribble.presentation.fetcher.Fetcher
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -18,5 +19,9 @@ class ApplicationModule(private val application: Application) {
 
     @Singleton
     @Provides
-    fun provideShotMapper(): ShotMapper = ShotMapper()
+    fun provideFetcher(): Fetcher = Fetcher()
+
+    @Singleton
+    @Provides
+    fun provideMapper(): Mapper = Mapper()
 }

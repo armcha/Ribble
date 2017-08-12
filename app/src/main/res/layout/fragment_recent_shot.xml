@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.luseen.ribble.presentation.screen.popular_shot.RecentShotFragment">
+    tools:context="com.luseen.ribble.presentation.screen.recent_shot.RecentShotFragment">
 
     <com.luseen.ribble.presentation.widget.ArcView
         android:layout_width="175dp"

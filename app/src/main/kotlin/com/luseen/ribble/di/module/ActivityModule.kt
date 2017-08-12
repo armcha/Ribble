@@ -4,7 +4,6 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.presentation.fetcher.Fetcher
 import dagger.Module
 import dagger.Provides
 
@@ -29,8 +28,4 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun providesFragmentManager(activity: AppCompatActivity): FragmentManager {
         return activity.supportFragmentManager
     }
-
-    @PerActivity
-    @Provides
-    fun provideFetcher(): Fetcher = Fetcher()
 }

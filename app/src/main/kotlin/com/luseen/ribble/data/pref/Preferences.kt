@@ -1,7 +1,7 @@
 package com.luseen.ribble.data.pref
 
 import android.app.Application
-import com.luseen.logger.Logger
+import android.content.Context
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -11,9 +11,15 @@ import javax.inject.Singleton
 @Singleton
 class Preferences @Inject constructor(app: Application) {
 
-    fun getSomeBool():Boolean = true //TODO fix
+    private val SHARED_PREF_NAME = "ribble_shared_pref"
+    private val USER_LOGGED_IN = "user_logged_in"
 
-    init {
-        Logger.log(app)
+    private val sharedPreferences = app.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+    private val editor = sharedPreferences.edit()
+
+    infix fun saveUserLoggedIn(isLogged: Boolean) {
+        editor.putBoolean(USER_LOGGED_IN, isLogged).apply()
     }
+
+    fun isUserLoggedIn(): Boolean = sharedPreferences.getBoolean(USER_LOGGED_IN, false)
 }

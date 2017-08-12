@@ -10,10 +10,12 @@ interface HomeContract {
     interface View : BaseContract.View {
 
         fun openShotFragment()
+
+        fun openLoginActivity()
     }
 
     interface Presenter : BaseContract.Presenter<View> {
 
-
+        fun logOut()
     }
 }

@@ -7,7 +7,10 @@ import android.support.v4.view.GravityCompat
 import android.view.MenuItem
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
+import com.luseen.ribble.presentation.screen.auth.AuthActivity
 import com.luseen.ribble.presentation.screen.shot_root.ShotRootFragment
+import com.luseen.ribble.utils.showToast
+import com.luseen.ribble.utils.start
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import javax.inject.Inject
@@ -50,6 +53,14 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
                 .commit()
     }
 
+    override fun openLoginActivity() {
+        start {
+            AuthActivity::class.java
+        }
+        showToast("Logged out")
+        finish()
+    }
+
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -76,7 +87,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
 
             }
             R.id.nav_send -> {
-
+                presenter.logOut()
             }
         }
 

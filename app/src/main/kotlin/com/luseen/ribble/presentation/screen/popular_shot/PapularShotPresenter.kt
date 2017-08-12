@@ -1,4 +1,4 @@
-package com.luseen.ribble.presentation.screen.shot
+package com.luseen.ribble.presentation.screen.popular_shot
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
@@ -13,7 +13,8 @@ import javax.inject.Inject
  * Created by Chatikyan on 01.08.2017.
  */
 @PerActivity
-class PapularShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor) : ApiPresenter<PapularShotContract.View>(), PapularShotContract.Presenter {
+class PapularShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor)
+    : ApiPresenter<PapularShotContract.View>(), PapularShotContract.Presenter {
 
     private var shotList: MutableList<Shot> = arrayListOf()
 

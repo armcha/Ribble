@@ -2,6 +2,7 @@ package com.luseen.ribble.di.module
 
 import com.luseen.ribble.BuildConfig
 import com.luseen.ribble.data.network.ApiConstants
+import com.luseen.ribble.data.network.AuthApiService
 import com.luseen.ribble.data.network.ShotApiService
 import com.luseen.ribble.data.network.UserApiService
 import dagger.Module
@@ -30,6 +31,13 @@ class ApiModule {
 
     @Singleton
     @Provides
+    @Named("authEndpoint")
+    fun authEndpoint(): String {
+        return ApiConstants.AUTH_ENDPOINT
+    }
+
+    @Singleton
+    @Provides
     fun provideOkHttp(): OkHttpClient {
         val okHttpBuilder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
@@ -54,6 +62,16 @@ class ApiModule {
 
     @Singleton
     @Provides
+    @Named("authRetrofit")
+    fun provideUserRetrofit(retrofitBuilder: Retrofit.Builder,
+                            @Named("authEndpoint") baseUrl: String): Retrofit {
+        return retrofitBuilder
+                .baseUrl(baseUrl)
+                .build()
+    }
+
+    @Singleton
+    @Provides
     fun provideRetrofitBuilder(okHttpClient: OkHttpClient): Retrofit.Builder {
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -71,5 +89,11 @@ class ApiModule {
     @Provides
     fun provideUserApiService(@Named("shotRetrofit") retrofit: Retrofit): UserApiService {
         return retrofit.create(UserApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthApiService(@Named("authRetrofit") retrofit: Retrofit): AuthApiService {
+        return retrofit.create(AuthApiService::class.java)
     }
 }

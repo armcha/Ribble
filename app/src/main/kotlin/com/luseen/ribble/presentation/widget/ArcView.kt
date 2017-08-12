@@ -25,7 +25,7 @@ class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(c
             style = Paint.Style.FILL
             strokeCap = Paint.Cap.ROUND
             isDither = true
-            setShadowLayer(SHADOW_OFFSET, 0F, 3F, Color.GRAY)
+            setShadowLayer(SHADOW_OFFSET, 0F, 4F, Color.GRAY)
         }
         setLayerType(LAYER_TYPE_SOFTWARE, paint)
     }

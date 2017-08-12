@@ -8,5 +8,11 @@ import io.reactivex.Flowable
  */
 interface UserRepository {
 
+    fun saveUserLoggedIn()
+
+    fun saveUserLoggedOut()
+
+    fun isUserLoggedIn(): Boolean
+
     fun getUser(): Flowable<User>
 }

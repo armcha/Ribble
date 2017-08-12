@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
 import com.luseen.ribble.presentation.model.Shot
-import com.luseen.ribble.presentation.screen.shot.PapularShotFragment
+import com.luseen.ribble.presentation.screen.popular_shot.PapularShotFragment
 import javax.inject.Inject
 
 class ShotDetailActivity : BaseActivity<ShotDetailContract.View, ShotDetailContract.Presenter>(), ShotDetailContract.View {

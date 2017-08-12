@@ -4,10 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.luseen.ribble.R
-import com.luseen.ribble.di.component.UserComponent
-import com.luseen.ribble.di.module.UserModule
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
+import com.luseen.ribble.presentation.screen.home.HomeActivity
 import com.luseen.ribble.utils.log
+import com.luseen.ribble.utils.showToast
+import com.luseen.ribble.utils.start
 import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
 
@@ -15,8 +16,6 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
 
     @Inject
     protected lateinit var authPresenter: AuthPresenter
-
-    protected var userComponent: UserComponent? = null
 
     override fun initPresenter(): AuthContract.Presenter = authPresenter
 
@@ -32,6 +31,14 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
         startActivity(Intent(Intent.ACTION_VIEW, uri))
     }
 
+    override fun openHomeActivity() {
+        start {
+            HomeActivity::class.java
+        }
+        finish()
+        showToast("Logged in!!")
+    }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         presenter.checkLogin(intent)
@@ -39,15 +46,6 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
     }
 
     override fun injectDependencies() {
-        //FIXME
-        userComponent = activityComponent.plus(UserModule())
-        userComponent?.inject(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (isFinishing) {
-            userComponent = null
-        }
+        activityComponent.inject(this)
     }
 }

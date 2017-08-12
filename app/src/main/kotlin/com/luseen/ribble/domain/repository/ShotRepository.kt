@@ -12,6 +12,4 @@ interface ShotRepository {
     fun getShotList(shotType:String,count:Int): Flowable<List<Shot>>
 
     fun getShotLikes(shotId:String): Flowable<List<Like>>
-
-    fun getSomeDataFromPref(): Boolean
 }

@@ -13,8 +13,8 @@ import javax.inject.Inject
  * Created by Chatikyan on 01.08.2017.
  */
 @PerActivity
-class PapularShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor)
-    : ApiPresenter<PapularShotContract.View>(), PapularShotContract.Presenter {
+class PopularShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor)
+    : ApiPresenter<PopularShotContract.View>(), PopularShotContract.Presenter {
 
     private var shotList: MutableList<Shot> = arrayListOf()
 

@@ -15,25 +15,25 @@ import kotlinx.android.synthetic.main.fragment_shot.*
 import javax.inject.Inject
 
 
-class PapularShotFragment : BaseFragment<PapularShotContract.View, PapularShotContract.Presenter>(),
-        PapularShotContract.View, ShotClickListener {
+class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotContract.Presenter>(),
+        PopularShotContract.View, ShotClickListener {
 
     @Inject
-    protected lateinit var papularShotPresenter: PapularShotPresenter
+    protected lateinit var popularShotPresenter: PopularShotPresenter
 
     private var recyclerAdapter: ShotRecyclerViewAdapter? = null
-    private var shotList: MutableList<Shot> = mutableListOf()
+    private var shotList: MutableList<Shot> = mutableListOf<Shot>()
 
     companion object {
         const val SHOT_EXTRA_ID = "shot_extra_id"
 
-        fun newInstance(): PapularShotFragment {
-            val fragment = PapularShotFragment()
+        fun newInstance(): PopularShotFragment {
+            val fragment = PopularShotFragment()
             return fragment
         }
     }
 
-    override fun initPresenter(): PapularShotContract.Presenter = papularShotPresenter
+    override fun initPresenter(): PopularShotContract.Presenter = popularShotPresenter
 
     override fun layoutResId(): Int = R.layout.fragment_shot
 

@@ -6,7 +6,7 @@ import com.luseen.ribble.presentation.model.Shot
 /**
  * Created by Chatikyan on 01.08.2017.
  */
-interface PapularShotContract {
+interface PopularShotContract {
 
     interface View : BaseContract.View {
 

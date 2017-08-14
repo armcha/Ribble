@@ -6,6 +6,9 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.support.v4.content.ContextCompat
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import com.luseen.logger.Logger
 
@@ -21,6 +24,10 @@ inline fun log(message: () -> Any?) {
 fun log(message: Any?) {
     Logger.log(message)
 }
+
+infix fun ViewGroup.inflate(layoutResId: Int): View =
+        LayoutInflater.from(this.context).inflate(layoutResId, this, false)
+
 
 infix fun Context.takeColor(colorId: Int) = ContextCompat.getColor(this, colorId)
 

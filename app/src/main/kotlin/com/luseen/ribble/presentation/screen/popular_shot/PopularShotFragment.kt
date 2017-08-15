@@ -45,8 +45,7 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
     }
 
     private fun updateAdapter(shotList: MutableList<Shot>) {
-        if (shotList.size > 0)
-            recyclerAdapter?.update(shotList) ?: this setUpRecyclerView shotList
+        recyclerAdapter?.update(shotList) ?: this setUpRecyclerView shotList
     }
 
     private infix fun setUpRecyclerView(shotList: MutableList<Shot>) {

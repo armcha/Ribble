@@ -36,8 +36,10 @@ class PopularShotPresenter @Inject constructor(private val shotListInteractor: S
     override fun <T> onRequestSuccess(data: T) {
         val shotList: MutableList<Shot> = data as MutableList<Shot>
         this.shotList = shotList
-        view?.onShotListReceive(shotList)
-        view?.hideLoading()
+        if (shotList.isNotEmpty()) {
+            view?.onShotListReceive(shotList)
+            view?.hideLoading()
+        }
     }
 
     override fun onRequestError(errorMessage: String?) {

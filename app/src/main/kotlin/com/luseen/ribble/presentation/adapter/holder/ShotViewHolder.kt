@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.shot_item.view.*
 /**
  * Created by Chatikyan on 04.08.2017.
  */
-class ShotRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ShotViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(shot: Shot) {
         itemView.shotTitle.text = shot.title

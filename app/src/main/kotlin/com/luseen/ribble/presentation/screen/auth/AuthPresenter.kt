@@ -22,13 +22,15 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
     }
 
     override fun checkLogin(resultIntent: Intent?) {
-        val userCode = resultIntent?.data?.getQueryParameter("code")
-        if (userCode != null)
+        val userCode: String? = resultIntent?.data?.getQueryParameter("code")
+        userCode?.let {
+            log { it }
             this fetch userInteractor.getUser(userCode)
+        }
     }
 
     override fun onRequestStart() {
-        log("Start")
+        log { "Start" }
     }
 
     override fun <T> onRequestSuccess(data: T) {
@@ -36,10 +38,6 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
         userInteractor.saveUserLoggedIn()
         log {
             user.name
-        }
-
-        log {
-            user.username
         }
 
         view?.openHomeActivity()

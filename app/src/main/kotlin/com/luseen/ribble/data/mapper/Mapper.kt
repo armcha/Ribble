@@ -22,8 +22,12 @@ class Mapper {
     @JvmName("translateLikeEntity")
     fun translate(likeResponseList: List<LikeResponse>): List<Like> {
         return likeResponseList.map {
-            Like(it.id)
+            Like(it.id, translate(it.shotResponse))
         }
+    }
+
+    fun translate(shotResponse: ShotResponse?): Shot {
+        return Shot(shotResponse?.title, shotResponse?.id)
     }
 
     fun translate(userResponse: UserResponse): User {

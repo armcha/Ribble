@@ -16,4 +16,8 @@ class LikeResponse {
     @SerializedName("created_at")
     @Expose
     val createdAt: String? = null
+
+    @SerializedName("shot")
+    @Expose
+    val shotResponse: ShotResponse? = null
 }

@@ -1,6 +1,7 @@
 package com.luseen.ribble.presentation.base_mvp.base
 
 import android.os.Bundle
+import android.support.annotation.CallSuper
 import com.luseen.arch.BaseMVPActivity
 import com.luseen.ribble.App
 import com.luseen.ribble.di.component.ActivityComponent
@@ -13,6 +14,7 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
         getAppComponent().plus(ActivityModule(this))
     }
 
+    @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
         super.onCreate(savedInstanceState)

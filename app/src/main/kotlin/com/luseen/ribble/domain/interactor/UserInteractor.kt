@@ -2,8 +2,11 @@ package com.luseen.ribble.domain.interactor
 
 import com.luseen.ribble.data.repository.UserDataRepository
 import com.luseen.ribble.di.scope.PerActivity
+import com.luseen.ribble.presentation.model.Like
 import com.luseen.ribble.presentation.model.User
+import com.luseen.ribble.utils.log
 import io.reactivex.Flowable
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -15,6 +18,7 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
     fun getUser(code: String): Flowable<User> {
         return userDataRepository.getToken(code)
                 .flatMap {
+                    log { it.token }
                     userDataRepository.getUser()
                 }
     }
@@ -23,9 +27,13 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
         userDataRepository.saveUserLoggedIn()
     }
 
-    fun saveUserLoggedOut(){
+    fun saveUserLoggedOut() {
         userDataRepository.saveUserLoggedOut()
     }
 
-    fun isUserLoggedIn():Boolean = userDataRepository.isUserLoggedIn()
+    fun isUserLoggedIn(): Boolean = userDataRepository.isUserLoggedIn()
+
+    fun getUserLikes(count: Int): Single<List<Like>> {
+        return userDataRepository.getUserLikes(count)
+    }
 }

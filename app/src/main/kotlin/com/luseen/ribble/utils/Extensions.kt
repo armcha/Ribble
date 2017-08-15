@@ -21,6 +21,12 @@ inline fun log(message: () -> Any?) {
     Logger.log(message())
 }
 
+fun log(vararg message: () -> Any?) {
+    message.forEach {
+        Logger.log(it())
+    }
+}
+
 fun log(message: Any?) {
     Logger.log(message)
 }
@@ -35,6 +41,12 @@ fun UIThread(action: () -> Unit) {
     Handler(Looper.getMainLooper()).post {
         action()
     }
+}
+
+fun delay(milliseconds: Long, action: () -> Unit) {
+    Handler().postDelayed({
+        action()
+    }, milliseconds)
 }
 
 inline fun Activity.start(clazz: () -> Class<*>) {

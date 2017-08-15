@@ -7,8 +7,10 @@ import com.luseen.ribble.data.pref.Preferences
 import com.luseen.ribble.data.response.TokenResponse
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.repository.UserRepository
+import com.luseen.ribble.presentation.model.Like
 import com.luseen.ribble.presentation.model.User
 import io.reactivex.Flowable
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -41,5 +43,10 @@ class UserDataRepository @Inject constructor(
 
     override fun saveUserLoggedOut() {
         preferences saveUserLoggedIn false
+    }
+
+    override fun getUserLikes(count: Int): Single<List<Like>> {
+        return userApiService.getUserLikes(pageSize = count)
+                .map { mapper.translate(it) }
     }
 }

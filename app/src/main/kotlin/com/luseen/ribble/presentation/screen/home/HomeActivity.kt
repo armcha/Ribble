@@ -9,6 +9,7 @@ import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
 import com.luseen.ribble.presentation.screen.auth.AuthActivity
 import com.luseen.ribble.presentation.screen.shot_root.ShotRootFragment
+import com.luseen.ribble.presentation.screen.user_likes.UserLikesFragment
 import com.luseen.ribble.utils.showToast
 import com.luseen.ribble.utils.start
 import kotlinx.android.synthetic.main.activity_home.*
@@ -75,7 +76,10 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
 
             }
             R.id.nav_gallery -> {
-
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container, UserLikesFragment.newInstance())
+                        .commit()
             }
             R.id.nav_slideshow -> {
 

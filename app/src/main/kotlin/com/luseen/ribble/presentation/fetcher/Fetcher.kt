@@ -7,6 +7,7 @@ import io.reactivex.Single
 import io.reactivex.SingleTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -22,6 +23,14 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
             it.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
         }
+    }
+
+    private fun <T> Single<T>.receive(resultListener: ResultListener): Disposable {
+        return this.subscribe({
+            resultListener.onRequestSuccess(it)
+        }, {
+            resultListener.onRequestError(it.message)
+        })
     }
 
     fun <T> fetch(flowable: Flowable<T>, resultListener: ResultListener) {
@@ -57,11 +66,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
             onRequestStart()
             disposable.add(single
                     .compose(getIOToMainTransformer())
-                    .subscribe({
-                        onRequestSuccess(it)
-                    }, {
-                        onRequestError(it.message)
-                    }))
+                    .receive(resultListener))
         }
     }
 

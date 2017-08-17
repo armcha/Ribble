@@ -4,7 +4,6 @@ package com.luseen.ribble.presentation.screen.popular_shot
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
-import com.luseen.logger.Logger
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.adapter.ShotRecyclerViewAdapter
 import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
@@ -72,7 +71,6 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
     }
 
     override fun onShotListReceive(shotList: MutableList<Shot>) {
-        Logger.log("onShotListReceive ${shotList.size}")
         this.shotList = shotList
         updateAdapter(shotList)
     }

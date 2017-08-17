@@ -57,6 +57,11 @@ fun Context.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
+fun <K, V> MutableMap<K, V>.replaceValue(key: K, value: V) {
+    this.remove(key)
+    this.put(key, value)
+}
+
 //fun <F, S, R> withH(first: F, second: S, block: () -> R): R {
 //    return with(first) {
 //        with(second) {

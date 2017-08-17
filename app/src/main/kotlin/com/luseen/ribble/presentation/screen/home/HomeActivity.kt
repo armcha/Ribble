@@ -7,9 +7,13 @@ import android.support.v4.view.GravityCompat
 import android.view.MenuItem
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
+import com.luseen.ribble.presentation.navigation.Navigator
+import com.luseen.ribble.presentation.screen.TESTFragment
 import com.luseen.ribble.presentation.screen.auth.AuthActivity
+import com.luseen.ribble.presentation.screen.recent_shot.RecentShotFragment
 import com.luseen.ribble.presentation.screen.shot_root.ShotRootFragment
 import com.luseen.ribble.presentation.screen.user_likes.UserLikesFragment
+import com.luseen.ribble.utils.log
 import com.luseen.ribble.utils.showToast
 import com.luseen.ribble.utils.start
 import kotlinx.android.synthetic.main.activity_home.*
@@ -24,6 +28,9 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
 
     @Inject
     protected lateinit var fragmentManager: FragmentManager
+
+    @Inject
+    protected lateinit var navigator: Navigator
 
     override fun initPresenter(): HomeContract.Presenter = homePresenter
 
@@ -48,10 +55,8 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun openShotFragment() {
-        fragmentManager
-                .beginTransaction()
-                .add(R.id.container, ShotRootFragment.newInstance())
-                .commit()
+        navigator.registerScreen(ShotRootFragment.newInstance(), "SHOT")
+        navigator.goTo("SHOT")
     }
 
     override fun openLoginActivity() {
@@ -66,6 +71,12 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
+            log {
+                fragmentManager.backStackEntryCount
+            }
+            if(navigator.has()){
+                navigator.goBack()
+            }else
             super.onBackPressed()
         }
     }
@@ -73,19 +84,25 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_camera -> {
-
+                navigator.goTo("SHOT")
             }
             R.id.nav_gallery -> {
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.container, UserLikesFragment.newInstance())
-                        .commit()
+                if (!navigator.isRegistered("USER")) {
+                    navigator.registerScreen(UserLikesFragment.newInstance(), "USER")
+                }
+                navigator.goTo("USER")
             }
             R.id.nav_slideshow -> {
-
+                if (!navigator.isRegistered("REC")) {
+                    navigator.registerScreen(RecentShotFragment(), "REC")
+                }
+                navigator.goTo("REC")
             }
             R.id.nav_manage -> {
-
+                if (!navigator.isRegistered("TEST")) {
+                    navigator.registerScreen(TESTFragment(), "TEST")
+                }
+                navigator.goTo("TEST")
             }
             R.id.nav_share -> {
 

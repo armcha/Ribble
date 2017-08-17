@@ -25,12 +25,6 @@ class UserLikePresenter @Inject constructor(private val userDataRepository: User
         val likeList = data as List<Like>
         if (likeList.isNotEmpty())
             view?.onDataReceive(likeList)
-
-        likeList.forEach {
-            log {
-                it.shot?.title
-            }
-        }
     }
 
     override fun onRequestError(errorMessage: String?) {

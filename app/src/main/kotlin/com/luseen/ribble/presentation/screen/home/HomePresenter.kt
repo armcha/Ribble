@@ -21,7 +21,7 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        view.openShotFragment()
+        view?.openShotFragment()
     }
 
     override fun logOut() {

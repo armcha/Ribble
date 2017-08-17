@@ -1328,7 +1328,7 @@ public class CustomTabLayout extends HorizontalScrollView {
         }
 
         /**
-         * Select this tab. Only valid if the tab has been added to the action bar.
+         * Select this tab. Only valid if the tab hasBackStack been added to the action bar.
          */
         public void select() {
             if (mParent == null) {
@@ -1457,7 +1457,7 @@ public class CustomTabLayout extends HorizontalScrollView {
 
             super.setSelected(selected);
 
-            // Always dispatch this to the child views, regardless of whether the value has
+            // Always dispatch this to the child views, regardless of whether the value hasBackStack
             // changed
             if (mTextView != null) {
                 mTextView.setSelected(selected);
@@ -1858,7 +1858,7 @@ public class CustomTabLayout extends HorizontalScrollView {
 
         void setIndicatorPosition(int left, int right) {
             if (left != mIndicatorLeft || right != mIndicatorRight) {
-                // If the indicator's left/right has changed, invalidate
+                // If the indicator's left/right hasBackStack changed, invalidate
                 mIndicatorLeft = left;
                 mIndicatorRight = right;
                 ViewCompat.postInvalidateOnAnimation(this);

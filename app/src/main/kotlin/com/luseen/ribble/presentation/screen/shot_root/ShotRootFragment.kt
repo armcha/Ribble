@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_shot_root.*
 import javax.inject.Inject
 
 
-class ShotRootFragment : BaseFragment<ShotRootContract.View, ShotRootContract.Presenter>(), ShotRootContract.View {
+class ShotRootFragment constructor(): BaseFragment<ShotRootContract.View, ShotRootContract.Presenter>(), ShotRootContract.View {
 
     @Inject
     protected lateinit var shotRootPresenter: ShotRootPresenter

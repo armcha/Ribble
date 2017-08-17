@@ -1,11 +1,12 @@
 package com.luseen.ribble.presentation.navigation
 
-import android.app.Activity
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.support.v7.app.AppCompatActivity
 import com.luseen.ribble.R
 import com.luseen.ribble.di.scope.PerActivity
+import com.luseen.ribble.utils.replaceValue
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -13,21 +14,18 @@ import kotlin.reflect.KClass
  * Created by Chatikyan on 15.08.2017.
  */
 @PerActivity
-class Navigator @Inject constructor(private val fragmentManager: FragmentManager, private val activity: Activity) {
+class Navigator @Inject constructor(private val activity: AppCompatActivity) : Navigation {
 
+    private val fragmentManager: FragmentManager = activity.supportFragmentManager
     private val fragmentMap: MutableMap<String, Fragment?> = mutableMapOf() //FIXME ?
     private val registryMap: MutableMap<String, Boolean> = mutableMapOf()
 
+    private val stackSize get() = fragmentMap.size
     private val containerId = R.id.container //TODO change
     private var activeTag: String? = null
     private var firstTag: String? = null
 
-    fun registerScreen(fragment: Fragment, tag: String) {
-        fragmentMap.put(tag, fragment)
-        registryMap.put(tag, false)
-    }
-
-    fun isRegistered(tag: String): Boolean {
+    private fun isRegistered(tag: String): Boolean {
         return registryMap[tag] ?: false
     }
 
@@ -35,8 +33,7 @@ class Navigator @Inject constructor(private val fragmentManager: FragmentManager
         val transaction = fragmentManager.beginTransaction()
         with(transaction) {
             if (!isRegistered(tag)) {
-
-                if (fragmentMap.size == 1) {
+                if (stackSize == 1) {
                     firstTag = tag
                 }
                 add(containerId, fragment, tag)
@@ -52,37 +49,36 @@ class Navigator @Inject constructor(private val fragmentManager: FragmentManager
         }
 
         val currentFragment: Fragment? = fragmentMap[tag]
-        fragmentMap.remove(tag)
-        fragmentMap.put(tag, currentFragment)
+        fragmentMap.replaceValue(tag, currentFragment)
 
-        val isRegistered: Boolean = registryMap[tag] ?: false
-        if (!isRegistered) {
-            //registryMap.replaceValue(tag, true)
-            registryMap.remove(tag)
-            registryMap.put(tag, true)
+        if (!isRegistered(tag)) {
+            registryMap.replaceValue(tag, true)
         }
     }
 
-    fun goTo(tag: String) {
+    override fun goTo(kClass: KClass<out Fragment>) {
+        val tag = kClass.java.name
+        if (!fragmentMap.containsKey(tag)) {
+            val localeFragment = Fragment.instantiate(activity, tag)
+            fragmentMap.put(tag, localeFragment)
+            registryMap.put(tag, false)
+        }
+
         openFragment(fragmentMap[tag], tag)
         activeTag = tag
     }
 
-    fun goTo(kClass: KClass<out Fragment>) {
-
+    override fun hasBackStack(): Boolean {
+        return stackSize > 1 && activeTag != firstTag
     }
 
-    fun has(): Boolean {
-        return fragmentMap.size > 1 && activeTag != firstTag
-    }
-
-    fun goBack() {
+    override fun goBack() {
         val transaction = fragmentManager.beginTransaction()
         transaction.remove(fragmentMap[activeTag])
         fragmentMap.remove(activeTag)
         registryMap.remove(activeTag)
 
-        val currentTag = fragmentMap.keys.elementAt(fragmentMap.size - 1)
+        val currentTag = fragmentMap.keys.elementAt(stackSize - 1)
         with(transaction) {
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             show(fragmentMap[currentTag])
@@ -90,24 +86,8 @@ class Navigator @Inject constructor(private val fragmentManager: FragmentManager
         }
         activeTag = currentTag
     }
-//
-//    fun goToFirst() {
-//        currentScreen = 0
-//        if (screenList.isNotEmpty())
-//            openFragment(screenList[0].fragment(), FragmentOpenType.ADD, screenList[0].fragmentTag())
-//        else
-//
-//            log {
-//                "Screen list is empty"
-//            }
-//    }
-//
-//    fun goToLast() {
-//        currentScreen = screenList.size
-//        openFragment(screenList[screenList.size].fragment(), FragmentOpenType.REPLACE, screenList[screenList.size].fragmentTag())
-//    }
-//
-//    fun stackCount(): Int {
-//        return fragmentStack.size
-//    }
+
+    override fun goToFirst() {
+        TODO()
+    }
 }

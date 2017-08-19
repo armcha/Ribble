@@ -34,6 +34,15 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         setContentView(R.layout.activity_home)
 
         initViews()
+
+        val navigatorState = presenter.getNavigatorState()
+        if (navigatorState != null)
+            navigator.restore(navigatorState)
+    }
+
+    override fun onDestroy() {
+        presenter.saveNavigatorState(navigator.getState())
+        super.onDestroy()
     }
 
     private fun initViews() {
@@ -50,6 +59,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun openShotFragment() {
+
         goTo(ShotRootFragment::class)
     }
 

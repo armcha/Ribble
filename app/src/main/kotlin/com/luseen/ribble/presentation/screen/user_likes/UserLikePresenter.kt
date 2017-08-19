@@ -1,5 +1,7 @@
 package com.luseen.ribble.presentation.screen.user_likes
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.data.repository.UserDataRepository
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
 import com.luseen.ribble.presentation.model.Like
@@ -12,6 +14,13 @@ import javax.inject.Inject
 class UserLikePresenter @Inject constructor(private val userDataRepository: UserDataRepository)
     : ApiPresenter<UserLikeContract.View>(), UserLikeContract.Presenter {
 
+    private var likeList: List<Like> = emptyList()
+
+    @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
+    fun onStart() {
+        view?.onDataReceive(likeList)
+    }
+
     override fun onPresenterCreate() {
         super.onPresenterCreate()
         fetch(userDataRepository.getUserLikes(count = 50))
@@ -22,7 +31,7 @@ class UserLikePresenter @Inject constructor(private val userDataRepository: User
     }
 
     override fun <T> onRequestSuccess(data: T) {
-        val likeList = data as List<Like>
+        likeList = data as List<Like>
         if (likeList.isNotEmpty())
             view?.onDataReceive(likeList)
     }

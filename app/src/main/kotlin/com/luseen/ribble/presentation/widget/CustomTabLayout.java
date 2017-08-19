@@ -1938,8 +1938,8 @@ public class CustomTabLayout extends HorizontalScrollView {
             if (mIndicatorLeft >= 0 && mIndicatorRight > mIndicatorLeft) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // TODO: 08.08.2017 add DP size
-                    canvas.drawRoundRect(mIndicatorLeft + (getWidth() / 3.3f), getHeight() - mSelectedIndicatorHeight,
-                            mIndicatorRight - (getWidth() / 3.3f), getHeight(), 15F, 15F, mSelectedIndicatorPaint);
+                    canvas.drawRoundRect(mIndicatorLeft + 300, getHeight() - mSelectedIndicatorHeight,
+                            mIndicatorRight - 300, getHeight(), 15F, 15F, mSelectedIndicatorPaint);
                 } else {
                     canvas.drawRect(mIndicatorLeft + (getWidth() / 3.3f), getHeight() - mSelectedIndicatorHeight,
                             mIndicatorRight - (getWidth() / 3.3f), getHeight(), mSelectedIndicatorPaint);

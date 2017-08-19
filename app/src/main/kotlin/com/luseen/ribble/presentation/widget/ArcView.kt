@@ -5,7 +5,6 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import com.luseen.ribble.R
-import com.luseen.ribble.utils.log
 import com.luseen.ribble.utils.takeColor
 
 class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
@@ -32,7 +31,6 @@ class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(c
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        log("onDraw")
         val arcStartPoint = 2.5F
         val width = width.toFloat() - SHADOW_OFFSET
         val height = height.toFloat() - SHADOW_OFFSET

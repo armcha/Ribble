@@ -8,13 +8,13 @@ import com.luseen.ribble.App
 import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.module.ActivityModule
-import com.luseen.ribble.presentation.navigation.Navigation
 import com.luseen.ribble.presentation.navigation.Navigator
+import com.luseen.ribble.presentation.navigation.Router
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
-    : BaseMVPActivity<V, P>(), Navigation {
+    : BaseMVPActivity<V, P>(), Router {
 
     @Inject
     protected lateinit var navigator: Navigator

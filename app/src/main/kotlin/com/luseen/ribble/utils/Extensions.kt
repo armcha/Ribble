@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +36,6 @@ fun log(message: Any?) {
 infix fun ViewGroup.inflate(layoutResId: Int): View =
         LayoutInflater.from(this.context).inflate(layoutResId, this, false)
 
-
 infix fun Context.takeColor(colorId: Int) = ContextCompat.getColor(this, colorId)
 
 fun UIThread(action: () -> Unit) {
@@ -62,10 +63,8 @@ fun <K, V> MutableMap<K, V>.replaceValue(key: K, value: V) {
     this.put(key, value)
 }
 
-//fun <F, S, R> withH(first: F, second: S, block: () -> R): R {
-//    return with(first) {
-//        with(second) {
-//            block()
-//        }
-//    }
-//}
+inline fun FragmentManager.inTransaction(transaction: FragmentTransaction.() -> Unit) {
+    val fragmentTransaction = this.beginTransaction()
+    fragmentTransaction.transaction()
+    fragmentTransaction.commit()
+}

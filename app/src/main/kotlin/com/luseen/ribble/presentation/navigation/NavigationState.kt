@@ -5,8 +5,8 @@ package com.luseen.ribble.presentation.navigation
  */
 data class NavigationState constructor(
         var activeTag: String? = null,
-        var firstTag: String? = null
-) {
+        var firstTag: String? = null) {
+
     fun clear() {
         activeTag = null
         firstTag = null

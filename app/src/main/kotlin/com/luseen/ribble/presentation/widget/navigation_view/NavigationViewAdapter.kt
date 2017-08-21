@@ -42,7 +42,7 @@ class NavigationViewAdapter constructor(private val itemList: MutableList<Naviga
         fun bind(navigationItem: NavigationItem) {
             itemView.itemText.text = navigationItem.name
             itemView.itemIcon.setImageResource(navigationItem.icon)
-            itemView.itemIcon.tint(R.color.colorPrimary)
+            itemView.itemIcon.tint(navigationItem.itemIconColor)
             if (navigationItem.isSelected)
                 itemView.setBackgroundColor(Color.LTGRAY)
             else

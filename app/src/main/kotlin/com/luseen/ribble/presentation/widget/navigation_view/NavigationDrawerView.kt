@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.luseen.ribble.R
-import com.luseen.ribble.utils.showToast
 
 /**
  * Created by Chatikyan on 20.08.2017.
@@ -22,9 +21,12 @@ import com.luseen.ribble.utils.showToast
 class NavigationDrawerView : NavigationView, ItemClickListener {
 
     private var itemList = mutableListOf(
-            NavigationItem(NavigationId.SHOT, R.drawable.ic_menu_camera, isSelected = true),
-            NavigationItem(NavigationId.USER_LIKES, R.drawable.ic_menu_gallery),
-            NavigationItem(NavigationId.TEST_1, R.drawable.ic_menu_manage),
+            NavigationItem(NavigationId.SHOT, R.drawable.ic_menu_camera,
+                    isSelected = true, itemIconColor = R.color.colorAccent),
+            NavigationItem(NavigationId.USER_LIKES, R.drawable.ic_menu_gallery,
+                    itemIconColor = R.color.colorPrimary),
+            NavigationItem(NavigationId.TEST_1, R.drawable.ic_menu_manage,
+                    itemIconColor = R.color.green),
             NavigationItem(NavigationId.TEST_2, R.drawable.ic_menu_send),
             NavigationItem(NavigationId.LOG_OUT, R.drawable.ic_menu_share))
 
@@ -87,7 +89,6 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
 
     override fun onNavigationItemClick(item: NavigationItem, position: Int) {
         this setCurrentSelected position
-        context.showToast(item.name)
         navigationItemSelectListener?.onNavigationItemSelected(item)
     }
 

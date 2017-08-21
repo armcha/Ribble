@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.luseen.ribble.R
+import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
-import com.luseen.ribble.presentation.model.Shot
 import com.luseen.ribble.presentation.screen.popular_shot.PopularShotFragment
 import javax.inject.Inject
 

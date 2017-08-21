@@ -4,9 +4,9 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.logger.Logger
 import com.luseen.ribble.di.scope.PerActivity
+import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.ShotListInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.model.Shot
 import javax.inject.Inject
 
 /**

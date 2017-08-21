@@ -3,8 +3,8 @@ package com.luseen.ribble.presentation.screen.user_likes
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.data.repository.UserDataRepository
+import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.model.Like
 import com.luseen.ribble.utils.log
 import javax.inject.Inject
 

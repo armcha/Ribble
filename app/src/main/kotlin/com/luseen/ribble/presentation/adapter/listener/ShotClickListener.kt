@@ -1,6 +1,6 @@
 package com.luseen.ribble.presentation.adapter.listener
 
-import com.luseen.ribble.presentation.model.Shot
+import com.luseen.ribble.domain.entity.Shot
 
 /**
  * Created by Chatikyan on 05.08.2017.

@@ -4,9 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import com.luseen.ribble.data.network.ApiConstants
 import com.luseen.ribble.di.scope.PerActivity
+import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.model.User
 import com.luseen.ribble.utils.log
 import javax.inject.Inject
 

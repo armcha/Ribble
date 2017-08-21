@@ -1,4 +1,4 @@
-package com.luseen.ribble.presentation.model
+package com.luseen.ribble.domain.entity
 
 import android.os.Parcel
 import android.os.Parcelable

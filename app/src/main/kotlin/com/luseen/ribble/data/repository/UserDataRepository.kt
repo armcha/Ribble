@@ -6,9 +6,9 @@ import com.luseen.ribble.data.network.UserApiService
 import com.luseen.ribble.data.pref.Preferences
 import com.luseen.ribble.data.response.TokenResponse
 import com.luseen.ribble.di.scope.PerActivity
+import com.luseen.ribble.domain.entity.Like
+import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.domain.repository.UserRepository
-import com.luseen.ribble.presentation.model.Like
-import com.luseen.ribble.presentation.model.User
 import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject

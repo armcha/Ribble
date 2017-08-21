@@ -3,7 +3,7 @@ package com.luseen.ribble.domain.interactor
 import com.luseen.ribble.data.network.ApiConstants
 import com.luseen.ribble.data.repository.ShotDataRepository
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.presentation.model.Shot
+import com.luseen.ribble.domain.entity.Shot
 import io.reactivex.Flowable
 import javax.inject.Inject
 

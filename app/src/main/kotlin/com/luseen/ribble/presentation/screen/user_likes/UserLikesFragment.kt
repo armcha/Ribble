@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.luseen.ribble.R
+import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.presentation.adapter.UserLikesRecyclerAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
-import com.luseen.ribble.presentation.model.Like
 import kotlinx.android.synthetic.main.fragment_user_likes.*
 import javax.inject.Inject
 

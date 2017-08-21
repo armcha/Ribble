@@ -2,8 +2,8 @@ package com.luseen.ribble.presentation.adapter
 
 import android.view.ViewGroup
 import com.luseen.ribble.R
+import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.presentation.adapter.holder.UserLikesViewHolder
-import com.luseen.ribble.presentation.model.Like
 import com.luseen.ribble.utils.inflate
 
 /**

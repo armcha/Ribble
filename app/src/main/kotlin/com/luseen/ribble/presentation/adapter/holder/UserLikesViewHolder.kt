@@ -2,7 +2,7 @@ package com.luseen.ribble.presentation.adapter.holder
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.luseen.ribble.presentation.model.Like
+import com.luseen.ribble.domain.entity.Like
 import kotlinx.android.synthetic.main.liked_shot_item.view.*
 
 /**

@@ -1,4 +1,4 @@
-package com.luseen.ribble.presentation.model
+package com.luseen.ribble.domain.entity
 
 /**
  * Created by Chatikyan on 10.08.2017.

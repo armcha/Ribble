@@ -61,7 +61,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
             }
             fragmentMap.put(tag, fragment)
 
-            if (activeTag == null) {
+            if (activeTag == null) { //TODO
                 rootTag = tag
             }
         }

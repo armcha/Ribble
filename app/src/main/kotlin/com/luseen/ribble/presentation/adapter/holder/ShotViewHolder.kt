@@ -2,7 +2,7 @@ package com.luseen.ribble.presentation.adapter.holder
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.luseen.ribble.presentation.model.Shot
+import com.luseen.ribble.domain.entity.Shot
 import kotlinx.android.synthetic.main.shot_item.view.*
 
 /**

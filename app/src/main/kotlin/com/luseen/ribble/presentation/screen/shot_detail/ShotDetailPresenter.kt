@@ -2,10 +2,10 @@ package com.luseen.ribble.presentation.screen.shot_detail
 
 import com.luseen.logger.Logger
 import com.luseen.ribble.di.scope.PerActivity
+import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.domain.interactor.ShotDetailInteractor
 import com.luseen.ribble.domain.interactor.ShotLikeInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.model.Like
 import javax.inject.Inject
 
 /**

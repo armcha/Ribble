@@ -3,9 +3,9 @@ package com.luseen.ribble.data.mapper
 import com.luseen.ribble.data.response.LikeResponse
 import com.luseen.ribble.data.response.ShotResponse
 import com.luseen.ribble.data.response.UserResponse
-import com.luseen.ribble.presentation.model.Like
-import com.luseen.ribble.presentation.model.Shot
-import com.luseen.ribble.presentation.model.User
+import com.luseen.ribble.domain.entity.Like
+import com.luseen.ribble.domain.entity.Shot
+import com.luseen.ribble.domain.entity.User
 
 /**
  * Created by Chatikyan on 03.08.2017.

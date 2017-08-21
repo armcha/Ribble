@@ -2,8 +2,8 @@ package com.luseen.ribble.domain.interactor
 
 import com.luseen.ribble.data.repository.UserDataRepository
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.presentation.model.Like
-import com.luseen.ribble.presentation.model.User
+import com.luseen.ribble.domain.entity.Like
+import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.utils.log
 import io.reactivex.Flowable
 import io.reactivex.Single

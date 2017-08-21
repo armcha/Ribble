@@ -1,7 +1,7 @@
 package com.luseen.ribble.domain.repository
 
-import com.luseen.ribble.presentation.model.Like
-import com.luseen.ribble.presentation.model.User
+import com.luseen.ribble.domain.entity.Like
+import com.luseen.ribble.domain.entity.User
 import io.reactivex.Flowable
 import io.reactivex.Single
 

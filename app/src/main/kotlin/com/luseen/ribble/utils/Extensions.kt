@@ -3,6 +3,7 @@ package com.luseen.ribble.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Handler
 import android.os.Looper
 import android.support.v4.app.FragmentManager
@@ -11,6 +12,7 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import com.luseen.logger.Logger
 
@@ -37,6 +39,10 @@ infix fun ViewGroup.inflate(layoutResId: Int): View =
         LayoutInflater.from(this.context).inflate(layoutResId, this, false)
 
 infix fun Context.takeColor(colorId: Int) = ContextCompat.getColor(this, colorId)
+
+fun ImageView.tint(colorId: Int) {
+    this.setColorFilter(this.context.takeColor(colorId), PorterDuff.Mode.SRC_IN)
+}
 
 fun UIThread(action: () -> Unit) {
     Handler(Looper.getMainLooper()).post {

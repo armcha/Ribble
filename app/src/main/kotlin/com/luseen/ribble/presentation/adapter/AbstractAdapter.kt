@@ -6,9 +6,8 @@ import android.view.ViewGroup
 /**
  * Created by Chatikyan on 14.08.2017.
  */
-abstract class AbstractAdapter<HOLDER : RecyclerView.ViewHolder, in ITEM> constructor(
-        private var itemList: List<ITEM>)
-    : RecyclerView.Adapter<HOLDER>() {
+abstract class AbstractAdapter<HOLDER : RecyclerView.ViewHolder, in ITEM>
+constructor(private var itemList: List<ITEM>) : RecyclerView.Adapter<HOLDER>() {
 
     override fun getItemCount(): Int {
         return itemList.size

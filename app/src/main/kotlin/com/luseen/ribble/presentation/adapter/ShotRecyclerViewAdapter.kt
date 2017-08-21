@@ -3,9 +3,9 @@ package com.luseen.ribble.presentation.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.luseen.ribble.R
+import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.holder.ShotViewHolder
 import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
-import com.luseen.ribble.presentation.model.Shot
 import com.luseen.ribble.utils.inflate
 
 /**

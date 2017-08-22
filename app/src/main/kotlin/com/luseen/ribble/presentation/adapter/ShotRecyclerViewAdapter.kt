@@ -12,7 +12,7 @@ import com.luseen.ribble.utils.inflate
  * Created by Chatikyan on 04.08.2017.
  */
 class ShotRecyclerViewAdapter constructor(
-        private val shotList: MutableList<Shot>,
+        private val shotList: List<Shot>,
         private val shotClickListener: ShotClickListener)
     : AbstractAdapter<ShotViewHolder, Shot>(shotList) {
 

@@ -5,10 +5,9 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
-import com.luseen.ribble.presentation.screen.TESTFragment
 import com.luseen.ribble.presentation.screen.auth.AuthActivity
-import com.luseen.ribble.presentation.screen.recent_shot.RecentShotFragment
 import com.luseen.ribble.presentation.screen.shot_root.ShotRootFragment
+import com.luseen.ribble.presentation.screen.user_following.UserFollowingFragment
 import com.luseen.ribble.presentation.screen.user_likes.UserLikesFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItem
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItemSelectedListener
@@ -87,11 +86,11 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
             id.USER_LIKES -> {
                 goTo(UserLikesFragment::class)
             }
-            id.TEST_1 -> {
-                goTo(RecentShotFragment::class)
+            id.FOLLOWING -> {
+                goTo(UserFollowingFragment::class)
             }
             id.TEST_2 -> {
-                goTo(TESTFragment::class)
+
             }
             id.LOG_OUT -> {
                 presenter.logOut()

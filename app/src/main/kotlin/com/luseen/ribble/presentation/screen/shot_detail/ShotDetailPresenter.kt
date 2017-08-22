@@ -14,7 +14,7 @@ import javax.inject.Inject
 @PerActivity
 class ShotDetailPresenter @Inject constructor(private val shotDetailInteractor: ShotDetailInteractor,
                                               private val shotLikeInteractor: ShotLikeInteractor)
-    : ApiPresenter<ShotDetailContract.View>(), ShotDetailContract.Presenter {
+    : ApiPresenter<List<Like>, ShotDetailContract.View>(), ShotDetailContract.Presenter {
 
     init {
 
@@ -28,8 +28,8 @@ class ShotDetailPresenter @Inject constructor(private val shotDetailInteractor: 
 
     }
 
-    override fun <T> onRequestSuccess(data: T) {
-        val likes: List<Like> = data as List<Like>
+    override fun onRequestSuccess(data: List<Like>) {
+        val likes: List<Like> = data
         Logger.log("Likes count is ${likes.count()}")
     }
 

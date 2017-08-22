@@ -1,12 +1,12 @@
-package com.luseen.ribble.presentation.screen.popular_shot
+package com.luseen.ribble.presentation.screen.user_following
 
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.base_mvp.base.BaseContract
 
 /**
- * Created by Chatikyan on 01.08.2017.
+ * Created by Chatikyan on 22.08.2017.
  */
-interface PopularShotContract {
+interface UserFollowingContract {
 
     interface View : BaseContract.View {
 
@@ -19,8 +19,7 @@ interface PopularShotContract {
         fun onShotListReceive(shotList: List<Shot>)
     }
 
-    interface Presenter : BaseContract.Presenter<View>{
+    interface Presenter : BaseContract.Presenter<View> {
 
     }
-
 }

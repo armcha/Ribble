@@ -3,6 +3,7 @@ package com.luseen.ribble.domain.interactor
 import com.luseen.ribble.data.repository.UserDataRepository
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.Like
+import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.utils.log
 import io.reactivex.Flowable
@@ -35,5 +36,9 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
 
     fun getUserLikes(count: Int): Single<List<Like>> {
         return userDataRepository.getUserLikes(count)
+    }
+
+    fun getFollowing(count: Int): Single<List<Shot>> {
+        return userDataRepository.getFollowing(count)
     }
 }

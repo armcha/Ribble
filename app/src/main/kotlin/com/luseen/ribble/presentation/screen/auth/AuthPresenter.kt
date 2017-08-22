@@ -15,7 +15,7 @@ import javax.inject.Inject
  */
 @PerActivity
 class AuthPresenter @Inject constructor(private val userInteractor: UserInteractor)
-    : ApiPresenter<AuthContract.View>(), AuthContract.Presenter {
+    : ApiPresenter<User,AuthContract.View>(), AuthContract.Presenter {
 
     override fun makeLogin() {
         view?.startOAuthIntent(Uri.parse(ApiConstants.LOGIN_OAUTH_URL))
@@ -33,8 +33,8 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
         log { "Start" }
     }
 
-    override fun <T> onRequestSuccess(data: T) {
-        val user = data as User
+    override fun onRequestSuccess(data: User) {
+        val user = data
         userInteractor.saveUserLoggedIn()
         log {
             user.name

@@ -1,9 +1,7 @@
 package com.luseen.ribble.presentation.screen.popular_shot
 
 
-import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.ShotRecyclerViewAdapter
@@ -21,14 +19,12 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
     protected lateinit var popularShotPresenter: PopularShotPresenter
 
     private var recyclerAdapter: ShotRecyclerViewAdapter? = null
-    private var shotList: MutableList<Shot> = mutableListOf<Shot>()
 
     companion object {
         const val SHOT_EXTRA_ID = "shot_extra_id"
 
         fun newInstance(): PopularShotFragment {
-            val fragment = PopularShotFragment()
-            return fragment
+            return PopularShotFragment()
         }
     }
 
@@ -38,16 +34,11 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
 
     override fun injectDependencies() = activityComponent.inject(this)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        updateAdapter(shotList)
-    }
-
-    private fun updateAdapter(shotList: MutableList<Shot>) {
+    private fun updateAdapter(shotList: List<Shot>) {
         recyclerAdapter?.update(shotList) ?: this setUpRecyclerView shotList
     }
 
-    private infix fun setUpRecyclerView(shotList: MutableList<Shot>) {
+    private infix fun setUpRecyclerView(shotList: List<Shot>) {
         recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)
         shotRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         shotRecyclerView.adapter = recyclerAdapter
@@ -70,8 +61,7 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
         ///TODO("not implemented")
     }
 
-    override fun onShotListReceive(shotList: MutableList<Shot>) {
-        this.shotList = shotList
+    override fun onShotListReceive(shotList: List<Shot>) {
         updateAdapter(shotList)
     }
 }

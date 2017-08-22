@@ -25,7 +25,7 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
                     isSelected = true, itemIconColor = R.color.colorAccent),
             NavigationItem(NavigationId.USER_LIKES, R.drawable.ic_menu_gallery,
                     itemIconColor = R.color.colorPrimary),
-            NavigationItem(NavigationId.TEST_1, R.drawable.ic_menu_manage,
+            NavigationItem(NavigationId.FOLLOWING, R.drawable.ic_menu_manage,
                     itemIconColor = R.color.green),
             NavigationItem(NavigationId.TEST_2, R.drawable.ic_menu_send),
             NavigationItem(NavigationId.LOG_OUT, R.drawable.ic_menu_share))

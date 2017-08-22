@@ -3,11 +3,11 @@ package com.luseen.ribble.presentation.base_mvp.result_listener
 /**
  * Created by Chatikyan on 04.08.2017.
  */
-interface ResultListener {
+interface ResultListener<T> {
 
     fun onRequestStart()
 
-    fun <T> onRequestSuccess(data: T)
+    fun onRequestSuccess(data: T)
 
     fun onRequestError(errorMessage: String?)
 }

@@ -17,7 +17,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
     @Inject
     protected lateinit var userLikePresenter: UserLikePresenter
 
-    // private var recyclerAdapter: UserLikesRecyclerAdapter? = null
+    private var recyclerAdapter: UserLikesRecyclerAdapter? = null
 
     companion object {
         fun newInstance(): UserLikesFragment {
@@ -38,12 +38,11 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
     override fun initPresenter() = userLikePresenter
 
     override fun onDataReceive(likeList: List<Like>) {
-        // updateAdapter(likeList)
-        setUpRecyclerView(likeList)
+        updateAdapter(likeList)
     }
 
     private fun updateAdapter(likeList: List<Like>) {
-        // recyclerAdapter?.update(likeList) ?: this setUpRecyclerView likeList
+        recyclerAdapter?.update(likeList) ?: this setUpRecyclerView likeList
     }
 
     private infix fun setUpRecyclerView(likeList: List<Like>) {

@@ -14,16 +14,13 @@ interface ShotApiService {
 
     @GET("shots?")
     fun getShots(@Query("sort") sortType: String,
-                 @Query("per_page") limit: Int,
-                 @Query("access_token") token: String = ApiConstants.TOKEN): Flowable<List<ShotResponse>>
+                 @Query("per_page") limit: Int): Flowable<List<ShotResponse>>
 
     @GET("shots/{shot_id}/likes?")
     fun getShotLikes(@Path("shot_id") shotId: String,
-                     @Query("per_page") limit: Int = 500,
-                     @Query("access_token") token: String = ApiConstants.TOKEN): Flowable<List<LikeResponse>>
+                     @Query("per_page") limit: Int = 500): Flowable<List<LikeResponse>>
 
     @GET("shots/{shot_id}/comments?")
-    fun getShotComments(@Path("shot_id") shotId: String,
-                        @Query("access_token") token: String = ApiConstants.TOKEN)
+    fun getShotComments(@Path("shot_id") shotId: String)
 
 }

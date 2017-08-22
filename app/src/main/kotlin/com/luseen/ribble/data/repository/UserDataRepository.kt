@@ -7,6 +7,7 @@ import com.luseen.ribble.data.pref.Preferences
 import com.luseen.ribble.data.response.TokenResponse
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.Like
+import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.domain.repository.UserRepository
 import io.reactivex.Flowable
@@ -47,6 +48,11 @@ class UserDataRepository @Inject constructor(
 
     override fun getUserLikes(count: Int): Single<List<Like>> {
         return userApiService.getUserLikes(pageSize = count)
+                .map { mapper.translate(it) }
+    }
+
+    override fun getFollowing(count: Int): Single<List<Shot>> {
+        return userApiService.getFollowing(count)
                 .map { mapper.translate(it) }
     }
 }

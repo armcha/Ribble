@@ -25,7 +25,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
         }
     }
 
-    private fun <T> Single<T>.receive(resultListener: ResultListener): Disposable {
+    private fun <T> Single<T>.receive(resultListener: ResultListener<T>): Disposable {
         return this.subscribe({
             resultListener.onRequestSuccess(it)
         }, {
@@ -33,7 +33,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
         })
     }
 
-    fun <T> fetch(flowable: Flowable<T>, resultListener: ResultListener) {
+    fun <T> fetch(flowable: Flowable<T>, resultListener: ResultListener<T>) {
         with(resultListener) {
             onRequestStart()
             disposable.add(flowable
@@ -47,7 +47,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
         }
     }
 
-    fun <T> fetch(observable: Observable<T>, resultListener: ResultListener) {
+    fun <T> fetch(observable: Observable<T>, resultListener: ResultListener<T>) {
         with(resultListener) {
             onRequestStart()
             disposable.add(observable
@@ -61,7 +61,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
         }
     }
 
-    fun <T> fetch(single: Single<T>, resultListener: ResultListener) {
+    fun <T> fetch(single: Single<T>, resultListener: ResultListener<T>) {
         with(resultListener) {
             onRequestStart()
             disposable.add(single

@@ -13,20 +13,20 @@ import javax.inject.Inject
 /**
  * Created by Chatikyan on 04.08.2017.
  */
-abstract class ApiPresenter<V : BaseContract.View> : BasePresenter<V>(), ResultListener {
+abstract class ApiPresenter<TYPE, VIEW : BaseContract.View> : BasePresenter<VIEW>(), ResultListener<TYPE> {
 
     @Inject
     protected lateinit var fetcher: Fetcher
 
-    infix fun <T> fetch(flowable: Flowable<T>) {
+    infix fun fetch(flowable: Flowable<TYPE>) {
         fetcher.fetch(flowable, this)
     }
 
-    infix fun <T> fetch(observable: Observable<T>) {
+    infix fun fetch(observable: Observable<TYPE>) {
         fetcher.fetch(observable, this)
     }
 
-    infix fun <T> fetch(single: Single<T>) {
+    infix fun fetch(single: Single<TYPE>) {
         fetcher.fetch(single, this)
     }
 

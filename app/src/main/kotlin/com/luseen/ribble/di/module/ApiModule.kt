@@ -1,10 +1,7 @@
 package com.luseen.ribble.di.module
 
 import com.luseen.ribble.BuildConfig
-import com.luseen.ribble.data.network.ApiConstants
-import com.luseen.ribble.data.network.AuthApiService
-import com.luseen.ribble.data.network.ShotApiService
-import com.luseen.ribble.data.network.UserApiService
+import com.luseen.ribble.data.network.*
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -38,7 +35,13 @@ class ApiModule {
 
     @Singleton
     @Provides
-    fun provideOkHttp(): OkHttpClient {
+    fun interceptor(): TokenInterceptor {
+        return TokenInterceptor(ApiConstants.TOKEN)
+    }
+
+    @Singleton
+    @Provides
+    fun provideOkHttpBuilder(): OkHttpClient.Builder {
         val okHttpBuilder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
             val logging = HttpLoggingInterceptor()
@@ -47,15 +50,20 @@ class ApiModule {
         }
         okHttpBuilder.readTimeout(15.toLong(), TimeUnit.SECONDS)
         okHttpBuilder.connectTimeout(15.toLong(), TimeUnit.SECONDS)
-        return okHttpBuilder.build()
+        return okHttpBuilder
     }
+
 
     @Singleton
     @Provides
     @Named("shotRetrofit")
     fun provideShotRetrofit(retrofitBuilder: Retrofit.Builder,
+                            okHttpClientBuilder: OkHttpClient.Builder,
+                            interceptor: TokenInterceptor,
                             @Named("shotEndpoint") baseUrl: String): Retrofit {
+        val client = okHttpClientBuilder.addInterceptor(interceptor).build()
         return retrofitBuilder
+                .client(client)
                 .baseUrl(baseUrl)
                 .build()
     }
@@ -64,19 +72,20 @@ class ApiModule {
     @Provides
     @Named("authRetrofit")
     fun provideUserRetrofit(retrofitBuilder: Retrofit.Builder,
+                            okHttpClientBuilder: OkHttpClient.Builder,
                             @Named("authEndpoint") baseUrl: String): Retrofit {
         return retrofitBuilder
+                .client(okHttpClientBuilder.build())
                 .baseUrl(baseUrl)
                 .build()
     }
 
     @Singleton
     @Provides
-    fun provideRetrofitBuilder(okHttpClient: OkHttpClient): Retrofit.Builder {
+    fun provideRetrofitBuilder(): Retrofit.Builder {
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient)
     }
 
     @Singleton

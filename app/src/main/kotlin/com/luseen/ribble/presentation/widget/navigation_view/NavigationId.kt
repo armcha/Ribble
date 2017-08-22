@@ -7,7 +7,7 @@ sealed class NavigationId(val name: String) {
 
     object SHOT: NavigationId("SHOT")
     object USER_LIKES: NavigationId("USER LIKES")
-    object TEST_1: NavigationId("TEST_1")
+    object FOLLOWING: NavigationId("FOLLOWING")
     object TEST_2: NavigationId("TEST_2")
     object LOG_OUT: NavigationId("LOG OUT")
 }

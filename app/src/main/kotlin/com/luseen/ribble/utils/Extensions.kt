@@ -9,6 +9,8 @@ import android.os.Looper
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
+import android.support.v4.widget.DrawerLayout
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,13 +46,13 @@ fun ImageView.tint(colorId: Int) {
     this.setColorFilter(this.context.takeColor(colorId), PorterDuff.Mode.SRC_IN)
 }
 
-fun UIThread(action: () -> Unit) {
+inline fun UIThread(crossinline action: () -> Unit) {
     Handler(Looper.getMainLooper()).post {
         action()
     }
 }
 
-fun delay(milliseconds: Long, action: () -> Unit) {
+inline fun delay(milliseconds: Long, crossinline action: () -> Unit) {
     Handler().postDelayed({
         action()
     }, milliseconds)
@@ -67,6 +69,20 @@ fun Context.showToast(message: String) {
 fun <K, V> MutableMap<K, V>.replaceValue(key: K, value: V) {
     this.remove(key)
     this.put(key, value)
+}
+
+fun emptyString() = ""
+
+fun DrawerLayout.lock() {
+    this.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+}
+
+fun DrawerLayout.unlock() {
+    this.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+}
+
+fun DrawerLayout.isLocked(): Boolean {
+    return this.getDrawerLockMode(Gravity.START) == DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 }
 
 inline fun FragmentManager.inTransaction(transaction: FragmentTransaction.() -> Unit) {

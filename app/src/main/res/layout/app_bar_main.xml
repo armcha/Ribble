@@ -33,6 +33,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
+                    android:id="@+id/arcImage"
+                    android:contentDescription="@string/arc_view_image"
                     app:srcCompat="@drawable/equal"
                     android:tint="@android:color/white" />
 

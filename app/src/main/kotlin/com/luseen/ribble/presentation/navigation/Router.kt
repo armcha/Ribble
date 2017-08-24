@@ -1,5 +1,6 @@
 package com.luseen.ribble.presentation.navigation
 
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import kotlin.reflect.KClass
 
@@ -8,7 +9,7 @@ import kotlin.reflect.KClass
  */
 interface Router {
 
-    fun goTo(kClass: KClass<out Fragment>)
+    fun goTo(kClass: KClass<out Fragment>, arg: Bundle)
 
     fun hasBackStack(): Boolean
 

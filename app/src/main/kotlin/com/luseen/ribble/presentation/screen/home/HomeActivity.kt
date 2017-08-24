@@ -11,12 +11,14 @@ import com.luseen.ribble.presentation.screen.user_following.UserFollowingFragmen
 import com.luseen.ribble.presentation.screen.user_likes.UserLikesFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItem
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItemSelectedListener
+import com.luseen.ribble.utils.lock
 import com.luseen.ribble.utils.showToast
 import com.luseen.ribble.utils.start
+import com.luseen.ribble.utils.unlock
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import javax.inject.Inject
-import com.luseen.ribble.presentation.widget.navigation_view.NavigationId as id
+import com.luseen.ribble.presentation.widget.navigation_view.NavigationId as Id
 
 class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), HomeContract.View,
         NavigationItemSelectedListener {
@@ -49,6 +51,17 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         navView.navigationItemSelectListener = this
+    }
+
+    override fun onDrawerLocked() {
+        arcImage.setImageResource(R.drawable.ic_menu_send)
+        arcView.setOnClickListener {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onDrawerUnlocked() {
+        arcImage.setImageResource(R.drawable.equal)
         arcView.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
@@ -59,7 +72,6 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun openShotFragment() {
-
         goTo(ShotRootFragment::class)
     }
 
@@ -71,6 +83,16 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         finish()
     }
 
+    override fun onNonRegistryFragmentOpen(tag: Id) {
+        drawerLayout.lock()
+        presenter.handleDrawerLock()
+    }
+
+    override fun onNonRegistryFragmentClose() {
+        drawerLayout.unlock()
+        presenter.handleDrawerUnLock()
+    }
+
     override fun onBackPressed() {
         when {
             drawerLayout.isDrawerOpen(GravityCompat.START) -> drawerLayout.closeDrawer(GravityCompat.START)
@@ -80,19 +102,19 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
 
     override fun onNavigationItemSelected(item: NavigationItem) {
         when (item.id) {
-            id.SHOT -> {
+            Id.SHOT -> {
                 goTo(ShotRootFragment::class)
             }
-            id.USER_LIKES -> {
+            Id.USER_LIKES -> {
                 goTo(UserLikesFragment::class)
             }
-            id.FOLLOWING -> {
+            Id.FOLLOWING -> {
                 goTo(UserFollowingFragment::class)
             }
-            id.TEST_2 -> {
+            Id.TEST_2 -> {
 
             }
-            id.LOG_OUT -> {
+            Id.LOG_OUT -> {
                 presenter.logOut()
             }
         }

@@ -13,7 +13,7 @@ import com.luseen.ribble.di.module.ApplicationModule
  */
 class App : Application() {
 
-    val applicationComponent: ApplicationComponent by lazy {
+    val applicationComponent: ApplicationComponent by lazy(LazyThreadSafetyMode.NONE) {
         DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
                 .build()

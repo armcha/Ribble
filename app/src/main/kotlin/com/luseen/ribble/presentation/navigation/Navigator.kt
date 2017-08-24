@@ -1,11 +1,13 @@
 package com.luseen.ribble.presentation.navigation
 
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import com.luseen.ribble.R
 import com.luseen.ribble.di.scope.PerActivity
+import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.inTransaction
 import javax.inject.Inject
 import kotlin.reflect.KClass
@@ -16,12 +18,23 @@ import kotlin.reflect.KClass
 @PerActivity
 class Navigator @Inject constructor(private val activity: AppCompatActivity) : Router {
 
+    interface NonRegistryFragmentListener {
+        fun onNonRegistryFragmentOpen(tag: NavigationId){
+
+        }
+
+        fun onNonRegistryFragmentClose(){
+
+        }
+    }
+
     private val fragmentManager: FragmentManager = activity.supportFragmentManager
     private var fragmentMap: MutableMap<String, Fragment> = mutableMapOf()
 
     private val containerId = R.id.container //TODO change
-    private var activeTag: String? = null
-    private var rootTag: String? = null
+    var activeTag: String? = null
+    var rootTag: String? = null
+    lateinit var nonRegistryFragmentListener: NonRegistryFragmentListener
 
     fun getState(): NavigationState {
         return NavigationState(activeTag, rootTag)
@@ -49,13 +62,16 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
         }
     }
 
-    override fun goTo(kClass: KClass<out Fragment>) {
+    override fun goTo(kClass: KClass<out Fragment>, arg: Bundle) {
         val tag = kClass.java.name
         if (activeTag == tag)
             return
 
         if (!fragmentMap.containsKey(tag)) {
             val fragment = Fragment.instantiate(activity, tag)
+            if (!arg.isEmpty) {
+                fragment.arguments = arg
+            }
             fragmentManager.inTransaction {
                 add(containerId, fragment, tag)
             }

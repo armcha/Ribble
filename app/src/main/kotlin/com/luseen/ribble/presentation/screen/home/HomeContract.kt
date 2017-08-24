@@ -13,6 +13,10 @@ interface HomeContract {
         fun openShotFragment()
 
         fun openLoginActivity()
+
+        fun onDrawerLocked()
+
+        fun onDrawerUnlocked()
     }
 
     interface Presenter : BaseContract.Presenter<View> {
@@ -22,5 +26,9 @@ interface HomeContract {
         fun saveNavigatorState(state: NavigationState?)
 
         fun getNavigatorState(): NavigationState?
+
+        fun handleDrawerLock()
+
+        fun handleDrawerUnLock()
     }
 }

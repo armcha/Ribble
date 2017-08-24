@@ -19,12 +19,6 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
 
     private var recyclerAdapter: UserLikesRecyclerAdapter? = null
 
-    companion object {
-        fun newInstance(): UserLikesFragment {
-            return UserLikesFragment()
-        }
-    }
-
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }

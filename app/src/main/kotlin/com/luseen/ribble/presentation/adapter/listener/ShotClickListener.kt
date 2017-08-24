@@ -1,5 +1,6 @@
 package com.luseen.ribble.presentation.adapter.listener
 
+import android.view.View
 import com.luseen.ribble.domain.entity.Shot
 
 /**
@@ -7,5 +8,5 @@ import com.luseen.ribble.domain.entity.Shot
  */
 interface ShotClickListener {
 
-    fun onShotClicked(shot: Shot)
+    fun onShotClicked(card: View, shot: Shot)
 }

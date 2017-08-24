@@ -2,6 +2,7 @@ package com.luseen.ribble.presentation.screen.user_following
 
 
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.ShotRecyclerViewAdapter
@@ -27,7 +28,7 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
 
     override fun initPresenter() = followingPresenter
 
-    override fun onShotClicked(shot: Shot) {
+    override fun onShotClicked(card: View, shot: Shot) {
 
     }
 

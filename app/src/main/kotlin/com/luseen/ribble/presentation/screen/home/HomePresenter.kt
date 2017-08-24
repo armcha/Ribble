@@ -15,32 +15,31 @@ import javax.inject.Inject
 class HomePresenter @Inject constructor(private val userInteractor: UserInteractor) : BasePresenter<HomeContract.View>(),
         HomeContract.Presenter {
 
-    var state: NavigationState? = null
+    private var state: NavigationState? = null
+    private var isDrawerLocked = false
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-//        log {
-//            "PRESENTER $state"
-//        }
-//        log {
-//            "onCreate ${hashCode()}"
-//        }
-//        //view.openShotFragment()
+        if (isDrawerLocked) {
+            view?.onDrawerLocked()
+        } else {
+            view?.onDrawerUnlocked()
+        }
     }
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
         view?.openShotFragment()
-//        log {
-//            "OnPResnterCreate ${hashCode()}"
-//        }
     }
 
-    override fun onPresenterDestroy() {
-        super.onPresenterDestroy()
-//        log {
-//            "onPresenterDestroy ${hashCode()}"
-//        }
+    override fun handleDrawerLock() {
+        isDrawerLocked = true
+        view?.onDrawerLocked()
+    }
+
+    override fun handleDrawerUnLock() {
+        isDrawerLocked = false
+        view?.onDrawerUnlocked()
     }
 
     override fun logOut() {

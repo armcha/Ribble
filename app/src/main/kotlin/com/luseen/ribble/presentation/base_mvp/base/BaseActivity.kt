@@ -9,15 +9,14 @@ import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.module.ActivityModule
 import com.luseen.ribble.presentation.navigation.Navigator
-import com.luseen.ribble.presentation.navigation.Router
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
-    : BaseMVPActivity<V, P>(), Router {
+    : BaseMVPActivity<V, P>(), Navigator.NonRegistryFragmentListener {
 
     @Inject
-    protected lateinit var navigator: Navigator
+    lateinit var navigator: Navigator
 
     val activityComponent: ActivityComponent by lazy {
         getAppComponent().plus(ActivityModule(this))
@@ -26,15 +25,18 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
+        navigator.nonRegistryFragmentListener = this
         super.onCreate(savedInstanceState)
     }
 
     override fun onBackPressed() {
+        if (navigator.activeTag == navigator.rootTag) {
+            navigator.nonRegistryFragmentListener.onNonRegistryFragmentClose()
+        }
         if (navigator.hasBackStack())
             navigator.goBack()
         else
             super.onBackPressed()
-
     }
 
     protected abstract fun injectDependencies()
@@ -43,15 +45,11 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
         return App.instance.applicationComponent
     }
 
-    final override fun goTo(kClass: KClass<out Fragment>) {
-        navigator.goTo(kClass)
+    fun goTo(kClass: KClass<out Fragment>, arg: Bundle = Bundle.EMPTY) {
+        navigator.goTo(kClass, arg)
     }
 
-    final override fun hasBackStack() = navigator.hasBackStack()
+    fun hasBackStack() = navigator.hasBackStack()
 
-    final override fun goBack() = navigator.goBack()
-
-    final override fun goToFirst() {
-        //NO-OP
-    }
+    fun goBack() = navigator.goBack()
 }

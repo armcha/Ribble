@@ -6,8 +6,8 @@ import android.view.ViewGroup
 /**
  * Created by Chatikyan on 14.08.2017.
  */
-abstract class AbstractAdapter<HOLDER : RecyclerView.ViewHolder, in ITEM>
-constructor(private var itemList: List<ITEM>) : RecyclerView.Adapter<HOLDER>() {
+abstract class AbstractAdapter<HOLDER : RecyclerView.ViewHolder, ITEM>
+constructor(protected var itemList: List<ITEM>) : RecyclerView.Adapter<HOLDER>() {
 
     override fun getItemCount(): Int {
         return itemList.size
@@ -29,5 +29,10 @@ constructor(private var itemList: List<ITEM>) : RecyclerView.Adapter<HOLDER>() {
     fun update(itemList: List<ITEM>) {
         this.itemList = itemList
         notifyDataSetChanged()
+    }
+
+    override fun onViewRecycled(holder: HOLDER) {
+        super.onViewRecycled(holder)
+        //TODO clear glide
     }
 }

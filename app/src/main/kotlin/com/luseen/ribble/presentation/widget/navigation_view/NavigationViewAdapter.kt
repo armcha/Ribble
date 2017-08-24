@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.navigation_view_item.view.*
 /**
  * Created by Chatikyan on 20.08.2017.
  */
-class NavigationViewAdapter constructor(private val itemList: MutableList<NavigationItem>)
-    : AbstractAdapter<NavigationViewAdapter.NavigationViewHolder, NavigationItem>(itemList) {
+class NavigationViewAdapter constructor(navigationItemList: MutableList<NavigationItem>)
+    : AbstractAdapter<NavigationViewAdapter.NavigationViewHolder, NavigationItem>(navigationItemList) {
 
     var itemClickListener: ItemClickListener? = null
 

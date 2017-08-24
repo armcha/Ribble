@@ -18,5 +18,4 @@ object AnimationUtils {
     fun lerp(startValue: Int, endValue: Int, fraction: Float): Int {
         return startValue + Math.round(fraction * (endValue - startValue))
     }
-
 }

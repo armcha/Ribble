@@ -1,39 +1,50 @@
 package com.luseen.ribble.presentation.screen.shot_detail
 
-import com.luseen.logger.Logger
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.domain.entity.Like
-import com.luseen.ribble.domain.interactor.ShotDetailInteractor
-import com.luseen.ribble.domain.interactor.ShotLikeInteractor
+import com.luseen.ribble.domain.entity.Comment
+import com.luseen.ribble.domain.interactor.CommentInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
+import com.luseen.ribble.utils.log
 import javax.inject.Inject
 
 /**
  * Created by Chatikyan on 05.08.2017.
  */
 @PerActivity
-class ShotDetailPresenter @Inject constructor(private val shotDetailInteractor: ShotDetailInteractor,
-                                              private val shotLikeInteractor: ShotLikeInteractor)
-    : ApiPresenter<List<Like>, ShotDetailContract.View>(), ShotDetailContract.Presenter {
+class ShotDetailPresenter @Inject constructor(private val commentInteractor: CommentInteractor)
+    : ApiPresenter<List<Comment>, ShotDetailContract.View>(), ShotDetailContract.Presenter {
 
-    init {
+    private var commentList = listOf<Comment>()
 
+    @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
+    fun onStart() {
+        view?.onDataReceive(commentList)
     }
 
-    override fun fetchLikes(shotId: String?) {
-        this fetch shotLikeInteractor.getShotLikes(shotId!!)
+    override fun onPresenterCreate() {
+        super.onPresenterCreate()
+        val shotId = view?.getShotId()
+        log {
+            shotId
+        }
+        if (shotId != null)
+            this fetch commentInteractor.getComments(shotId)
     }
 
     override fun onRequestStart() {
 
     }
 
-    override fun onRequestSuccess(data: List<Like>) {
-        val likes: List<Like> = data
-        Logger.log("Likes count is ${likes.count()}")
+    override fun onRequestSuccess(data: List<Comment>) {
+        commentList = data
+        view?.onDataReceive(data)
     }
 
     override fun onRequestError(errorMessage: String?) {
-
+        log {
+            "onRequestError ${errorMessage}"
+        }
     }
 }

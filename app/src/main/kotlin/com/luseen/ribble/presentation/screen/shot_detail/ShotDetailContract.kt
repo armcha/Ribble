@@ -1,5 +1,6 @@
 package com.luseen.ribble.presentation.screen.shot_detail
 
+import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.presentation.base_mvp.base.BaseContract
 
 /**
@@ -7,10 +8,14 @@ import com.luseen.ribble.presentation.base_mvp.base.BaseContract
  */
 interface ShotDetailContract {
 
-    interface View : BaseContract.View
+    interface View : BaseContract.View{
+
+        fun onDataReceive(commentList: List<Comment>)
+
+        fun getShotId():String?
+    }
 
     interface Presenter : BaseContract.Presenter<View> {
 
-        fun fetchLikes(shotId: String?)
     }
 }

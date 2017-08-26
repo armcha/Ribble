@@ -2,11 +2,12 @@ package com.luseen.ribble.data.repository
 
 import com.luseen.ribble.data.mapper.Mapper
 import com.luseen.ribble.data.network.ShotApiService
-import com.luseen.ribble.data.pref.Preferences
+import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.repository.ShotRepository
 import io.reactivex.Flowable
+import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,7 +16,6 @@ import javax.inject.Singleton
  */
 @Singleton
 class ShotDataRepository @Inject constructor(private var shotApiService: ShotApiService,
-                                             private var preferences: Preferences,
                                              private var mapper: Mapper) : ShotRepository {
 
     override fun getShotList(shotType: String, count: Int): Flowable<List<Shot>> {
@@ -23,6 +23,11 @@ class ShotDataRepository @Inject constructor(private var shotApiService: ShotApi
     }
 
     override fun getShotLikes(shotId: String): Flowable<List<Like>> {
-        return shotApiService.getShotLikes(shotId).map { mapper.translate(it) }
+        return shotApiService.getShotLikes(shotId).map {
+            mapper.translate(it) }
+    }
+
+    override fun getShotComments(shotId: String): Single<List<Comment>> {
+        return shotApiService.getShotComments(shotId).map { mapper.translate(it) }
     }
 }

@@ -111,7 +111,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
             Id.FOLLOWING -> {
                 goTo(UserFollowingFragment::class)
             }
-            Id.TEST_2 -> {
+            Id.ABOUT -> {
 
             }
             Id.LOG_OUT -> {

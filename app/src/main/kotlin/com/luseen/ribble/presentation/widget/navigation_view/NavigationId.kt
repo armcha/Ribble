@@ -10,7 +10,7 @@ sealed class NavigationId(val name: String = emptyString()) {
     object SHOT : NavigationId("SHOT")
     object USER_LIKES : NavigationId("USER LIKES")
     object FOLLOWING : NavigationId("FOLLOWING")
-    object TEST_2 : NavigationId("TEST_2")
+    object ABOUT : NavigationId("ABOUT")
     object LOG_OUT : NavigationId("LOG OUT")
     object SHOT_DETAIL : NavigationId()
 }

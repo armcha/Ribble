@@ -1,6 +1,7 @@
 package com.luseen.ribble.presentation.fetcher
 
 import com.luseen.ribble.presentation.base_mvp.result_listener.ResultListener
+import com.luseen.ribble.utils.log
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -29,6 +30,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
         return this.subscribe({
             resultListener.onRequestSuccess(it)
         }, {
+            log { "onError ${it.message}" }
             resultListener.onRequestError(it.message)
         })
     }
@@ -42,6 +44,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
                     .subscribe({
                         onRequestSuccess(it)
                     }, {
+                        log { "onError ${it.message}" }
                         onRequestError(it.message)
                     }))
         }
@@ -56,6 +59,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
                     .subscribe({
                         onRequestSuccess(it)
                     }, {
+                        log { "onError ${it.message}" }
                         onRequestError(it.message)
                     }))
         }

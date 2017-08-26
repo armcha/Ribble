@@ -2,7 +2,6 @@ package com.luseen.ribble.presentation.screen.popular_shot
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import com.luseen.logger.Logger
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.ShotListInteractor
@@ -25,7 +24,7 @@ class PopularShotPresenter @Inject constructor(private val shotListInteractor: S
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        this fetch shotListInteractor.getRecentShotList(10)
+        this fetch shotListInteractor.getPopularShotList(100)
     }
 
     override fun onRequestStart() {
@@ -41,7 +40,6 @@ class PopularShotPresenter @Inject constructor(private val shotListInteractor: S
     }
 
     override fun onRequestError(errorMessage: String?) {
-        Logger.log("onError $errorMessage")
         view?.showError()
         view?.hideLoading()
     }

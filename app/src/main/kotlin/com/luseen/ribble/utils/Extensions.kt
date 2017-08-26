@@ -4,13 +4,15 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.Parcelable
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.DrawerLayout
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,8 +83,19 @@ fun DrawerLayout.unlock() {
     this.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 }
 
-fun DrawerLayout.isLocked(): Boolean {
-    return this.getDrawerLockMode(Gravity.START) == DrawerLayout.LOCK_MODE_LOCKED_CLOSED
+fun Fragment.whitArgument(key: String, value: Any) {
+    val args = Bundle()
+    if (value is Parcelable) {
+        args.putParcelable(key, value)
+    } else {
+        throw UnsupportedOperationException("Only parcelable supported")
+    }
+    arguments = args
+}
+
+infix fun <T> Fragment.getExtra(key: String): T {
+    val value: Any = arguments[key]
+    return value as T
 }
 
 inline fun FragmentManager.inTransaction(transaction: FragmentTransaction.() -> Unit) {

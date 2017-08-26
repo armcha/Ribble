@@ -1,8 +1,10 @@
 package com.luseen.ribble.data.network
 
+import com.luseen.ribble.data.response.CommentResponse
 import com.luseen.ribble.data.response.LikeResponse
 import com.luseen.ribble.data.response.ShotResponse
 import io.reactivex.Flowable
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -21,6 +23,5 @@ interface ShotApiService {
                      @Query("per_page") limit: Int = 500): Flowable<List<LikeResponse>>
 
     @GET("shots/{shot_id}/comments?")
-    fun getShotComments(@Path("shot_id") shotId: String)
-
+    fun getShotComments(@Path("shot_id") shotId: String): Single<List<CommentResponse>>
 }

@@ -6,14 +6,20 @@
     android:background="@color/bg_color"
     android:clickable="true"
     android:focusable="true"
+    android:orientation="vertical"
     tools:context="com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,17 +31,16 @@
             android:id="@+id/scrolling_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-10dp"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="0dp"
-                android:layout_marginEnd="-30dp"
+                android:layout_marginEnd="-25dp"
                 android:layout_marginStart="70dp"
-                app:cardCornerRadius="18dp"
+                app:cardCornerRadius="12dp"
                 app:cardElevation="10dp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -54,52 +59,46 @@
 
             </android.support.v7.widget.CardView>
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="22dp"
-                android:src="@drawable/ic_menu_gallery"
-                app:layout_constraintBottom_toBottomOf="@+id/cardView"
-                app:layout_constraintEnd_toStartOf="@+id/cardView"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal|bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/cardView"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="22dp"
-                android:src="@drawable/ic_menu_send"
-                app:layout_constraintBottom_toTopOf="@+id/imageView2"
-                app:layout_constraintEnd_toStartOf="@+id/cardView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                <com.luseen.ribble.presentation.widget.CircleLinedImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="60dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/ic_menu_gallery" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="22dp"
-                android:src="@drawable/ic_menu_manage"
-                app:layout_constraintBottom_toTopOf="@+id/imageView"
-                app:layout_constraintEnd_toStartOf="@+id/cardView"
-                app:layout_constraintStart_toStartOf="parent" />
+                <com.luseen.ribble.presentation.widget.CircleLinedImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/ic_menu_send" />
+
+                <com.luseen.ribble.presentation.widget.CircleLinedImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="60dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_menu_manage" />
+            </LinearLayout>
+
 
         </android.support.constraint.ConstraintLayout>
     </android.support.design.widget.AppBarLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
 </android.support.design.widget.CoordinatorLayout>

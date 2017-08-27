@@ -1,18 +1,20 @@
 package com.luseen.ribble.utils
 
+import android.annotation.SuppressLint
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.Parcelable
+import android.os.*
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.DrawerLayout
+import android.text.Html
+import android.text.Spanned
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +50,7 @@ fun ImageView.tint(colorId: Int) {
     this.setColorFilter(this.context.takeColor(colorId), PorterDuff.Mode.SRC_IN)
 }
 
-inline fun UIThread(crossinline action: () -> Unit) {
+inline fun UiThread(crossinline action: () -> Unit) {
     Handler(Looper.getMainLooper()).post {
         action()
     }
@@ -66,11 +68,6 @@ inline fun Activity.start(clazz: () -> Class<*>) {
 
 fun Context.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-}
-
-fun <K, V> MutableMap<K, V>.replaceValue(key: K, value: V) {
-    this.remove(key)
-    this.put(key, value)
 }
 
 fun emptyString() = ""
@@ -93,7 +90,7 @@ fun Fragment.whitArgument(key: String, value: Any) {
     arguments = args
 }
 
-infix fun <T> Fragment.getExtra(key: String): T {
+inline infix fun <reified T> Fragment.getExtra(key: String): T {
     val value: Any = arguments[key]
     return value as T
 }
@@ -102,4 +99,32 @@ inline fun FragmentManager.inTransaction(transaction: FragmentTransaction.() -> 
     val fragmentTransaction = this.beginTransaction()
     fragmentTransaction.transaction()
     fragmentTransaction.commit()
+}
+
+@SuppressLint("InlinedApi")
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+inline fun LorAbove(body: () -> Unit) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        body()
+    }
+}
+
+@TargetApi(Build.VERSION_CODES.N)
+inline fun NorAbove(body: () -> Unit) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        body()
+    }
+}
+
+@SuppressLint("NewApi")
+fun String.toHtml(): Spanned {
+    NorAbove {
+        return Html.fromHtml(this, Html.FROM_HTML_MODE_COMPACT)
+    }
+    return Html.fromHtml(this)
+}
+
+fun Int.toPx(context:Context):Int{
+    val displayMetrics = context.resources.displayMetrics
+        return Math.round(this * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
 }

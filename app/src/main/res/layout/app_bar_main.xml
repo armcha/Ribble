@@ -19,7 +19,6 @@
             android:layout_height="80dp"
             android:background="@color/bg_color"
             app:contentInsetStart="0dp"
-            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <com.luseen.ribble.presentation.widget.ArcView

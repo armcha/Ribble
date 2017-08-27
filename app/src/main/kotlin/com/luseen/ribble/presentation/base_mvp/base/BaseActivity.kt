@@ -13,7 +13,7 @@ import javax.inject.Inject
 import kotlin.reflect.KClass
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
-    : BaseMVPActivity<V, P>(), Navigator.NonRegistryFragmentListener {
+    : BaseMVPActivity<V, P>(), Navigator.NonRegistryFragmentListener,Navigator.TitleChangeListener {
 
     @Inject
     lateinit var navigator: Navigator
@@ -26,7 +26,12 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
         navigator.nonRegistryFragmentListener = this
+        navigator.titleChangeListener = this
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onTitleChanged(newTitle: String) {
+
     }
 
     override fun onBackPressed() {

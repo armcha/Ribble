@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import com.luseen.ribble.R
 import com.luseen.ribble.di.scope.PerActivity
+import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.inTransaction
 import javax.inject.Inject
@@ -19,12 +20,15 @@ import kotlin.reflect.KClass
 class Navigator @Inject constructor(private val activity: AppCompatActivity) : Router {
 
     interface NonRegistryFragmentListener {
-        fun onNonRegistryFragmentOpen(tag: NavigationId){
-
+        fun onNonRegistryFragmentOpen(tag: NavigationId) {
         }
 
-        fun onNonRegistryFragmentClose(){
+        fun onNonRegistryFragmentClose() {
+        }
+    }
 
+    interface TitleChangeListener {
+        fun onTitleChanged(newTitle: String){
         }
     }
 
@@ -35,6 +39,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
     var activeTag: String? = null
     var rootTag: String? = null
     lateinit var nonRegistryFragmentListener: NonRegistryFragmentListener
+    lateinit var titleChangeListener: TitleChangeListener
 
     fun getState(): NavigationState {
         return NavigationState(activeTag, rootTag)
@@ -60,6 +65,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
                     }
             show(fragmentMap[activeTag])
         }
+        changeTitle(activeTag)
     }
 
     override fun goTo(kClass: KClass<out Fragment>, arg: Bundle) {
@@ -92,6 +98,14 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
             show(fragmentMap[tag])
         }
         activeTag = tag
+        changeTitle(tag)
+    }
+
+    private fun changeTitle(tag: String?) {
+        val fragment = fragmentMap[tag]
+        if (fragment is BaseFragment<*, *>) {
+            titleChangeListener.onTitleChanged(fragment.getTitle())
+        }
     }
 
     override fun hasBackStack(): Boolean {
@@ -110,6 +124,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
             show(fragmentMap[currentTag])
         }
         activeTag = currentTag
+        changeTitle(currentTag)
     }
 
     override fun goToFirst() {

@@ -8,6 +8,7 @@ import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.ShotRecyclerViewAdapter
 import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
+import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import kotlinx.android.synthetic.main.fragment_shot.*
 import javax.inject.Inject
 
@@ -56,5 +57,9 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
         recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)
         shotRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         shotRecyclerView.adapter = recyclerAdapter
+    }
+
+    override fun getTitle(): String {
+        return NavigationId.FOLLOWING.name
     }
 }

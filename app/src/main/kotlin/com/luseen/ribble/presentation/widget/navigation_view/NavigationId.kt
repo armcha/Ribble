@@ -12,5 +12,5 @@ sealed class NavigationId(val name: String = emptyString()) {
     object FOLLOWING : NavigationId("FOLLOWING")
     object ABOUT : NavigationId("ABOUT")
     object LOG_OUT : NavigationId("LOG OUT")
-    object SHOT_DETAIL : NavigationId()
+    object SHOT_DETAIL : NavigationId("SHOT DETAIL")
 }

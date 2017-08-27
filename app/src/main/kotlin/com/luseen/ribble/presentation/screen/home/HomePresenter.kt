@@ -6,6 +6,8 @@ import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.base.BasePresenter
 import com.luseen.ribble.presentation.navigation.NavigationState
+import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
+import com.luseen.ribble.utils.emptyString
 import javax.inject.Inject
 
 /**
@@ -17,14 +19,17 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
 
     private var state: NavigationState? = null
     private var isDrawerLocked = false
+    private var activeTitle = emptyString()
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         if (isDrawerLocked) {
             view?.onDrawerLocked()
+            activeTitle = NavigationId.SHOT_DETAIL.name
         } else {
             view?.onDrawerUnlocked()
         }
+        view?.setToolBarTitle(activeTitle)
     }
 
     override fun onPresenterCreate() {
@@ -35,11 +40,18 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
     override fun handleDrawerLock() {
         isDrawerLocked = true
         view?.onDrawerLocked()
+        view?.setToolBarTitle(NavigationId.SHOT_DETAIL.name)
     }
 
     override fun handleDrawerUnLock() {
         isDrawerLocked = false
         view?.onDrawerUnlocked()
+        view?.setToolBarTitle(NavigationId.SHOT.name)
+    }
+
+    override fun handleTitleChanges(newTitle: String) {
+        view?.setToolBarTitle(newTitle)
+        activeTitle = newTitle
     }
 
     override fun logOut() {
@@ -54,5 +66,4 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
     override fun getNavigatorState(): NavigationState? {
         return state
     }
-
 }

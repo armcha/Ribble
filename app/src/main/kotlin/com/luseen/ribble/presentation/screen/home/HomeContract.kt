@@ -17,6 +17,8 @@ interface HomeContract {
         fun onDrawerLocked()
 
         fun onDrawerUnlocked()
+
+        fun setToolBarTitle(title: String)
     }
 
     interface Presenter : BaseContract.Presenter<View> {
@@ -30,5 +32,7 @@ interface HomeContract {
         fun handleDrawerLock()
 
         fun handleDrawerUnLock()
+
+        fun handleTitleChanges(newTitle: String)
     }
 }

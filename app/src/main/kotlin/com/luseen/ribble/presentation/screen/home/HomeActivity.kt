@@ -83,6 +83,14 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         finish()
     }
 
+    override fun onTitleChanged(newTitle: String) {
+        presenter.handleTitleChanges(newTitle)
+    }
+
+    override fun setToolBarTitle(title: String) {
+        toolbarTitle?.setAnimatedText(title)
+    }
+
     override fun onNonRegistryFragmentOpen(tag: Id) {
         drawerLayout.lock()
         presenter.handleDrawerLock()
@@ -118,7 +126,6 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
                 presenter.logOut()
             }
         }
-
         drawerLayout.closeDrawer(GravityCompat.START)
     }
 }

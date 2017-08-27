@@ -8,6 +8,7 @@ import com.luseen.ribble.presentation.adapter.ShotPagerAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.popular_shot.ShotRootContract
 import com.luseen.ribble.presentation.widget.CustomTabLayout
+import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import kotlinx.android.synthetic.main.fragment_shot_root.*
 import javax.inject.Inject
 
@@ -20,10 +21,6 @@ class ShotRootFragment constructor(): BaseFragment<ShotRootContract.View, ShotRo
     @Inject
     protected lateinit var shotPagerAdapter: ShotPagerAdapter
 
-    companion object {
-        fun newInstance(): ShotRootFragment = ShotRootFragment()
-    }
-
     override fun initPresenter(): ShotRootContract.Presenter = shotRootPresenter
 
     override fun layoutResId(): Int = R.layout.fragment_shot_root
@@ -35,13 +32,16 @@ class ShotRootFragment constructor(): BaseFragment<ShotRootContract.View, ShotRo
         setUpPagerAdapter()
     }
 
-    fun setUpPagerAdapter() {
+    private fun setUpPagerAdapter() {
         shotViewPager.adapter = shotPagerAdapter
         with(tabLayout) {
             setupWithViewPager(shotViewPager)
             tabMode = CustomTabLayout.MODE_FIXED
             setSelectedTabIndicatorHeight(20)
         }
-        //shotViewPager.setCurrentItem(1)
+    }
+
+    override fun getTitle(): String {
+        return NavigationId.SHOT.name
     }
 }

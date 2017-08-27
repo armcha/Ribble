@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.luseen.arch.BaseMVPFragment
 import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.presentation.navigation.Navigator
+import com.luseen.ribble.utils.emptyString
 import kotlin.reflect.KClass
 
 /**
@@ -41,4 +42,6 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
     protected abstract fun injectDependencies()
 
     protected abstract fun layoutResId(): Int
+
+    open fun getTitle():String = emptyString()
 }

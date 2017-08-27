@@ -8,6 +8,7 @@ import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.presentation.adapter.UserLikesRecyclerAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
+import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import kotlinx.android.synthetic.main.fragment_user_likes.*
 import javax.inject.Inject
 
@@ -43,5 +44,9 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
         val recyclerAdapter = UserLikesRecyclerAdapter(likeList)
         likesRecyclerView.layoutManager = LinearLayoutManager(activity)
         likesRecyclerView.adapter = recyclerAdapter
+    }
+
+    override fun getTitle(): String {
+        return NavigationId.USER_LIKES.name
     }
 }

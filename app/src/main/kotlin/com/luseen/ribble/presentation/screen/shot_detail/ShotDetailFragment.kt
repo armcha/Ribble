@@ -8,6 +8,7 @@ import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.CommentRecyclerAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
+import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.getExtra
 import kotlinx.android.synthetic.main.fragment_shot_detail.*
 import javax.inject.Inject
@@ -56,4 +57,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
         recyclerView.adapter = recyclerAdapter
     }
 
+    override fun getTitle(): String {
+        return NavigationId.SHOT_DETAIL.name
+    }
 }

@@ -21,23 +21,39 @@
             app:contentInsetStart="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <com.luseen.ribble.presentation.widget.ArcView
-                android:layout_width="85dp"
-                android:layout_height="63dp"
-                android:layout_marginTop="15dp"
-                android:id="@+id/arcView"
-                android:background="@android:color/white">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:id="@+id/arcImage"
-                    android:contentDescription="@string/arc_view_image"
-                    app:srcCompat="@drawable/equal"
-                    android:tint="@android:color/white" />
+                <com.luseen.ribble.presentation.widget.ArcView
+                    android:id="@+id/arcView"
+                    android:layout_width="85dp"
+                    android:layout_height="63dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@android:color/white">
 
-            </com.luseen.ribble.presentation.widget.ArcView>
+                    <ImageView
+                        android:id="@+id/arcImage"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/arc_view_image"
+                        android:tint="@android:color/white"
+                        app:srcCompat="@drawable/equal" />
+
+                </com.luseen.ribble.presentation.widget.ArcView>
+
+                <com.luseen.ribble.presentation.widget.AnimatedTextView
+                    android:id="@+id/toolbarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="63dp"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="19sp" />
+            </FrameLayout>
+
 
         </android.support.v7.widget.Toolbar>
 

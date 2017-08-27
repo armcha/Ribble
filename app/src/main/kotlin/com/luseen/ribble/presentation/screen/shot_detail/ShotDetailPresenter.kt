@@ -24,9 +24,6 @@ class ShotDetailPresenter @Inject constructor(private val commentInteractor: Com
     override fun onPresenterCreate() {
         super.onPresenterCreate()
         val shotId = view?.getShotId()
-        log {
-            shotId
-        }
         if (shotId != null)
             this fetch commentInteractor.getComments(shotId)
     }

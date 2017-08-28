@@ -54,6 +54,7 @@ ext.retrofitVersion = '2.3.0'
 ext.loggerVersion = '2.2.0'
 ext.daggerVersion = '2.11'
 ext.archVersion = '1.0.0-alpha8'
+ext.glideVersion = '4.0.0'
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -71,7 +72,6 @@ dependencies {
     //Architecture components
     implementation "android.arch.lifecycle:runtime:${archVersion}"
     implementation "android.arch.lifecycle:extensions:${archVersion}"
-    implementation 'com.android.support:support-v4:26.0.1'
     kapt "android.arch.lifecycle:compiler:${archVersion}"
 
     //RX
@@ -99,6 +99,11 @@ dependencies {
 
     //Logging
     implementation "com.github.armcha:Logger:${loggerVersion}"
+
+    //Image loading
+    implementation "com.github.bumptech.glide:glide:${glideVersion}"
+    implementation "com.github.bumptech.glide:okhttp3-integration:${glideVersion}"
+    kapt  "com.github.bumptech.glide:compiler:${glideVersion}"
 
     //Testing
     testImplementation 'junit:junit:4.12'

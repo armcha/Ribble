@@ -1,13 +1,8 @@
 package com.luseen.ribble.data.mapper
 
-import com.luseen.ribble.data.response.CommentResponse
-import com.luseen.ribble.data.response.LikeResponse
-import com.luseen.ribble.data.response.ShotResponse
-import com.luseen.ribble.data.response.UserResponse
-import com.luseen.ribble.domain.entity.Comment
-import com.luseen.ribble.domain.entity.Like
-import com.luseen.ribble.domain.entity.Shot
-import com.luseen.ribble.domain.entity.User
+import com.luseen.ribble.data.response.*
+import com.luseen.ribble.domain.entity.*
+import com.luseen.ribble.utils.emptyString
 
 /**
  * Created by Chatikyan on 03.08.2017.
@@ -17,7 +12,7 @@ class Mapper {
     @JvmName("translateShotEntity")
     fun translate(shotResponseList: List<ShotResponse>): List<Shot> {
         return shotResponseList.map {
-            Shot(it.title, it.id)
+            translate(it)
         }
     }
 
@@ -39,7 +34,20 @@ class Mapper {
         return User(userResponse?.name, userResponse?.avatarUrl, userResponse?.username)
     }
 
+    private fun translate(imageResponse: ImageResponse?): Image? {
+        return imageResponse?.let {
+            with(imageResponse) {
+                Image(small ?: emptyString(),
+                        normal ?: emptyString(),
+                        big ?: emptyString())
+            }
+        }
+    }
+
     private fun translate(shotResponse: ShotResponse?): Shot {
-        return Shot(shotResponse?.title, shotResponse?.id)
+        return Shot(shotResponse?.title,
+                shotResponse?.id,
+                translate(shotResponse?.image),
+                shotResponse?.description)
     }
 }

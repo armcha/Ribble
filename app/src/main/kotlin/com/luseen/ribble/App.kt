@@ -7,7 +7,6 @@ import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.component.DaggerApplicationComponent
 import com.luseen.ribble.di.module.ApplicationModule
 
-
 /**
  * Created by Chatikyan on 29.07.2017.
  */

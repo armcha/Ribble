@@ -3,6 +3,8 @@ package com.luseen.ribble.presentation.adapter.holder
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.luseen.ribble.domain.entity.Shot
+import com.luseen.ribble.utils.emptyString
+import com.luseen.ribble.utils.glide.load
 import kotlinx.android.synthetic.main.shot_item.view.*
 
 /**
@@ -11,6 +13,14 @@ import kotlinx.android.synthetic.main.shot_item.view.*
 class ShotViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(shot: Shot) {
-        itemView.shotTitle.text = shot.title
+        with(itemView){
+            shotTitle.text = shot.title
+            //shotAuthor.text = shot.
+            val shotImage = shot.image
+            image?.let {
+                image.load(shotImage?.normal ?: emptyString())
+            }
+        }
+
     }
 }

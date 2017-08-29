@@ -8,7 +8,8 @@ import android.os.Parcelable
  */
 data class Shot constructor(val title: String?,
                             var id: String?,
-                            var image: Image? = null,
+                            var image: Image,
+                            var user: User,
                             var description: String? = null,
                             var likesCount: Int? = null) : Parcelable {
 
@@ -16,14 +17,15 @@ data class Shot constructor(val title: String?,
             parcel.readString(),
             parcel.readString(),
             parcel.readParcelable(Image::class.java.classLoader),
+            parcel.readParcelable(User::class.java.classLoader),
             parcel.readString(),
-            parcel.readValue(Int::class.java.classLoader) as? Int) {
-    }
+            parcel.readValue(Int::class.java.classLoader) as? Int)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(id)
         parcel.writeParcelable(image, flags)
+        parcel.writeParcelable(user, flags)
         parcel.writeString(description)
         parcel.writeValue(likesCount)
     }

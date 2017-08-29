@@ -1,5 +1,6 @@
 package com.luseen.ribble.presentation.adapter
 
+import android.view.View
 import android.view.ViewGroup
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Comment
@@ -20,5 +21,9 @@ class CommentRecyclerAdapter constructor(
     override fun createViewHolder(parent: ViewGroup): CommentViewHolder {
         val view = parent inflate R.layout.comment_item
         return CommentViewHolder(view)
+    }
+
+    override fun onViewRecycled(itemView: View) {
+
     }
 }

@@ -128,3 +128,11 @@ fun Int.toPx(context:Context):Int{
     val displayMetrics = context.resources.displayMetrics
         return Math.round(this * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
 }
+
+fun View.topMargin(marginInDp: Int) {
+    (this.layoutParams as ViewGroup.MarginLayoutParams).topMargin = marginInDp.toPx(this.context)
+}
+
+fun View.bottomMargin(marginInDp: Int) {
+    (this.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = marginInDp.toPx(this.context)
+}

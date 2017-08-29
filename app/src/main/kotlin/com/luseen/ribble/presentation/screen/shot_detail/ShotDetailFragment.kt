@@ -2,7 +2,9 @@ package com.luseen.ribble.presentation.screen.shot_detail
 
 
 import android.content.Context
+import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.entity.Shot
@@ -10,15 +12,15 @@ import com.luseen.ribble.presentation.adapter.CommentRecyclerAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.getExtra
+import com.luseen.ribble.utils.glide.TransformationType
+import com.luseen.ribble.utils.glide.clear
+import com.luseen.ribble.utils.glide.load
 import kotlinx.android.synthetic.main.fragment_shot_detail.*
 import javax.inject.Inject
 
+const val SHOT_EXTRA_KEY = "shot_extra_key"
 
 class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContract.Presenter>(), ShotDetailContract.View {
-
-    companion object {
-        const val SHOT_EXTRA_KEY = "shot_extra_key"
-    }
 
     @Inject
     protected lateinit var shotDetailPresenter: ShotDetailPresenter
@@ -37,6 +39,19 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         shot = this getExtra SHOT_EXTRA_KEY
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        shotDetailImage.load(shot.image.normal)
+        shotAuthor.text = shot.user.username
+        authorImage.load(shot.user.avatarUrl,TransformationType.CIRCLE)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        shotDetailImage.clear()
+        authorImage.clear()
     }
 
     override fun onDataReceive(commentList: List<Comment>) {

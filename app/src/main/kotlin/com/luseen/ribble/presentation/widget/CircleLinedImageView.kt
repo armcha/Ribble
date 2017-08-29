@@ -39,4 +39,8 @@ class CircleLinedImageView : AppCompatImageView {
         canvas.drawCircle(width / 2F, width / 2F, actualWidth, paint)
         super.onDraw(canvas)
     }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec)
+    }
 }

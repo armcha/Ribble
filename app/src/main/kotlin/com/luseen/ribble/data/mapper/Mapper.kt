@@ -26,21 +26,19 @@ class Mapper {
     @JvmName("translateCommentEntity")
     fun translate(commentResponseList: List<CommentResponse>): List<Comment> {
         return commentResponseList.map {
-            Comment(it.comment, translate(it.user))
+            Comment(it.comment, translate(it.user),it.likesCount)
         }
     }
 
     fun translate(userResponse: UserResponse?): User {
-        return User(userResponse?.name, userResponse?.avatarUrl, userResponse?.username)
+        return User(userResponse?.name, userResponse?.avatarUrl ?: emptyString(), userResponse?.username)
     }
 
-    private fun translate(imageResponse: ImageResponse?): Image? {
-        return imageResponse?.let {
-            with(imageResponse) {
-                Image(small ?: emptyString(),
-                        normal ?: emptyString(),
-                        big ?: emptyString())
-            }
+    private fun translate(imageResponse: ImageResponse?): Image {
+        return imageResponse.let {
+            Image(imageResponse?.small ?: emptyString(),
+                    imageResponse?.normal ?: emptyString(),
+                    imageResponse?.big ?: emptyString())
         }
     }
 
@@ -48,6 +46,7 @@ class Mapper {
         return Shot(shotResponse?.title,
                 shotResponse?.id,
                 translate(shotResponse?.image),
+                translate(shotResponse?.user),
                 shotResponse?.description)
     }
 }

@@ -1,6 +1,7 @@
 package com.luseen.ribble.presentation.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewGroup
 
 /**
@@ -22,17 +23,20 @@ constructor(protected var itemList: List<ITEM>) : RecyclerView.Adapter<HOLDER>()
         onBind(holder, item)
     }
 
-    protected abstract fun onBind(holder: HOLDER, item: ITEM)
-
-    protected abstract fun createViewHolder(parent: ViewGroup): HOLDER
-
     fun update(itemList: List<ITEM>) {
         this.itemList = itemList
         notifyDataSetChanged()
     }
 
-    override fun onViewRecycled(holder: HOLDER) {
+    final override fun onViewRecycled(holder: HOLDER) {
         super.onViewRecycled(holder)
-        //TODO clear glide
+        onViewRecycled(holder.itemView)
+    }
+
+    protected abstract fun onBind(holder: HOLDER, item: ITEM)
+
+    protected abstract fun createViewHolder(parent: ViewGroup): HOLDER
+
+    protected open fun onViewRecycled(itemView:View){
     }
 }

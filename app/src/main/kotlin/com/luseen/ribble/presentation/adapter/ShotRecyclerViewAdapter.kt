@@ -2,6 +2,7 @@ package com.luseen.ribble.presentation.adapter
 
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewGroup
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Shot
@@ -36,8 +37,7 @@ class ShotRecyclerViewAdapter constructor(
         holder.bind(item)
     }
 
-    override fun onViewRecycled(holder: ShotViewHolder) {
-        super.onViewRecycled(holder)
-        holder.itemView.image.clear()
+    override fun onViewRecycled(itemView: View) {
+        itemView.image.clear()
     }
 }

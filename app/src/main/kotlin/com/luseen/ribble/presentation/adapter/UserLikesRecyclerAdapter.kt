@@ -9,8 +9,7 @@ import com.luseen.ribble.utils.inflate
 /**
  * Created by Chatikyan on 15.08.2017.
  */
-class UserLikesRecyclerAdapter constructor(
-        private val likeList: List<Like>)
+class UserLikesRecyclerAdapter constructor(likeList: List<Like>)
     : AbstractAdapter<UserLikesViewHolder, Like>(likeList) {
 
     override fun onBind(holder: UserLikesViewHolder, item: Like) {

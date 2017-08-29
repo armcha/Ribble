@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.presentation.adapter.holder.CommentViewHolder
+import com.luseen.ribble.utils.glide.clear
 import com.luseen.ribble.utils.inflate
+import kotlinx.android.synthetic.main.comment_item.view.*
 
 /**
  * Created by Chatikyan on 26.08.2017.
@@ -24,6 +26,6 @@ class CommentRecyclerAdapter constructor(
     }
 
     override fun onViewRecycled(itemView: View) {
-
+        itemView.userImage.clear()
     }
 }

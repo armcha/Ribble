@@ -2,6 +2,7 @@ package com.luseen.ribble.presentation.screen.shot_detail
 
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -46,6 +47,12 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
         shotDetailImage.load(shot.image.normal)
         shotAuthor.text = shot.user.username
         authorImage.load(shot.user.avatarUrl,TransformationType.CIRCLE)
+        likeLayout.layoutText = shot.likesCount
+        likeLayout.imageResId = R.drawable.heart_full
+        likeLayout.imageTint = Color.RED
+        viewCountLayout.layoutText = shot.viewsCount
+        viewCountLayout.imageResId = R.drawable.eye
+        viewCountLayout.imageTint = Color.BLUE
     }
 
     override fun onDestroyView() {

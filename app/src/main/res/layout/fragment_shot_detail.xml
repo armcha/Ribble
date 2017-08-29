@@ -70,15 +70,14 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.luseen.ribble.presentation.widget.TextImageLayout
-                    android:id="@+id/imageView2"
+                    android:id="@+id/likeLayout"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    android:src="@drawable/ic_menu_gallery" />
+                    android:layout_marginRight="4dp" />
 
                 <com.luseen.ribble.presentation.widget.TextImageLayout
-                    android:id="@+id/imageView"
+                    android:id="@+id/viewCountLayout"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -124,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:text="Armania, Yerevan"
+                android:text="Armenia, Yerevan"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/authorImage"
                 app:layout_constraintTop_toBottomOf="@+id/shotAuthor" />

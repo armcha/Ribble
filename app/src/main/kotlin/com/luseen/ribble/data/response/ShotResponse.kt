@@ -28,4 +28,12 @@ class ShotResponse {
     @SerializedName("images")
     @Expose
     val image: ImageResponse? = null
+
+    @SerializedName("likes_count")
+    @Expose
+    val likesCount: Int? = null
+
+    @SerializedName("views_count")
+    @Expose
+    val viewsCount: Int? = null
 }

@@ -47,6 +47,8 @@ class Mapper {
                 shotResponse?.id,
                 translate(shotResponse?.image),
                 translate(shotResponse?.user),
-                shotResponse?.description)
+                shotResponse?.description,
+                shotResponse?.likesCount,
+                shotResponse?.viewsCount)
     }
 }

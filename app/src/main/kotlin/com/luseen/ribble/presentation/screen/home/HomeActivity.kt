@@ -17,6 +17,7 @@ import com.luseen.ribble.utils.start
 import com.luseen.ribble.utils.unlock
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 import javax.inject.Inject
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId as Id
 
@@ -51,6 +52,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         navView.navigationItemSelectListener = this
+        navView.header.userName
     }
 
     override fun onDrawerLocked() {

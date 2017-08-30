@@ -22,9 +22,9 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
 
     private var itemList = mutableListOf(
             NavigationItem(NavigationId.SHOT, R.drawable.ic_menu_camera,
-                    isSelected = true, itemIconColor = R.color.colorAccent),
-            NavigationItem(NavigationId.USER_LIKES, R.drawable.ic_menu_gallery,
-                    itemIconColor = R.color.error_color_material),
+                    isSelected = true, itemIconColor = R.color.error_color_material),
+            NavigationItem(NavigationId.USER_LIKES, R.drawable.heart_full,
+                    itemIconColor = R.color.colorPrimary),
             NavigationItem(NavigationId.FOLLOWING, R.drawable.ic_menu_manage,
                     itemIconColor = R.color.green),
             NavigationItem(NavigationId.ABOUT, R.drawable.ic_menu_send),
@@ -35,13 +35,14 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
     private val adapter by lazy {
         NavigationViewAdapter(itemList)
     }
-    private val recyclerView by lazy {
+    private val recyclerView by lazy(LazyThreadSafetyMode.NONE) {
         RecyclerView(context).apply {
             layoutManager = LinearLayoutManager(context)
         }
     }
 
     var navigationItemSelectListener: NavigationItemSelectedListener? = null
+    val header: View = getHeaderView(0)
 
     constructor(context: Context) : super(context)
 

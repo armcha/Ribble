@@ -55,4 +55,12 @@ class UserDataRepository @Inject constructor(
         return userApiService.getFollowing(count)
                 .map { mapper.translate(it) }
     }
+
+    override fun saveUserCode(code: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getUserCode(): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

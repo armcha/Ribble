@@ -51,7 +51,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
         //TODO move to attributes
         likeLayout.layoutText = shot.likesCount
         likeLayout.imageResId = R.drawable.heart_full
-        likeLayout.imageTint = R.color.red
+        likeLayout.imageTint = R.color.colorPrimary
         viewCountLayout.layoutText = shot.viewsCount
         viewCountLayout.imageResId = R.drawable.eye
         viewCountLayout.imageTint = R.color.cyan

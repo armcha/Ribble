@@ -8,7 +8,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
@@ -22,28 +22,25 @@
 
             <ImageView
                 android:id="@+id/shotImage"
-                android:layout_width="137dp"
-                android:layout_height="match_parent"
+                android:layout_width="150dp"
+                android:layout_height="130dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/hello_dribble" />
+                android:contentDescription="@string/liked_shot_image" />
 
             <TextView
                 android:id="@+id/shotTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lines="1"
                 android:maxWidth="200dp"
+                android:text="Hello Dribble"
                 android:textAllCaps="true"
                 android:textColor="@android:color/black"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/shotAuthor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.097"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/shotImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,16 +48,13 @@
                 android:id="@+id/shotAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="60dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
                 android:text="by Arman"
                 android:textColor="@color/colorAccent"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/shotTitle" />
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@+id/shotTitle"
+                app:layout_constraintTop_toBottomOf="@+id/shotTitle" />
 
             <ImageView
                 android:id="@+id/shotLikeIcon"
@@ -75,38 +69,31 @@
                 app:layout_constraintHorizontal_bias="0.921"
                 app:layout_constraintStart_toEndOf="@+id/shotAuthor"
                 app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
+                android:tint="@color/colorAccent"
                 app:layout_constraintVertical_bias="0.49"
-                app:srcCompat="@drawable/ic_menu_slideshow" />
+                app:srcCompat="@drawable/heart_full" />
 
             <ImageView
-                android:id="@+id/commentCountIcon"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:id="@+id/likeCountIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/shotAuthor"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/shotTitle"
-                app:layout_constraintTop_toBottomOf="@+id/shotAuthor"
-                app:layout_constraintVertical_bias="0.428"
-                app:srcCompat="@drawable/ic_menu_send" />
+                android:tint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="@+id/shotImage"
+                app:layout_constraintStart_toStartOf="@+id/shotAuthor"
+                app:srcCompat="@drawable/heart_full" />
 
             <TextView
-                android:id="@+id/commentCount"
+                android:id="@+id/likeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="4dp"
                 android:text="4598"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/shotAuthor"
-                app:layout_constraintStart_toEndOf="@+id/commentCountIcon"
-                app:layout_constraintTop_toBottomOf="@+id/shotAuthor" />
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/likeCountIcon"
+                app:layout_constraintStart_toEndOf="@+id/likeCountIcon" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </FrameLayout>

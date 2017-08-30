@@ -16,7 +16,7 @@
         <com.luseen.ribble.presentation.widget.CustomTabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             app:tabBackground="@android:color/transparent" />
 
     </android.support.design.widget.AppBarLayout>

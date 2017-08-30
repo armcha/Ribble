@@ -8,6 +8,7 @@ import android.content.res.ColorStateList
 import android.database.DataSetObserver
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.annotation.ColorInt
@@ -30,6 +31,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.*
 import com.luseen.ribble.utils.AnimationUtils
+import com.luseen.ribble.utils.toPx
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -115,6 +117,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
     private var mPageChangeListener: CustomTabLayoutOnPageChangeListener? = null
     private var mAdapterChangeListener: CustomTabLayout.AdapterChangeListener? = null
     private var mSetupViewPagerImplicitly: Boolean = false
+    private val indicatorRect: RectF = RectF()
 
     // Pool we use as a simple RecyclerBin
     private val mTabViewPool = Pools.SimplePool<CustomTabLayout.TabView>(12)
@@ -961,7 +964,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
     /**
      * A tab in this layout. Instances can be created via [.newTab].
      */
-    class Tab internal constructor(){
+    class Tab internal constructor() {
 
         private var mTag: Any? = null
         private var mIcon: Drawable? = null
@@ -1723,15 +1726,11 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
         override fun draw(canvas: Canvas) {
             super.draw(canvas)
             // Thick colored underline below the current selection
+            val indicatorWidth = 100.toPx(context)
+            indicatorRect.set((mIndicatorLeft + indicatorWidth).toFloat(), (height - mSelectedIndicatorHeight).toFloat(),
+                    (mIndicatorRight - indicatorWidth).toFloat(), height.toFloat())
             if (mIndicatorLeft in 0..(mIndicatorRight - 1)) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    // TODO: 08.08.2017 add DP size
-                    canvas.drawRoundRect((mIndicatorLeft + 300).toFloat(), (height - mSelectedIndicatorHeight).toFloat(),
-                            (mIndicatorRight - 300).toFloat(), height.toFloat(), 15f, 15f, mSelectedIndicatorPaint)
-                } else {
-                    canvas.drawRect(mIndicatorLeft + width / 3.3f, (height - mSelectedIndicatorHeight).toFloat(),
-                            mIndicatorRight - width / 3.3f, height.toFloat(), mSelectedIndicatorPaint)
-                }
+                canvas.drawRoundRect(indicatorRect, 15f, 15f, mSelectedIndicatorPaint)
             }
         }
     }

@@ -13,7 +13,7 @@ import javax.inject.Inject
  */
 @PerActivity
 class PopularShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor)
-    : ApiPresenter<List<Shot>,PopularShotContract.View>(), PopularShotContract.Presenter {
+    : ApiPresenter<List<Shot>, PopularShotContract.View>(), PopularShotContract.Presenter {
 
     private var shotList: List<Shot> = arrayListOf()
 
@@ -31,7 +31,7 @@ class PopularShotPresenter @Inject constructor(private val shotListInteractor: S
         view?.showLoading()
     }
 
-    override fun  onRequestSuccess(data: List<Shot>) {
+    override fun onRequestSuccess(data: List<Shot>) {
         this.shotList = data
         if (shotList.isNotEmpty()) {
             view?.onShotListReceive(shotList)

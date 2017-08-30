@@ -46,5 +46,9 @@ class UserResponse {
     @SerializedName("likes_count")
     @Expose
     val likesCount: Int? = null
+
+    @SerializedName("location")
+    @Expose
+    val location: String? = null
 }
 

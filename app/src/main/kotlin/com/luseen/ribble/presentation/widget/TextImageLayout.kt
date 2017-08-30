@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.luseen.ribble.utils.takeColor
 
 /**
  * Created by Chatikyan on 29.08.2017.
@@ -28,7 +29,7 @@ class TextImageLayout : LinearLayout {
     var imageTint: Int = 0
         set(value) {
             val wrap = DrawableCompat.wrap(circleImage.drawable)
-            DrawableCompat.setTint(wrap, value)
+            DrawableCompat.setTint(wrap, context.takeColor(value))
         }
 
     constructor(context: Context) : super(context)

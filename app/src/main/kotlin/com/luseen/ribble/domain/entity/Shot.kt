@@ -12,7 +12,8 @@ data class Shot constructor(val title: String?,
                             var user: User,
                             var description: String? = null,
                             var likesCount: Int? = null,
-                            var viewsCount: Int? = null) : Parcelable {
+                            var viewsCount: Int? = null,
+                            var bucketCount: Int? = null) : Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
@@ -20,6 +21,7 @@ data class Shot constructor(val title: String?,
             parcel.readParcelable(Image::class.java.classLoader),
             parcel.readParcelable(User::class.java.classLoader),
             parcel.readString(),
+            parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Int::class.java.classLoader) as? Int)
 
@@ -31,6 +33,7 @@ data class Shot constructor(val title: String?,
         parcel.writeString(description)
         parcel.writeValue(likesCount)
         parcel.writeValue(viewsCount)
+        parcel.writeValue(bucketCount)
     }
 
     override fun describeContents(): Int {

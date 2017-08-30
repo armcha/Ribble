@@ -82,10 +82,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginRight="4dp"
-                    android:src="@drawable/ic_menu_send" />
+                    />
 
                 <com.luseen.ribble.presentation.widget.TextImageLayout
-                    android:id="@+id/imageView4"
+                    android:id="@+id/bucketLayout"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"

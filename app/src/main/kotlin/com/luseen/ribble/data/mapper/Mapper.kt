@@ -31,7 +31,10 @@ class Mapper {
     }
 
     fun translate(userResponse: UserResponse?): User {
-        return User(userResponse?.name, userResponse?.avatarUrl ?: emptyString(), userResponse?.username)
+        return User(userResponse?.name,
+                userResponse?.avatarUrl ?: emptyString(),
+                userResponse?.username,
+                userResponse?.location ?: emptyString())
     }
 
     private fun translate(imageResponse: ImageResponse?): Image {
@@ -49,6 +52,7 @@ class Mapper {
                 translate(shotResponse?.user),
                 shotResponse?.description,
                 shotResponse?.likesCount,
-                shotResponse?.viewsCount)
+                shotResponse?.viewsCount,
+                shotResponse?.bucketsCount)
     }
 }

@@ -2,7 +2,6 @@ package com.luseen.ribble.presentation.screen.shot_detail
 
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -45,14 +44,20 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         shotDetailImage.load(shot.image.normal)
-        shotAuthor.text = shot.user.username
-        authorImage.load(shot.user.avatarUrl,TransformationType.CIRCLE)
+        shotAuthor.text = shot.user.name
+        authorLocation.text = shot.user.location
+        authorImage.load(shot.user.avatarUrl, TransformationType.CIRCLE)
+
+        //TODO move to attributes
         likeLayout.layoutText = shot.likesCount
         likeLayout.imageResId = R.drawable.heart_full
-        likeLayout.imageTint = Color.RED
+        likeLayout.imageTint = R.color.red
         viewCountLayout.layoutText = shot.viewsCount
         viewCountLayout.imageResId = R.drawable.eye
-        viewCountLayout.imageTint = Color.BLUE
+        viewCountLayout.imageTint = R.color.cyan
+        bucketLayout.layoutText = shot.bucketCount
+        bucketLayout.imageResId = R.drawable.bucket
+        bucketLayout.imageTint = R.color.blue_gray
     }
 
     override fun onDestroyView() {
@@ -80,6 +85,6 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     override fun getTitle(): String {
-        return NavigationId.SHOT_DETAIL.name
+        return shot.title ?: NavigationId.SHOT_DETAIL.name //TODO
     }
 }

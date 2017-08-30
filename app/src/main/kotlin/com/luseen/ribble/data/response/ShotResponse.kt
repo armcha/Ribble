@@ -36,4 +36,8 @@ class ShotResponse {
     @SerializedName("views_count")
     @Expose
     val viewsCount: Int? = null
+
+    @SerializedName("buckets_count")
+    @Expose
+    val bucketsCount: Int? = null
 }

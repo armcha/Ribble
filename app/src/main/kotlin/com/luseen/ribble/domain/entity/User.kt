@@ -7,9 +7,13 @@ import com.luseen.ribble.utils.emptyString
 /**
  * Created by Chatikyan on 10.08.2017.
  */
-class User constructor(val name: String?, val avatarUrl: String = emptyString(), val username: String?) : Parcelable {
+data class User constructor(val name: String?,
+                       val avatarUrl: String = emptyString(),
+                       val username: String?,
+                       val location: String?) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString())
@@ -18,6 +22,7 @@ class User constructor(val name: String?, val avatarUrl: String = emptyString(),
         parcel.writeString(name)
         parcel.writeString(avatarUrl)
         parcel.writeString(username)
+        parcel.writeString(location)
     }
 
     override fun describeContents(): Int {

@@ -15,40 +15,42 @@
         app:cardUseCompatPadding="true">
 
         <ImageView
+            android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:id="@+id/image"
-            android:src="@drawable/hello_dribble" />
+            android:contentDescription="@string/shot_image" />
 
     </com.luseen.ribble.presentation.widget.SquareCardView>
 
     <TextView
         android:id="@+id/shotTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/cardView"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="-5dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:ellipsize="end"
         android:lines="1"
-        android:maxWidth="100dp"
-        android:text="Name"
+        android:textStyle="bold"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/shotAuthor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/cardView"
-        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:layout_below="@+id/shotTitle"
+        android:lines="1"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="by Arman"
+        android:layout_marginBottom="2dp"
         android:textColor="@color/colorAccent"
         android:textSize="12sp" />
 

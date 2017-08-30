@@ -54,7 +54,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun onDrawerLocked() {
-        arcImage.setImageResource(R.drawable.ic_menu_send)
+        arcImage.setImageResource(R.drawable.arrow_left)
         arcView.setOnClickListener {
             super.onBackPressed()
         }

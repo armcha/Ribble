@@ -6,4 +6,7 @@
     <color name="bg_color">#fafafa</color>
     <color name="navigation_item_color">#434A5A</color>
     <color name="green">#009f5a</color>
+    <color name="red">#F44336</color>
+    <color name="cyan">#00BCD4</color>
+    <color name="blue_gray">#607D8B</color>
 </resources>

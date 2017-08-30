@@ -20,18 +20,16 @@ import javax.inject.Inject
 class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotContract.Presenter>(),
         PopularShotContract.View, ShotClickListener {
 
-    @Inject
-    protected lateinit var popularShotPresenter: PopularShotPresenter
-
-    private var recyclerAdapter: ShotRecyclerViewAdapter? = null
-
     companion object {
-        const val SHOT_EXTRA_ID = "shot_extra_id"
-
         fun newInstance(): PopularShotFragment {
             return PopularShotFragment()
         }
     }
+
+    @Inject
+    protected lateinit var popularShotPresenter: PopularShotPresenter
+
+    private var recyclerAdapter: ShotRecyclerViewAdapter? = null
 
     override fun initPresenter(): PopularShotContract.Presenter = popularShotPresenter
 

@@ -34,16 +34,16 @@ class UserDataRepository @Inject constructor(
         }
     }
 
-    override fun saveUserLoggedIn() {
+    override fun logIn() {
         preferences saveUserLoggedIn true
+    }
+
+    override fun logOut() {
+        preferences saveUserLoggedIn false
     }
 
     override fun isUserLoggedIn(): Boolean {
         return preferences.isUserLoggedIn()
-    }
-
-    override fun saveUserLoggedOut() {
-        preferences saveUserLoggedIn false
     }
 
     override fun getUserLikes(count: Int): Single<List<Like>> {
@@ -54,13 +54,5 @@ class UserDataRepository @Inject constructor(
     override fun getFollowing(count: Int): Single<List<Shot>> {
         return userApiService.getFollowing(count)
                 .map { mapper.translate(it) }
-    }
-
-    override fun saveUserCode(code: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getUserCode(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

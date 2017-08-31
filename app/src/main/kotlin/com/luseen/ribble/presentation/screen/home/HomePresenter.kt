@@ -35,7 +35,7 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        //this fetch userInteractor.getUser()
+        this fetch userInteractor.getAuthenticatedUser()
         view?.openShotFragment()
     }
 
@@ -43,6 +43,7 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
     }
 
     override fun onRequestSuccess(data: User) {
+        view?.updateDrawerInfo(data)
     }
 
     override fun onRequestError(errorMessage: String?) {
@@ -66,7 +67,7 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
     }
 
     override fun logOut() {
-        userInteractor.saveUserLoggedOut()
+        userInteractor.logOut()
         view?.openLoginActivity()
     }
 

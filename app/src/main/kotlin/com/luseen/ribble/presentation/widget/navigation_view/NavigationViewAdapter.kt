@@ -20,17 +20,11 @@ class NavigationViewAdapter constructor(navigationItemList: MutableList<Navigati
 
     override fun createViewHolder(parent: ViewGroup): NavigationViewHolder {
         val view = parent inflate R.layout.navigation_view_item
-        val holder = NavigationViewHolder(view)
-        val itemView = holder.itemView
+        return NavigationViewHolder(view)
+    }
 
-        itemView.setOnClickListener {
-            if (holder.adapterPosition != RecyclerView.NO_POSITION) {
-                val position = holder.adapterPosition
-                val item = itemList[position]
-                itemClickListener?.onNavigationItemClick(item, position)
-            }
-        }
-        return holder
+    override fun onItemClick(itemView: View, position: Int) {
+        itemClickListener?.onNavigationItemClick(itemList[position], position)
     }
 
     override fun onBind(holder: NavigationViewHolder, item: NavigationItem) {
@@ -40,13 +34,15 @@ class NavigationViewAdapter constructor(navigationItemList: MutableList<Navigati
     class NavigationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(navigationItem: NavigationItem) {
-            itemView.itemText.text = navigationItem.name
-            itemView.itemIcon.setImageResource(navigationItem.icon)
-            itemView.itemIcon.tint(navigationItem.itemIconColor)
-            if (navigationItem.isSelected)
-                itemView.setBackgroundColor(Color.LTGRAY)
-            else
-                itemView.setBackgroundColor(Color.WHITE)
+            with(itemView) {
+                itemText.text = navigationItem.name
+                itemIcon.setImageResource(navigationItem.icon)
+                itemIcon.tint(navigationItem.itemIconColor)
+                if (navigationItem.isSelected)
+                    setBackgroundColor(Color.LTGRAY)
+                else
+                    setBackgroundColor(Color.WHITE)
+            }
         }
     }
 }

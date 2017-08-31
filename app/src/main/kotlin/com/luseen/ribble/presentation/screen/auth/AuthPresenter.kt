@@ -34,12 +34,10 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
     }
 
     override fun onRequestSuccess(data: User) {
-        val user = data
-        userInteractor.saveUserLoggedIn()
+        userInteractor.logIn()
         log {
-            user.name
+            data.name
         }
-
         view?.openHomeActivity()
     }
 

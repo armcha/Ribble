@@ -44,8 +44,6 @@ kapt {
 }
 
 ext.okhttpVersion = '3.8.1'
-ext.butterKnifeVersion = '8.7.0'
-ext.butterKnifeCompilerVersion = '8.7.0'
 ext.rxJavaVersion = '2.1.2'
 ext.rxAndroidVersion = '2.0.1'
 ext.supportLibVersion = '26.0.1'
@@ -92,10 +90,6 @@ dependencies {
 
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
-    //Butter knife
-    implementation "com.jakewharton:butterknife:${butterKnifeVersion}"
-    kapt "com.jakewharton:butterknife-compiler:${butterKnifeCompilerVersion}"
 
     //Logging
     implementation "com.github.armcha:Logger:${loggerVersion}"

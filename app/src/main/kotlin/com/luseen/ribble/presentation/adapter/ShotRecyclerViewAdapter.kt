@@ -1,7 +1,5 @@
 package com.luseen.ribble.presentation.adapter
 
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.luseen.ribble.R
@@ -22,15 +20,11 @@ class ShotRecyclerViewAdapter constructor(
 
     override fun createViewHolder(parent: ViewGroup): ShotViewHolder {
         val shotView = parent inflate R.layout.shot_item
-        val viewHolder = ShotViewHolder(shotView)
-        viewHolder.itemView.setOnClickListener {
-            val adapterPosition = viewHolder.adapterPosition
-            if (adapterPosition != RecyclerView.NO_POSITION) {
-                ViewCompat.setTransitionName(viewHolder.itemView.cardView, "cardView" + adapterPosition)
-                shotClickListener.onShotClicked(viewHolder.itemView.cardView, itemList[adapterPosition])
-            }
-        }
-        return viewHolder
+        return ShotViewHolder(shotView)
+    }
+
+    override fun onItemClick(itemView: View, position: Int) {
+        shotClickListener.onShotClicked(itemList[position])
     }
 
     override fun onBind(holder: ShotViewHolder, item: Shot) {

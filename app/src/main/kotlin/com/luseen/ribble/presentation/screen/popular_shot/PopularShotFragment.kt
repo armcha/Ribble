@@ -2,17 +2,14 @@ package com.luseen.ribble.presentation.screen.popular_shot
 
 
 import android.support.v7.widget.GridLayoutManager
-import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.ShotRecyclerViewAdapter
 import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
-import com.luseen.ribble.presentation.screen.shot_detail.SHOT_EXTRA_KEY
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.inTransaction
-import com.luseen.ribble.utils.whitArgument
 import kotlinx.android.synthetic.main.fragment_shot.*
 import javax.inject.Inject
 
@@ -47,9 +44,8 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
         shotRecyclerView.adapter = recyclerAdapter
     }
 
-    override fun onShotClicked(card: View, shot: Shot) {
-        val fragment = ShotDetailFragment()
-        fragment.whitArgument(SHOT_EXTRA_KEY, shot)
+    override fun onShotClicked(shot: Shot) {
+        val fragment = ShotDetailFragment.newInstance(shot)
         fragmentManager.inTransaction {
             setCustomAnimations(R.anim.slide_in_start, R.anim.slide_in_finish, R.anim.slide_out_start, R.anim.slide_out_finish)
             addToBackStack(null)

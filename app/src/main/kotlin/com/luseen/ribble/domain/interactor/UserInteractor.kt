@@ -24,23 +24,19 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
                 }
     }
 
-    fun saveUserLoggedIn() {
-        userDataRepository.saveUserLoggedIn()
+    fun logOut() {
+        userDataRepository.logOut()
     }
 
-    fun saveUserLoggedOut() {
-        userDataRepository.saveUserLoggedOut()
+    fun logIn() {
+        userDataRepository.logIn()
+    }
+
+    fun getAuthenticatedUser(): Flowable<User> {
+        return userDataRepository.getUser()
     }
 
     fun isUserLoggedIn(): Boolean = userDataRepository.isUserLoggedIn()
-
-    fun saveUserCode(code: String) {
-
-    }
-
-    fun getUserCode(): String {
-        TODO()
-    }
 
     fun getUserLikes(count: Int): Single<List<Like>> {
         return userDataRepository.getUserLikes(count)

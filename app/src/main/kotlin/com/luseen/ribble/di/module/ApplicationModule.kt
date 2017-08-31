@@ -4,7 +4,6 @@ import android.app.Application
 import com.luseen.ribble.data.mapper.Mapper
 import dagger.Module
 import dagger.Provides
-import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 /**
@@ -16,10 +15,6 @@ class ApplicationModule(private val application: Application) {
     @Singleton
     @Provides
     fun provideApplication(): Application = application
-
-    @Singleton
-    @Provides
-    fun provideCompositeDisposable() = CompositeDisposable()
 
     @Singleton
     @Provides

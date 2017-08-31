@@ -11,21 +11,15 @@ import io.reactivex.Single
  */
 interface UserRepository {
 
-    fun saveUserLoggedIn()
+    fun logIn()
 
-    fun saveUserLoggedOut()
-
-    fun saveUserCode(code: String)
+    fun logOut()
 
     fun isUserLoggedIn(): Boolean
 
     fun getUser(): Flowable<User>
 
-    fun getUserCode(): String
-
     fun getUserLikes(count: Int): Single<List<Like>>
 
     fun getFollowing(count: Int): Single<List<Shot>>
-
-
 }

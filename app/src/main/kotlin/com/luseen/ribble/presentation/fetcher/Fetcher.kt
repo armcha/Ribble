@@ -1,5 +1,6 @@
 package com.luseen.ribble.presentation.fetcher
 
+import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.presentation.base_mvp.result_listener.ResultListener
 import com.luseen.ribble.utils.log
 import io.reactivex.Flowable
@@ -11,12 +12,11 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Created by Chatikyan on 04.08.2017.
  */
-@Singleton
+@PerActivity
 class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
 
     private fun <T> getIOToMainTransformer(): SingleTransformer<T, T> {

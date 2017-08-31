@@ -15,7 +15,15 @@ constructor(protected var itemList: List<ITEM>) : RecyclerView.Adapter<HOLDER>()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HOLDER {
-        return createViewHolder(parent)
+        val viewHolder = createViewHolder(parent)
+        val itemView = viewHolder.itemView
+        itemView.setOnClickListener {
+            val adapterPosition = viewHolder.adapterPosition
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                onItemClick(itemView, adapterPosition)
+            }
+        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: HOLDER, position: Int) {
@@ -37,6 +45,9 @@ constructor(protected var itemList: List<ITEM>) : RecyclerView.Adapter<HOLDER>()
 
     protected abstract fun createViewHolder(parent: ViewGroup): HOLDER
 
-    protected open fun onViewRecycled(itemView:View){
+    protected open fun onViewRecycled(itemView: View) {
+    }
+
+    protected open fun onItemClick(itemView: View, position: Int) {
     }
 }

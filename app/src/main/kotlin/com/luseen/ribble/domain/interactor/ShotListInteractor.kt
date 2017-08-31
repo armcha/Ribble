@@ -20,5 +20,4 @@ class ShotListInteractor @Inject constructor(private val shotRepository: ShotDat
     fun getRecentShotList(count: Int = 500): Flowable<List<Shot>> {
         return shotRepository.getShotList(ApiConstants.TYPE_RECENT, count)
     }
-
 }

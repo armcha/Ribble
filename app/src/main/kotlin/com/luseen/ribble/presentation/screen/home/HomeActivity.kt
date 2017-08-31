@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import com.luseen.ribble.R
+import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
 import com.luseen.ribble.presentation.screen.auth.AuthActivity
 import com.luseen.ribble.presentation.screen.shot_root.ShotRootFragment
@@ -11,6 +12,8 @@ import com.luseen.ribble.presentation.screen.user_following.UserFollowingFragmen
 import com.luseen.ribble.presentation.screen.user_likes.UserLikesFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItem
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItemSelectedListener
+import com.luseen.ribble.utils.glide.TransformationType
+import com.luseen.ribble.utils.glide.load
 import com.luseen.ribble.utils.lock
 import com.luseen.ribble.utils.showToast
 import com.luseen.ribble.utils.start
@@ -91,6 +94,15 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
 
     override fun setToolBarTitle(title: String) {
         toolbarTitle?.setAnimatedText(title)
+    }
+
+    override fun updateDrawerInfo(user: User) {
+        val header = navView.header
+        with(header) {
+            userName.text = user.name
+            userInfo.text = user.location
+            userAvatar.load(user.avatarUrl, TransformationType.CIRCLE)
+        }
     }
 
     override fun onNonRegistryFragmentOpen(tag: Id) {

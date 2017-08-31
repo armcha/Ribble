@@ -10,6 +10,7 @@ import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.inTransaction
+import com.luseen.ribble.utils.log
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -113,6 +114,9 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
     }
 
     override fun goBack() {
+        log {
+            "navigator onBack $activeTag"
+        }
         fragmentManager.inTransaction {
             remove(fragmentMap[activeTag])
         }

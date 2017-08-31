@@ -6,14 +6,18 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Like
+import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.UserLikesRecyclerAdapter
+import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
+import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
+import com.luseen.ribble.utils.inTransaction
 import kotlinx.android.synthetic.main.fragment_user_likes.*
 import javax.inject.Inject
 
 class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.Presenter>(),
-        UserLikeContract.View {
+        UserLikeContract.View,ShotClickListener {
 
     @Inject
     protected lateinit var userLikePresenter: UserLikePresenter
@@ -36,12 +40,22 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
         updateAdapter(likeList)
     }
 
+    override fun onShotClicked(shot: Shot) {
+        val fragment = ShotDetailFragment.newInstance(shot)
+        fragmentManager.inTransaction {
+            setCustomAnimations(R.anim.slide_in_start, R.anim.slide_in_finish, R.anim.slide_out_start, R.anim.slide_out_finish)
+            addToBackStack(null)
+            add(R.id.container,fragment, "android") //FIXME
+        }
+        navigator.nonRegistryFragmentListener.onNonRegistryFragmentOpen(NavigationId.SHOT_DETAIL)
+    }
+
     private fun updateAdapter(likeList: List<Like>) {
         recyclerAdapter?.update(likeList) ?: this setUpRecyclerView likeList
     }
 
     private infix fun setUpRecyclerView(likeList: List<Like>) {
-        val recyclerAdapter = UserLikesRecyclerAdapter(likeList)
+        val recyclerAdapter = UserLikesRecyclerAdapter(likeList,this)
         likesRecyclerView.layoutManager = LinearLayoutManager(activity)
         likesRecyclerView.adapter = recyclerAdapter
     }

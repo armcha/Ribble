@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:contentDescription="@string/user_avatar" />
 
     <TextView
         android:id="@+id/userName"
@@ -27,7 +27,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Android Studio"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/black"
         android:textSize="25sp"
@@ -43,9 +42,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:gravity="center"
-        android:text="android.studio@android.com"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userName" />

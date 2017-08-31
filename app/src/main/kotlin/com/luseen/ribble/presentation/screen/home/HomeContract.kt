@@ -1,5 +1,6 @@
 package com.luseen.ribble.presentation.screen.home
 
+import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.presentation.base_mvp.base.BaseContract
 import com.luseen.ribble.presentation.navigation.NavigationState
 
@@ -19,6 +20,8 @@ interface HomeContract {
         fun onDrawerUnlocked()
 
         fun setToolBarTitle(title: String)
+
+        fun updateDrawerInfo(user: User)
     }
 
     interface Presenter : BaseContract.Presenter<View> {

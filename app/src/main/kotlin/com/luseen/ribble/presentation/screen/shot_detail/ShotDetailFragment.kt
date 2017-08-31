@@ -15,12 +15,21 @@ import com.luseen.ribble.utils.getExtra
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.clear
 import com.luseen.ribble.utils.glide.load
+import com.luseen.ribble.utils.whitArgument
 import kotlinx.android.synthetic.main.fragment_shot_detail.*
 import javax.inject.Inject
 
 const val SHOT_EXTRA_KEY = "shot_extra_key"
 
 class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContract.Presenter>(), ShotDetailContract.View {
+
+    companion object {
+        fun newInstance(shot: Shot): ShotDetailFragment {
+            val fragment = ShotDetailFragment()
+            fragment.whitArgument(SHOT_EXTRA_KEY, shot)
+            return fragment
+        }
+    }
 
     @Inject
     protected lateinit var shotDetailPresenter: ShotDetailPresenter

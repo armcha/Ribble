@@ -12,4 +12,5 @@
     <string name="arc_view_image">Arc view image</string>
     <string name="shot_image">Shot image</string>
     <string name="liked_shot_image">Liked shot image</string>
+    <string name="user_avatar">User avatar</string>
 </resources>

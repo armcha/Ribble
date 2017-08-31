@@ -16,11 +16,12 @@ import javax.inject.Inject
  */
 @PerActivity
 class HomePresenter @Inject constructor(private val userInteractor: UserInteractor)
-    : ApiPresenter<User,HomeContract.View>(), HomeContract.Presenter {
+    : ApiPresenter<User, HomeContract.View>(), HomeContract.Presenter {
 
     private var state: NavigationState? = null
     private var isDrawerLocked = false
     private var activeTitle = emptyString()
+    private var user: User? = null
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_CREATE)
     fun onCreate() {
@@ -31,6 +32,9 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
             view?.onDrawerUnlocked()
         }
         view?.setToolBarTitle(activeTitle)
+        user?.let {
+            view?.updateDrawerInfo(it)
+        }
     }
 
     override fun onPresenterCreate() {
@@ -43,6 +47,7 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
     }
 
     override fun onRequestSuccess(data: User) {
+        user = data
         view?.updateDrawerInfo(data)
     }
 

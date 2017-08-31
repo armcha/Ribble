@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_user_likes.*
 import javax.inject.Inject
 
 class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.Presenter>(),
-        UserLikeContract.View,ShotClickListener {
+        UserLikeContract.View, ShotClickListener {
 
     @Inject
     protected lateinit var userLikePresenter: UserLikePresenter
@@ -48,6 +48,9 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
             add(R.id.container,fragment, "android") //FIXME
         }
         navigator.nonRegistryFragmentListener.onNonRegistryFragmentOpen(NavigationId.SHOT_DETAIL)
+//        val bundle = Bundle()
+//        bundle.putParcelable(SHOT_EXTRA_KEY, shot)
+//        goTo(ShotDetailFragment::class, bundle)
     }
 
     private fun updateAdapter(likeList: List<Like>) {
@@ -55,7 +58,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
     }
 
     private infix fun setUpRecyclerView(likeList: List<Like>) {
-        val recyclerAdapter = UserLikesRecyclerAdapter(likeList,this)
+        val recyclerAdapter = UserLikesRecyclerAdapter(likeList, this)
         likesRecyclerView.layoutManager = LinearLayoutManager(activity)
         likesRecyclerView.adapter = recyclerAdapter
     }

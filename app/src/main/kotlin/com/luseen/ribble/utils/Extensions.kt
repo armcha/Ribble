@@ -5,6 +5,7 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.PorterDuff
 import android.os.*
 import android.support.v4.app.Fragment
@@ -124,9 +125,9 @@ fun String.toHtml(): Spanned {
     return Html.fromHtml(this)
 }
 
-fun Int.toPx(context:Context):Int{
+fun Int.toPx(context: Context): Int {
     val displayMetrics = context.resources.displayMetrics
-        return Math.round(this * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+    return Math.round(this * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
 }
 
 fun View.topMargin(marginInDp: Int) {
@@ -136,3 +137,8 @@ fun View.topMargin(marginInDp: Int) {
 fun View.bottomMargin(marginInDp: Int) {
     (this.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = marginInDp.toPx(this.context)
 }
+
+fun Activity.isPortrait() = this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+
+fun Fragment.isPortrait() = this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+

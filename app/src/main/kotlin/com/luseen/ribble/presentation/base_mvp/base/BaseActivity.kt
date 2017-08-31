@@ -9,17 +9,16 @@ import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.module.ActivityModule
 import com.luseen.ribble.presentation.navigation.Navigator
-import com.luseen.ribble.utils.log
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
-    : BaseMVPActivity<V, P>(), Navigator.NonRegistryFragmentListener,Navigator.TitleChangeListener {
+    : BaseMVPActivity<V, P>(), Navigator.NonRegistryFragmentListener, Navigator.TitleChangeListener {
 
     @Inject
     lateinit var navigator: Navigator
 
-    val activityComponent: ActivityComponent by lazy {
+    val activityComponent: ActivityComponent by lazy(LazyThreadSafetyMode.NONE) {
         getAppComponent().plus(ActivityModule(this))
     }
 
@@ -31,14 +30,7 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
         super.onCreate(savedInstanceState)
     }
 
-    override fun onTitleChanged(newTitle: String) {
-
-    }
-
     override fun onBackPressed() {
-        log {
-
-        }
         if (navigator.activeTag == navigator.rootTag) {
             navigator.nonRegistryFragmentListener.onNonRegistryFragmentClose()
         }

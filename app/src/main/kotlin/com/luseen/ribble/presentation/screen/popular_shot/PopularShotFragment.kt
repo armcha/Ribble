@@ -10,6 +10,7 @@ import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.inTransaction
+import com.luseen.ribble.utils.isPortrait
 import kotlinx.android.synthetic.main.fragment_shot.*
 import javax.inject.Inject
 
@@ -40,7 +41,7 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
 
     private infix fun setUpRecyclerView(shotList: List<Shot>) {
         recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)
-        shotRecyclerView.layoutManager = GridLayoutManager(activity, 2)
+        shotRecyclerView.layoutManager = GridLayoutManager(activity, if (isPortrait()) 2 else 3)
         shotRecyclerView.adapter = recyclerAdapter
     }
 
@@ -49,7 +50,7 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
         fragmentManager.inTransaction {
             setCustomAnimations(R.anim.slide_in_start, R.anim.slide_in_finish, R.anim.slide_out_start, R.anim.slide_out_finish)
             addToBackStack(null)
-            add(R.id.container,fragment, "android") //FIXME
+            add(R.id.container, fragment, "android") //FIXME
         }
         navigator.nonRegistryFragmentListener.onNonRegistryFragmentOpen(NavigationId.SHOT_DETAIL)
     }

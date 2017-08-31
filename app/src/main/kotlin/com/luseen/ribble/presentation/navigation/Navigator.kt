@@ -76,9 +76,9 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
 
         if (!fragmentMap.containsKey(tag)) {
             val fragment = Fragment.instantiate(activity, tag)
-            if (!arg.isEmpty) {
+           // if (!arg.isEmpty) {
                 fragment.arguments = arg
-            }
+          //  }
             fragmentManager.inTransaction {
                 add(containerId, fragment, tag)
             }

@@ -13,7 +13,7 @@ import javax.inject.Inject
 import kotlin.reflect.KClass
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
-    : BaseMVPActivity<V, P>(), Navigator.NonRegistryFragmentListener, Navigator.TitleChangeListener {
+    : BaseMVPActivity<V, P>(), Navigator.FragmentChangeListener {
 
     @Inject
     lateinit var navigator: Navigator
@@ -25,15 +25,11 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
-        navigator.nonRegistryFragmentListener = this
-        navigator.titleChangeListener = this
+        navigator.fragmentChangeListener = this
         super.onCreate(savedInstanceState)
     }
 
     override fun onBackPressed() {
-        if (navigator.activeTag == navigator.rootTag) {
-            navigator.nonRegistryFragmentListener.onNonRegistryFragmentClose()
-        }
         if (navigator.hasBackStack())
             navigator.goBack()
         else
@@ -46,8 +42,8 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
         return App.instance.applicationComponent
     }
 
-    fun goTo(kClass: KClass<out Fragment>, arg: Bundle = Bundle.EMPTY) {
-        navigator.goTo(kClass, arg)
+    fun goTo(kClass: KClass<out Fragment>, withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
+        navigator.goTo(kClass, withCustomAnimation, arg)
     }
 
     fun hasBackStack() = navigator.hasBackStack()

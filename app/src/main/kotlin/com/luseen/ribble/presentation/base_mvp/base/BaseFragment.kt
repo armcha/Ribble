@@ -35,13 +35,13 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         return inflater!!.inflate(layoutResId(), container, false)
     }
 
-    fun goTo(kClass: KClass<out Fragment>, args: Bundle = Bundle.EMPTY) {
-        navigator.goTo(kClass, args)
+    fun goTo(kClass: KClass<out Fragment>, withCustomAnimation: Boolean = false, args: Bundle = Bundle.EMPTY) {
+        navigator.goTo(kClass, withCustomAnimation, args)
     }
 
     protected abstract fun injectDependencies()
 
     protected abstract fun layoutResId(): Int
 
-    open fun getTitle():String = emptyString()
+    open fun getTitle(): String = emptyString()
 }

@@ -58,17 +58,21 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         navView.header.userName
     }
 
-    override fun onDrawerLocked() {
+    override fun lockDrawer() {
+        drawerLayout.lock()
         arcImage.setImageResource(R.drawable.arrow_left)
         arcView.setOnClickListener {
             super.onBackPressed()
         }
     }
 
-    override fun onDrawerUnlocked() {
-        arcImage.setImageResource(R.drawable.equal)
-        arcView.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
+    override fun unlockDrawer() {
+        drawerLayout?.let {
+            drawerLayout.unlock()
+            arcImage.setImageResource(R.drawable.equal)
+            arcView.setOnClickListener {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
         }
     }
 
@@ -88,12 +92,12 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         finish()
     }
 
-    override fun onTitleChanged(newTitle: String) {
-        presenter.handleTitleChanges(newTitle)
-    }
-
     override fun setToolBarTitle(title: String) {
         toolbarTitle?.setAnimatedText(title)
+    }
+
+    override fun onFragmentChanged(tag: String) {
+        presenter.handleFragmentChanges(tag)
     }
 
     override fun updateDrawerInfo(user: User) {
@@ -103,16 +107,6 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
             userInfo.text = user.location
             userAvatar.load(user.avatarUrl, TransformationType.CIRCLE)
         }
-    }
-
-    override fun onNonRegistryFragmentOpen(tag: Id) {
-        drawerLayout.lock()
-        presenter.handleDrawerLock()
-    }
-
-    override fun onNonRegistryFragmentClose() {
-        drawerLayout.unlock()
-        presenter.handleDrawerUnLock()
     }
 
     override fun onBackPressed() {

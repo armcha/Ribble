@@ -15,9 +15,9 @@ interface HomeContract {
 
         fun openLoginActivity()
 
-        fun onDrawerLocked()
+        fun lockDrawer()
 
-        fun onDrawerUnlocked()
+        fun unlockDrawer()
 
         fun setToolBarTitle(title: String)
 
@@ -32,10 +32,6 @@ interface HomeContract {
 
         fun getNavigatorState(): NavigationState?
 
-        fun handleDrawerLock()
-
-        fun handleDrawerUnLock()
-
-        fun handleTitleChanges(newTitle: String)
+        fun handleFragmentChanges(tag: String)
     }
 }

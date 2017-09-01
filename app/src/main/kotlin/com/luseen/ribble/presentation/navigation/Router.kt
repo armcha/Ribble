@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
  */
 interface Router {
 
-    fun goTo(kClass: KClass<out Fragment>, arg: Bundle)
+    fun goTo(kClass: KClass<out Fragment>, withCustomAnimation:Boolean , arg: Bundle)
 
     fun hasBackStack(): Boolean
 

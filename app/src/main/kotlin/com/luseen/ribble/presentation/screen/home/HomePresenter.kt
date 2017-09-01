@@ -9,6 +9,7 @@ import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
 import com.luseen.ribble.presentation.navigation.NavigationState
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.emptyString
+import com.luseen.ribble.utils.log
 import javax.inject.Inject
 
 /**
@@ -26,10 +27,9 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
     @OnLifecycleEvent(value = Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         if (isDrawerLocked) {
-            view?.onDrawerLocked()
-            activeTitle = NavigationId.SHOT_DETAIL.name
+            view?.lockDrawer()
         } else {
-            view?.onDrawerUnlocked()
+            view?.unlockDrawer()
         }
         view?.setToolBarTitle(activeTitle)
         user?.let {
@@ -54,21 +54,34 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
     override fun onRequestError(errorMessage: String?) {
     }
 
-    override fun handleDrawerLock() {
-        isDrawerLocked = true
-        view?.onDrawerLocked()
-        view?.setToolBarTitle(NavigationId.SHOT_DETAIL.name)
-    }
+//    override fun handleDrawerLock() {
+//        isDrawerLocked = true
+//        view?.lockDrawer()
+//        view?.setToolBarTitle(NavigationId.SHOT_DETAIL.name)
+//    }
 
-    override fun handleDrawerUnLock() {
-        isDrawerLocked = false
-        view?.onDrawerUnlocked()
-        view?.setToolBarTitle(NavigationId.SHOT.name)
-    }
+//    override fun handleDrawerUnLock() {
+//        isDrawerLocked = false
+//        view?.unlockDrawer()
+//        view?.setToolBarTitle(NavigationId.SHOT.name)
+//    }
 
-    override fun handleTitleChanges(newTitle: String) {
-        view?.setToolBarTitle(newTitle)
-        activeTitle = newTitle
+    override fun handleFragmentChanges(tag: String) {
+        view?.setToolBarTitle(tag)
+        activeTitle = tag
+        if (tag == NavigationId.SHOT_DETAIL.name) {
+            isDrawerLocked = true
+            view?.lockDrawer()
+            log {
+                "Lock"
+            }
+        } else if (isDrawerLocked) {
+            isDrawerLocked = false
+            view?.unlockDrawer()
+            log {
+                "UnLock"
+            }
+        }
     }
 
     override fun logOut() {

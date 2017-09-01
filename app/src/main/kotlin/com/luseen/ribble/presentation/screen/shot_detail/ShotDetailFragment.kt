@@ -13,7 +13,6 @@ import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.getExtra
 import com.luseen.ribble.utils.glide.TransformationType
-import com.luseen.ribble.utils.glide.clear
 import com.luseen.ribble.utils.glide.load
 import com.luseen.ribble.utils.whitArgument
 import kotlinx.android.synthetic.main.fragment_shot_detail.*
@@ -71,8 +70,8 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
 
     override fun onDestroyView() {
         super.onDestroyView()
-        shotDetailImage.clear()
-        authorImage.clear()
+//        shotDetailImage.clear()
+       /// authorImage.clear()
     }
 
     override fun onDataReceive(commentList: List<Comment>) {
@@ -94,6 +93,6 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     override fun getTitle(): String {
-        return shot.title ?: NavigationId.SHOT_DETAIL.name //TODO
+        return NavigationId.SHOT_DETAIL.name //TODO
     }
 }

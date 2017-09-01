@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import com.luseen.ribble.R
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
-import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.inTransaction
-import com.luseen.ribble.utils.log
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -18,42 +16,34 @@ import kotlin.reflect.KClass
  * Created by Chatikyan on 15.08.2017.
  */
 @PerActivity
-class Navigator @Inject constructor(private val activity: AppCompatActivity) : Router {
+class Navigator @Inject constructor(private val activity: AppCompatActivity,
+                                    private val fragmentManager: FragmentManager) : Router {
 
-    interface NonRegistryFragmentListener {
-        fun onNonRegistryFragmentOpen(tag: NavigationId) {
-        }
-
-        fun onNonRegistryFragmentClose() {
-        }
+    interface FragmentChangeListener {
+        fun onFragmentChanged(tag: String){}
     }
 
-    interface TitleChangeListener {
-        fun onTitleChanged(newTitle: String){
-        }
-    }
-
-    private val fragmentManager: FragmentManager = activity.supportFragmentManager
     private var fragmentMap: MutableMap<String, Fragment> = mutableMapOf()
+    lateinit var fragmentChangeListener: FragmentChangeListener
 
     private val containerId = R.id.container //TODO change
-    var activeTag: String? = null
-    var rootTag: String? = null
-    lateinit var nonRegistryFragmentListener: NonRegistryFragmentListener
-    lateinit var titleChangeListener: TitleChangeListener
+    private var activeTag: String? = null
+    private var rootTag: String? = null
+    private var isCustomAnimationUsed = false
 
     fun getState(): NavigationState {
-        return NavigationState(activeTag, rootTag)
+        return NavigationState(activeTag, rootTag, isCustomAnimationUsed)
     }
 
     fun restore(state: NavigationState) {
         activeTag = state.activeTag
         rootTag = state.firstTag
+        isCustomAnimationUsed = state.isCustomAnimationUsed
         state.clear()
 
         fragmentMap.clear()
         fragmentManager.fragments
-                .filter { !it.tag.contains("android") } //FiXME not the best solution
+                .filter { it.tag.contains("ribble") } //FiXME not the best solution
                 .forEach {
                     fragmentMap.put(it.tag, it)
                 }
@@ -66,31 +56,32 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
                     }
             show(fragmentMap[activeTag])
         }
-        changeTitle(activeTag)
+        invokeFragmentChangeListener(activeTag)
     }
 
-    override fun goTo(kClass: KClass<out Fragment>, arg: Bundle) {
+    override fun goTo(kClass: KClass<out Fragment>, withCustomAnimation: Boolean, arg: Bundle) {
         val tag = kClass.java.name
         if (activeTag == tag)
             return
 
         if (!fragmentMap.containsKey(tag)) {
             val fragment = Fragment.instantiate(activity, tag)
-           // if (!arg.isEmpty) {
+            if (!arg.isEmpty) {
                 fragment.arguments = arg
-          //  }
+            }
             fragmentManager.inTransaction {
+                addOpenTransition(this, withCustomAnimation)
                 add(containerId, fragment, tag)
             }
             fragmentMap.put(tag, fragment)
 
-            if (activeTag == null) { //TODO
+            if (activeTag == null) {
                 rootTag = tag
             }
         }
 
         fragmentManager.inTransaction {
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            addOpenTransition(this, withCustomAnimation)
             fragmentMap
                     .filter { it.key != tag }
                     .forEach {
@@ -99,13 +90,23 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
             show(fragmentMap[tag])
         }
         activeTag = tag
-        changeTitle(tag)
+        invokeFragmentChangeListener(tag)
     }
 
-    private fun changeTitle(tag: String?) {
+    private fun addOpenTransition(transaction: FragmentTransaction, withCustomAnimation: Boolean) {
+        if (withCustomAnimation) {
+            isCustomAnimationUsed = true
+            transaction.setCustomAnimations(R.anim.slide_in_start, 0)
+        } else {
+            isCustomAnimationUsed = false
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        }
+    }
+
+    private fun invokeFragmentChangeListener(tag: String?) {
         val fragment = fragmentMap[tag]
         if (fragment is BaseFragment<*, *>) {
-            titleChangeListener.onTitleChanged(fragment.getTitle())
+            fragmentChangeListener.onFragmentChanged(fragment.getTitle())
         }
     }
 
@@ -114,21 +115,20 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) : R
     }
 
     override fun goBack() {
-        log {
-            "navigator onBack $activeTag"
-        }
         fragmentManager.inTransaction {
+            if (isCustomAnimationUsed)
+                setCustomAnimations(0, R.anim.slide_out_finish)
             remove(fragmentMap[activeTag])
         }
         fragmentMap.remove(activeTag)
         val currentTag = fragmentMap.keys.elementAt(fragmentMap.size - 1)
-
         fragmentManager.inTransaction {
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            if (!isCustomAnimationUsed)
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             show(fragmentMap[currentTag])
         }
         activeTag = currentTag
-        changeTitle(currentTag)
+        invokeFragmentChangeListener(currentTag)
     }
 
     override fun goToFirst() {

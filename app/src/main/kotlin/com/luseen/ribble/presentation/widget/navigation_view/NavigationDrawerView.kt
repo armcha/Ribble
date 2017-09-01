@@ -1,12 +1,10 @@
 package com.luseen.ribble.presentation.widget.navigation_view
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.design.widget.NavigationView
 import android.support.v4.view.AbsSavedState
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
@@ -14,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.luseen.ribble.R
+import com.luseen.ribble.utils.delay
 
 /**
  * Created by Chatikyan on 20.08.2017.
@@ -61,17 +60,6 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
         addView(recyclerView)
     }
 
-    @SuppressLint("RestrictedApi") //FIXME
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        val drawer = parent as DrawerLayout?
-        drawer?.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
-            override fun onDrawerClosed(drawerView: View?) {
-                adapter.notifyDataSetChanged()
-            }
-        })
-    }
-
     override fun onSaveInstanceState(): Parcelable {
         val superState = super.onSaveInstanceState()
         val state = State(superState)
@@ -97,6 +85,14 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
         itemList[currentSelectedItem].isSelected = false
         currentSelectedItem = position
         itemList[currentSelectedItem].isSelected = true
+    }
+
+    fun setChecked(position: Int) {
+        setCurrentSelected(position)
+        //FIXME
+        delay(250) {
+            adapter.notifyDataSetChanged()
+        }
     }
 
     private class State : AbsSavedState {

@@ -123,10 +123,12 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         fragmentMap.remove(activeTag)
         val currentTag = fragmentMap.keys.elementAt(fragmentMap.size - 1)
         fragmentManager.inTransaction {
-            if (!isCustomAnimationUsed)
+            if (!isCustomAnimationUsed) {
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            }
             show(fragmentMap[currentTag])
         }
+        isCustomAnimationUsed = false
         activeTag = currentTag
         invokeFragmentChangeListener(currentTag)
     }

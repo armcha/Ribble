@@ -14,7 +14,6 @@ import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.getExtra
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.load
-import com.luseen.ribble.utils.whitArgument
 import kotlinx.android.synthetic.main.fragment_shot_detail.*
 import javax.inject.Inject
 
@@ -23,10 +22,10 @@ const val SHOT_EXTRA_KEY = "shot_extra_key"
 class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContract.Presenter>(), ShotDetailContract.View {
 
     companion object {
-        fun newInstance(shot: Shot): ShotDetailFragment {
-            val fragment = ShotDetailFragment()
-            fragment.whitArgument(SHOT_EXTRA_KEY, shot)
-            return fragment
+        fun getBundle(shot: Shot): Bundle {
+            val bundle = Bundle()
+            bundle.putParcelable(SHOT_EXTRA_KEY, shot)
+            return bundle
         }
     }
 
@@ -66,12 +65,6 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
         bucketLayout.layoutText = shot.bucketCount
         bucketLayout.imageResId = R.drawable.bucket
         bucketLayout.imageTint = R.color.blue_gray
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-//        shotDetailImage.clear()
-       /// authorImage.clear()
     }
 
     override fun onDataReceive(commentList: List<Comment>) {

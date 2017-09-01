@@ -22,6 +22,8 @@ interface HomeContract {
         fun setToolBarTitle(title: String)
 
         fun updateDrawerInfo(user: User)
+
+        fun checkNavigationItem(position: Int)
     }
 
     interface Presenter : BaseContract.Presenter<View> {

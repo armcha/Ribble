@@ -109,6 +109,12 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         }
     }
 
+    override fun checkNavigationItem(position: Int) {
+        navView?.let {
+            navView.setChecked(position)
+        }
+    }
+
     override fun onBackPressed() {
         when {
             drawerLayout.isDrawerOpen(GravityCompat.START) -> drawerLayout.closeDrawer(GravityCompat.START)

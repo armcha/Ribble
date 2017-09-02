@@ -9,6 +9,8 @@ import com.luseen.ribble.R
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.utils.inTransaction
+import com.luseen.ribble.utils.log
+import com.luseen.ribble.utils.replaceValue
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -20,13 +22,13 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
                                     private val fragmentManager: FragmentManager) : Router {
 
     interface FragmentChangeListener {
-        fun onFragmentChanged(tag: String){}
+        fun onFragmentChanged(tag: String) {}
     }
 
-    private var fragmentMap: MutableMap<String, Fragment> = mutableMapOf()
+    private var fragmentMap: LinkedHashMap<String, Fragment> = linkedMapOf()
     lateinit var fragmentChangeListener: FragmentChangeListener
 
-    private val containerId = R.id.container //TODO change
+    private val containerId = R.id.container //TODO add builder
     private var activeTag: String? = null
     private var rootTag: String? = null
     private var isCustomAnimationUsed = false
@@ -91,6 +93,14 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         }
         activeTag = tag
         invokeFragmentChangeListener(tag)
+
+        fragmentMap.replaceValue(tag, fragmentMap[tag])
+        log {
+            "fragmentMap is  ${fragmentMap.keys.map {
+                val split: List<String> = it.split(".")
+                split[split.size - 1]
+            }}"
+        }
     }
 
     private fun addOpenTransition(transaction: FragmentTransaction, withCustomAnimation: Boolean) {

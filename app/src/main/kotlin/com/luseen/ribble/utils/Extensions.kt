@@ -130,15 +130,22 @@ fun Int.toPx(context: Context): Int {
     return Math.round(this * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
 }
 
-fun View.topMargin(marginInDp: Int) {
+fun View.addTopMargin(marginInDp: Int) {
     (this.layoutParams as ViewGroup.MarginLayoutParams).topMargin = marginInDp.toPx(this.context)
 }
 
-fun View.bottomMargin(marginInDp: Int) {
+fun View.addBottomMargin(marginInDp: Int) {
     (this.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = marginInDp.toPx(this.context)
 }
 
 fun Activity.isPortrait() = this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
 fun Fragment.isPortrait() = this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+
+fun <K, V> MutableMap<K, V>.replaceValue(key: K, value: V?) {
+    this.remove(key)
+    value?.let {
+        this.put(key, value)
+    }
+}
 

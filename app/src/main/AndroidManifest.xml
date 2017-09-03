@@ -20,6 +20,7 @@
         <activity
             android:name=".presentation.screen.auth.AuthActivity"
             android:exported="true"
+            android:theme="@style/AuthTheme"
             android:launchMode="singleTop">
             <intent-filter>
                 <data
@@ -35,7 +36,6 @@
         <activity android:name=".presentation.screen.dispatch.DispatchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

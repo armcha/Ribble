@@ -31,7 +31,7 @@
             android:id="@+id/scrolling_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|enterAlways">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView"
@@ -43,13 +43,13 @@
                 app:cardElevation="10dp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/shotDetailImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
                     android:src="@drawable/hello_dribble" />
 
@@ -81,15 +81,13 @@
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="4dp"
-                    />
+                    android:layout_marginRight="4dp" />
 
                 <com.luseen.ribble.presentation.widget.TextImageLayout
                     android:id="@+id/bucketLayout"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:src="@drawable/ic_menu_manage" />
+                    android:layout_marginRight="4dp" />
             </LinearLayout>
 
             <ImageView

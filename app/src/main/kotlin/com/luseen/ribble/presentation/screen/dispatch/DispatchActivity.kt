@@ -11,7 +11,6 @@ class DispatchActivity : BaseActivity<DispatchContract.View, DispatchContract.Pr
     @Inject
     protected lateinit var dispatchPresenter: DispatchPresenter
 
-
     override fun injectDependencies() {
         activityComponent.inject(this)
     }

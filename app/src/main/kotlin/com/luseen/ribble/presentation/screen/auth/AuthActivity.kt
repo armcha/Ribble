@@ -19,6 +19,10 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
 
     override fun initPresenter(): AuthContract.Presenter = authPresenter
 
+    override fun injectDependencies() {
+        activityComponent.inject(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
@@ -43,9 +47,5 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
         super.onNewIntent(intent)
         presenter.checkLogin(intent)
         log("onNewIntent$intent")
-    }
-
-    override fun injectDependencies() {
-        activityComponent.inject(this)
     }
 }

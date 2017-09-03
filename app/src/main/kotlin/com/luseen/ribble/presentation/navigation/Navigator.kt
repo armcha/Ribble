@@ -19,7 +19,7 @@ import kotlin.reflect.KClass
  */
 @PerActivity
 class Navigator @Inject constructor(private val activity: AppCompatActivity,
-                                    private val fragmentManager: FragmentManager) : Router {
+                                    private val fragmentManager: FragmentManager) {
 
     interface FragmentChangeListener {
         fun onFragmentChanged(tag: String) {}
@@ -32,6 +32,32 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
     private var activeTag: String? = null
     private var rootTag: String? = null
     private var isCustomAnimationUsed = false
+
+    private fun runDebugLog() {
+        log {
+            "Chain [${fragmentMap.size}] - ${fragmentMap.keys.joinToString(" -> ") {
+                val split: List<String> = it.split(".")
+                split[split.size - 1]
+            }}"
+        }
+    }
+
+    private fun addOpenTransition(transaction: FragmentTransaction, withCustomAnimation: Boolean) {
+        if (withCustomAnimation) {
+            isCustomAnimationUsed = true
+            transaction.setCustomAnimations(R.anim.slide_in_start, 0)
+        } else {
+            isCustomAnimationUsed = false
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        }
+    }
+
+    private fun invokeFragmentChangeListener(tag: String?) {
+        val fragment = fragmentMap[tag]
+        if (fragment is BaseFragment<*, *>) {
+            fragmentChangeListener.onFragmentChanged(fragment.getTitle())
+        }
+    }
 
     fun getState(): NavigationState {
         return NavigationState(activeTag, rootTag, isCustomAnimationUsed)
@@ -59,9 +85,10 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
             show(fragmentMap[activeTag])
         }
         invokeFragmentChangeListener(activeTag)
+        runDebugLog()
     }
 
-    override fun goTo(kClass: KClass<out Fragment>, withCustomAnimation: Boolean, arg: Bundle) {
+    fun goTo(kClass: KClass<out Fragment>, withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
         val tag = kClass.java.name
         if (activeTag == tag)
             return
@@ -95,43 +122,22 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         invokeFragmentChangeListener(tag)
 
         fragmentMap.replaceValue(tag, fragmentMap[tag])
-        log {
-            "fragmentMap is  ${fragmentMap.keys.map {
-                val split: List<String> = it.split(".")
-                split[split.size - 1]
-            }}"
-        }
+
+        runDebugLog()
     }
 
-    private fun addOpenTransition(transaction: FragmentTransaction, withCustomAnimation: Boolean) {
-        if (withCustomAnimation) {
-            isCustomAnimationUsed = true
-            transaction.setCustomAnimations(R.anim.slide_in_start, 0)
-        } else {
-            isCustomAnimationUsed = false
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        }
-    }
-
-    private fun invokeFragmentChangeListener(tag: String?) {
-        val fragment = fragmentMap[tag]
-        if (fragment is BaseFragment<*, *>) {
-            fragmentChangeListener.onFragmentChanged(fragment.getTitle())
-        }
-    }
-
-    override fun hasBackStack(): Boolean {
+    fun hasBackStack(): Boolean {
         return fragmentMap.size > 1 && activeTag != rootTag
     }
 
-    override fun goBack() {
+    fun goBack() {
         fragmentManager.inTransaction {
             if (isCustomAnimationUsed)
                 setCustomAnimations(0, R.anim.slide_out_finish)
             remove(fragmentMap[activeTag])
         }
         fragmentMap.remove(activeTag)
-        val currentTag = fragmentMap.keys.elementAt(fragmentMap.size - 1)
+        val currentTag = fragmentMap.keys.last()
         fragmentManager.inTransaction {
             if (!isCustomAnimationUsed) {
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
@@ -141,9 +147,10 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         isCustomAnimationUsed = false
         activeTag = currentTag
         invokeFragmentChangeListener(currentTag)
+        runDebugLog()
     }
 
-    override fun goToFirst() {
+    fun goToFirst() {
         TODO()
     }
 }

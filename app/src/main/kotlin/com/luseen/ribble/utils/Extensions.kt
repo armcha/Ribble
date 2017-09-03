@@ -32,6 +32,10 @@ inline fun log(message: () -> Any?) {
     Logger.log(message())
 }
 
+inline fun Any.log(message: () -> Any?) {
+    Logger.log(message())
+}
+
 fun log(vararg message: () -> Any?) {
     message.forEach {
         Logger.log(it())

@@ -32,8 +32,8 @@ inline fun log(message: () -> Any?) {
     Logger.log(message())
 }
 
-inline fun Any.log(message: () -> Any?) {
-    Logger.log(message())
+fun Any.makeLog() {
+    Logger.log(this)
 }
 
 fun log(vararg message: () -> Any?) {

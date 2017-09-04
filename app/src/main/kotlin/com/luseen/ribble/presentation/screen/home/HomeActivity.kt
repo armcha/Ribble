@@ -41,9 +41,9 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
 
         initViews()
 
-        val navigatorState = presenter.getNavigatorState()
-        if (navigatorState != null)
-            navigator.restore(navigatorState)
+        presenter.getNavigatorState()?.let {
+            navigator.restore(it)
+        }
     }
 
     override fun onDestroy() {

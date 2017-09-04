@@ -14,12 +14,10 @@ class DispatchPresenter @Inject constructor(private val userInteractor: UserInte
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        with(view) {
-            if (userInteractor.isUserLoggedIn()) {
-                openHomeActivity()
-            } else {
-                openLoginActivity()
-            }
+        if (userInteractor.isUserLoggedIn()) {
+            view?.openHomeActivity()
+        } else {
+            view?.openLoginActivity()
         }
     }
 }

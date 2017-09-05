@@ -142,6 +142,15 @@ fun View.addBottomMargin(marginInDp: Int) {
     (this.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = marginInDp.toPx(this.context)
 }
 
+fun View.show() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.hide() {
+    this.visibility = View.GONE
+}
+
+
 fun Activity.isPortrait() = this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
 fun Fragment.isPortrait() = this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT

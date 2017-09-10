@@ -62,13 +62,13 @@
                 app:cardElevation="10dp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/shotDetailImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:adjustViewBounds="true"
                     android:contentDescription="@string/shot_detail_image"
                     android:scaleType="centerCrop"
                     android:src="@drawable/hello_dribble" />
@@ -121,13 +121,13 @@
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginStart="0dp"
+                android:contentDescription="@string/shot_author_image"
                 android:scaleType="centerCrop"
                 android:src="@drawable/hello_dribble"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/linearLayout"
                 app:layout_constraintTop_toBottomOf="@+id/cardView"
-                app:layout_constraintVertical_bias="0.0"
-                android:contentDescription="@string/shot_author_image" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/shotAuthor"

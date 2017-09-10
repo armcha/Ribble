@@ -71,10 +71,6 @@ inline fun delay(milliseconds: Long, crossinline action: () -> Unit) {
     }, milliseconds)
 }
 
-inline fun Activity.start(clazz: () -> Class<*>) {
-    this.startActivity(Intent(this, clazz()))
-}
-
 inline fun <reified T> Activity.start() {
     this.startActivity(Intent(this, T::class.java))
 }

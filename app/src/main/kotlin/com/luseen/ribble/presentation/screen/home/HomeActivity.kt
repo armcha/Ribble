@@ -85,9 +85,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun openLoginActivity() {
-        start {
-            AuthActivity::class.java
-        }
+        start<AuthActivity>()
         showToast("Logged out")
         finish()
     }

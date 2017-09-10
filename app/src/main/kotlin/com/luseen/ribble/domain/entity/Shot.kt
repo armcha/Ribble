@@ -1,11 +1,15 @@
 package com.luseen.ribble.domain.entity
 
+import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by Chatikyan on 02.08.2017.
  */
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Shot constructor(val title: String?,
                             var id: String?,
                             var image: Image,
@@ -24,29 +28,4 @@ data class Shot constructor(val title: String?,
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Int::class.java.classLoader) as? Int)
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(title)
-        parcel.writeString(id)
-        parcel.writeParcelable(image, flags)
-        parcel.writeParcelable(user, flags)
-        parcel.writeString(description)
-        parcel.writeValue(likesCount)
-        parcel.writeValue(viewsCount)
-        parcel.writeValue(bucketCount)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Shot> {
-        override fun createFromParcel(parcel: Parcel): Shot {
-            return Shot(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Shot?> {
-            return arrayOfNulls(size)
-        }
-    }
 }

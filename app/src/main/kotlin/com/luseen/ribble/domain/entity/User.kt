@@ -1,12 +1,16 @@
 package com.luseen.ribble.domain.entity
 
+import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
 import com.luseen.ribble.utils.emptyString
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by Chatikyan on 10.08.2017.
  */
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class User constructor(val name: String?,
                        val avatarUrl: String = emptyString(),
                        val username: String?,
@@ -17,25 +21,4 @@ data class User constructor(val name: String?,
             parcel.readString(),
             parcel.readString(),
             parcel.readString())
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeString(avatarUrl)
-        parcel.writeString(username)
-        parcel.writeString(location)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<User> {
-        override fun createFromParcel(parcel: Parcel): User {
-            return User(parcel)
-        }
-
-        override fun newArray(size: Int): Array<User?> {
-            return arrayOfNulls(size)
-        }
-    }
 }

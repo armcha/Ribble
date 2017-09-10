@@ -18,16 +18,12 @@ class DispatchActivity : BaseActivity<DispatchContract.View, DispatchContract.Pr
     override fun initPresenter(): DispatchContract.Presenter = dispatchPresenter
 
     override fun openHomeActivity() {
-        start {
-            HomeActivity::class.java
-        }
+        start<HomeActivity>()
         finish()
     }
 
     override fun openLoginActivity() {
-        start {
-            AuthActivity::class.java
-        }
+        start<AuthActivity>()
         finish()
     }
 }

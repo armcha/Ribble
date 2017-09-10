@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+androidExtensions {
+    experimental = true
+}
 
 android {
 
@@ -46,7 +49,7 @@ kapt {
 ext.okhttpVersion = '3.8.1'
 ext.rxJavaVersion = '2.1.2'
 ext.rxAndroidVersion = '2.0.1'
-ext.supportLibVersion = '26.0.1'
+ext.supportLibVersion = '26.0.2'
 ext.rxBindingVersion = '2.0.0'
 ext.retrofitVersion = '2.3.0'
 ext.loggerVersion = '2.2.0'

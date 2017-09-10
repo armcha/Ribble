@@ -11,4 +11,6 @@
         android:background="@color/bg_color"
         android:id="@+id/likesRecyclerView"/>
 
+    <include layout="@layout/progress_bar"/>
+
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.luseen.ribble.presentation.widget
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
@@ -12,7 +14,6 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.RotateAnimation
-import android.view.animation.ScaleAnimation
 import com.luseen.ribble.utils.AnimationUtils
 import com.luseen.ribble.utils.hide
 import com.luseen.ribble.utils.show
@@ -25,7 +26,7 @@ class CircleProgressView : View, Animatable {
 
     private val MAX_VALUE = 360F
     private val END_VALUE = 280F
-    private val START_VALUE = 10F
+    private val START_VALUE = 15F
 
     private val progressAnimator = ValueAnimator.ofFloat(START_VALUE, END_VALUE)
     private val rotateAnimation = RotateAnimation(0f, MAX_VALUE,
@@ -41,11 +42,19 @@ class CircleProgressView : View, Animatable {
     var progressColor = Color.WHITE
         set(value) {
             field = value
+            paint.color = field
             invalidate()
         }
     var backgroundCircleColor = Color.parseColor("#80ffffff")
         set(value) {
             field = value
+            backgroundPaint.color = field
+            invalidate()
+        }
+    var progresTicknes = 11F
+        set(value) {
+            field = value
+            paint.strokeWidth = field
             invalidate()
         }
 
@@ -54,18 +63,13 @@ class CircleProgressView : View, Animatable {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     init {
-        hide()
+        if (!isInEditMode)
+            hide()
         paint.color = progressColor
-        paint.strokeWidth = 13F
+        paint.strokeWidth = progresTicknes
         paint.style = Paint.Style.STROKE
         paint.strokeCap = Paint.Cap.ROUND
-
         backgroundPaint.color = backgroundCircleColor
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        start()
     }
 
     override fun isRunning(): Boolean {
@@ -95,27 +99,27 @@ class CircleProgressView : View, Animatable {
         val actualWidth = width.toFloat() - strokeWidth
         val actualHeight = height.toFloat() - strokeWidth
         rectF.set(strokeWidth, strokeWidth, actualWidth, actualHeight)
-        canvas.drawCircle(height.toFloat() / 2, height.toFloat() / 2, height.toFloat() / 2, backgroundPaint)
+
+        val halfSize = height.toFloat() / 2
+        canvas.drawCircle(halfSize, halfSize, halfSize, backgroundPaint)
         canvas.drawArc(rectF, start, progress, false, paint)
     }
 
     private fun startProgress() {
-        var started = false
+        var started = true
         with(progressAnimator) {
-            duration = 800L
+            duration = 550L
             repeatMode = ValueAnimator.REVERSE
             repeatCount = ValueAnimator.INFINITE
 
             val diff = MAX_VALUE - END_VALUE
             var currentPoint = start - diff
-            progressAnimator.addUpdateListener {
-                val currentValue = it.animatedValue as Float
-                if (Math.round(currentValue) < END_VALUE && !started) {
-                    progress = currentValue
-                } else {
+
+            addUpdateListener {
+                progress = it.animatedValue as Float
+                if (Math.round(progress) >= END_VALUE || started) {
                     started = true
-                    progress = currentValue
-                    start = currentPoint - currentValue
+                    start = currentPoint - progress
                     if (Math.round(progress) == START_VALUE.toInt()) {
                         started = false
                         currentPoint = start - diff
@@ -137,26 +141,26 @@ class CircleProgressView : View, Animatable {
     }
 
     private inline fun startScale(isReverse: Boolean = false, crossinline endBody: () -> Unit) {
-        val from = if (isReverse) 1F else 0F
         val to = if (isReverse) 0F else 1F
-        val scale = ScaleAnimation(
-                from, to,
-                from, to,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f)
-        scale.fillAfter = true
-        scale.duration = 500
-        scale.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationEnd(p0: Animation?) {
-                endBody()
-            }
 
-            override fun onAnimationRepeat(p0: Animation?) {
-            }
-
-            override fun onAnimationStart(p0: Animation?) {
-            }
-        })
-        animationSet.addAnimation(scale)
+        if (!isReverse) {
+            this.scale = 0F
+        }
+        this.animate()
+                .scaleX(to)
+                .scaleY(to)
+                .setDuration(200)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        endBody()
+                    }
+                }).start()
     }
+
+    private var View.scale: Float
+        get() = this.scaleX
+        set(value) {
+            this.scaleY = value
+            this.scaleX = value
+        }
 }

@@ -36,9 +36,7 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
     }
 
     override fun openHomeActivity() {
-        start {
-            HomeActivity::class.java
-        }
+        start<HomeActivity>()
         finish()
         showToast("Logged in!!")
     }

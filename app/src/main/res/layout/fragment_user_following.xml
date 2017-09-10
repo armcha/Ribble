@@ -10,4 +10,6 @@
         android:layout_height="match_parent"
         android:id="@+id/shotRecyclerView"/>
 
+    <include layout="@layout/progress_bar"/>
+
 </android.support.constraint.ConstraintLayout>

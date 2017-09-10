@@ -5,7 +5,6 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.interactor.CommentInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.utils.log
 import javax.inject.Inject
 
 /**
@@ -29,17 +28,20 @@ class ShotDetailPresenter @Inject constructor(private val commentInteractor: Com
     }
 
     override fun onRequestStart() {
-
+        view?.showLoading()
     }
 
     override fun onRequestSuccess(data: List<Comment>) {
         commentList = data
-        view?.onDataReceive(data)
+        view?.hideLoading()
+        if (data.isNotEmpty())
+            view?.onDataReceive(data)
+        else
+            view?.showNoComments()
     }
 
     override fun onRequestError(errorMessage: String?) {
-        log {
-            "onRequestError ${errorMessage}"
-        }
+        view?.hideLoading()
+        view?.showError(errorMessage)
     }
 }

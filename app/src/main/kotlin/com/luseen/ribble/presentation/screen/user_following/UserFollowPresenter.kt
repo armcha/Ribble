@@ -36,11 +36,13 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
         if (shotList.isNotEmpty()) {
             view?.onShotListReceive(shotList)
             view?.hideLoading()
+        }else{
+            //TODO
         }
     }
 
     override fun onRequestError(errorMessage: String?) {
         view?.hideLoading()
-        view?.showError()
+        view?.showError(errorMessage)
     }
 }

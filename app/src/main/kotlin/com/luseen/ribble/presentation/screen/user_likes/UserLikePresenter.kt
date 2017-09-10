@@ -5,7 +5,6 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.utils.log
 import javax.inject.Inject
 
 /**
@@ -27,18 +26,21 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
     }
 
     override fun onRequestStart() {
-
+        view?.showLoading()
     }
 
     override fun onRequestSuccess(data: List<Like>) {
         likeList = data
+        view?.hideLoading()
         if (likeList.isNotEmpty())
             view?.onDataReceive(likeList)
+        else{
+            //TODO
+        }
     }
 
     override fun onRequestError(errorMessage: String?) {
-        log {
-            errorMessage
-        }
+        view?.hideLoading()
+        view?.showError(errorMessage)
     }
 }

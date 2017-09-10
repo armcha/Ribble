@@ -1,23 +1,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/hello_dribble"
     tools:context=".presentation.screen.popular_shot.PopularShotFragment">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/shotRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:id="@+id/shotRecyclerView"/>
+        android:layout_height="match_parent" />
 
-    <com.luseen.ribble.presentation.widget.CircleProgressView
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+   <include layout="@layout/progress_bar"/>
 
 </android.support.constraint.ConstraintLayout>

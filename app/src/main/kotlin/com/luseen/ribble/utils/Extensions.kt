@@ -51,6 +51,10 @@ infix fun ViewGroup.inflate(layoutResId: Int): View =
 
 infix fun Context.takeColor(colorId: Int) = ContextCompat.getColor(this, colorId)
 
+infix fun Activity.takeColor(colorId: Int) = ContextCompat.getColor(this, colorId)
+
+infix fun Fragment.takeColor(colorId: Int) = ContextCompat.getColor(this.context, colorId)
+
 fun ImageView.tint(colorId: Int) {
     this.setColorFilter(this.context.takeColor(colorId), PorterDuff.Mode.SRC_IN)
 }
@@ -69,6 +73,10 @@ inline fun delay(milliseconds: Long, crossinline action: () -> Unit) {
 
 inline fun Activity.start(clazz: () -> Class<*>) {
     this.startActivity(Intent(this, clazz()))
+}
+
+inline fun <reified T> Activity.start() {
+    this.startActivity(Intent(this, T::class.java))
 }
 
 fun Context.showToast(message: String) {
@@ -106,7 +114,6 @@ inline fun FragmentManager.inTransaction(transaction: FragmentTransaction.() -> 
     fragmentTransaction.commit()
 }
 
-@SuppressLint("InlinedApi")
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 inline fun LorAbove(body: () -> Unit) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -149,7 +156,6 @@ fun View.show() {
 fun View.hide() {
     this.visibility = View.GONE
 }
-
 
 fun Activity.isPortrait() = this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 

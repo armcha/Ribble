@@ -9,4 +9,5 @@
     <color name="red">#F44336</color>
     <color name="cyan">#00BCD4</color>
     <color name="blue_gray">#607D8B</color>
+    <color name="progressBg">#30FF4081</color>
 </resources>

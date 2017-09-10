@@ -40,6 +40,6 @@ class RibbleGlideModule : AppGlideModule() {
     override fun registerComponents(context: Context?, glide: Glide, registry: Registry) {
         val client =  OkHttpClient.Builder().build()
         val factory = OkHttpUrlLoader.Factory(client)
-        glide.getRegistry().replace(GlideUrl::class.java, InputStream::class.java, factory)
+        glide.registry.replace(GlideUrl::class.java, InputStream::class.java, factory)
     }
 }

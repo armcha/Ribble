@@ -12,7 +12,9 @@ import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
+import com.luseen.ribble.utils.takeColor
 import kotlinx.android.synthetic.main.fragment_user_likes.*
+import kotlinx.android.synthetic.main.progress_bar.*
 import javax.inject.Inject
 
 class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.Presenter>(),
@@ -25,6 +27,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressBar.backgroundCircleColor = takeColor(R.color.colorPrimary)
     }
 
     override fun injectDependencies() {
@@ -37,6 +40,18 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
 
     override fun onDataReceive(likeList: List<Like>) {
         updateAdapter(likeList)
+    }
+
+    override fun showLoading() {
+        progressBar.start()
+    }
+
+    override fun hideLoading() {
+        progressBar.stop()
+    }
+
+    override fun showError(message: String?) {
+        TODO()
     }
 
     override fun onShotClicked(shot: Shot) {

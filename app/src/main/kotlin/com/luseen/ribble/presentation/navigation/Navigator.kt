@@ -88,8 +88,16 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         runDebugLog()
     }
 
+    inline fun <reified T : Fragment> goTo() {
+        val tag = T::class.java.name
+        TODO()
+    }
+
     fun goTo(kClass: KClass<out Fragment>, withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
         val tag = kClass.java.name
+        log {
+            "Tag $tag"
+        }
         if (activeTag == tag)
             return
 

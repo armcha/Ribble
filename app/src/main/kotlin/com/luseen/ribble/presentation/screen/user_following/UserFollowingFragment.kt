@@ -1,7 +1,9 @@
 package com.luseen.ribble.presentation.screen.user_following
 
 
+import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.ShotRecyclerViewAdapter
@@ -10,7 +12,9 @@ import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.isPortrait
+import com.luseen.ribble.utils.takeColor
 import kotlinx.android.synthetic.main.fragment_shot.*
+import kotlinx.android.synthetic.main.progress_bar.*
 import javax.inject.Inject
 
 
@@ -21,6 +25,11 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
     protected lateinit var followingPresenter: UserFollowPresenter
 
     private var recyclerAdapter: ShotRecyclerViewAdapter? = null
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar.backgroundCircleColor = takeColor(R.color.colorPrimary)
+    }
 
     override fun injectDependencies() {
         activityComponent.inject(this)
@@ -36,14 +45,14 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
     }
 
     override fun showLoading() {
-
+        progressBar.start()
     }
 
     override fun hideLoading() {
-
+        progressBar.stop()
     }
 
-    override fun showError() {
+    override fun showError(message: String?) {
 
     }
 

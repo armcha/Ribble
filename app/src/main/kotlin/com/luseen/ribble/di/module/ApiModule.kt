@@ -53,7 +53,6 @@ class ApiModule {
         return okHttpBuilder
     }
 
-
     @Singleton
     @Provides
     @Named("shotRetrofit")

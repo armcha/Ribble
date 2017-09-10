@@ -7,6 +7,9 @@ import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import com.luseen.ribble.utils.AnimationUtils
 
+/**
+ * Created by Chatikyan on 16.02.2017.
+ */
 
 class AnimatedTextView : AppCompatTextView {
 
@@ -14,11 +17,7 @@ class AnimatedTextView : AppCompatTextView {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    fun setAnimatedText(text: CharSequence) {
-        changeText(text, 0)
-    }
-
-    fun setAnimatedText(text: CharSequence, startDelay: Long) {
+    fun setAnimatedText(text: CharSequence, startDelay: Long = 0L) {
         changeText(text, startDelay)
     }
 
@@ -49,5 +48,4 @@ class AnimatedTextView : AppCompatTextView {
                 })
                 .start()
     }
-
 }

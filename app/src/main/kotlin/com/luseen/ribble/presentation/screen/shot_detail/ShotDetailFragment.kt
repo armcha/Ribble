@@ -14,14 +14,15 @@ import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.getExtra
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.load
+import com.luseen.ribble.utils.takeColor
 import kotlinx.android.synthetic.main.fragment_shot_detail.*
 import javax.inject.Inject
-
-const val SHOT_EXTRA_KEY = "shot_extra_key"
 
 class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContract.Presenter>(), ShotDetailContract.View {
 
     companion object {
+        const val SHOT_EXTRA_KEY = "shot_extra_key"
+
         fun getBundle(shot: Shot): Bundle {
             val bundle = Bundle()
             bundle.putParcelable(SHOT_EXTRA_KEY, shot)
@@ -50,10 +51,17 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        shotDetailImage.load(shot.image.normal)
-        shotAuthor.text = shot.user.name
-        authorLocation.text = shot.user.location
-        authorImage.load(shot.user.avatarUrl, TransformationType.CIRCLE)
+        setUpViews()
+    }
+
+    private fun setUpViews() {
+        with(shot) {
+            shotDetailImage.load(image.normal)
+            shotAuthor.text = user.name
+            authorLocation.text = user.location
+            authorImage.load(user.avatarUrl, TransformationType.CIRCLE)
+        }
+        progressBar.backgroundCircleColor = takeColor(R.color.colorPrimary)
 
         //TODO move to attributes
         likeLayout.layoutText = shot.likesCount
@@ -73,6 +81,22 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
 
     override fun getShotId(): String? {
         return shot.id
+    }
+
+    override fun showNoComments() {
+        noCommentsText.setAnimatedText(getString(R.string.no_comments_text))
+    }
+
+    override fun showLoading() {
+        progressBar.start()
+    }
+
+    override fun hideLoading() {
+        progressBar.stop()
+    }
+
+    override fun showError(message: String?) {
+        //TODO("not implemented")
     }
 
     private fun updateAdapter(commentList: List<Comment>) {

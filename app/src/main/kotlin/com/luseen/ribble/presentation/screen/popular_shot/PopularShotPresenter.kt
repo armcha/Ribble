@@ -16,7 +16,7 @@ import javax.inject.Inject
 class PopularShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor)
     : ApiPresenter<List<Shot>, PopularShotContract.View>(), PopularShotContract.Presenter {
 
-    private var shotList: List<Shot> = arrayListOf()
+    private var shotList: List<Shot> = listOf()
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
@@ -42,7 +42,7 @@ class PopularShotPresenter @Inject constructor(private val shotListInteractor: S
     }
 
     override fun onRequestError(errorMessage: String?) {
-        view?.showError()
+        view?.showError(errorMessage)
         view?.hideLoading()
         log {
             "shotListInteractor.getPopularShotList(100) $errorMessage"

@@ -13,4 +13,7 @@
     <string name="shot_image">Shot image</string>
     <string name="liked_shot_image">Liked shot image</string>
     <string name="user_avatar">User avatar</string>
+    <string name="shot_detail_image">Shot detail image</string>
+    <string name="no_comments_text">No comments</string>
+    <string name="shot_author_image">Shot author image</string>
 </resources>

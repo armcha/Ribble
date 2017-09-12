@@ -55,7 +55,7 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
 
     override fun onShotClicked(shot: Shot) {
         val bundle = ShotDetailFragment.getBundle(shot)
-        goTo<ShotDetailFragment>(withCustomAnimation = true, arg = bundle)
+        goTo<ShotDetailFragment>(keepState = false,withCustomAnimation = true, arg = bundle)
     }
 
     override fun showLoading() {

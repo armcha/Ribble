@@ -1,6 +1,7 @@
 package com.luseen.ribble.presentation.screen.home
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import com.luseen.ribble.R
@@ -14,10 +15,8 @@ import com.luseen.ribble.presentation.widget.navigation_view.NavigationItem
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItemSelectedListener
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.load
-import com.luseen.ribble.utils.lock
 import com.luseen.ribble.utils.showToast
 import com.luseen.ribble.utils.start
-import com.luseen.ribble.utils.unlock
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
@@ -58,17 +57,15 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         navView.header.userName
     }
 
-    override fun lockDrawer() {
-        drawerLayout.lock()
+    override fun setArcArrowState() {
         arcImage.setImageResource(R.drawable.arrow_left)
         arcView.setOnClickListener {
             super.onBackPressed()
         }
     }
 
-    override fun unlockDrawer() {
+    override fun setArcHamburgerIconState() {
         drawerLayout?.let {
-            drawerLayout.unlock()
             arcImage.setImageResource(R.drawable.equal)
             arcView.setOnClickListener {
                 drawerLayout.openDrawer(GravityCompat.START)
@@ -91,11 +88,11 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun setToolBarTitle(title: String) {
-        toolbarTitle?.setAnimatedText(title)
+        toolbarTitle?.setAnimatedText(title,100)
     }
 
-    override fun onFragmentChanged(tag: String) {
-        presenter.handleFragmentChanges(tag)
+    override fun onFragmentChanged(currentFragment: Fragment) {
+        presenter.handleFragmentChanges(currentFragment)
     }
 
     override fun updateDrawerInfo(user: User) {

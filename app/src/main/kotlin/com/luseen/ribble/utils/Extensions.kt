@@ -9,8 +9,6 @@ import android.content.res.Configuration
 import android.graphics.PorterDuff
 import android.os.*
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.DrawerLayout
 import android.text.Html
@@ -22,6 +20,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import com.luseen.logger.Logger
+import java.io.Serializable
 
 /**
  * Created by Chatikyan on 01.08.2017.
@@ -89,25 +88,19 @@ fun DrawerLayout.unlock() {
     this.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 }
 
-fun Fragment.whitArgument(key: String, value: Any) {
+fun Fragment.withArgument(key: String, value: Any) {
     val args = Bundle()
-    if (value is Parcelable) {
-        args.putParcelable(key, value)
-    } else {
-        throw UnsupportedOperationException("Only parcelable supported")
+    when (value) {
+        is Parcelable -> args.putParcelable(key, value)
+        is Serializable -> args.putSerializable(key, value)
+        else -> throw UnsupportedOperationException("${value.javaClass.simpleName} type not supported yet!!!")
     }
     arguments = args
 }
 
-inline infix fun <reified T> Fragment.getExtra(key: String): T {
+inline infix fun <reified T> Fragment.getExtraWithKey(key: String): T {
     val value: Any = arguments[key]
     return value as T
-}
-
-inline fun FragmentManager.inTransaction(transaction: FragmentTransaction.() -> Unit) {
-    val fragmentTransaction = this.beginTransaction()
-    fragmentTransaction.transaction()
-    fragmentTransaction.commit()
 }
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -161,6 +154,12 @@ fun <K, V> MutableMap<K, V>.replaceValue(key: K, value: V?) {
     this.remove(key)
     value?.let {
         this.put(key, value)
+    }
+}
+
+fun View.onClick(function: () -> Unit) {
+    this.setOnClickListener {
+        function()
     }
 }
 

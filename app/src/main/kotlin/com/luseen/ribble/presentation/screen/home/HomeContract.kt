@@ -1,5 +1,6 @@
 package com.luseen.ribble.presentation.screen.home
 
+import android.support.v4.app.Fragment
 import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.presentation.base_mvp.base.BaseContract
 import com.luseen.ribble.presentation.navigation.NavigationState
@@ -15,9 +16,9 @@ interface HomeContract {
 
         fun openLoginActivity()
 
-        fun lockDrawer()
+        fun setArcArrowState()
 
-        fun unlockDrawer()
+        fun setArcHamburgerIconState()
 
         fun setToolBarTitle(title: String)
 
@@ -34,6 +35,6 @@ interface HomeContract {
 
         fun getNavigatorState(): NavigationState?
 
-        fun handleFragmentChanges(tag: String)
+        fun handleFragmentChanges(fragment: Fragment)
     }
 }

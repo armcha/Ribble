@@ -36,8 +36,8 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         return inflater!!.inflate(layoutResId(), container, false)
     }
 
-    inline fun <reified T : Fragment> goTo(withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
-        navigator.goTo<T>(withCustomAnimation = withCustomAnimation,arg =  arg)
+    inline fun <reified T : Fragment> goTo(keepState: Boolean = true, withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
+        navigator.goTo<T>(keepState = keepState, withCustomAnimation = withCustomAnimation, arg = arg)
     }
 
     protected abstract fun injectDependencies()

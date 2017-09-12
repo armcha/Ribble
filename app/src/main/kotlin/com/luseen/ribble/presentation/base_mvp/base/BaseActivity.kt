@@ -34,6 +34,7 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
         super.onCreate(savedInstanceState)
     }
 
+    @CallSuper
     override fun onBackPressed() {
         if (navigator.hasBackStack())
             navigator.goBack()
@@ -50,10 +51,6 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
     inline fun <reified T : Fragment> goTo(withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
         navigator.goTo<T>(withCustomAnimation = withCustomAnimation, arg = arg)
     }
-
-    fun hasBackStack() = navigator.hasBackStack()
-
-    fun goBack() = navigator.goBack()
 
     fun showDialog(message: String) {
         val dialog1 = Dialog(this, R.style.MaterialDialogSheet)

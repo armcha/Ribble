@@ -7,8 +7,6 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import com.luseen.ribble.R
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
-import com.luseen.ribble.utils.inTransaction
 import com.luseen.ribble.utils.log
 import com.luseen.ribble.utils.replaceValue
 import javax.inject.Inject
@@ -21,7 +19,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
                                     private val fragmentManager: FragmentManager) {
 
     interface FragmentChangeListener {
-        fun onFragmentChanged(tag: String) {}
+        fun onFragmentChanged(currentFragment: Fragment) {}
     }
 
     private var fragmentMap: LinkedHashMap<String, Fragment> = linkedMapOf()
@@ -53,8 +51,8 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
 
     private fun invokeFragmentChangeListener(tag: String?) {
         val fragment = fragmentMap[tag]
-        if (fragment is BaseFragment<*, *>) {
-            fragmentChangeListener.onFragmentChanged(fragment.getTitle())
+        fragment?.let {
+            fragmentChangeListener.onFragmentChanged(fragment)
         }
     }
 
@@ -69,6 +67,11 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         state.clear()
 
         fragmentMap.clear()
+        fragmentManager.fragments.forEach {
+            log {
+                "Fragment ${it}"
+            }
+        }
         fragmentManager.fragments
                 .filter { it.tag.contains("ribble") } //FiXME not the best solution
                 .forEach {
@@ -97,15 +100,25 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         if (activeTag == tag)
             return
 
-        if (!fragmentMap.containsKey(tag)) {
+        if (!fragmentMap.containsKey(tag) || !keepState) {
             val fragment = Fragment.instantiate(activity, tag)
             if (!arg.isEmpty) {
                 fragment.arguments = arg
+            }
+
+            if (!keepState) {
+                val weakFragment = fragmentManager.findFragmentByTag(tag)
+                weakFragment?.let {
+                    fragmentManager.inTransaction {
+                        remove(weakFragment)
+                    }
+                }
             }
             fragmentManager.inTransaction {
                 addOpenTransition(this, withCustomAnimation)
                 add(containerId, fragment, tag)
             }
+
             fragmentMap.put(tag, fragment)
 
             if (activeTag == null) {
@@ -156,5 +169,11 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
 
     fun goToFirst() {
         TODO()
+    }
+
+    private inline fun FragmentManager.inTransaction(transaction: FragmentTransaction.() -> Unit) {
+        val fragmentTransaction = this.beginTransaction()
+        fragmentTransaction.transaction()
+        fragmentTransaction.commitNow()
     }
 }

@@ -21,24 +21,26 @@
             app:contentInsetStart="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <FrameLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
 
                 <com.luseen.ribble.presentation.widget.ArcView
                     android:id="@+id/arcView"
                     android:layout_width="85dp"
                     android:layout_height="63dp"
-                    android:layout_marginBottom="5dp"
                     android:layout_gravity="bottom"
+                    android:layout_marginBottom="5dp"
                     android:background="@android:color/white">
 
                     <ImageView
                         android:id="@+id/arcImage"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginRight="5dp"
                         android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
                         android:contentDescription="@string/arc_view_image"
                         android:tint="@android:color/white"
                         app:srcCompat="@drawable/equal" />
@@ -47,16 +49,25 @@
 
                 <com.luseen.ribble.presentation.widget.AnimatedTextView
                     android:id="@+id/toolbarTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="63dp"
+                    android:layout_marginBottom="11dp"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="15dp"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:text="asdsf asfa shf aaaaaaaaaaaaaaa"
+                    android:textAllCaps="true"
                     android:textColor="@android:color/black"
-                    android:textSize="19sp" />
-            </FrameLayout>
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.Toolbar>
 

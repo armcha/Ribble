@@ -11,7 +11,7 @@ import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.CommentRecyclerAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
-import com.luseen.ribble.utils.getExtra
+import com.luseen.ribble.utils.getExtraWithKey
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.load
 import com.luseen.ribble.utils.takeColor
@@ -46,7 +46,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        shot = this getExtra SHOT_EXTRA_KEY
+        shot = this getExtraWithKey SHOT_EXTRA_KEY
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -110,6 +110,6 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     override fun getTitle(): String {
-        return NavigationId.SHOT_DETAIL.name //TODO
+        return shot.title ?: NavigationId.SHOT_DETAIL.name
     }
 }

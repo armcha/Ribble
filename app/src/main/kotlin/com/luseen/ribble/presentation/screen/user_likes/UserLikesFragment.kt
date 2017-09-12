@@ -56,7 +56,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
 
     override fun onShotClicked(shot: Shot) {
         val bundle = ShotDetailFragment.getBundle(shot)
-        goTo<ShotDetailFragment>(withCustomAnimation = true, arg = bundle)
+        goTo<ShotDetailFragment>(keepState = false,withCustomAnimation = true, arg = bundle)
     }
 
     private fun updateAdapter(likeList: List<Like>) {

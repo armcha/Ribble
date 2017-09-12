@@ -6,7 +6,6 @@ import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.ShotListInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.utils.makeLog
 import javax.inject.Inject
 
 /**
@@ -20,7 +19,6 @@ class PopularShotPresenter @Inject constructor(private val shotListInteractor: S
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        isRequestStarted.makeLog()
         if (isRequestStarted)
             view?.showLoading()
         else

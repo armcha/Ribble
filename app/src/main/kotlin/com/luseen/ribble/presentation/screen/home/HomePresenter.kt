@@ -2,10 +2,12 @@ package com.luseen.ribble.presentation.screen.home
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import android.support.v4.app.Fragment
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
+import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.navigation.NavigationState
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.emptyString
@@ -19,17 +21,17 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
     : ApiPresenter<User, HomeContract.View>(), HomeContract.Presenter {
 
     private var state: NavigationState? = null
-    private var isDrawerLocked = false
+    private var isArcIcon = false
     private var activeTitle = emptyString()
     private var user: User? = null
     private var currentNavigationSelectedItem = 0
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        if (isDrawerLocked) {
-            view?.lockDrawer()
+        if (isArcIcon) {
+            view?.setArcArrowState()
         } else {
-            view?.unlockDrawer()
+            view?.setArcHamburgerIconState()
         }
         view?.setToolBarTitle(activeTitle)
         user?.let {
@@ -43,26 +45,31 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
         view?.openShotFragment()
     }
 
-    override fun onRequestStart() {
-    }
-
     override fun onRequestSuccess(data: User) {
+        super.onRequestSuccess(data)
         user = data
         view?.updateDrawerInfo(data)
     }
 
     override fun onRequestError(errorMessage: String?) {
+        super.onRequestError(errorMessage)
     }
 
-    override fun handleFragmentChanges(tag: String) {
+    override fun handleFragmentChanges(fragment: Fragment) {
+        val tag = if (fragment is BaseFragment<*, *>) {
+            fragment.getTitle()
+        } else {
+            "EEE"
+        }
+
         view?.setToolBarTitle(tag)
         activeTitle = tag
         if (tag == NavigationId.SHOT_DETAIL.name) {
-            isDrawerLocked = true
-            view?.lockDrawer()
-        } else if (isDrawerLocked) {
-            isDrawerLocked = false
-            view?.unlockDrawer()
+            isArcIcon = true
+            view?.setArcArrowState()
+        } else if (isArcIcon) {
+            isArcIcon = false
+            view?.setArcHamburgerIconState()
         }
 
         val checkPosition = when (tag) {

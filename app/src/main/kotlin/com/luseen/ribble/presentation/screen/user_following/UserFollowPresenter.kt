@@ -19,7 +19,10 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        view?.onShotListReceive(shotList)
+        if (isRequestStarted)
+            view?.showLoading()
+        else
+            view?.onShotListReceive(shotList)
     }
 
     override fun onPresenterCreate() {
@@ -28,20 +31,23 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
     }
 
     override fun onRequestStart() {
+        super.onRequestStart()
         view?.showLoading()
     }
 
     override fun onRequestSuccess(data: List<Shot>) {
+        super.onRequestSuccess(data)
         this.shotList = data
         if (shotList.isNotEmpty()) {
             view?.onShotListReceive(shotList)
             view?.hideLoading()
-        }else{
+        } else {
             //TODO
         }
     }
 
     override fun onRequestError(errorMessage: String?) {
+        super.onRequestError(errorMessage)
         view?.hideLoading()
         view?.showError(errorMessage)
     }

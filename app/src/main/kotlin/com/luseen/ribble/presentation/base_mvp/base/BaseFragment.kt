@@ -10,22 +10,23 @@ import com.luseen.arch.BaseMVPFragment
 import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.presentation.navigation.Navigator
 import com.luseen.ribble.utils.emptyString
-import kotlin.reflect.KClass
+import javax.inject.Inject
 
 /**
  * Created by Chatikyan on 01.08.2017.
  */
 abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>> : BaseMVPFragment<V, P>() {
 
+    @Inject
+    lateinit var navigator: Navigator
+
     protected lateinit var activityComponent: ActivityComponent
     protected lateinit var activity: BaseActivity<*, *>
-    protected lateinit var navigator: Navigator
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is BaseActivity<*, *>) {
             this.activity = context
-            navigator = activity.navigator
             activityComponent = activity.activityComponent
             injectDependencies()
         }
@@ -35,8 +36,8 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         return inflater!!.inflate(layoutResId(), container, false)
     }
 
-    fun goTo(kClass: KClass<out Fragment>, withCustomAnimation: Boolean = false, args: Bundle = Bundle.EMPTY) {
-        navigator.goTo(kClass, withCustomAnimation, args)
+    inline fun <reified T : Fragment> goTo(withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
+        navigator.goTo<T>(withCustomAnimation = withCustomAnimation,arg =  arg)
     }
 
     protected abstract fun injectDependencies()

@@ -81,7 +81,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun openShotFragment() {
-        goTo(ShotRootFragment::class)
+        goTo<ShotRootFragment>()
     }
 
     override fun openLoginActivity() {
@@ -123,13 +123,13 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     override fun onNavigationItemSelected(item: NavigationItem) {
         when (item.id) {
             Id.SHOT -> {
-                goTo(ShotRootFragment::class)
+                goTo<ShotRootFragment>()
             }
             Id.USER_LIKES -> {
-                goTo(UserLikesFragment::class)
+                goTo<UserLikesFragment>()
             }
             Id.FOLLOWING -> {
-                goTo(UserFollowingFragment::class)
+                goTo<UserFollowingFragment>()
             }
             Id.ABOUT -> {
 

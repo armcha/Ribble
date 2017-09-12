@@ -41,7 +41,7 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
 
     override fun onShotClicked(shot: Shot) {
         val bundle = ShotDetailFragment.getBundle(shot)
-        goTo(ShotDetailFragment::class, withCustomAnimation = true, args = bundle)
+        goTo<ShotDetailFragment>(withCustomAnimation = true, arg = bundle)
     }
 
     override fun showLoading() {

@@ -33,7 +33,7 @@ inline fun log(message: () -> Any?) {
 }
 
 fun Any.makeLog() {
-    Logger.log(this)
+    Logger.log("${this.javaClass.simpleName} $this")
 }
 
 fun log(vararg message: () -> Any?) {

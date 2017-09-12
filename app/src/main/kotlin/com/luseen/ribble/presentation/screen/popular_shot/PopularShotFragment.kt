@@ -40,6 +40,7 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressBar.backgroundCircleColor = takeColor(R.color.colorPrimary)
+        activity.showDialog("Hello")
     }
 
     private fun updateAdapter(shotList: List<Shot>) {
@@ -54,7 +55,7 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
 
     override fun onShotClicked(shot: Shot) {
         val bundle = ShotDetailFragment.getBundle(shot)
-        goTo(ShotDetailFragment::class, withCustomAnimation = true, args = bundle)
+        goTo<ShotDetailFragment>(withCustomAnimation = true, arg = bundle)
     }
 
     override fun showLoading() {

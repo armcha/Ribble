@@ -6,7 +6,7 @@ import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.ShotListInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.utils.log
+import com.luseen.ribble.utils.makeLog
 import javax.inject.Inject
 
 /**
@@ -20,32 +20,35 @@ class PopularShotPresenter @Inject constructor(private val shotListInteractor: S
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        view?.onShotListReceive(shotList)
+        isRequestStarted.makeLog()
+        if (isRequestStarted)
+            view?.showLoading()
+        else
+            view?.onShotListReceive(shotList)
     }
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
         this fetch shotListInteractor.getPopularShotList(100)
-
     }
 
     override fun onRequestStart() {
+        super.onRequestStart()
         view?.showLoading()
     }
 
     override fun onRequestSuccess(data: List<Shot>) {
+        super.onRequestSuccess(data)
         this.shotList = data
+        view?.hideLoading()
         if (shotList.isNotEmpty()) {
             view?.onShotListReceive(shotList)
-            view?.hideLoading()
         }
     }
 
     override fun onRequestError(errorMessage: String?) {
+        super.onRequestError(errorMessage)
         view?.showError(errorMessage)
         view?.hideLoading()
-        log {
-            "shotListInteractor.getPopularShotList(100) $errorMessage"
-        }
     }
 }

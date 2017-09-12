@@ -17,7 +17,10 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        view?.onDataReceive(likeList)
+        if (isRequestStarted)
+            view?.showLoading()
+        else
+            view?.onDataReceive(likeList)
     }
 
     override fun onPresenterCreate() {
@@ -26,20 +29,23 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
     }
 
     override fun onRequestStart() {
+        super.onRequestStart()
         view?.showLoading()
     }
 
     override fun onRequestSuccess(data: List<Like>) {
+        super.onRequestSuccess(data)
         likeList = data
         view?.hideLoading()
         if (likeList.isNotEmpty())
             view?.onDataReceive(likeList)
-        else{
+        else {
             //TODO
         }
     }
 
     override fun onRequestError(errorMessage: String?) {
+        super.onRequestError(errorMessage)
         view?.hideLoading()
         view?.showError(errorMessage)
     }

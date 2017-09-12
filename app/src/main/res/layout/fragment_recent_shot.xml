@@ -1,12 +1,34 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.luseen.ribble.presentation.screen.recent_shot.RecentShotFragment">
 
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="150dp">
+
+        <com.luseen.ribble.presentation.widget.CircleProgressView
+            android:id="@+id/progressBar"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </FrameLayout>
+
     <com.luseen.ribble.presentation.widget.ArcView
         android:layout_width="175dp"
         android:layout_height="100dp"
         android:layout_gravity="center" />
+
+
 
 </FrameLayout>

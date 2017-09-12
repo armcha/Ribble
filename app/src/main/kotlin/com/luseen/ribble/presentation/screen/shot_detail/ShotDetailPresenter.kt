@@ -17,7 +17,10 @@ class ShotDetailPresenter @Inject constructor(private val commentInteractor: Com
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        view?.onDataReceive(commentList)
+        if (isRequestStarted) {
+            view?.showLoading()
+        } else
+            view?.onDataReceive(commentList)
     }
 
     override fun onPresenterCreate() {
@@ -28,10 +31,12 @@ class ShotDetailPresenter @Inject constructor(private val commentInteractor: Com
     }
 
     override fun onRequestStart() {
+        super.onRequestStart()
         view?.showLoading()
     }
 
     override fun onRequestSuccess(data: List<Comment>) {
+        super.onRequestSuccess(data)
         commentList = data
         view?.hideLoading()
         if (data.isNotEmpty())
@@ -41,6 +46,7 @@ class ShotDetailPresenter @Inject constructor(private val commentInteractor: Com
     }
 
     override fun onRequestError(errorMessage: String?) {
+        super.onRequestError(errorMessage)
         view?.hideLoading()
         view?.showError(errorMessage)
     }

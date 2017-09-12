@@ -12,7 +12,6 @@ import com.luseen.ribble.utils.inTransaction
 import com.luseen.ribble.utils.log
 import com.luseen.ribble.utils.replaceValue
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 /**
  * Created by Chatikyan on 15.08.2017.
@@ -88,13 +87,13 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         runDebugLog()
     }
 
-    inline fun <reified T : Fragment> goTo() {
+    inline fun <reified T : Fragment> goTo(keepState: Boolean = true, withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
         val tag = T::class.java.name
-        TODO()
+        goTo(tag, keepState, withCustomAnimation, arg)
     }
 
-    fun goTo(kClass: KClass<out Fragment>, withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
-        val tag = kClass.java.name
+    @PublishedApi
+    internal fun goTo(tag: String, keepState: Boolean, withCustomAnimation: Boolean, arg: Bundle) {
         if (activeTag == tag)
             return
 

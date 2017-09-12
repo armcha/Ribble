@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.luseen.ribble.R
+import kotlinx.android.synthetic.main.fragment_recent_shot.*
 
 
 /**
@@ -19,6 +20,11 @@ class RecentShotFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_recent_shot, container, false)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar.start()
     }
 
 }

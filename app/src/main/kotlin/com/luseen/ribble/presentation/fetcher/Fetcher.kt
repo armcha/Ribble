@@ -74,6 +74,10 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
         }
     }
 
+//    fun hasActiveRequest(): Boolean {
+//
+//    }
+
     fun clear() {
         disposable.clear()
     }

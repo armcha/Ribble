@@ -6,11 +6,14 @@ import android.os.Bundle
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
 import com.luseen.ribble.presentation.screen.home.HomeActivity
-import com.luseen.ribble.utils.log
+import com.luseen.ribble.utils.onClick
 import com.luseen.ribble.utils.showToast
 import com.luseen.ribble.utils.start
+import com.luseen.ribble.utils.takeColor
 import kotlinx.android.synthetic.main.activity_auth.*
+import kotlinx.android.synthetic.main.progress_bar.*
 import javax.inject.Inject
+
 
 class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), AuthContract.View {
 
@@ -26,9 +29,24 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-        login.setOnClickListener {
+        progressBar.backgroundCircleColor = takeColor(R.color.colorPrimary)
+        login.onClick {
             presenter.makeLogin()
         }
+    }
+
+    override fun showLoading() {
+        progressBar.start()
+        login.isClickable = false
+    }
+
+    override fun hideLoading() {
+        progressBar.stop()
+        login.isClickable = true
+    }
+
+    override fun showError(message: String?) {
+        showErrorDialog(message)
     }
 
     override fun startOAuthIntent(uri: Uri) {
@@ -38,12 +56,11 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
     override fun openHomeActivity() {
         start<HomeActivity>()
         finish()
-        showToast("Logged in!!")
+        showToast(getString(R.string.logged_in_message))
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         presenter.checkLogin(intent)
-        log("onNewIntent$intent")
     }
 }

@@ -35,6 +35,6 @@ interface HomeContract {
 
         fun getNavigatorState(): NavigationState?
 
-        fun handleFragmentChanges(fragment: Fragment)
+        fun handleFragmentChanges(currentTag: String,fragment: Fragment)
     }
 }

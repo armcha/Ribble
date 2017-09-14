@@ -6,13 +6,14 @@ import com.luseen.logger.Logger
 import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.component.DaggerApplicationComponent
 import com.luseen.ribble.di.module.ApplicationModule
+import com.luseen.ribble.utils.nonSafeLazy
 
 /**
  * Created by Chatikyan on 29.07.2017.
  */
 class App : Application() {
 
-    val applicationComponent: ApplicationComponent by lazy(LazyThreadSafetyMode.NONE) {
+    val applicationComponent: ApplicationComponent by nonSafeLazy {
         DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
                 .build()

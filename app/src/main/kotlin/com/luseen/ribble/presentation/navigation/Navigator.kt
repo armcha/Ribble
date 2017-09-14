@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import com.luseen.ribble.R
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.utils.log
+import com.luseen.ribble.utils.extensions.log
 import com.luseen.ribble.utils.replaceValue
 import javax.inject.Inject
 
@@ -19,7 +19,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
                                     private val fragmentManager: FragmentManager) {
 
     interface FragmentChangeListener {
-        fun onFragmentChanged(currentFragment: Fragment) {}
+        fun onFragmentChanged(currentTag: String, currentFragment: Fragment) {}
     }
 
     private var fragmentMap: LinkedHashMap<String, Fragment> = linkedMapOf()
@@ -50,9 +50,11 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
     }
 
     private fun invokeFragmentChangeListener(tag: String?) {
-        val fragment = fragmentMap[tag]
-        fragment?.let {
-            fragmentChangeListener.onFragmentChanged(fragment)
+        tag?.let {
+            val fragment = fragmentMap[it]
+            fragment?.let {
+                fragmentChangeListener.onFragmentChanged(tag, it)
+            }
         }
     }
 
@@ -69,11 +71,8 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         fragmentMap.clear()
         fragmentManager.fragments.forEach {
             log {
-                "Fragment ${it::class.java.simpleName}"
+                "Fragment manager fragment - ${it::class.java.simpleName}"
             }
-        }
-        log {
-            activity.applicationContext.packageName
         }
         fragmentManager.fragments
                 .filter { it.tag.contains(activity.applicationContext.packageName) } //FiXME not the best solution
@@ -95,7 +94,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
 
     inline fun <reified T : Fragment> goTo(keepState: Boolean = true,
                                            withCustomAnimation: Boolean = false,
-                                           arg: Bundle = Bundle.EMPTY){
+                                           arg: Bundle = Bundle.EMPTY) {
         val tag = T::class.java.name
         goTo(tag, keepState, withCustomAnimation, arg)
     }

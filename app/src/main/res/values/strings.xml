@@ -17,4 +17,8 @@
     <string name="no_comments_text">No comments</string>
     <string name="shot_author_image">Shot author image</string>
     <string name="error_title">Something went wrong</string>
+    <string name="app_name_upper">DRIBBLE</string>
+    <string name="welcome_to_ribble">WELCOME TO RIBBLE</string>
+    <string name="login_via">Login via</string>
+    <string name="logged_in_message">Logged in!!</string>
 </resources>

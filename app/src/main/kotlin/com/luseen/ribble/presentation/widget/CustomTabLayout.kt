@@ -1726,7 +1726,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
         override fun draw(canvas: Canvas) {
             super.draw(canvas)
             // Thick colored underline below the current selection
-            val indicatorWidth = 100.toPx(context)
+            val indicatorWidth = 90.toPx(context)
             indicatorRect.set((mIndicatorLeft + indicatorWidth).toFloat(), (height - mSelectedIndicatorHeight).toFloat(),
                     (mIndicatorRight - indicatorWidth).toFloat(), height.toFloat())
             if (mIndicatorLeft in 0..(mIndicatorRight - 1)) {

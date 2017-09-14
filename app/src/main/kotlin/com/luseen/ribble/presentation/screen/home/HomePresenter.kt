@@ -55,16 +55,16 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
         super.onRequestError(errorMessage)
     }
 
-    override fun handleFragmentChanges(fragment: Fragment) {
+    override fun handleFragmentChanges(currentTag: String, fragment: Fragment) {
         val tag = if (fragment is BaseFragment<*, *>) {
             fragment.getTitle()
         } else {
-            "EEE"
+            emptyString()
         }
 
         view?.setToolBarTitle(tag)
         activeTitle = tag
-        if (tag == NavigationId.SHOT_DETAIL.name) {
+        if (currentTag == NavigationId.SHOT_DETAIL.fullName) {
             isArcIcon = true
             view?.setArcArrowState()
         } else if (isArcIcon) {

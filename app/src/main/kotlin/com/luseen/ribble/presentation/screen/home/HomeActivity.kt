@@ -91,8 +91,8 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         toolbarTitle?.setAnimatedText(title, 100)
     }
 
-    override fun onFragmentChanged(currentFragment: Fragment) {
-        presenter.handleFragmentChanges(currentFragment)
+    override fun onFragmentChanged(currentTag: String,currentFragment: Fragment) {
+        presenter.handleFragmentChanges(currentTag,currentFragment)
     }
 
     override fun updateDrawerInfo(user: User) {

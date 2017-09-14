@@ -5,7 +5,6 @@ import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.entity.User
-import com.luseen.ribble.utils.log
 import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -18,10 +17,7 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
 
     fun getUser(code: String): Flowable<User> {
         return userDataRepository.getToken(code)
-                .flatMap {
-                    log { it.token }
-                    userDataRepository.getUser()
-                }
+                .flatMap { userDataRepository.getUser() }
     }
 
     fun logOut() {

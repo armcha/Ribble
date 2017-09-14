@@ -13,37 +13,17 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.widget.DrawerLayout
 import android.text.Html
 import android.text.Spanned
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import com.luseen.logger.Logger
 import java.io.Serializable
+
 
 /**
  * Created by Chatikyan on 01.08.2017.
  */
-
-
-inline fun log(message: () -> Any?) {
-    Logger.log(message())
-}
-
-fun Any.makeLog() {
-    Logger.log("${this.javaClass.simpleName} $this")
-}
-
-fun log(vararg message: () -> Any?) {
-    message.forEach {
-        Logger.log(it())
-    }
-}
-
-fun log(message: Any?) {
-    Logger.log(message)
-}
 
 infix fun ViewGroup.inflate(layoutResId: Int): View =
         LayoutInflater.from(this.context).inflate(layoutResId, this, false)
@@ -125,9 +105,14 @@ fun String.toHtml(): Spanned {
     return Html.fromHtml(this)
 }
 
+fun Context.toPx(px:Int): Int {
+    val density = resources.displayMetrics.density
+    return (px * density).toInt()
+}
+
 fun Int.toPx(context: Context): Int {
-    val displayMetrics = context.resources.displayMetrics
-    return Math.round(this * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+    val density = context.resources.displayMetrics.density
+    return (this * density).toInt()
 }
 
 fun View.addTopMargin(marginInDp: Int) {

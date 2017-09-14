@@ -2,7 +2,7 @@ package com.luseen.ribble.presentation.fetcher
 
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.presentation.base_mvp.result_listener.ResultListener
-import com.luseen.ribble.utils.log
+import com.luseen.ribble.utils.extensions.log
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single

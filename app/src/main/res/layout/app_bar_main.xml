@@ -43,7 +43,8 @@
                         android:layout_marginRight="5dp"
                         android:contentDescription="@string/arc_view_image"
                         android:tint="@android:color/white"
-                        app:srcCompat="@drawable/equal" />
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hamburger_to_arrow" />
 
                 </com.luseen.ribble.presentation.widget.ArcView>
 

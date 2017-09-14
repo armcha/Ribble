@@ -13,8 +13,10 @@ import com.luseen.ribble.presentation.screen.user_following.UserFollowingFragmen
 import com.luseen.ribble.presentation.screen.user_likes.UserLikesFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItem
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItemSelectedListener
+import com.luseen.ribble.utils.delay
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.load
+import com.luseen.ribble.utils.onClick
 import com.luseen.ribble.utils.showToast
 import com.luseen.ribble.utils.start
 import kotlinx.android.synthetic.main.activity_home.*
@@ -58,17 +60,23 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun setArcArrowState() {
-        arcImage.setImageResource(R.drawable.arrow_left)
-        arcView.setOnClickListener {
+        val stateSet = intArrayOf(android.R.attr.state_checked)
+        arcView.onClick {
             super.onBackPressed()
+        }
+        delay(100){
+            arcImage.setImageState(stateSet, true)
         }
     }
 
     override fun setArcHamburgerIconState() {
         drawerLayout?.let {
-            arcImage.setImageResource(R.drawable.equal)
-            arcView.setOnClickListener {
+            val stateSet = intArrayOf(-android.R.attr.state_checked)
+            arcView.onClick {
                 drawerLayout.openDrawer(GravityCompat.START)
+            }
+            delay(100) {
+                arcImage.setImageState(stateSet, true)
             }
         }
     }
@@ -91,8 +99,8 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         toolbarTitle?.setAnimatedText(title, 100)
     }
 
-    override fun onFragmentChanged(currentTag: String,currentFragment: Fragment) {
-        presenter.handleFragmentChanges(currentTag,currentFragment)
+    override fun onFragmentChanged(currentTag: String, currentFragment: Fragment) {
+        presenter.handleFragmentChanges(currentTag, currentFragment)
     }
 
     override fun updateDrawerInfo(user: User) {

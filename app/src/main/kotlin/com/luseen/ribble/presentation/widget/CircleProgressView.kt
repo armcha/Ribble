@@ -12,7 +12,6 @@ import android.graphics.drawable.Animatable
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.Animation
-import android.view.animation.AnimationSet
 import android.view.animation.RotateAnimation
 import com.luseen.ribble.utils.AnimationUtils
 import com.luseen.ribble.utils.hide
@@ -33,7 +32,6 @@ class CircleProgressView : View, Animatable {
             Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val animationSet = AnimationSet(false)
     private val rectF = RectF()
     private var progress = START_VALUE
     private var start = 0F
@@ -43,19 +41,16 @@ class CircleProgressView : View, Animatable {
         set(value) {
             field = value
             paint.color = field
-            invalidate()
         }
     var backgroundCircleColor = Color.parseColor("#80ffffff")
         set(value) {
             field = value
             backgroundPaint.color = field
-            invalidate()
         }
     var progresTicknes = 11F
         set(value) {
             field = value
             paint.strokeWidth = field
-            invalidate()
         }
 
     constructor(context: Context) : super(context)
@@ -82,7 +77,7 @@ class CircleProgressView : View, Animatable {
     }
 
     override fun stop() {
-        startScale(isReverse = true) {
+        startAlpha(isReverse = true) {
             hide()
             progressAnimator.cancel()
             rotateAnimation.cancel()
@@ -91,12 +86,9 @@ class CircleProgressView : View, Animatable {
 
     override fun start() {
         show()
-        startScale {}
+        startAlpha {}
         startProgress()
         startRotation()
-        animation = animationSet.apply {
-            start()
-        }
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -113,7 +105,7 @@ class CircleProgressView : View, Animatable {
     private fun startProgress() {
         var started = true
         with(progressAnimator) {
-            duration = 700L
+            duration = 650L
             repeatMode = ValueAnimator.REVERSE
             repeatCount = ValueAnimator.INFINITE
 
@@ -138,22 +130,21 @@ class CircleProgressView : View, Animatable {
 
     private fun startRotation() {
         with(rotateAnimation) {
-            duration = 1700
+            duration = 1100
             repeatCount = Animation.INFINITE
             interpolator = AnimationUtils.LINEAR_INTERPOLATOR
         }
-        animationSet.addAnimation(rotateAnimation)
+        animation = rotateAnimation
     }
 
-    private inline fun startScale(isReverse: Boolean = false, crossinline endBody: () -> Unit) {
+    private inline fun startAlpha(isReverse: Boolean = false, crossinline endBody: () -> Unit) {
         val to = if (isReverse) 0F else 1F
 
         if (!isReverse) {
-            this.scale = 0F
+            this.alpha = 0F
         }
         this.animate()
-                .scaleX(to)
-                .scaleY(to)
+                .alpha(to)
                 .setDuration(200)
                 .withLayer()
                 .setListener(object : AnimatorListenerAdapter() {

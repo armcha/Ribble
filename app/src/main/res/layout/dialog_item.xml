@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:layout_margin="30dp"
-    android:background="@android:color/transparent"
-    android:orientation="vertical">
+    android:layout_gravity="center"
+    android:background="@android:color/transparent">
 
     <LinearLayout
-        android:id="@+id/cardView"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dialog_shape"
@@ -19,19 +18,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
-            android:text="Title"
+            android:layout_marginTop="20dp"
+            android:id="@+id/title"
             android:textColor="@android:color/black"
             android:textSize="19sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
+            android:id="@+id/message"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
-            android:text="Message this is simple long long message from dialog testing hi Ribble"
+            android:maxLines="10"
+            android:ellipsize="end"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
@@ -40,11 +41,12 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_gravity="end"
+            android:id="@+id/positiveButton"
             android:textColor="@color/colorPrimary"
             android:layout_marginRight="5dp"
             android:layout_marginTop="15dp"
-            android:text="OPEN"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_marginEnd="5dp" />
     </LinearLayout>
 
-</RelativeLayout>
+</FrameLayout>

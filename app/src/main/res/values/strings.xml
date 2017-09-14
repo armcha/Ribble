@@ -16,4 +16,5 @@
     <string name="shot_detail_image">Shot detail image</string>
     <string name="no_comments_text">No comments</string>
     <string name="shot_author_image">Shot author image</string>
+    <string name="error_title">Something went wrong</string>
 </resources>

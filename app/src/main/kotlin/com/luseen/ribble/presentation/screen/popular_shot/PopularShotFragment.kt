@@ -40,7 +40,6 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressBar.backgroundCircleColor = takeColor(R.color.colorPrimary)
-        activity.showDialog("Hello")
     }
 
     private fun updateAdapter(shotList: List<Shot>) {
@@ -55,7 +54,8 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
 
     override fun onShotClicked(shot: Shot) {
         val bundle = ShotDetailFragment.getBundle(shot)
-        goTo<ShotDetailFragment>(keepState = false,withCustomAnimation = true, arg = bundle)
+        //goTo<ShotDetailFragment>(keepState = false, withCustomAnimation = true, arg = bundle)
+        showErrorDialog(shot.description)
     }
 
     override fun showLoading() {
@@ -67,7 +67,7 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
     }
 
     override fun showError(message: String?) {
-        //TODO("not implemented")
+        showErrorDialog(message)
     }
 
     override fun onShotListReceive(shotList: List<Shot>) {

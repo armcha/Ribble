@@ -51,7 +51,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
     }
 
     override fun showError(message: String?) {
-        TODO()
+        showErrorDialog(message)
     }
 
     override fun onShotClicked(shot: Shot) {

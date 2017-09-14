@@ -96,7 +96,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     override fun showError(message: String?) {
-        //TODO("not implemented")
+        showErrorDialog(message)
     }
 
     private fun updateAdapter(commentList: List<Comment>) {

@@ -163,3 +163,9 @@ fun View.onClick(function: () -> Unit) {
     }
 }
 
+fun <T> nonSafeLazy(initializer: () -> T): Lazy<T> {
+    return lazy(LazyThreadSafetyMode.NONE) {
+        initializer()
+    }
+}
+

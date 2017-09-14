@@ -57,7 +57,6 @@
                     android:gravity="center"
                     android:maxLength="20"
                     android:maxLines="1"
-                    android:text="asdsf asfa shf aaaaaaaaaaaaaaa"
                     android:textAllCaps="true"
                     android:textColor="@android:color/black"
                     android:textSize="19sp"
@@ -65,7 +64,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginRight="8dp" />
 
             </android.support.constraint.ConstraintLayout>
 

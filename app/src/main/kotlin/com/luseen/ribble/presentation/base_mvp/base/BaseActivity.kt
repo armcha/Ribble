@@ -1,17 +1,16 @@
 package com.luseen.ribble.presentation.base_mvp.base
 
-import android.app.Dialog
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import com.luseen.arch.BaseMVPActivity
 import com.luseen.ribble.App
-import com.luseen.ribble.R
 import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.module.ActivityModule
 import com.luseen.ribble.presentation.navigation.Navigator
+import com.luseen.ribble.presentation.widget.MaterialDialog
 import javax.inject.Inject
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
@@ -23,6 +22,8 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
     @Inject
     lateinit var inflater: LayoutInflater
 
+    private var dialog: MaterialDialog? = null
+
     val activityComponent: ActivityComponent by lazy(LazyThreadSafetyMode.NONE) {
         getAppComponent().plus(ActivityModule(this))
     }
@@ -32,6 +33,12 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
         injectDependencies()
         navigator.fragmentChangeListener = this
         super.onCreate(savedInstanceState)
+    }
+
+    @CallSuper
+    override fun onDestroy() {
+        dialog?.hide()
+        super.onDestroy()
     }
 
     @CallSuper
@@ -48,19 +55,20 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
         return App.instance.applicationComponent
     }
 
-    inline fun <reified T : Fragment> goTo(withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
-        navigator.goTo<T>(withCustomAnimation = withCustomAnimation, arg = arg)
+    inline protected fun <reified T : Fragment> goTo(keepState: Boolean = true,
+                                                     withCustomAnimation: Boolean = false,
+                                                     arg: Bundle = Bundle.EMPTY) {
+        navigator.goTo<T>(keepState = keepState, withCustomAnimation = withCustomAnimation, arg = arg)
     }
 
-    fun showDialog(message: String) {
-        val dialog1 = Dialog(this, R.style.MaterialDialogSheet)
-        dialog1.setContentView(R.layout.dialog_item)
-        //dialog1.show()
-//        val dialog = Dialog.Builder(this)
-//
-//        dialog.setView(inflater.inflate(R.layout.dialog_item,null))
-//
-//        dialog.setTitle("Title")
-//        dialog.create().show()
+    fun showDialog(title: String, message: String, buttonText: String = "Close") {
+        dialog = MaterialDialog(this).apply {
+            message(message)
+                    .title(title)
+                    .addPositiveButton(buttonText) {
+                        hide()
+                    }
+                    .show()
+        }
     }
 }

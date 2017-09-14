@@ -88,7 +88,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun setToolBarTitle(title: String) {
-        toolbarTitle?.setAnimatedText(title,100)
+        toolbarTitle?.setAnimatedText(title, 100)
     }
 
     override fun onFragmentChanged(currentFragment: Fragment) {

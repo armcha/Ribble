@@ -69,11 +69,14 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         fragmentMap.clear()
         fragmentManager.fragments.forEach {
             log {
-                "Fragment ${it}"
+                "Fragment ${it::class.java.simpleName}"
             }
         }
+        log {
+            activity.applicationContext.packageName
+        }
         fragmentManager.fragments
-                .filter { it.tag.contains("ribble") } //FiXME not the best solution
+                .filter { it.tag.contains(activity.applicationContext.packageName) } //FiXME not the best solution
                 .forEach {
                     fragmentMap.put(it.tag, it)
                 }
@@ -90,7 +93,9 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         runDebugLog()
     }
 
-    inline fun <reified T : Fragment> goTo(keepState: Boolean = true, withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
+    inline fun <reified T : Fragment> goTo(keepState: Boolean = true,
+                                           withCustomAnimation: Boolean = false,
+                                           arg: Bundle = Bundle.EMPTY){
         val tag = T::class.java.name
         goTo(tag, keepState, withCustomAnimation, arg)
     }

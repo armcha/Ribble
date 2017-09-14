@@ -72,6 +72,11 @@ class CircleProgressView : View, Animatable {
         backgroundPaint.color = backgroundCircleColor
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        stop()
+    }
+
     override fun isRunning(): Boolean {
         return progressAnimator.isRunning && !rotateAnimation.hasEnded()
     }
@@ -108,7 +113,7 @@ class CircleProgressView : View, Animatable {
     private fun startProgress() {
         var started = true
         with(progressAnimator) {
-            duration = 550L
+            duration = 700L
             repeatMode = ValueAnimator.REVERSE
             repeatCount = ValueAnimator.INFINITE
 
@@ -150,6 +155,7 @@ class CircleProgressView : View, Animatable {
                 .scaleX(to)
                 .scaleY(to)
                 .setDuration(200)
+                .withLayer()
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {
                         endBody()

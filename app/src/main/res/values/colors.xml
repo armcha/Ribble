@@ -3,6 +3,7 @@
     <color name="colorPrimary">#FF4081</color>
     <color name="colorPrimaryDark">#eeeeee</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="dialogPrimaryDark">#616161</color>
     <color name="bg_color">#fafafa</color>
     <color name="navigation_item_color">#434A5A</color>
     <color name="green">#009f5a</color>

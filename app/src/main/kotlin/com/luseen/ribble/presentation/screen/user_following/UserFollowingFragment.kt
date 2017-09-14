@@ -53,7 +53,7 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
     }
 
     override fun showError(message: String?) {
-
+        showErrorDialog(message)
     }
 
     override fun onShotListReceive(shotList: List<Shot>) {

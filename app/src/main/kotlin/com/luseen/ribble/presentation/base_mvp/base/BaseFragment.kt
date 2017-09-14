@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.luseen.arch.BaseMVPFragment
+import com.luseen.ribble.R
 import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.presentation.navigation.Navigator
 import com.luseen.ribble.utils.emptyString
@@ -45,4 +46,12 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
     protected abstract fun layoutResId(): Int
 
     open fun getTitle(): String = emptyString()
+
+    fun showDialog(title: String, message: String, buttonText: String = "Close") {
+        activity.showDialog(title, message, buttonText)
+    }
+
+    fun showErrorDialog(message: String?, buttonText: String = "Close") {
+        activity.showDialog(getString(R.string.error_title), message ?: emptyString(), buttonText)
+    }
 }

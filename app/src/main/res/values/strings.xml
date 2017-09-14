@@ -1,14 +1,9 @@
 <resources>
     <string name="app_name">Ribble</string>
     <string name="title_activity_main">MainActivity</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="arc_view_image">Arc view image</string>
     <string name="shot_image">Shot image</string>
     <string name="liked_shot_image">Liked shot image</string>
@@ -21,4 +16,14 @@
     <string name="welcome_to_ribble">WELCOME TO RIBBLE</string>
     <string name="login_via">Login via</string>
     <string name="logged_in_message">Logged in!!</string>
+    <string name="contact_with_us">Contact with us</string>
+    <string name="mail">chatikyana@gmail.com</string>
+    <string name="about_this_app_content">Ribble is unofficial client for Dribbble</string>
+    <string name="about_app_icon">About App Icon</string>
+    <string name="email">E-mail</string>
+    <string name="twitter">Twitter</string>
+    <string name="facebook">Facebook</string>
+    <string name="github">Source code</string>
+
+
 </resources>

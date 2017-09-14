@@ -31,9 +31,10 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
 
     private var recyclerAdapter: ShotRecyclerViewAdapter? = null
 
-    override fun initPresenter(): PopularShotContract.Presenter = popularShotPresenter
 
-    override fun layoutResId(): Int = R.layout.fragment_shot
+    override fun initPresenter() = popularShotPresenter
+
+    override fun layoutResId() = R.layout.fragment_shot
 
     override fun injectDependencies() = activityComponent.inject(this)
 
@@ -55,7 +56,6 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
     override fun onShotClicked(shot: Shot) {
         val bundle = ShotDetailFragment.getBundle(shot)
         goTo<ShotDetailFragment>(keepState = false, withCustomAnimation = true, arg = bundle)
-        //showErrorDialog(shot.description)
     }
 
     override fun showLoading() {

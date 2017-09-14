@@ -2,6 +2,7 @@ package com.luseen.ribble.di.component
 
 import com.luseen.ribble.di.module.ActivityModule
 import com.luseen.ribble.di.scope.PerActivity
+import com.luseen.ribble.presentation.screen.about.AboutFragment
 import com.luseen.ribble.presentation.screen.auth.AuthActivity
 import com.luseen.ribble.presentation.screen.dispatch.DispatchActivity
 import com.luseen.ribble.presentation.screen.home.HomeActivity
@@ -35,4 +36,6 @@ interface ActivityComponent {
     fun inject(userLikesFragment: UserLikesFragment)
 
     fun inject(userFollowingFragment: UserFollowingFragment)
+
+    fun inject(aboutFragment: AboutFragment)
 }

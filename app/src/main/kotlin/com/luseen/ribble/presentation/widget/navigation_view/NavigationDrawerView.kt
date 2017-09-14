@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.luseen.ribble.R
 import com.luseen.ribble.utils.delay
+import com.luseen.ribble.utils.nonSafeLazy
 
 /**
  * Created by Chatikyan on 20.08.2017.
@@ -24,17 +25,19 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
                     isSelected = true, itemIconColor = R.color.error_color_material),
             NavigationItem(NavigationId.USER_LIKES, R.drawable.heart_full,
                     itemIconColor = R.color.colorPrimary),
-            NavigationItem(NavigationId.FOLLOWING, R.drawable.ic_menu_manage,
+            NavigationItem(NavigationId.FOLLOWING, R.drawable.following,
                     itemIconColor = R.color.green),
-            NavigationItem(NavigationId.ABOUT, R.drawable.ic_menu_send),
-            NavigationItem(NavigationId.LOG_OUT, R.drawable.ic_menu_share))
+            NavigationItem(NavigationId.ABOUT, R.drawable.about,
+                    itemIconColor = R.color.cyan),
+            NavigationItem(NavigationId.LOG_OUT, R.drawable.logout,
+                    itemIconColor = R.color.blue_gray))
 
     private var attr: AttributeSet? = null
     private var currentSelectedItem: Int = 0
     private val adapter by lazy {
         NavigationViewAdapter(itemList)
     }
-    private val recyclerView by lazy(LazyThreadSafetyMode.NONE) {
+    private val recyclerView by nonSafeLazy {
         RecyclerView(context).apply {
             layoutManager = LinearLayoutManager(context)
         }

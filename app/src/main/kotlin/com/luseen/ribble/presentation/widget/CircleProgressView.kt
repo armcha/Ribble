@@ -60,10 +60,12 @@ class CircleProgressView : View, Animatable {
     init {
         if (!isInEditMode)
             hide()
-        paint.color = progressColor
-        paint.strokeWidth = progresTicknes
-        paint.style = Paint.Style.STROKE
-        paint.strokeCap = Paint.Cap.ROUND
+        with(paint) {
+            color = progressColor
+            strokeWidth = progresTicknes
+            style = Paint.Style.STROKE
+            strokeCap = Paint.Cap.ROUND
+        }
         backgroundPaint.color = backgroundCircleColor
     }
 

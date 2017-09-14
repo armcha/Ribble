@@ -11,7 +11,7 @@ sealed class NavigationId(val name: String = emptyString(), val fullName: String
     object SHOT : NavigationId("SHOT")
     object USER_LIKES : NavigationId("USER LIKES")
     object FOLLOWING : NavigationId("FOLLOWING")
-    object ABOUT : NavigationId("ABOUT")
+    object ABOUT : NavigationId("APP INFO")
     object LOG_OUT : NavigationId("LOG OUT")
     object SHOT_DETAIL : NavigationId("SHOT DETAIL", ShotDetailFragment::class.java.name)
 }

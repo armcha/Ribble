@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
+import com.luseen.ribble.presentation.screen.about.AboutFragment
 import com.luseen.ribble.presentation.screen.auth.AuthActivity
 import com.luseen.ribble.presentation.screen.shot_root.ShotRootFragment
 import com.luseen.ribble.presentation.screen.user_following.UserFollowingFragment
@@ -137,7 +138,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
                 goTo<UserFollowingFragment>()
             }
             Id.ABOUT -> {
-
+                goTo<AboutFragment>()
             }
             Id.LOG_OUT -> {
                 presenter.logOut()

@@ -17,13 +17,14 @@
     <string name="login_via">Login via</string>
     <string name="logged_in_message">Logged in!!</string>
     <string name="contact_with_us">Contact with us</string>
-    <string name="mail">chatikyana@gmail.com</string>
     <string name="about_this_app_content">Ribble is unofficial client for Dribbble</string>
     <string name="about_app_icon">About App Icon</string>
     <string name="email">E-mail</string>
     <string name="twitter">Twitter</string>
     <string name="facebook">Facebook</string>
     <string name="github">Source code</string>
+    <string name="mail">chatikyana@gmail.com</string>
+    <string name="sen_us_emial">Send us email</string>
 
 
 </resources>

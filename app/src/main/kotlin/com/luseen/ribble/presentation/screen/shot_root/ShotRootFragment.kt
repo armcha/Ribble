@@ -21,9 +21,9 @@ class ShotRootFragment constructor(): BaseFragment<ShotRootContract.View, ShotRo
     @Inject
     protected lateinit var shotPagerAdapter: ShotPagerAdapter
 
-    override fun initPresenter(): ShotRootContract.Presenter = shotRootPresenter
+    override fun initPresenter() = shotRootPresenter
 
-    override fun layoutResId(): Int = R.layout.fragment_shot_root
+    override fun layoutResId() = R.layout.fragment_shot_root
 
     override fun injectDependencies() = activityComponent.inject(this)
 

@@ -14,7 +14,7 @@ import com.luseen.ribble.presentation.screen.user_following.UserFollowingFragmen
 import com.luseen.ribble.presentation.screen.user_likes.UserLikesFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItem
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItemSelectedListener
-import com.luseen.ribble.utils.delay
+import com.luseen.ribble.utils.D
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.load
 import com.luseen.ribble.utils.onClick
@@ -35,7 +35,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     @Inject
     protected lateinit var fragmentManager: FragmentManager
 
-    override fun initPresenter(): HomeContract.Presenter = homePresenter
+    override fun initPresenter() = homePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,9 +65,10 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         arcView.onClick {
             super.onBackPressed()
         }
-        delay(100){
-            arcImage.setImageState(stateSet, true)
-        }
+        arcImage.setImageResource(D.arrow_left)
+//        delay(100){
+//            arcImage.setImageState(stateSet, false)
+//        }
     }
 
     override fun setArcHamburgerIconState() {
@@ -76,9 +77,11 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
             arcView.onClick {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
-            delay(100) {
-                arcImage.setImageState(stateSet, true)
-            }
+
+            arcImage.setImageResource(D.equal)
+//            delay(100) {
+//                arcImage.setImageState(stateSet, false)
+//            }
         }
     }
 

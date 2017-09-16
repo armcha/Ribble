@@ -7,6 +7,7 @@ import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.component.DaggerApplicationComponent
 import com.luseen.ribble.di.module.ApplicationModule
 import com.luseen.ribble.utils.nonSafeLazy
+import com.squareup.leakcanary.LeakCanary
 
 /**
  * Created by Chatikyan on 29.07.2017.
@@ -26,6 +27,8 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        if (LeakCanary.isInAnalyzerProcess(this)) return
+        LeakCanary.install(this)
         instance = this
         initLogger()
     }

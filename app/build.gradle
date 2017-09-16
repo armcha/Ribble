@@ -103,6 +103,9 @@ dependencies {
     implementation "com.github.bumptech.glide:okhttp3-integration:${glideVersion}"
     kapt "com.github.bumptech.glide:compiler:${glideVersion}"
 
+    //Leak canary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+
     //Testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.0'

@@ -2,7 +2,6 @@ package com.luseen.ribble.presentation.screen.about
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.View
 import android.widget.TextView
 import com.luseen.ribble.BuildConfig
@@ -71,7 +70,7 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
 
         when (view.id) {
             EMAIL -> {
-                context.sendEmail(getString(S.app_name), "", getString(R.string.sen_us_emial))
+                context.sendEmail(getString(S.app_name), getString(S.mail), getString(S.sen_us_emial))
             }
             TWITTER -> {
                 context.actionView {
@@ -91,8 +90,5 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
         }
     }
 }
-
-operator fun Fragment.get(id: Int): String = getString(id)
-
 
 data class AboutItem(val stringResId: Int, val icon: Int, val tintColor: Int = 0)

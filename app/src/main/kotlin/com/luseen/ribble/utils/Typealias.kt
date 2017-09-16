@@ -1,6 +1,7 @@
 package com.luseen.ribble.utils
 
-import com.luseen.arch.R
+import com.luseen.ribble.R
+
 
 /**
  * Created by Chatikyan on 15.09.2017.
@@ -8,3 +9,4 @@ import com.luseen.arch.R
 
 typealias S = R.string
 typealias C = R.color
+typealias D = R.drawable

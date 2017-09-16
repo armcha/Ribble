@@ -75,7 +75,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
             }
         }
         fragmentManager.fragments
-                .filter { it.tag.contains(activity.applicationContext.packageName) } //FiXME not the best solution
+                .filter { it.tag.contains(activity.applicationContext.packageName) }
                 .forEach {
                     fragmentMap.put(it.tag, it)
                 }

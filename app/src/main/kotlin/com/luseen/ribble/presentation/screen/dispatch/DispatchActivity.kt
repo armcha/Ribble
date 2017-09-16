@@ -15,7 +15,7 @@ class DispatchActivity : BaseActivity<DispatchContract.View, DispatchContract.Pr
         activityComponent.inject(this)
     }
 
-    override fun initPresenter(): DispatchContract.Presenter = dispatchPresenter
+    override fun initPresenter() = dispatchPresenter
 
     override fun openHomeActivity() {
         start<HomeActivity>()

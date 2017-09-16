@@ -1,5 +1,4 @@
-package com.luseen.ribble.presentation.screen.popular_shot
-
+package com.luseen.ribble.presentation.screen.shot
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
@@ -10,29 +9,33 @@ import com.luseen.ribble.presentation.adapter.ShotRecyclerViewAdapter
 import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
+import com.luseen.ribble.utils.getExtraWithKey
 import com.luseen.ribble.utils.isPortrait
 import com.luseen.ribble.utils.takeColor
 import kotlinx.android.synthetic.main.fragment_shot.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import javax.inject.Inject
 
-
-class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotContract.Presenter>(),
-        PopularShotContract.View, ShotClickListener {
+class ShotFragment : BaseFragment<ShotContract.View, ShotContract.Presenter>(),
+        ShotContract.View, ShotClickListener {
 
     companion object {
-        fun newInstance(): PopularShotFragment {
-            return PopularShotFragment()
+        private const val SHOT_TYPE = "shot_type"
+
+        fun newInstance(shotFragmentType: String): ShotFragment {
+            val bundle = Bundle()
+            bundle.putString(SHOT_TYPE, shotFragmentType)
+            val shotFragment = ShotFragment()
+            shotFragment.arguments = bundle
+            return shotFragment
         }
     }
 
     @Inject
-    protected lateinit var popularShotPresenter: PopularShotPresenter
-
+    protected lateinit var shotPresenter: ShotPresenter
     private var recyclerAdapter: ShotRecyclerViewAdapter? = null
 
-
-    override fun initPresenter() = popularShotPresenter
+    override fun initPresenter() = shotPresenter
 
     override fun layoutResId() = R.layout.fragment_shot
 
@@ -42,6 +45,8 @@ class PopularShotFragment : BaseFragment<PopularShotContract.View, PopularShotCo
         super.onViewCreated(view, savedInstanceState)
         progressBar.backgroundCircleColor = takeColor(R.color.colorPrimary)
     }
+
+    override fun getShotType() = getExtraWithKey<String>(SHOT_TYPE)
 
     private fun updateAdapter(shotList: List<Shot>) {
         recyclerAdapter?.update(shotList) ?: this setUpRecyclerView shotList

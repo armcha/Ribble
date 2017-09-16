@@ -44,9 +44,9 @@ public abstract class BaseMVPActivity<V extends BaseMVPContract.View, P extends 
     @CallSuper
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         presenter.detachLifecycle(getLifecycle());
         presenter.detachView();
+        super.onDestroy();
     }
 
     protected abstract P initPresenter();

@@ -4,8 +4,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.presentation.screen.popular_shot.PopularShotFragment
-import com.luseen.ribble.presentation.screen.recent_shot.RecentShotFragment
+import com.luseen.ribble.presentation.screen.shot.ShotFragment
+import com.luseen.ribble.presentation.screen.shot.TYPE_POPULAR
+import com.luseen.ribble.presentation.screen.shot.TYPE_RECENT
 import javax.inject.Inject
 
 /**
@@ -18,9 +19,9 @@ class ShotPagerAdapter @Inject constructor(fragmentManager: FragmentManager) : F
 
     override fun getItem(position: Int): Fragment {
         return if (position == 0)
-            PopularShotFragment.newInstance()
+            ShotFragment.newInstance(TYPE_POPULAR)
         else
-            RecentShotFragment()
+            ShotFragment.newInstance(TYPE_RECENT)
     }
 
     override fun getCount(): Int = titles.count()

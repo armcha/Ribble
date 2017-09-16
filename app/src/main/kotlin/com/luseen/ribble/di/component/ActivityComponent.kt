@@ -6,7 +6,7 @@ import com.luseen.ribble.presentation.screen.about.AboutFragment
 import com.luseen.ribble.presentation.screen.auth.AuthActivity
 import com.luseen.ribble.presentation.screen.dispatch.DispatchActivity
 import com.luseen.ribble.presentation.screen.home.HomeActivity
-import com.luseen.ribble.presentation.screen.popular_shot.PopularShotFragment
+import com.luseen.ribble.presentation.screen.shot.ShotFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.presentation.screen.shot_root.ShotRootFragment
 import com.luseen.ribble.presentation.screen.user_following.UserFollowingFragment
@@ -23,7 +23,7 @@ interface ActivityComponent {
 
     fun inject(homeActivity: HomeActivity)
 
-    fun inject(popularShotFragment: PopularShotFragment)
+    fun inject(shotFragment: ShotFragment)
 
     fun inject(shotDetailFragment: ShotDetailFragment)
 

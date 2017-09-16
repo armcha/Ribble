@@ -1,19 +1,18 @@
-package com.luseen.ribble.presentation.screen.popular_shot
+package com.luseen.ribble.presentation.screen.shot
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.ShotListInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
+import com.luseen.ribble.utils.extensions.log
 import javax.inject.Inject
 
 /**
  * Created by Chatikyan on 01.08.2017.
  */
-@PerActivity
-class PopularShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor)
-    : ApiPresenter<List<Shot>, PopularShotContract.View>(), PopularShotContract.Presenter {
+class ShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor)
+    : ApiPresenter<List<Shot>, ShotContract.View>(), ShotContract.Presenter {
 
     private var shotList: List<Shot> = listOf()
 
@@ -27,7 +26,10 @@ class PopularShotPresenter @Inject constructor(private val shotListInteractor: S
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        this fetch shotListInteractor.getPopularShotList(100)
+        if (view?.getShotType() == TYPE_POPULAR)
+            this fetch shotListInteractor.getPopularShotList(100)
+        else
+            this fetch shotListInteractor.getRecentShotList(100)
     }
 
     override fun onRequestStart() {
@@ -37,6 +39,9 @@ class PopularShotPresenter @Inject constructor(private val shotListInteractor: S
 
     override fun onRequestSuccess(data: List<Shot>) {
         super.onRequestSuccess(data)
+        log {
+            "Data received"
+        }
         this.shotList = data
         view?.hideLoading()
         if (shotList.isNotEmpty()) {

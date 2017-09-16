@@ -45,9 +45,9 @@ public abstract class BaseMVPFragment<V extends BaseMVPContract.View, P extends 
     @CallSuper
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         presenter.detachLifecycle(getLifecycle());
         presenter.detachView();
+        super.onDestroyView();
     }
 
     protected abstract P initPresenter();

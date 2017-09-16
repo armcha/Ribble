@@ -1,4 +1,4 @@
-package com.luseen.ribble.presentation.screen.popular_shot
+package com.luseen.ribble.presentation.screen.shot
 
 import com.luseen.ribble.presentation.base_mvp.base.BaseContract
 

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.User
+import com.luseen.ribble.presentation.adapter.ShotPagerAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
 import com.luseen.ribble.presentation.screen.about.AboutFragment
 import com.luseen.ribble.presentation.screen.auth.AuthActivity
@@ -121,6 +122,9 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
             navView.setChecked(position)
         }
     }
+
+    @Inject
+    protected lateinit var shotPagerAdapter: ShotPagerAdapter
 
     override fun onBackPressed() {
         when {

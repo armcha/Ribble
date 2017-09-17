@@ -3,6 +3,7 @@ package com.luseen.ribble.utils.extensions
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.support.v4.content.ContextCompat
+import android.view.View
 import android.widget.TextView
 import com.luseen.ribble.utils.LorAbove
 
@@ -20,3 +21,10 @@ fun TextView.iconTint(colorId: Int) {
         compoundDrawableTintList = ColorStateList.valueOf(ContextCompat.getColor(context, colorId))
     }
 }
+
+var View.scale: Float
+    get() = this.scaleX
+    set(value) {
+        this.scaleY = value
+        this.scaleX = value
+    }

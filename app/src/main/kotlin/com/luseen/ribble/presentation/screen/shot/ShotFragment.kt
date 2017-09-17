@@ -55,12 +55,17 @@ class ShotFragment : BaseFragment<ShotContract.View, ShotContract.Presenter>(),
     private infix fun setUpRecyclerView(shotList: List<Shot>) {
         recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)
         shotRecyclerView.layoutManager = GridLayoutManager(activity, if (isPortrait()) 2 else 3)
+        shotRecyclerView.setHasFixedSize(true)
         shotRecyclerView.adapter = recyclerAdapter
+        shotRecyclerView.scheduleLayoutAnimation()
     }
 
     override fun onShotClicked(shot: Shot) {
         val bundle = ShotDetailFragment.getBundle(shot)
-        goTo<ShotDetailFragment>(keepState = false, withCustomAnimation = true, arg = bundle)
+        goTo<ShotDetailFragment>(
+                keepState = false,
+                withCustomAnimation = true,
+                arg = bundle)
     }
 
     override fun showLoading() {

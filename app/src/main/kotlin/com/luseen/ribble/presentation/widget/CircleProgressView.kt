@@ -1,7 +1,5 @@
 package com.luseen.ribble.presentation.widget
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
@@ -149,17 +147,7 @@ class CircleProgressView : View, Animatable {
                 .alpha(to)
                 .setDuration(200)
                 .withLayer()
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        endBody()
-                    }
-                }).start()
+                .withEndAction { endBody() }
+                .start()
     }
-
-    private var View.scale: Float
-        get() = this.scaleX
-        set(value) {
-            this.scaleY = value
-            this.scaleX = value
-        }
 }

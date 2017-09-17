@@ -13,7 +13,7 @@ import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.isPortrait
 import com.luseen.ribble.utils.takeColor
-import kotlinx.android.synthetic.main.fragment_shot.*
+import kotlinx.android.synthetic.main.fragment_user_following.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import javax.inject.Inject
 
@@ -67,7 +67,9 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
     private infix fun setUpRecyclerView(shotList: List<Shot>) {
         recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)
         shotRecyclerView.layoutManager = GridLayoutManager(activity, if (isPortrait()) 2 else 3)
+        shotRecyclerView.setHasFixedSize(true)
         shotRecyclerView.adapter = recyclerAdapter
+        shotRecyclerView.scheduleLayoutAnimation()
     }
 
     override fun getTitle(): String {

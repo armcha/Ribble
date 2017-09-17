@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     tools:context=".presentation.screen.shot.ShotFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <com.luseen.ribble.presentation.widget.GridRecyclerView
         android:id="@+id/shotRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layoutAnimation="@anim/grid_layout_animation_from_bottom" />
 
-   <include layout="@layout/progress_bar"/>
+    <include layout="@layout/progress_bar" />
 
 </android.support.constraint.ConstraintLayout>

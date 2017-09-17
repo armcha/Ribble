@@ -5,7 +5,6 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.ShotListInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.utils.extensions.log
 import javax.inject.Inject
 
 /**
@@ -39,9 +38,6 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
 
     override fun onRequestSuccess(data: List<Shot>) {
         super.onRequestSuccess(data)
-        log {
-            "Data received"
-        }
         this.shotList = data
         view?.hideLoading()
         if (shotList.isNotEmpty()) {

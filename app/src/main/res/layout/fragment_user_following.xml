@@ -5,9 +5,10 @@
     android:background="@android:color/transparent"
     tools:context=".presentation.screen.shot.ShotFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <com.luseen.ribble.presentation.widget.GridRecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layoutAnimation="@anim/grid_layout_animation_from_bottom"
         android:id="@+id/shotRecyclerView"/>
 
     <include layout="@layout/progress_bar"/>

@@ -1,7 +1,5 @@
 package com.luseen.ribble.presentation.widget
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.view.View
 import com.luseen.ribble.utils.AnimationUtils
 
@@ -21,20 +19,17 @@ interface AnimatedView {
                     .withLayer()
                     .setInterpolator(AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR)
                     .setStartDelay(startDelay)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            super.onAnimationEnd(animation)
-                            acton(view)
-                            scaleX = scaleFactor
-                            animate()
-                                    .scaleX(1f)
-                                    .alpha(1f)
-                                    .setListener(null)
-                                    .withLayer()
-                                    .setDuration(duration)
-                                    .start()
-                        }
-                    })
+                    .withEndAction {
+                        acton(view)
+                        scaleX = scaleFactor
+                        animate()
+                                .scaleX(1f)
+                                .alpha(1f)
+                                .setListener(null)
+                                .withLayer()
+                                .setDuration(duration)
+                                .start()
+                    }
                     .start()
         }
     }

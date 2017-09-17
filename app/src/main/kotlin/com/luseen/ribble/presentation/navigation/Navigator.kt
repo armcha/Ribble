@@ -14,6 +14,7 @@ import javax.inject.Inject
 /**
  * Created by Chatikyan on 15.08.2017.
  */
+
 @PerActivity
 class Navigator @Inject constructor(private val activity: AppCompatActivity,
                                     private val fragmentManager: FragmentManager) {

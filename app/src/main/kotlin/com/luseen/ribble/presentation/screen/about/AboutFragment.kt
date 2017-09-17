@@ -67,7 +67,6 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
     }
 
     override fun onClick(view: View) {
-
         when (view.id) {
             EMAIL -> {
                 context.sendEmail(getString(S.app_name), getString(S.mail), getString(S.sen_us_emial))

@@ -16,11 +16,12 @@ class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(c
     private val path = Path()
     private val rect = RectF()
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val arcStartPoint = 2.5F
 
     init {
         setBackgroundColor(Color.TRANSPARENT)
         with(paint) {
-            color = context takeColor  R.color.colorAccent
+            color = context takeColor R.color.colorAccent
             style = Paint.Style.FILL
             strokeCap = Paint.Cap.ROUND
             isDither = true
@@ -30,18 +31,16 @@ class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(c
     }
 
     override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-        val arcStartPoint = 2.5F
-        val width = width.toFloat() - SHADOW_OFFSET
-        val height = height.toFloat() - SHADOW_OFFSET
-        rect.set(width / arcStartPoint, SHADOW_OFFSET, width, height)
-        with(path) {
-            val halfWidth = width / 2
-            lineTo(halfWidth + halfWidth / arcStartPoint, SHADOW_OFFSET)
-            addArc(rect, START_ANGLE, SWEEP_ANGLE)
-            lineTo(0F, height)
-            lineTo(0F, SHADOW_OFFSET)
-        }
-        canvas.drawPath(path, paint)
+            val width = width.toFloat() - SHADOW_OFFSET
+            val height = height.toFloat() - SHADOW_OFFSET
+            rect.set(width / arcStartPoint, SHADOW_OFFSET, width, height)
+            with(path) {
+                val halfWidth = width / 2
+                lineTo(halfWidth + halfWidth / arcStartPoint, SHADOW_OFFSET)
+                addArc(rect, START_ANGLE, SWEEP_ANGLE)
+                lineTo(0F, height)
+                lineTo(0F, SHADOW_OFFSET)
+            }
+            canvas.drawPath(path, paint)
     }
 }

@@ -6,17 +6,17 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import com.luseen.arch.BaseMVPActivity
 import com.luseen.ribble.App
-import com.luseen.ribble.R
 import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.module.ActivityModule
 import com.luseen.ribble.presentation.navigation.Navigator
 import com.luseen.ribble.presentation.widget.MaterialDialog
+import com.luseen.ribble.utils.S
 import com.luseen.ribble.utils.emptyString
 import javax.inject.Inject
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
-    : BaseMVPActivity<V, P>(), Navigator.FragmentChangeListener {
+    : BaseMVPActivity<V, P>(), Navigator.FragmentChangeListener{
 
     @Inject
     lateinit var navigator: Navigator
@@ -75,6 +75,6 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
     }
 
     fun showErrorDialog(message: String?, buttonText: String = "Close") {
-        showDialog(getString(R.string.error_title), message ?: emptyString(), buttonText)
+        showDialog(getString(S.error_title), message ?: emptyString(), buttonText)
     }
 }

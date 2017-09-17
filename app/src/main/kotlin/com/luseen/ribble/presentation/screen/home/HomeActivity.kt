@@ -62,27 +62,18 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun setArcArrowState() {
-        val stateSet = intArrayOf(android.R.attr.state_checked)
         arcView.onClick {
             super.onBackPressed()
         }
-        arcImage.setImageResource(D.arrow_left)
-//        delay(100){
-//            arcImage.setImageState(stateSet, false)
-//        }
+        arcImage.setAnimatedImage(D.arrow_left)
     }
 
     override fun setArcHamburgerIconState() {
         drawerLayout?.let {
-            val stateSet = intArrayOf(-android.R.attr.state_checked)
             arcView.onClick {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
-
-            arcImage.setImageResource(D.equal)
-//            delay(100) {
-//                arcImage.setImageState(stateSet, false)
-//            }
+            arcImage.setAnimatedImage(D.equal)
         }
     }
 
@@ -101,7 +92,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     }
 
     override fun setToolBarTitle(title: String) {
-        toolbarTitle?.setAnimatedText(title, 100)
+        toolbarTitle?.setAnimatedText(title)
     }
 
     override fun onFragmentChanged(currentTag: String, currentFragment: Fragment) {

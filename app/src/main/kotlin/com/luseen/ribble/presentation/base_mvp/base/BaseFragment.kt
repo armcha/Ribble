@@ -47,6 +47,10 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     open fun getTitle(): String = emptyString()
 
+    open fun onBack(): Boolean {
+        return false
+    }
+
     fun showDialog(title: String, message: String, buttonText: String = "Close") {
         activity.showDialog(title, message, buttonText)
     }

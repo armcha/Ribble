@@ -17,7 +17,9 @@ abstract class ApiPresenter<TYPE, VIEW : BaseContract.View> : BasePresenter<VIEW
 
     @Inject
     protected lateinit var fetcher: Fetcher
-    protected var isRequestStarted = false
+
+    protected var status: Status = Status.IDLE
+        private set
 
     infix fun fetch(flowable: Flowable<TYPE>) {
         fetcher.fetch(flowable, this)
@@ -39,16 +41,20 @@ abstract class ApiPresenter<TYPE, VIEW : BaseContract.View> : BasePresenter<VIEW
 
     @CallSuper
     override fun onRequestStart() {
-        isRequestStarted = true
+        status = Status.LOADING
     }
 
     @CallSuper
     override fun onRequestSuccess(data: TYPE) {
-        isRequestStarted = false
+        status = if (data is List<*> && data.isEmpty()) {
+            Status.EMPTY
+        } else {
+            Status.SUCCESS
+        }
     }
 
     @CallSuper
     override fun onRequestError(errorMessage: String?) {
-        isRequestStarted = false
+        status = Status.ERROR
     }
 }

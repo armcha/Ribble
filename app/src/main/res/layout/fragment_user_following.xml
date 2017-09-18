@@ -11,6 +11,14 @@
         android:layoutAnimation="@anim/grid_layout_animation_from_bottom"
         android:id="@+id/shotRecyclerView"/>
 
+    <com.luseen.ribble.presentation.widget.AnimatedTextView
+        android:id="@+id/noShotsText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
     <include layout="@layout/progress_bar"/>
 
 </android.support.constraint.ConstraintLayout>

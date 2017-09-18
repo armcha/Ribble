@@ -11,6 +11,8 @@ interface UserLikeContract {
     interface View : ApiContract.View{
 
         fun onDataReceive(likeList: List<Like>)
+
+        fun showNoShots()
     }
 
     interface Presenter : ApiContract.Presenter<View>

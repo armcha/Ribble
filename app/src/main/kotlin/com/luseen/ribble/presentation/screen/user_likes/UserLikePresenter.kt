@@ -5,6 +5,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
+import com.luseen.ribble.presentation.base_mvp.api.Status
 import javax.inject.Inject
 
 /**
@@ -17,10 +18,11 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        if (isRequestStarted)
-            view?.showLoading()
-        else
-            view?.onDataReceive(likeList)
+        when (status) {
+            Status.LOADING -> view?.showLoading()
+            Status.EMPTY -> view?.showNoShots()
+            else ->  view?.onDataReceive(likeList)
+        }
     }
 
     override fun onPresenterCreate() {
@@ -40,7 +42,7 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
         if (likeList.isNotEmpty())
             view?.onDataReceive(likeList)
         else {
-            //TODO
+            view?.showNoShots()
         }
     }
 

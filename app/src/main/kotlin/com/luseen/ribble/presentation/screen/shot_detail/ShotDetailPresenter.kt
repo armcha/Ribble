@@ -5,6 +5,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.interactor.CommentInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
+import com.luseen.ribble.presentation.base_mvp.api.Status
 import javax.inject.Inject
 
 /**
@@ -17,10 +18,11 @@ class ShotDetailPresenter @Inject constructor(private val commentInteractor: Com
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        if (isRequestStarted) {
-            view?.showLoading()
-        } else
-            view?.onDataReceive(commentList)
+        when (status) {
+            Status.LOADING -> view?.showLoading()
+            Status.EMPTY -> view?.showNoComments()
+            else -> view?.onDataReceive(commentList)
+        }
     }
 
     override fun onPresenterCreate() {

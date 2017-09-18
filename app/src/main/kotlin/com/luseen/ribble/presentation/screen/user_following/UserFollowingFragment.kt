@@ -11,6 +11,7 @@ import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
+import com.luseen.ribble.utils.S
 import com.luseen.ribble.utils.isPortrait
 import com.luseen.ribble.utils.takeColor
 import kotlinx.android.synthetic.main.fragment_user_following.*
@@ -54,6 +55,10 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
 
     override fun showError(message: String?) {
         showErrorDialog(message)
+    }
+
+    override fun showNoShots() {
+        noShotsText.setAnimatedText(getString(S.no_shots))
     }
 
     override fun onShotListReceive(shotList: List<Shot>) {

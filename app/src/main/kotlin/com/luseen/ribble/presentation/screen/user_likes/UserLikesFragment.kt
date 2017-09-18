@@ -12,6 +12,7 @@ import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
+import com.luseen.ribble.utils.S
 import com.luseen.ribble.utils.takeColor
 import kotlinx.android.synthetic.main.fragment_user_likes.*
 import kotlinx.android.synthetic.main.progress_bar.*
@@ -52,6 +53,10 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
 
     override fun showError(message: String?) {
         showErrorDialog(message)
+    }
+
+    override fun showNoShots() {
+        noShotsText.setAnimatedText(getString(S.no_shots))
     }
 
     override fun onShotClicked(shot: Shot) {

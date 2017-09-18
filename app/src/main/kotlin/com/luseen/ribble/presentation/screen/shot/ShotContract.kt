@@ -13,6 +13,8 @@ interface ShotContract {
         fun onShotListReceive(shotList: List<Shot>)
 
         fun getShotType(): String
+
+        fun showNoShots()
     }
 
     interface Presenter : ApiContract.Presenter<View>

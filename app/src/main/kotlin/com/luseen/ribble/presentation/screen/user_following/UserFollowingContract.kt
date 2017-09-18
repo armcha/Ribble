@@ -11,6 +11,8 @@ interface UserFollowingContract {
     interface View : ApiContract.View {
 
         fun onShotListReceive(shotList: List<Shot>)
+
+        fun showNoShots()
     }
 
     interface Presenter : ApiContract.Presenter<View>

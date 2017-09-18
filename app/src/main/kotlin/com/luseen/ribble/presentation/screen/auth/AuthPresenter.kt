@@ -9,6 +9,7 @@ import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
+import com.luseen.ribble.presentation.base_mvp.api.Status
 import javax.inject.Inject
 
 /**
@@ -20,7 +21,7 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        if (isRequestStarted)
+        if (status == Status.LOADING)
             view?.showLoading()
     }
 

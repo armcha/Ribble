@@ -6,6 +6,7 @@ import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
+import com.luseen.ribble.presentation.base_mvp.api.Status
 import javax.inject.Inject
 
 /**
@@ -19,10 +20,11 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        if (isRequestStarted)
-            view?.showLoading()
-        else
-            view?.onShotListReceive(shotList)
+        when (status) {
+            Status.LOADING -> view?.showLoading()
+            Status.EMPTY -> view?.showNoShots()
+            else -> view?.onShotListReceive(shotList)
+        }
     }
 
     override fun onPresenterCreate() {
@@ -38,11 +40,11 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
     override fun onRequestSuccess(data: List<Shot>) {
         super.onRequestSuccess(data)
         this.shotList = data
+        view?.hideLoading()
         if (shotList.isNotEmpty()) {
             view?.onShotListReceive(shotList)
-            view?.hideLoading()
         } else {
-            //TODO
+            view?.showNoShots()
         }
     }
 

@@ -5,6 +5,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.ShotListInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
+import com.luseen.ribble.presentation.base_mvp.api.Status
 import javax.inject.Inject
 
 /**
@@ -17,10 +18,11 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        if (isRequestStarted)
-            view?.showLoading()
-        else
-            view?.onShotListReceive(shotList)
+        when (status) {
+            Status.LOADING -> view?.showLoading()
+            Status.EMPTY -> view?.showNoShots()
+            else -> view?.onShotListReceive(shotList)
+        }
     }
 
     override fun onPresenterCreate() {
@@ -42,6 +44,8 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
         view?.hideLoading()
         if (shotList.isNotEmpty()) {
             view?.onShotListReceive(shotList)
+        } else {
+            view?.showNoShots()
         }
     }
 

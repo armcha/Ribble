@@ -9,6 +9,7 @@ import com.luseen.ribble.presentation.adapter.ShotRecyclerViewAdapter
 import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
+import com.luseen.ribble.utils.S
 import com.luseen.ribble.utils.getExtraWithKey
 import com.luseen.ribble.utils.isPortrait
 import com.luseen.ribble.utils.takeColor
@@ -78,6 +79,10 @@ class ShotFragment : BaseFragment<ShotContract.View, ShotContract.Presenter>(),
 
     override fun showError(message: String?) {
         showErrorDialog(message)
+    }
+
+    override fun showNoShots() {
+        noShotsText.setAnimatedText(getString(S.no_shots))
     }
 
     override fun onShotListReceive(shotList: List<Shot>) {

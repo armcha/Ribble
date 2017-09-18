@@ -16,7 +16,7 @@ import com.luseen.ribble.utils.emptyString
 import javax.inject.Inject
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
-    : BaseMVPActivity<V, P>(), Navigator.FragmentChangeListener{
+    : BaseMVPActivity<V, P>(), Navigator.FragmentChangeListener {
 
     @Inject
     lateinit var navigator: Navigator

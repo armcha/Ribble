@@ -21,7 +21,6 @@ class App : Application() {
     }
 
     companion object {
-        @JvmStatic
         var instance = App()
     }
 

@@ -11,8 +11,8 @@ import com.luseen.ribble.utils.LorAbove
  * Created by Chatikyan on 14.09.2017.
  */
 
-fun TextView.leftIcon(colorId: Int) {
-    setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, colorId), null, null, null)
+fun TextView.leftIcon(drawableId: Int) {
+    setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, drawableId), null, null, null)
 }
 
 @SuppressLint("NewApi")

@@ -8,6 +8,8 @@ import com.luseen.ribble.BuildConfig
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
+import com.luseen.ribble.utils.C
+import com.luseen.ribble.utils.D
 import com.luseen.ribble.utils.S
 import com.luseen.ribble.utils.extensions.actionView
 import com.luseen.ribble.utils.extensions.iconTint
@@ -24,6 +26,7 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
     private val TWITTER = 1
     private val FACEBOOK = 2
     private val GITHUB = 3
+    private val INFO = 4
 
     @Inject
     protected lateinit var aboutPresenter: AboutPresenter
@@ -61,32 +64,29 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
                         id = current
                     }
                 }
-        appInfo.text = """${getString(S.app_name)} ${BuildConfig.VERSION_NAME}
+        with(appInfo) {
+            leftIcon(D.about)
+            iconTint(C.cyan)
+            text = """${getString(S.app_name)} ${BuildConfig.VERSION_NAME}
             |Copyright © 2014-2017
             |Arman Chatikyan""".trimMargin()
+            id = INFO
+            setOnClickListener(this@AboutFragment)
+        }
     }
 
     override fun onClick(view: View) {
         when (view.id) {
-            EMAIL -> {
-                context.sendEmail(getString(S.app_name), getString(S.mail), getString(S.sen_us_emial))
-            }
-            TWITTER -> {
-                context.actionView {
-                    "https://twitter.com/ArmanChatikyan"
-                }
-            }
-            FACEBOOK -> {
-                context.actionView {
-                    "https://web.facebook.com/chatikyana"
-                }
-            }
-            GITHUB -> {
-                context.actionView {
-                    "https://github.com/armcha/Ribble"
-                }
-            }
+            EMAIL -> context.sendEmail(getString(S.app_name), getString(S.mail), getString(S.sen_us_emial))
+            TWITTER -> actionView { S.twitter_url }
+            FACEBOOK -> actionView { S.facebook_url }
+            GITHUB -> actionView { S.githun_url }
+            INFO -> showDialog("Test title", "Test message","OK")
         }
+    }
+
+    private inline fun actionView(action: () -> Int) {
+        context.actionView { getString(action()) }
     }
 }
 

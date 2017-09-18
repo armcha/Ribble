@@ -51,6 +51,7 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
 
     override fun onRequestError(errorMessage: String?) {
         super.onRequestError(errorMessage)
+        view?.showNoShots()
         view?.showError(errorMessage)
         view?.hideLoading()
     }

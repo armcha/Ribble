@@ -50,6 +50,7 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
 
     override fun onRequestError(errorMessage: String?) {
         super.onRequestError(errorMessage)
+        view?.showNoShots()
         view?.hideLoading()
         view?.showError(errorMessage)
     }

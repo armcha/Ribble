@@ -27,7 +27,7 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        fetch(userInteractor.getUserLikes(count = 50))
+        fetch(userInteractor.getUserLikes(count = 100))
     }
 
     override fun onRequestStart() {
@@ -48,6 +48,7 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
 
     override fun onRequestError(errorMessage: String?) {
         super.onRequestError(errorMessage)
+        view?.showNoShots()
         view?.hideLoading()
         view?.showError(errorMessage)
     }

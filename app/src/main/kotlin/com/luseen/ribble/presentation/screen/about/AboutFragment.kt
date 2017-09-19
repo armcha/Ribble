@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.luseen.ribble.BuildConfig
+import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.C
@@ -32,10 +33,10 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
     protected lateinit var aboutPresenter: AboutPresenter
 
     private val items = mutableListOf(
-            AboutItem(S.email, D.email, C.colorAccent),
-            AboutItem(S.twitter, D.twitter, C.twitter),
-            AboutItem(S.facebook, D.facebook, C.facebook),
-            AboutItem(S.github, D.github, C.github)
+            AboutItem(S.email, R.drawable.email, C.colorAccent),
+            AboutItem(S.twitter, R.drawable.twitter, C.twitter),
+            AboutItem(S.facebook, R.drawable.facebook, C.facebook),
+            AboutItem(S.github, R.drawable.github, C.github)
     )
 
     override fun injectDependencies() {

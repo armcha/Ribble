@@ -40,13 +40,12 @@
                     android:layout_width="30dp"
                     android:layout_height="63dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="22dp"
                     android:contentDescription="@string/arc_view_image"
-                    android:src="@drawable/hamburger_to_arrow"
                     android:tint="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/toolbarTitle"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="24dp" />
+                    android:layout_marginLeft="22dp" />
 
                 <com.luseen.ribble.presentation.widget.AnimatedTextView
                     android:id="@+id/toolbarTitle"

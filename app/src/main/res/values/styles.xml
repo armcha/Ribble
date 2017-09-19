@@ -17,7 +17,7 @@
 
     <style name="AuthTheme" parent="AppTheme.NoActionBar" />
 
-    <style name="MaterialDialogSheet" parent="@android:style/Theme.Material.Light.Dialog">
+    <style name="MaterialDialogSheet" parent="@android:style/Theme.Dialog">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -26,4 +26,7 @@
         <item name="android:windowIsFloating">false</item>
     </style>
 
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
 </resources>

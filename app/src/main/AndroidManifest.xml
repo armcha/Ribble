@@ -15,13 +15,12 @@
         <activity
             android:name=".presentation.screen.home.HomeActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.screen.auth.AuthActivity"
             android:exported="true"
-            android:theme="@style/AuthTheme"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/AuthTheme">
             <intent-filter>
                 <data
                     android:host="dribbble-auth-callback"
@@ -33,7 +32,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.screen.dispatch.DispatchActivity">
+        <activity
+            android:name=".presentation.screen.dispatch.DispatchActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

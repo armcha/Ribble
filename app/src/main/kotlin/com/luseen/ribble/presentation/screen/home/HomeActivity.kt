@@ -15,7 +15,6 @@ import com.luseen.ribble.presentation.screen.user_following.UserFollowingFragmen
 import com.luseen.ribble.presentation.screen.user_likes.UserLikesFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItem
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItemSelectedListener
-import com.luseen.ribble.utils.D
 import com.luseen.ribble.utils.extensions.onClick
 import com.luseen.ribble.utils.extensions.showToast
 import com.luseen.ribble.utils.extensions.start
@@ -65,7 +64,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         arcView.onClick {
             super.onBackPressed()
         }
-        arcImage.setAnimatedImage(D.arrow_left)
+        arcImage.setAnimatedImage(R.drawable.arrow_left)
     }
 
     override fun setArcHamburgerIconState() {
@@ -73,7 +72,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
             arcView.onClick {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
-            arcImage.setAnimatedImage(D.equal)
+            arcImage.setAnimatedImage(R.drawable.hamb)
         }
     }
 

@@ -5,13 +5,13 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.CommentRecyclerAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.C
-import com.luseen.ribble.utils.D
 import com.luseen.ribble.utils.L
 import com.luseen.ribble.utils.S
 import com.luseen.ribble.utils.extensions.getExtraWithKey
@@ -68,13 +68,13 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
 
         //TODO move to attributes
         likeLayout.layoutText = shot.likesCount
-        likeLayout.imageResId = D.heart_full
+        likeLayout.imageResId = R.drawable.heart_full
         likeLayout.imageTint = C.colorPrimary
         viewCountLayout.layoutText = shot.viewsCount
-        viewCountLayout.imageResId = D.eye
+        viewCountLayout.imageResId = R.drawable.eye
         viewCountLayout.imageTint = C.cyan
         bucketLayout.layoutText = shot.bucketCount
-        bucketLayout.imageResId = D.bucket
+        bucketLayout.imageResId = R.drawable.bucket
         bucketLayout.imageTint = C.blue_gray
     }
 

@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.luseen.ribble.BuildConfig
-import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.C
 import com.luseen.ribble.utils.D
+import com.luseen.ribble.utils.L
 import com.luseen.ribble.utils.S
 import com.luseen.ribble.utils.extensions.actionView
 import com.luseen.ribble.utils.extensions.iconTint
@@ -32,17 +32,17 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
     protected lateinit var aboutPresenter: AboutPresenter
 
     private val items = mutableListOf(
-            AboutItem(R.string.email, R.drawable.email, R.color.colorAccent),
-            AboutItem(R.string.twitter, R.drawable.twitter, R.color.twitter),
-            AboutItem(R.string.facebook, R.drawable.facebook, R.color.facebook),
-            AboutItem(R.string.github, R.drawable.github, R.color.github)
+            AboutItem(S.email, D.email, C.colorAccent),
+            AboutItem(S.twitter, D.twitter, C.twitter),
+            AboutItem(S.facebook, D.facebook, C.facebook),
+            AboutItem(S.github, D.github, C.github)
     )
 
     override fun injectDependencies() {
         activityComponent.inject(this)
     }
 
-    override fun layoutResId() = R.layout.fragment_about
+    override fun layoutResId() = L.fragment_about
 
     override fun initPresenter() = aboutPresenter
 
@@ -81,7 +81,7 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
             TWITTER -> actionView { S.twitter_url }
             FACEBOOK -> actionView { S.facebook_url }
             GITHUB -> actionView { S.githun_url }
-            INFO -> showDialog("Test title", "Test message","OK")
+            INFO -> showDialog("Test title", "Test message", "OK")
         }
     }
 

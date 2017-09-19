@@ -12,7 +12,7 @@ import com.luseen.ribble.di.module.ActivityModule
 import com.luseen.ribble.presentation.navigation.Navigator
 import com.luseen.ribble.presentation.widget.MaterialDialog
 import com.luseen.ribble.utils.S
-import com.luseen.ribble.utils.emptyString
+import com.luseen.ribble.utils.extensions.emptyString
 import javax.inject.Inject
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
@@ -75,6 +75,6 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
     }
 
     fun showErrorDialog(message: String?, buttonText: String = "Close") {
-        showDialog(getString(S.error_title), message ?: emptyString(), buttonText)
+        showDialog(getString(S.error_title), message ?: emptyString, buttonText)
     }
 }

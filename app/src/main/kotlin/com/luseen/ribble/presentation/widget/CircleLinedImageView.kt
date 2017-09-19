@@ -7,7 +7,7 @@ import android.graphics.Paint
 import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import com.luseen.ribble.R
-import com.luseen.ribble.utils.toPx
+import com.luseen.ribble.utils.extensions.toPx
 
 /**
  * Created by Chatikyan on 27.08.2017.

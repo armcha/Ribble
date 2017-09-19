@@ -10,3 +10,4 @@ import com.luseen.ribble.R
 typealias S = R.string
 typealias C = R.color
 typealias D = R.drawable
+typealias L = R.layout

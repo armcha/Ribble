@@ -5,16 +5,19 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.CommentRecyclerAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
-import com.luseen.ribble.utils.getExtraWithKey
+import com.luseen.ribble.utils.C
+import com.luseen.ribble.utils.D
+import com.luseen.ribble.utils.L
+import com.luseen.ribble.utils.S
+import com.luseen.ribble.utils.extensions.getExtraWithKey
+import com.luseen.ribble.utils.extensions.takeColor
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.load
-import com.luseen.ribble.utils.takeColor
 import kotlinx.android.synthetic.main.fragment_shot_detail.*
 import javax.inject.Inject
 
@@ -40,7 +43,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
         activityComponent.inject(this)
     }
 
-    override fun layoutResId() = R.layout.fragment_shot_detail
+    override fun layoutResId() = L.fragment_shot_detail
 
     override fun initPresenter() = shotDetailPresenter
 
@@ -61,18 +64,18 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
             authorLocation.text = user.location
             authorImage.load(user.avatarUrl, TransformationType.CIRCLE)
         }
-        progressBar.backgroundCircleColor = takeColor(R.color.colorPrimary)
+        progressBar.backgroundCircleColor = takeColor(C.colorPrimary)
 
         //TODO move to attributes
         likeLayout.layoutText = shot.likesCount
-        likeLayout.imageResId = R.drawable.heart_full
-        likeLayout.imageTint = R.color.colorPrimary
+        likeLayout.imageResId = D.heart_full
+        likeLayout.imageTint = C.colorPrimary
         viewCountLayout.layoutText = shot.viewsCount
-        viewCountLayout.imageResId = R.drawable.eye
-        viewCountLayout.imageTint = R.color.cyan
+        viewCountLayout.imageResId = D.eye
+        viewCountLayout.imageTint = C.cyan
         bucketLayout.layoutText = shot.bucketCount
-        bucketLayout.imageResId = R.drawable.bucket
-        bucketLayout.imageTint = R.color.blue_gray
+        bucketLayout.imageResId = D.bucket
+        bucketLayout.imageTint = C.blue_gray
     }
 
     override fun onDataReceive(commentList: List<Comment>) {
@@ -84,7 +87,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     override fun showNoComments() {
-        noCommentsText.setAnimatedText(getString(R.string.no_comments_text))
+        noCommentsText.setAnimatedText(getString(S.no_comments_text))
     }
 
     override fun showLoading() {

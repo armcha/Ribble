@@ -10,7 +10,7 @@ import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.navigation.NavigationState
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
-import com.luseen.ribble.utils.emptyString
+import com.luseen.ribble.utils.extensions.emptyString
 import javax.inject.Inject
 
 /**
@@ -22,7 +22,7 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
 
     private var state: NavigationState? = null
     private var isArcIcon = false
-    private var activeTitle = emptyString()
+    private var activeTitle = emptyString
     private var user: User? = null
     private var currentNavigationSelectedItem = 0
 
@@ -59,7 +59,7 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
         val tag = if (fragment is BaseFragment<*, *>) {
             fragment.getTitle()
         } else {
-            emptyString()
+            emptyString
         }
 
         view?.setToolBarTitle(tag)

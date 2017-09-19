@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.luseen.ribble.utils.takeColor
+import com.luseen.ribble.utils.extensions.takeColor
 
 /**
  * Created by Chatikyan on 29.08.2017.

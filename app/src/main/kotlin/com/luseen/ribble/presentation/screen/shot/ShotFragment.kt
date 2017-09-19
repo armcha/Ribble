@@ -10,9 +10,9 @@ import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.utils.S
-import com.luseen.ribble.utils.getExtraWithKey
-import com.luseen.ribble.utils.isPortrait
-import com.luseen.ribble.utils.takeColor
+import com.luseen.ribble.utils.extensions.getExtraWithKey
+import com.luseen.ribble.utils.extensions.isPortrait
+import com.luseen.ribble.utils.extensions.takeColor
 import kotlinx.android.synthetic.main.fragment_shot.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import javax.inject.Inject

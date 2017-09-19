@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.adapter.AbstractAdapter
-import com.luseen.ribble.utils.inflate
-import com.luseen.ribble.utils.tint
+import com.luseen.ribble.utils.extensions.inflate
+import com.luseen.ribble.utils.extensions.tint
 import kotlinx.android.synthetic.main.navigation_view_item.view.*
 
 /**

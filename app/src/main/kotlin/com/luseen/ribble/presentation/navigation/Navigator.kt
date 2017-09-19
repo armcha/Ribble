@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import com.luseen.ribble.R
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.utils.extensions.log
-import com.luseen.ribble.utils.replaceValue
 import javax.inject.Inject
 
 /**
@@ -172,13 +171,17 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         runDebugLog()
     }
 
-    fun goToFirst() {
-        TODO()
-    }
-
     private inline fun FragmentManager.inTransaction(transaction: FragmentTransaction.() -> Unit) {
         val fragmentTransaction = this.beginTransaction()
         fragmentTransaction.transaction()
         fragmentTransaction.commitNow()
+    }
+
+
+    fun <K, V> MutableMap<K, V>.replaceValue(key: K, value: V?) {
+        this.remove(key)
+        value?.let {
+            this.put(key, value)
+        }
     }
 }

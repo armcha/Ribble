@@ -8,8 +8,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.luseen.ribble.R
-import com.luseen.ribble.utils.nonSafeLazy
-import com.luseen.ribble.utils.onClick
+import com.luseen.ribble.utils.extensions.nonSafeLazy
+import com.luseen.ribble.utils.extensions.onClick
 
 /**
  * Created by Chatikyan on 10.09.2017.

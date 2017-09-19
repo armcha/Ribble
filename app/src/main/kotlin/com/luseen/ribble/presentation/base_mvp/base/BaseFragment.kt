@@ -10,7 +10,7 @@ import com.luseen.arch.BaseMVPFragment
 import com.luseen.ribble.R
 import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.presentation.navigation.Navigator
-import com.luseen.ribble.utils.emptyString
+import com.luseen.ribble.utils.extensions.emptyString
 import javax.inject.Inject
 
 /**
@@ -45,7 +45,7 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     protected abstract fun layoutResId(): Int
 
-    open fun getTitle(): String = emptyString()
+    open fun getTitle(): String = emptyString
 
     open fun onBack(): Boolean {
         return false
@@ -56,6 +56,6 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
     }
 
     fun showErrorDialog(message: String?, buttonText: String = "Close") {
-        activity.showDialog(getString(R.string.error_title), message ?: emptyString(), buttonText)
+        activity.showDialog(getString(R.string.error_title), message ?: emptyString, buttonText)
     }
 }

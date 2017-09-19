@@ -2,7 +2,7 @@ package com.luseen.ribble.data.mapper
 
 import com.luseen.ribble.data.response.*
 import com.luseen.ribble.domain.entity.*
-import com.luseen.ribble.utils.emptyString
+import com.luseen.ribble.utils.extensions.emptyString
 
 /**
  * Created by Chatikyan on 03.08.2017.
@@ -32,16 +32,16 @@ class Mapper {
 
     fun translate(userResponse: UserResponse?): User {
         return User(userResponse?.name,
-                userResponse?.avatarUrl ?: emptyString(),
+                userResponse?.avatarUrl ?: emptyString,
                 userResponse?.username,
-                userResponse?.location ?: emptyString())
+                userResponse?.location ?: emptyString)
     }
 
     private fun translate(imageResponse: ImageResponse?): Image {
         return imageResponse.let {
-            Image(imageResponse?.small ?: emptyString(),
-                    imageResponse?.normal ?: emptyString(),
-                    imageResponse?.big ?: emptyString())
+            Image(imageResponse?.small ?: emptyString,
+                    imageResponse?.normal ?: emptyString,
+                    imageResponse?.big ?: emptyString)
         }
     }
 

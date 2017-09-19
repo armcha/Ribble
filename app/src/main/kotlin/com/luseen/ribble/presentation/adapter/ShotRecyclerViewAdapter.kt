@@ -6,8 +6,8 @@ import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.holder.ShotViewHolder
 import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
+import com.luseen.ribble.utils.extensions.inflate
 import com.luseen.ribble.utils.glide.clear
-import com.luseen.ribble.utils.inflate
 import kotlinx.android.synthetic.main.shot_item.view.*
 
 /**

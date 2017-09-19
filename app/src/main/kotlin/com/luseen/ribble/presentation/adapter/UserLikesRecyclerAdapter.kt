@@ -6,7 +6,7 @@ import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.presentation.adapter.holder.UserLikesViewHolder
 import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
-import com.luseen.ribble.utils.inflate
+import com.luseen.ribble.utils.extensions.inflate
 
 /**
  * Created by Chatikyan on 15.08.2017.

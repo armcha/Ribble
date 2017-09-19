@@ -5,7 +5,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import com.luseen.ribble.R
-import com.luseen.ribble.utils.takeColor
+import com.luseen.ribble.utils.extensions.takeColor
 
 class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 

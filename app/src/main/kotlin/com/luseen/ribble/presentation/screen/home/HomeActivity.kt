@@ -16,11 +16,11 @@ import com.luseen.ribble.presentation.screen.user_likes.UserLikesFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItem
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItemSelectedListener
 import com.luseen.ribble.utils.D
+import com.luseen.ribble.utils.extensions.onClick
+import com.luseen.ribble.utils.extensions.showToast
+import com.luseen.ribble.utils.extensions.start
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.load
-import com.luseen.ribble.utils.onClick
-import com.luseen.ribble.utils.showToast
-import com.luseen.ribble.utils.start
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*

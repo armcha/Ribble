@@ -1,12 +1,12 @@
 package com.luseen.ribble.presentation.widget.navigation_view
 
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
-import com.luseen.ribble.utils.emptyString
+import com.luseen.ribble.utils.extensions.emptyString
 
 /**
  * Created by Chatikyan on 21.08.2017.
  */
-sealed class NavigationId(val name: String = emptyString(), val fullName: String = emptyString()) {
+sealed class NavigationId(val name: String = emptyString, val fullName: String = emptyString) {
 
     object SHOT : NavigationId("SHOT")
     object USER_LIKES : NavigationId("USER LIKES")

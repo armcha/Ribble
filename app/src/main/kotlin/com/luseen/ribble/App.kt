@@ -6,7 +6,7 @@ import com.luseen.logger.Logger
 import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.component.DaggerApplicationComponent
 import com.luseen.ribble.di.module.ApplicationModule
-import com.luseen.ribble.utils.nonSafeLazy
+import com.luseen.ribble.utils.extensions.nonSafeLazy
 import com.squareup.leakcanary.LeakCanary
 
 /**

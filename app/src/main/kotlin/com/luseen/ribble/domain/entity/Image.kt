@@ -3,7 +3,7 @@ package com.luseen.ribble.domain.entity
 import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
-import com.luseen.ribble.utils.emptyString
+import com.luseen.ribble.utils.extensions.emptyString
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -11,9 +11,9 @@ import kotlinx.android.parcel.Parcelize
  */
 @SuppressLint("ParcelCreator")
 @Parcelize
-data class Image(val small: String = emptyString(),
-                 val normal: String = emptyString(),
-                 val big: String = emptyString()) : Parcelable {
+data class Image(val small: String = emptyString,
+                 val normal: String = emptyString,
+                 val big: String = emptyString) : Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),

@@ -7,9 +7,14 @@ import android.view.View
  */
 class RibbleAdapter<ITEM>(items: List<ITEM>,
                           layoutResId: Int,
-                          private val bindHolder: View.(ITEM) -> Unit) : AbstractAdapter<ITEM>(items, layoutResId) {
+                          private val bindHolder: View.(ITEM) -> Unit,
+                          private val itemClick: ITEM.() -> Unit = {}) : AbstractAdapter<ITEM>(items, layoutResId) {
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.itemView.bindHolder(itemList[position])
+    }
+
+    override fun onItemClick(itemView: View, position: Int) {
+        itemList[position].itemClick()
     }
 }

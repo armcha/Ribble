@@ -8,16 +8,16 @@ import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.entity.Shot
-import com.luseen.ribble.presentation.adapter.CommentRecyclerAdapter
+import com.luseen.ribble.presentation.adapter.RibbleAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.C
 import com.luseen.ribble.utils.L
 import com.luseen.ribble.utils.S
-import com.luseen.ribble.utils.extensions.getExtraWithKey
-import com.luseen.ribble.utils.extensions.takeColor
+import com.luseen.ribble.utils.extensions.*
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.load
+import kotlinx.android.synthetic.main.comment_item.view.*
 import kotlinx.android.synthetic.main.fragment_shot_detail.*
 import javax.inject.Inject
 
@@ -36,7 +36,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     @Inject
     protected lateinit var shotDetailPresenter: ShotDetailPresenter
 
-    private var recyclerAdapter: CommentRecyclerAdapter? = null
+    private var recyclerAdapter: RibbleAdapter<Comment>? = null
     private lateinit var shot: Shot
 
     override fun injectDependencies() {
@@ -107,7 +107,20 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     private infix fun setUpRecyclerView(commentList: List<Comment>) {
-        recyclerAdapter = CommentRecyclerAdapter(commentList)
+
+        recyclerAdapter = RibbleAdapter(commentList, R.layout.comment_item) {
+            comment.text = it.comment?.toHtml()
+            commentAuthor.text = it.user?.username
+            userImage.load(it.user?.avatarUrl, TransformationType.CIRCLE)
+            userCommentLikeCount.text = it.likeCount.toString()
+
+            onClick {
+                log {
+                    "${it.comment}"
+                }
+            }
+        }
+
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = recyclerAdapter
     }

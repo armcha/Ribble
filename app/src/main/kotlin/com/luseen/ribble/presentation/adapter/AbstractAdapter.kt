@@ -50,7 +50,9 @@ abstract class AbstractAdapter<ITEM> constructor(protected var itemList: List<IT
     protected open fun onItemClick(itemView: View, position: Int) {
     }
 
-    abstract fun View.bind(item: ITEM)
+    open fun View.bind(item: ITEM){
+        //NO-OP
+    }
 
     class Holder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

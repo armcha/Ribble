@@ -48,6 +48,10 @@ fun View.hide() {
     this.visibility = View.GONE
 }
 
+fun View.invisible() {
+    this.visibility = View.INVISIBLE
+}
+
 fun View.onClick(function: () -> Unit) {
     this.setOnClickListener {
         function()
@@ -60,3 +64,5 @@ infix fun ViewGroup.inflate(layoutResId: Int): View =
 fun ImageView.tint(colorId: Int) {
     this.setColorFilter(this.context.takeColor(colorId), PorterDuff.Mode.SRC_IN)
 }
+
+operator fun ViewGroup.get(index: Int): View = getChildAt(index)

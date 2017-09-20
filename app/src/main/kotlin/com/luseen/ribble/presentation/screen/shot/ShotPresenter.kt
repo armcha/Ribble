@@ -20,7 +20,7 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
     fun onStart() {
         when (status) {
             Status.LOADING -> view?.showLoading()
-            Status.EMPTY -> view?.showNoShots()
+            Status.EMPTY, Status.ERROR -> view?.showNoShots()
             else -> view?.onShotListReceive(shotList)
         }
     }
@@ -51,8 +51,9 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
 
     override fun onRequestError(errorMessage: String?) {
         super.onRequestError(errorMessage)
+        if (view?.getShotType() == TYPE_POPULAR)
+            view?.showError(errorMessage)
         view?.showNoShots()
-        view?.showError(errorMessage)
         view?.hideLoading()
     }
 }

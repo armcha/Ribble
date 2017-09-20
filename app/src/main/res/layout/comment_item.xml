@@ -18,21 +18,23 @@
             android:id="@+id/userImage"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginBottom="12dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/comment_user_image"
             android:scaleType="centerCrop"
             android:src="@drawable/hello_dribble"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/commentAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="14dp"
-            android:text="Arman Chatikyan"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -44,11 +46,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="14dp"
-            android:text="5 min ago"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/comment"
             app:layout_constraintStart_toEndOf="@+id/commentAuthor"
             app:layout_constraintTop_toTopOf="parent" />
@@ -58,9 +61,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,17 +73,18 @@
             app:layout_constraintTop_toBottomOf="@+id/commentAuthor" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/heartImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
             android:layout_marginTop="4dp"
+            android:tint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comment"
             app:layout_constraintVertical_bias="0.0"
-            android:tint="@color/colorAccent"
             app:srcCompat="@drawable/heart_full" />
 
         <TextView
@@ -88,15 +93,16 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             android:layout_marginEnd="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="0dp"
             android:layout_marginStart="8dp"
-            android:text="256"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/heartImage"
+            app:layout_constraintTop_toTopOf="@+id/heartImage"
             app:layout_constraintVertical_bias="0.16000003" />
 
     </android.support.constraint.ConstraintLayout>

@@ -19,6 +19,8 @@ class AnimatedTextView : AppCompatTextView, AnimatedView {
     }
 
     private fun changeText(newText: CharSequence, startDelay: Long) {
+        if (text == newText)
+            return
         animate(view = this, startDelay = startDelay) {
             text = newText
         }

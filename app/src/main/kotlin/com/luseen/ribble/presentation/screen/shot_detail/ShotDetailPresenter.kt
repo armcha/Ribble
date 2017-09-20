@@ -20,7 +20,7 @@ class ShotDetailPresenter @Inject constructor(private val commentInteractor: Com
     fun onStart() {
         when (status) {
             Status.LOADING -> view?.showLoading()
-            Status.EMPTY -> view?.showNoComments()
+            Status.EMPTY, Status.ERROR -> view?.showNoComments()
             else -> view?.onDataReceive(commentList)
         }
     }

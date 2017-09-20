@@ -3,7 +3,6 @@ package com.luseen.ribble.presentation.adapter
 import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Comment
-import com.luseen.ribble.utils.extensions.toHtml
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.clear
 import com.luseen.ribble.utils.glide.load
@@ -21,7 +20,7 @@ class CommentRecyclerAdapter constructor(
     }
 
     override fun View.bind(item: Comment) {
-        comment.text = item.comment?.toHtml()
+        comment.text = item.commentText
         with(item) {
             commentAuthor.text = user?.username
             userImage.load(user?.avatarUrl, TransformationType.CIRCLE)

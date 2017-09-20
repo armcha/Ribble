@@ -19,8 +19,11 @@ class AnimatedImageView : AppCompatImageView, AnimatedView {
     }
 
     private fun changeImage(newImage: Int, startDelay: Long) {
+        if (tag == newImage)
+            return
         animate(view = this, startDelay = startDelay) {
             setImageResource(newImage)
+            tag = newImage
         }
     }
 }

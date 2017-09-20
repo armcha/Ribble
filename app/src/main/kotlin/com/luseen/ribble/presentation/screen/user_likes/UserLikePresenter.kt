@@ -20,8 +20,8 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
     fun onStart() {
         when (status) {
             Status.LOADING -> view?.showLoading()
-            Status.EMPTY -> view?.showNoShots()
-            else ->  view?.onDataReceive(likeList)
+            Status.EMPTY, Status.ERROR -> view?.showNoShots()
+            else -> view?.onDataReceive(likeList)
         }
     }
 

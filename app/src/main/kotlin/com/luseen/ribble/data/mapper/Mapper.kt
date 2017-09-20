@@ -11,23 +11,32 @@ class Mapper {
 
     @JvmName("translateShotEntity")
     fun translate(shotResponseList: List<ShotResponse>): List<Shot> {
-        return shotResponseList.map {
-            translate(it)
-        }
+        return shotResponseList
+                .asSequence()
+                .map {
+                    translate(it)
+                }
+                .toList()
     }
 
     @JvmName("translateLikeEntity")
     fun translate(likeResponseList: List<LikeResponse>): List<Like> {
-        return likeResponseList.map {
-            Like(it.id, translate(it.shotResponse))
-        }
+        return likeResponseList
+                .asSequence()
+                .map {
+                    Like(it.id, translate(it.shotResponse))
+                }
+                .toList()
     }
 
     @JvmName("translateCommentEntity")
     fun translate(commentResponseList: List<CommentResponse>): List<Comment> {
-        return commentResponseList.map {
-            Comment(it.comment, translate(it.user),it.likesCount)
-        }
+        return commentResponseList
+                .asSequence()
+                .map {
+                    Comment(it.comment, translate(it.user), it.likesCount, it.createdAt)
+                }
+                .toList()
     }
 
     fun translate(userResponse: UserResponse?): User {

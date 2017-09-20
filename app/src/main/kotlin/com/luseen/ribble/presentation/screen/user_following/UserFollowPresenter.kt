@@ -22,7 +22,7 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
     fun onStart() {
         when (status) {
             Status.LOADING -> view?.showLoading()
-            Status.EMPTY -> view?.showNoShots()
+            Status.EMPTY,Status.ERROR -> view?.showNoShots()
             else -> view?.onShotListReceive(shotList)
         }
     }

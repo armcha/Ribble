@@ -65,3 +65,5 @@ fun <T> nonSafeLazy(initializer: () -> T): Lazy<T> {
     }
 }
 
+fun Int.isZero(): Boolean = this == 0
+

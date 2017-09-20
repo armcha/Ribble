@@ -33,10 +33,10 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
     protected lateinit var aboutPresenter: AboutPresenter
 
     private val items = mutableListOf(
-            AboutItem(S.email, R.drawable.email, C.colorAccent),
-            AboutItem(S.twitter, R.drawable.twitter, C.twitter),
-            AboutItem(S.facebook, R.drawable.facebook, C.facebook),
-            AboutItem(S.github, R.drawable.github, C.github)
+            Triple(S.email, R.drawable.email, C.colorAccent),
+            Triple(S.twitter, R.drawable.twitter, C.twitter),
+            Triple(S.facebook, R.drawable.facebook, C.facebook),
+            Triple(S.github, R.drawable.github, C.github)
     )
 
     override fun injectDependencies() {
@@ -90,5 +90,3 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
         context.actionView { getString(action()) }
     }
 }
-
-data class AboutItem(val stringResId: Int, val icon: Int, val tintColor: Int = 0)

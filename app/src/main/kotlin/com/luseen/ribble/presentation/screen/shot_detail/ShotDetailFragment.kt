@@ -1,22 +1,25 @@
 package com.luseen.ribble.presentation.screen.shot_detail
 
 
+import android.animation.StateListAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
+import android.text.method.LinkMovementMethod
 import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.presentation.adapter.RibbleAdapter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
+import com.luseen.ribble.presentation.widget.TextImageLayout
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
 import com.luseen.ribble.utils.C
 import com.luseen.ribble.utils.L
 import com.luseen.ribble.utils.S
-import com.luseen.ribble.utils.extensions.getExtraWithKey
-import com.luseen.ribble.utils.extensions.takeColor
-import com.luseen.ribble.utils.extensions.toHtml
+import com.luseen.ribble.utils.extensions.*
 import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.load
 import kotlinx.android.synthetic.main.comment_item.view.*
@@ -34,6 +37,11 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
             return bundle
         }
     }
+
+    private val items = listOf(
+            Pair(R.drawable.heart_full, C.colorPrimary),
+            Pair(R.drawable.eye, C.cyan),
+            Pair(R.drawable.bucket, C.blue_gray))
 
     @Inject
     protected lateinit var shotDetailPresenter: ShotDetailPresenter
@@ -69,15 +77,17 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
         progressBar.backgroundCircleColor = takeColor(C.colorPrimary)
 
         //TODO move to attributes
+        (0 until linearLayout.childCount)
+                .map { linearLayout[it] }
+                .map { it as TextImageLayout }
+                .forEachIndexed { index, child ->
+                    val (image, color) = items[index]
+                    child.imageResId = image
+                    child.imageTint = color
+                }
         likeLayout.layoutText = shot.likesCount
-        likeLayout.imageResId = R.drawable.heart_full
-        likeLayout.imageTint = C.colorPrimary
         viewCountLayout.layoutText = shot.viewsCount
-        viewCountLayout.imageResId = R.drawable.eye
-        viewCountLayout.imageTint = C.cyan
         bucketLayout.layoutText = shot.bucketCount
-        bucketLayout.imageResId = R.drawable.bucket
-        bucketLayout.imageTint = C.blue_gray
     }
 
     override fun onDataReceive(commentList: List<Comment>) {
@@ -89,7 +99,19 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     override fun showNoComments() {
+        lockAppBar()
         noCommentsText.setAnimatedText(getString(S.no_comments_text))
+    }
+
+    @SuppressLint("NewApi")
+    private fun lockAppBar() {
+        if (isPortrait()) {
+            val params = scrollingView.layoutParams as AppBarLayout.LayoutParams
+            params.scrollFlags = 0
+            LorAbove {
+                appBarLayout.stateListAnimator = StateListAnimator()
+            }
+        }
     }
 
     override fun showLoading() {
@@ -111,10 +133,19 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     private infix fun setUpRecyclerView(commentList: List<Comment>) {
 
         recyclerAdapter = RibbleAdapter(commentList, R.layout.comment_item, {
-            comment.text = it.comment?.toHtml()
+            commentDate.text = it.commentDate
+            comment.text = it.commentText
+            comment.movementMethod = LinkMovementMethod.getInstance()
             commentAuthor.text = it.user?.username
             userImage.load(it.user?.avatarUrl, TransformationType.CIRCLE)
-            userCommentLikeCount.text = it.likeCount.toString()
+            if (it.likeCount.isZero()) {
+                userCommentLikeCount.invisible()
+                heartImage.invisible()
+            } else {
+                heartImage.show()
+                userCommentLikeCount.show()
+                userCommentLikeCount.text = it.likeCount.toString()
+            }
         })
 
         recyclerView.layoutManager = LinearLayoutManager(activity)

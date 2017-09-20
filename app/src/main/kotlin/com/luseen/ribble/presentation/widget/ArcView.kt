@@ -3,11 +3,11 @@ package com.luseen.ribble.presentation.widget
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.widget.FrameLayout
+import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.utils.extensions.takeColor
 
-class ArcView constructor(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
+class ArcView constructor(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private val SHADOW_OFFSET = 15F
     private val START_ANGLE = 270F

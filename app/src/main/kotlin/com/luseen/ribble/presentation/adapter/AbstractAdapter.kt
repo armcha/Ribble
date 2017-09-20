@@ -3,19 +3,22 @@ package com.luseen.ribble.presentation.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import com.luseen.ribble.utils.extensions.inflate
 
 /**
  * Created by Chatikyan on 14.08.2017.
  */
-abstract class AbstractAdapter<HOLDER : RecyclerView.ViewHolder, ITEM>
-constructor(protected var itemList: List<ITEM>) : RecyclerView.Adapter<HOLDER>() {
+abstract class AbstractAdapter<ITEM> constructor(protected var itemList: List<ITEM>,
+                                                 private val layoutResId: Int)
+    : RecyclerView.Adapter<AbstractAdapter.Holder>() {
 
     override fun getItemCount(): Int {
         return itemList.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HOLDER {
-        val viewHolder = createViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        val view = parent inflate layoutResId
+        val viewHolder = Holder(view)
         val itemView = viewHolder.itemView
         itemView.setOnClickListener {
             val adapterPosition = viewHolder.adapterPosition
@@ -26,28 +29,28 @@ constructor(protected var itemList: List<ITEM>) : RecyclerView.Adapter<HOLDER>()
         return viewHolder
     }
 
-    override fun onBindViewHolder(holder: HOLDER, position: Int) {
+    override fun onBindViewHolder(holder: AbstractAdapter.Holder, position: Int) {
         val item = itemList[position]
-        onBind(holder, item)
+        holder.itemView.bind(item)
     }
 
     fun update(itemList: List<ITEM>) {
         this.itemList = itemList
-        notifyDataSetChanged()
+        notifyDataSetChanged()//TODO
     }
 
-    final override fun onViewRecycled(holder: HOLDER) {
+    final override fun onViewRecycled(holder: AbstractAdapter.Holder) {
         super.onViewRecycled(holder)
         onViewRecycled(holder.itemView)
     }
-
-    protected abstract fun onBind(holder: HOLDER, item: ITEM)
-
-    protected abstract fun createViewHolder(parent: ViewGroup): HOLDER
 
     protected open fun onViewRecycled(itemView: View) {
     }
 
     protected open fun onItemClick(itemView: View, position: Int) {
     }
+
+    abstract fun View.bind(item: ITEM)
+
+    class Holder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

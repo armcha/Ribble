@@ -9,9 +9,9 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:elevation="0dp"
         android:background="@android:color/transparent"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -31,27 +31,30 @@
                     android:id="@+id/arcView"
                     android:layout_width="85dp"
                     android:layout_height="63dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="5dp"
-                    android:background="@android:color/white"/>
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.luseen.ribble.presentation.widget.AnimatedImageView
                     android:id="@+id/arcImage"
                     android:layout_width="30dp"
-                    android:layout_height="63dp"
+                    android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="22dp"
                     android:contentDescription="@string/arc_view_image"
                     android:tint="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/toolbarTitle"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="22dp" />
+                    app:layout_constraintTop_toTopOf="@+id/toolbarTitle"
+                    app:layout_constraintVertical_bias="0.48000002" />
 
                 <com.luseen.ribble.presentation.widget.AnimatedTextView
                     android:id="@+id/toolbarTitle"
                     android:layout_width="0dp"
-                    android:layout_height="63dp"
-                    android:layout_marginBottom="11dp"
+                    android:layout_height="0dp"
                     android:layout_marginEnd="8dp"
                     android:ellipsize="end"
                     android:gravity="center"

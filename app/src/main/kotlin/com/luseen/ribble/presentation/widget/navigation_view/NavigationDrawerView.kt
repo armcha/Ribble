@@ -34,8 +34,8 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
 
     private var attr: AttributeSet? = null
     private var currentSelectedItem: Int = 0
-    private val adapter by lazy {
-        NavigationViewAdapter(itemList)
+    private val adapter by nonSafeLazy {
+        NavigationViewAdapter(itemList,this)
     }
     private val recyclerView by nonSafeLazy {
         RecyclerView(context).apply {
@@ -57,9 +57,7 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
                 ViewGroup.LayoutParams.MATCH_PARENT)
         layoutParams.topMargin = context.resources.getDimension(R.dimen.nav_header_height).toInt()
         recyclerView.layoutParams = layoutParams
-        adapter.itemClickListener = this
         recyclerView.adapter = adapter
-
         addView(recyclerView)
     }
 

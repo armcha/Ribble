@@ -1,12 +1,12 @@
 package com.luseen.ribble.presentation.adapter
 
 import android.view.View
-import android.view.ViewGroup
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Comment
-import com.luseen.ribble.presentation.adapter.holder.CommentViewHolder
-import com.luseen.ribble.utils.extensions.inflate
+import com.luseen.ribble.utils.extensions.toHtml
+import com.luseen.ribble.utils.glide.TransformationType
 import com.luseen.ribble.utils.glide.clear
+import com.luseen.ribble.utils.glide.load
 import kotlinx.android.synthetic.main.comment_item.view.*
 
 /**
@@ -14,18 +14,18 @@ import kotlinx.android.synthetic.main.comment_item.view.*
  */
 class CommentRecyclerAdapter constructor(
         commentList: List<Comment>)
-    : AbstractAdapter<CommentViewHolder, Comment>(commentList) {
-
-    override fun onBind(holder: CommentViewHolder, item: Comment) {
-        holder.bind(item)
-    }
-
-    override fun createViewHolder(parent: ViewGroup): CommentViewHolder {
-        val view = parent inflate R.layout.comment_item
-        return CommentViewHolder(view)
-    }
+    : AbstractAdapter<Comment>(commentList, R.layout.comment_item) {
 
     override fun onViewRecycled(itemView: View) {
         itemView.userImage.clear()
+    }
+
+    override fun View.bind(item: Comment) {
+        comment.text = item.comment?.toHtml()
+        with(item) {
+            commentAuthor.text = user?.username
+            userImage.load(user?.avatarUrl, TransformationType.CIRCLE)
+            userCommentLikeCount.text = item.likeCount.toString()
+        }
     }
 }

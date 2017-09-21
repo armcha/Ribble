@@ -3,6 +3,9 @@ package com.luseen.ribble.data.mapper
 import com.luseen.ribble.data.response.*
 import com.luseen.ribble.domain.entity.*
 import com.luseen.ribble.utils.extensions.emptyString
+import com.luseen.ribble.utils.extensions.toHtml
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by Chatikyan on 03.08.2017.
@@ -34,7 +37,8 @@ class Mapper {
         return commentResponseList
                 .asSequence()
                 .map {
-                    Comment(it.comment, translate(it.user), it.likesCount, it.createdAt)
+                    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+                    Comment(it.comment?.toHtml(), translate(it.user), it.likesCount, format.parse(it.createdAt))
                 }
                 .toList()
     }

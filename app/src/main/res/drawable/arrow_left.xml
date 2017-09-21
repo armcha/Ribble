@@ -1,8 +1,13 @@
-<!-- drawable/arrow_left.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:height="24dp"
-    android:width="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-    <path android:fillColor="#000" android:pathData="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+    android:width="14.8dp"
+    android:height="16.7dp"
+    android:viewportHeight="56.7"
+    android:viewportWidth="54.8">
+
+    <path
+        android:fillColor="#fff"
+        android:pathData="M36.6,51.3 C36,51.3,35.5,51.1,35,50.8 L9.5,32.4 C7.3,30.8,7.3,27.6,9.5,26
+L35,7.1 C36.3,6.2,38.1,6.5,38.9,7.8 C39.7,9,39.3,10.7,38.1,11.6 L14.5,29.2
+L38.1,46.2 C39.3,47.1,39.7,48.9,38.8,50.2 C38.3,50.9,37.5,51.3,36.6,51.3 Z" />
 </vector>

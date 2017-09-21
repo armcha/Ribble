@@ -40,16 +40,18 @@
 
                 <com.luseen.ribble.presentation.widget.AnimatedImageView
                     android:id="@+id/arcImage"
-                    android:layout_width="30dp"
+                    android:layout_width="28dp"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="2dp"
                     android:layout_marginStart="22dp"
                     android:contentDescription="@string/arc_view_image"
                     android:tint="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/toolbarTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/toolbarTitle"
-                    app:layout_constraintVertical_bias="0.48000002" />
+                    app:layout_constraintVertical_bias="0.50"
+                    android:layout_marginLeft="22dp" />
 
                 <com.luseen.ribble.presentation.widget.AnimatedTextView
                     android:id="@+id/toolbarTitle"
@@ -58,7 +60,7 @@
                     android:layout_marginEnd="8dp"
                     android:ellipsize="end"
                     android:gravity="center"
-                    android:maxLength="20"
+                    android:maxLength="19"
                     android:maxLines="1"
                     android:textAllCaps="true"
                     android:textColor="@android:color/black"

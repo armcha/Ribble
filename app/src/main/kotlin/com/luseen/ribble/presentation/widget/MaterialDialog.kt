@@ -5,11 +5,14 @@ import android.animation.AnimatorListenerAdapter
 import android.app.Dialog
 import android.content.Context
 import android.view.View
+import android.view.ViewPropertyAnimator
 import android.widget.Button
 import android.widget.TextView
 import com.luseen.ribble.R
+import com.luseen.ribble.utils.AnimationUtils
 import com.luseen.ribble.utils.extensions.nonSafeLazy
 import com.luseen.ribble.utils.extensions.onClick
+import com.luseen.ribble.utils.extensions.scale
 
 /**
  * Created by Chatikyan on 10.09.2017.
@@ -55,13 +58,12 @@ class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogS
         val view = findViewById<View>(R.id.container)
         with(view) {
             alpha = 0F
-            scaleY = 0.80F
-            scaleX = 0.80F
+            scale = 0.8F
             animate()
-                    .scaleY(1F)
-                    .scaleX(1F)
+                    .scale(1F)
                     .alpha(1F)
                     .setDuration(130)
+                    .setInterpolator(AnimationUtils.FAST_OUT_LINEAR_IN_INTERPOLATOR)
                     .withLayer()
                     .start()
         }
@@ -71,10 +73,10 @@ class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogS
         val view = findViewById<View>(R.id.container)
         with(view) {
             animate()
-                    .scaleY(0.88F)
-                    .scaleX(0.88F)
+                    .scale(1F)
                     .alpha(0F)
-                    .setDuration(150)
+                    .setInterpolator(AnimationUtils.FAST_OUT_LINEAR_IN_INTERPOLATOR)
+                    .setDuration(140)
                     .setListener(object : AnimatorListenerAdapter() {
                         override fun onAnimationEnd(animation: Animator?) {
                             this@MaterialDialog.dismiss()
@@ -82,5 +84,11 @@ class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogS
                     })
                     .start()
         }
+    }
+
+    private fun ViewPropertyAnimator.scale(scale: Float): ViewPropertyAnimator {
+        scaleX(scale)
+        scaleY(scale)
+        return this
     }
 }

@@ -1,99 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
 
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/cardView"
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="3dp"
-        app:cardUseCompatPadding="true">
+        android:layout_height="wrap_content">
 
-        <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/shotImage"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:contentDescription="@string/liked_shot_image"
+            android:scaleType="centerCrop" />
 
-            <ImageView
-                android:id="@+id/shotImage"
-                android:layout_width="150dp"
-                android:layout_height="130dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/liked_shot_image" />
+        <TextView
+            android:id="@+id/shotTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxWidth="200dp"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/shotImage"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/shotTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:ellipsize="end"
-                android:lines="1"
-                android:maxWidth="200dp"
-                android:text="Hello Dribble"
-                android:textAllCaps="true"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/shotImage"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/shotAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/shotTitle"
+            app:layout_constraintTop_toBottomOf="@+id/shotTitle" />
 
-            <TextView
-                android:id="@+id/shotAuthor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="8dp"
-                android:text="by Arman"
-                android:textColor="@color/colorAccent"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/shotTitle"
-                app:layout_constraintTop_toBottomOf="@+id/shotTitle" />
+        <ImageView
+            android:id="@+id/shotLikeIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:tint="@color/colorAccent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.921"
+            app:layout_constraintStart_toEndOf="@+id/shotAuthor"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.49"
+            app:srcCompat="@drawable/heart_full"
+            tools:ignore="ContentDescription" />
 
-            <ImageView
-                android:id="@+id/shotLikeIcon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.921"
-                app:layout_constraintStart_toEndOf="@+id/shotAuthor"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="gone"
-                android:tint="@color/colorAccent"
-                app:layout_constraintVertical_bias="0.49"
-                app:srcCompat="@drawable/heart_full" />
-
-            <ImageView
-                android:id="@+id/likeCountIcon"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginBottom="8dp"
-                android:tint="@color/colorAccent"
-                app:layout_constraintBottom_toBottomOf="@+id/shotImage"
-                app:layout_constraintStart_toStartOf="@+id/shotAuthor"
-                app:srcCompat="@drawable/heart_full" />
-
-            <TextView
-                android:id="@+id/likeCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_marginStart="4dp"
-                android:text="4598"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/likeCountIcon"
-                app:layout_constraintStart_toEndOf="@+id/likeCountIcon" />
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
-</FrameLayout>
+        <TextView
+            android:id="@+id/likeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:drawableLeft="@drawable/heart_full"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/heart_full"
+            android:gravity="center"
+            android:textColor="@color/blue_gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/shotImage"
+            app:layout_constraintStart_toStartOf="@+id/shotAuthor" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

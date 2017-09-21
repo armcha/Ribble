@@ -19,6 +19,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginBottom="12dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:contentDescription="@string/comment_user_image"
@@ -72,38 +73,22 @@
             app:layout_constraintStart_toEndOf="@+id/userImage"
             app:layout_constraintTop_toBottomOf="@+id/commentAuthor" />
 
-        <ImageView
-            android:id="@+id/heartImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="4dp"
-            android:tint="@color/colorAccent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/comment"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/heart_full" />
-
         <TextView
             android:id="@+id/userCommentLikeCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:drawableLeft="@drawable/heart_full"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/heart_full"
+            android:gravity="center"
             android:textColor="@android:color/black"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/heartImage"
-            app:layout_constraintTop_toTopOf="@+id/heartImage"
-            app:layout_constraintVertical_bias="0.16000003" />
+            app:layout_constraintTop_toBottomOf="@+id/comment"
+            android:layout_marginRight="16dp" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

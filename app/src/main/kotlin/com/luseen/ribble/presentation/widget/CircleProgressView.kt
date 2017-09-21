@@ -144,7 +144,7 @@ class CircleProgressView : View, Animatable {
         }
         this.animate()
                 .alpha(to)
-                .setDuration(200)
+                .setDuration(160)
                 .withLayer()
                 .withEndAction { endBody() }
                 .start()

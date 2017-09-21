@@ -12,6 +12,7 @@ import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
+import com.luseen.ribble.utils.L
 import com.luseen.ribble.utils.S
 import com.luseen.ribble.utils.extensions.takeColor
 import kotlinx.android.synthetic.main.fragment_user_likes.*
@@ -35,7 +36,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
         activityComponent.inject(this)
     }
 
-    override fun layoutResId() = R.layout.fragment_user_likes
+    override fun layoutResId() = L.fragment_user_likes
 
     override fun initPresenter() = userLikePresenter
 
@@ -61,7 +62,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
 
     override fun onShotClicked(shot: Shot) {
         val bundle = ShotDetailFragment.getBundle(shot)
-        goTo<ShotDetailFragment>(keepState = false,withCustomAnimation = true, arg = bundle)
+        goTo<ShotDetailFragment>(keepState = false, withCustomAnimation = true, arg = bundle)
     }
 
     private fun updateAdapter(likeList: List<Like>) {

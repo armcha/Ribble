@@ -132,7 +132,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
 
     private infix fun setUpRecyclerView(commentList: List<Comment>) {
 
-        recyclerAdapter = RibbleAdapter(commentList, R.layout.comment_item, {
+        recyclerAdapter = RibbleAdapter(commentList, L.comment_item, {
             commentDate.text = it.commentDate
             comment.text = it.commentText
             comment.movementMethod = LinkMovementMethod.getInstance()
@@ -140,9 +140,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
             userImage.load(it.user?.avatarUrl, TransformationType.CIRCLE)
             if (it.likeCount.isZero()) {
                 userCommentLikeCount.invisible()
-                heartImage.invisible()
             } else {
-                heartImage.show()
                 userCommentLikeCount.show()
                 userCommentLikeCount.text = it.likeCount.toString()
             }

@@ -22,10 +22,10 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         fun onFragmentChanged(currentTag: String, currentFragment: Fragment) {}
     }
 
-    private var fragmentMap: LinkedHashMap<String, Fragment> = linkedMapOf()
+    private var fragmentMap: LinkedHashMap<String, Screen> = linkedMapOf()
     lateinit var fragmentChangeListener: FragmentChangeListener
 
-    private val containerId = R.id.container //TODO add builder
+    private val containerId = R.id.container //TODO add to builder
     private var activeTag: String? = null
     private var rootTag: String? = null
     private var isCustomAnimationUsed = false
@@ -53,7 +53,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         tag?.let {
             val fragment = fragmentMap[it]
             fragment?.let {
-                fragmentChangeListener.onFragmentChanged(tag, it)
+                fragmentChangeListener.onFragmentChanged(tag, it.fragment)
             }
         }
     }
@@ -77,16 +77,16 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         fragmentManager.fragments
                 .filter { it.tag.contains(activity.applicationContext.packageName) }
                 .forEach {
-                    fragmentMap.put(it.tag, it)
+                    fragmentMap.put(it.tag, Screen(it, BackStrategy.DESTROY)) //FIXME
                 }
 
         fragmentManager.inTransaction {
             fragmentMap
                     .filter { it.key != activeTag }
                     .forEach {
-                        hide(it.value)
+                        hide(it.value.fragment)
                     }
-            show(fragmentMap[activeTag])
+            show(fragmentMap[activeTag]?.fragment)
         }
         invokeFragmentChangeListener(activeTag)
         runDebugLog()
@@ -94,13 +94,19 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
 
     inline fun <reified T : Fragment> goTo(keepState: Boolean = true,
                                            withCustomAnimation: Boolean = false,
-                                           arg: Bundle = Bundle.EMPTY) {
+                                           arg: Bundle = Bundle.EMPTY,
+                                           @Experimental
+                                           backStrategy: BackStrategy = BackStrategy.DESTROY) {
         val tag = T::class.java.name
-        goTo(tag, keepState, withCustomAnimation, arg)
+        goTo(tag, keepState, withCustomAnimation, arg, backStrategy)
     }
 
     @PublishedApi
-    internal fun goTo(tag: String, keepState: Boolean, withCustomAnimation: Boolean, arg: Bundle) {
+    internal fun goTo(tag: String,
+                      keepState: Boolean,
+                      withCustomAnimation: Boolean,
+                      arg: Bundle,
+                      backStrategy: BackStrategy) {
         if (activeTag == tag)
             return
 
@@ -123,7 +129,8 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
                 add(containerId, fragment, tag)
             }
 
-            fragmentMap.put(tag, fragment)
+
+            fragmentMap.put(tag, Screen(fragment, backStrategy))
 
             if (activeTag == null) {
                 rootTag = tag
@@ -135,9 +142,9 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
             fragmentMap
                     .filter { it.key != tag }
                     .forEach {
-                        hide(it.value)
+                        hide(it.value.fragment)
                     }
-            show(fragmentMap[tag])
+            show(fragmentMap[tag]?.fragment)
         }
         activeTag = tag
         invokeFragmentChangeListener(tag)
@@ -152,18 +159,33 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
     }
 
     fun goBack() {
+        val screen = fragmentMap[activeTag]
+        val backStrategy = screen?.backStrategy
+        val isKeep = backStrategy is BackStrategy.KEEP
         fragmentManager.inTransaction {
             if (isCustomAnimationUsed)
                 setCustomAnimations(0, R.anim.slide_out_finish)
-            remove(fragmentMap[activeTag])
+            if (isKeep) {
+                hide(screen?.fragment)
+            } else if (backStrategy is BackStrategy.DESTROY) {
+                remove(screen.fragment)
+            }
         }
-        fragmentMap.remove(activeTag)
-        val currentTag = fragmentMap.keys.last()
+
+        val keys = fragmentMap.keys
+        val currentTag = if (isKeep) {
+            val ind = keys.indexOf(activeTag)
+            keys.elementAt(ind - 1)
+        } else {
+            fragmentMap.remove(activeTag)
+            keys.last()
+        }
+
         fragmentManager.inTransaction {
             if (!isCustomAnimationUsed) {
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             }
-            show(fragmentMap[currentTag])
+            show(fragmentMap[currentTag]?.fragment)
         }
         isCustomAnimationUsed = false
         activeTag = currentTag
@@ -177,8 +199,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         fragmentTransaction.commitNow()
     }
 
-
-    fun <K, V> MutableMap<K, V>.replaceValue(key: K, value: V?) {
+    private fun <K, V> MutableMap<K, V>.replaceValue(key: K, value: V?) {
         this.remove(key)
         value?.let {
             this.put(key, value)

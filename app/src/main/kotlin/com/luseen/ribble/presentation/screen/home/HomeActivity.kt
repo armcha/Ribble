@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
+import com.luseen.ribble.presentation.navigation.BackStrategy
 import com.luseen.ribble.presentation.screen.about.AboutFragment
 import com.luseen.ribble.presentation.screen.auth.AuthActivity
 import com.luseen.ribble.presentation.screen.shot_root.ShotRootFragment
@@ -122,16 +123,16 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     override fun onNavigationItemSelected(item: NavigationItem) {
         when (item.id) {
             Id.SHOT -> {
-                goTo<ShotRootFragment>()
+                goTo<ShotRootFragment>(backStrategy = BackStrategy.KEEP)
             }
             Id.USER_LIKES -> {
-                goTo<UserLikesFragment>()
+                goTo<UserLikesFragment>(backStrategy = BackStrategy.KEEP)
             }
             Id.FOLLOWING -> {
-                goTo<UserFollowingFragment>()
+                goTo<UserFollowingFragment>(backStrategy = BackStrategy.KEEP)
             }
             Id.ABOUT -> {
-                goTo<AboutFragment>()
+                goTo<AboutFragment>(backStrategy = BackStrategy.KEEP)
             }
             Id.LOG_OUT -> {
                 presenter.logOut()

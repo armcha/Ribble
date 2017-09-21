@@ -9,6 +9,7 @@ import com.luseen.ribble.App
 import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.module.ActivityModule
+import com.luseen.ribble.presentation.navigation.BackStrategy
 import com.luseen.ribble.presentation.navigation.Navigator
 import com.luseen.ribble.presentation.widget.MaterialDialog
 import com.luseen.ribble.utils.S
@@ -59,8 +60,12 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     inline protected fun <reified T : Fragment> goTo(keepState: Boolean = true,
                                                      withCustomAnimation: Boolean = false,
-                                                     arg: Bundle = Bundle.EMPTY) {
-        navigator.goTo<T>(keepState = keepState, withCustomAnimation = withCustomAnimation, arg = arg)
+                                                     arg: Bundle = Bundle.EMPTY,
+                                                     backStrategy: BackStrategy = BackStrategy.DESTROY) {
+        navigator.goTo<T>(keepState = keepState,
+                withCustomAnimation = withCustomAnimation,
+                arg = arg,
+                backStrategy = backStrategy)
     }
 
     fun showDialog(title: String, message: String, buttonText: String = "Close") {

@@ -39,9 +39,9 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     private val items = listOf(
-            Pair(R.drawable.heart_full, C.colorPrimary),
-            Pair(R.drawable.eye, C.cyan),
-            Pair(R.drawable.bucket, C.blue_gray))
+            R.drawable.heart_full to C.colorPrimary,
+            R.drawable.eye to C.cyan,
+            R.drawable.bucket to C.blue_gray)
 
     @Inject
     protected lateinit var shotDetailPresenter: ShotDetailPresenter

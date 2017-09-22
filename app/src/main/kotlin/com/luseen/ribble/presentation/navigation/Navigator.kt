@@ -96,7 +96,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
                                            withCustomAnimation: Boolean = false,
                                            arg: Bundle = Bundle.EMPTY,
                                            @Experimental
-                                           backStrategy: BackStrategy = BackStrategy.DESTROY) {
+                                           backStrategy: BackStrategy = BackStrategy.KEEP) {
         val tag = T::class.java.name
         goTo(tag, keepState, withCustomAnimation, arg, backStrategy)
     }
@@ -174,8 +174,8 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
 
         val keys = fragmentMap.keys
         val currentTag = if (isKeep) {
-            val ind = keys.indexOf(activeTag)
-            keys.elementAt(ind - 1)
+            val index = keys.indexOf(activeTag)
+            keys.elementAt(index - 1)
         } else {
             fragmentMap.remove(activeTag)
             keys.last()

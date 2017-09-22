@@ -1,7 +1,5 @@
 package com.luseen.arch;
 
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
@@ -13,9 +11,8 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public abstract class BaseMVPActivity<V extends BaseMVPContract.View, P extends BaseMVPContract.Presenter<V>>
-        extends AppCompatActivity implements BaseMVPContract.View, LifecycleRegistryOwner {
+        extends AppCompatActivity implements BaseMVPContract.View {
 
-    private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
     protected P presenter;
 
     @SuppressWarnings("unchecked")
@@ -34,11 +31,6 @@ public abstract class BaseMVPActivity<V extends BaseMVPContract.View, P extends 
         presenter.attachView((V) this);
         if (isPresenterCreated)
             presenter.onPresenterCreate();
-    }
-
-    @Override
-    public LifecycleRegistry getLifecycle() {
-        return lifecycleRegistry;
     }
 
     @CallSuper

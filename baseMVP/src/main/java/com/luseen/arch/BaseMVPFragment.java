@@ -1,7 +1,5 @@
 package com.luseen.arch;
 
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
@@ -14,9 +12,8 @@ import android.view.View;
  */
 
 public abstract class BaseMVPFragment<V extends BaseMVPContract.View, P extends BaseMVPContract.Presenter<V>>
-        extends Fragment implements LifecycleRegistryOwner, BaseMVPContract.View {
+        extends Fragment implements BaseMVPContract.View {
 
-    private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
     protected P presenter;
 
     @SuppressWarnings("unchecked")
@@ -35,11 +32,6 @@ public abstract class BaseMVPFragment<V extends BaseMVPContract.View, P extends 
         presenter.attachView((V) this);
         if (isPresenterCreated)
             presenter.onPresenterCreate();
-    }
-
-    @Override
-    public LifecycleRegistry getLifecycle() {
-        return lifecycleRegistry;
     }
 
     @CallSuper

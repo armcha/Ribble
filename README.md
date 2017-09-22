@@ -3,10 +3,10 @@
 ## Simple Dribbble Client using Dribbble API, work in progress
 
 ## Features
-:white_check_mark:  Kotlin: Yes, fully written in Kotlin(It's amaizing). :scream: :heart: <br/>
+:white_check_mark:  Kotlin: Yes, fully written in Kotlin(Amazing). :scream: :heart: <br/>
 :white_check_mark:  Clean architecture: The whole project is based on uncle Bob's clean architecture approach. <br/>
 :white_check_mark:  Configuration change: Handles configuration changes <br/>
-:white_check_mark:  Material Design: Not a fully Material Design App, but trying my best. <br/>
+:white_check_mark:  Material Design: Not a fully Material Design App, but I am trying my best. <br/>
 :white_check_mark:  Some custom views: Full custom progress bar <br/>
 :white_check_mark:  Usage of libraries:<br/>
    * [BaseMVP](https://github.com/armcha/MVP-Architecture-Components) - for MVP architecture<br/>
@@ -16,7 +16,7 @@
    * [Glide](https://github.com/bumptech/glide) - for image loading<br/>
    * [Gson](https://github.com/google/gson) - for serialization and deserialization<br/>
    * [Retrofit](https://github.com/square/retrofit) - for HTTP requests<br/>
-   * [Room](https://developer.android.com/topic/libraries/architecture/room.html) - for data persistence (Not implimented yet)<br/>
+   * [Room](https://developer.android.com/topic/libraries/architecture/room.html) - for data persistence (Not implemented yet)<br/>
    * [Leak canary](https://github.com/square/leakcanary) - for memory leak detection<br/>
    * [Logger](https://github.com/armcha/logger) - for simple logging<br/>
     

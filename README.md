@@ -7,7 +7,7 @@
 :white_check_mark:  Clean architecture: The whole project is based on uncle Bob's clean architecture approach. <br/>
 :white_check_mark:  Configuration change: Handles configuration changes <br/>
 :white_check_mark:  Material Design: Not a fully Material Design App, but I am trying my best. <br/>
-:white_check_mark:  Some custom views: Full custom progress bar <br/>
+:white_check_mark:  Some custom views: Progress bar, navigation view, arcView, dialog...<br/>
 :white_check_mark:  Usage of libraries:<br/>
    * [BaseMVP](https://github.com/armcha/MVP-Architecture-Components) - for MVP architecture<br/>
    * [Dagger 2](https://github.com/google/dagger) - for dependency injection<br/>
@@ -31,11 +31,11 @@
 
 | Login     | Popular/Recent     | Likes     |
 | :-------------: | :-------------: | :-------------: |
-| ![Get-Started](https://pbs.twimg.com/media/DIlfhrdW0AA8-7T.jpg) | ![Main](https://pbs.twimg.com/media/DIlfhrdW0AA8-7T.jpg) | ![Shot](https://pbs.twimg.com/media/DIlfhrdW0AA8-7T.jpg) |
+| ![Login](art/log_in.png) | ![Popular/Recent](art/shots.png) | ![Likes](art/likes.png) |
 
-| Shot detail     | App info     | 
-| :-------------: | :-------------: |
-| ![Get-Started](https://pbs.twimg.com/media/DIlfjHTW0AIkfoP.jpg) | ![Main](https://pbs.twimg.com/media/DIlfjHTW0AIkfoP.jpg) |
+| Shot detail     | Nav drawer     | App info     | 
+| :-------------: | :-------------: | :-------------: |
+| ![Shot detail](art/detail.png) | ![Nav drawer](art/nav_drawer.png) | ![App info](art/app_info.png) | 
     
 ## Build
 ### Open the project in Android Studio

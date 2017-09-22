@@ -1,9 +1,15 @@
 # Ribble
 
-## Simple Dribbble Client using Dribbble API, work in progress
+<p align="center">
+    <a href="art/launcher.png">
+        <img src="art/launcher.png" width="360" height="360"/>
+    </a>
+</p>
+
+## Simple Dribbble Client using Dribbble API, work in progress...
 
 ## Features
-:white_check_mark:  Kotlin: Yes, fully written in Kotlin(Amazing). :scream: :heart: <br/>
+:white_check_mark:  Kotlin: Yes, fully written in Kotlin(~95%). :scream: :heart: <br/>
 :white_check_mark:  Clean architecture: The whole project is based on uncle Bob's clean architecture approach. <br/>
 :white_check_mark:  Configuration change: Handles configuration changes <br/>
 :white_check_mark:  Material Design: Not a fully Material Design App, but I am trying my best. <br/>

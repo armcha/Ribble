@@ -37,7 +37,9 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         return inflater!!.inflate(layoutResId(), container, false)
     }
 
-    inline fun <reified T : Fragment> goTo(keepState: Boolean = true, withCustomAnimation: Boolean = false, arg: Bundle = Bundle.EMPTY) {
+    inline fun <reified T : Fragment> goTo(keepState: Boolean = true,
+                                           withCustomAnimation: Boolean = false,
+                                           arg: Bundle = Bundle.EMPTY) {
         navigator.goTo<T>(keepState = keepState, withCustomAnimation = withCustomAnimation, arg = arg)
     }
 
@@ -46,10 +48,6 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
     protected abstract fun layoutResId(): Int
 
     open fun getTitle(): String = emptyString
-
-    open fun onBack(): Boolean {
-        return false
-    }
 
     fun showDialog(title: String, message: String, buttonText: String = "Close") {
         activity.showDialog(title, message, buttonText)

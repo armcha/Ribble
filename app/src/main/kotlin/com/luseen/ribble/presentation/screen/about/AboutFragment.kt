@@ -12,10 +12,7 @@ import com.luseen.ribble.utils.C
 import com.luseen.ribble.utils.D
 import com.luseen.ribble.utils.L
 import com.luseen.ribble.utils.S
-import com.luseen.ribble.utils.extensions.actionView
-import com.luseen.ribble.utils.extensions.iconTint
-import com.luseen.ribble.utils.extensions.leftIcon
-import com.luseen.ribble.utils.extensions.sendEmail
+import com.luseen.ribble.utils.extensions.*
 import kotlinx.android.synthetic.main.fragment_about.*
 import javax.inject.Inject
 
@@ -82,7 +79,7 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
             TWITTER -> actionView { S.twitter_url }
             FACEBOOK -> actionView { S.facebook_url }
             GITHUB -> actionView { S.githun_url }
-            INFO -> showDialog("Test title", "Test message", "OK")
+            INFO -> showDialog(S.easter_title.text(), S.easter_message.text(), S.easter_button_text.text())
         }
     }
 

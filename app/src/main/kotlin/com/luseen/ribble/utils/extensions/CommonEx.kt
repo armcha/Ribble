@@ -5,10 +5,13 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
 import android.os.Handler
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.text.Html
 import android.text.Spanned
 import android.widget.Toast
+import com.luseen.ribble.App
+import com.luseen.ribble.presentation.navigation.Experimental
 
 
 /**
@@ -16,6 +19,17 @@ import android.widget.Toast
  */
 
 infix fun Context.takeColor(colorId: Int) = ContextCompat.getColor(this, colorId)
+
+operator fun Context.get(resId: Int): String {
+    return getString(resId)
+}
+
+operator fun Fragment.get(resId: Int): String {
+    return getString(resId)
+}
+
+@Experimental
+fun Int.text(): String = App.instance.getString(this) //What do you think about it?
 
 fun Context.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

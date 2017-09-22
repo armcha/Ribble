@@ -30,6 +30,9 @@
     <string name="facebook_url">https://web.facebook.com/chatikyana</string>
     <string name="githun_url">https://github.com/armcha/Ribble</string>
     <string name="comment_user_image">Comment user image</string>
+    <string name="easter_title">Easter egg</string>
+    <string name="easter_message">There should be an easter egg, what do you think?</string>
+    <string name="easter_button_text">Not funny</string>
 
 
 </resources>

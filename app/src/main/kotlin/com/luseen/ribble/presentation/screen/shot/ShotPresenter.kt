@@ -5,14 +5,14 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.ShotListInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.base_mvp.api.Status
+import com.luseen.ribble.presentation.fetcher.Status
 import javax.inject.Inject
 
 /**
  * Created by Chatikyan on 01.08.2017.
  */
 class ShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor)
-    : ApiPresenter<List<Shot>, ShotContract.View>(), ShotContract.Presenter {
+    : ApiPresenter<ShotContract.View>(), ShotContract.Presenter {
 
     private var shotList: List<Shot> = listOf()
 
@@ -27,26 +27,26 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
+
+        val success = { it: List<Shot> ->
+            this.shotList = it
+            view?.hideLoading()
+            if (it.isNotEmpty()) {
+                view?.onShotListReceive(it) ?: Unit
+            } else {
+                view?.showNoShots() ?: Unit
+            }
+        }
+
         if (view?.getShotType() == TYPE_POPULAR)
-            this fetch shotListInteractor.getPopularShotList(100)
+            fetch(shotListInteractor.getPopularShotList(100),success =  success)
         else
-            this fetch shotListInteractor.getRecentShotList(100)
+            fetch(shotListInteractor.getRecentShotList(100),success =  success)
     }
 
     override fun onRequestStart() {
         super.onRequestStart()
         view?.showLoading()
-    }
-
-    override fun onRequestSuccess(data: List<Shot>) {
-        super.onRequestSuccess(data)
-        this.shotList = data
-        view?.hideLoading()
-        if (shotList.isNotEmpty()) {
-            view?.onShotListReceive(shotList)
-        } else {
-            view?.showNoShots()
-        }
     }
 
     override fun onRequestError(errorMessage: String?) {

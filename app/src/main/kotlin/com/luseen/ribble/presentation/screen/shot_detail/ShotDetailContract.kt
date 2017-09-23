@@ -8,14 +8,17 @@ import com.luseen.ribble.presentation.base_mvp.api.ApiContract
  */
 interface ShotDetailContract {
 
-    interface View : ApiContract.View{
+    interface View : ApiContract.View {
 
         fun onDataReceive(commentList: List<Comment>)
 
-        fun getShotId():String?
+        fun getShotId(): String?
 
         fun showNoComments()
     }
 
-    interface Presenter : ApiContract.Presenter<View>
+    interface Presenter : ApiContract.Presenter<View> {
+
+        fun handleShotLike(shotId: String)
+    }
 }

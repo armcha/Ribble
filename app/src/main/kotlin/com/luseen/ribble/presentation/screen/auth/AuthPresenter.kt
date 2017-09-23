@@ -6,10 +6,9 @@ import android.content.Intent
 import android.net.Uri
 import com.luseen.ribble.data.network.ApiConstants
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.base_mvp.api.Status
+import com.luseen.ribble.presentation.fetcher.Status
 import javax.inject.Inject
 
 /**
@@ -17,7 +16,7 @@ import javax.inject.Inject
  */
 @PerActivity
 class AuthPresenter @Inject constructor(private val userInteractor: UserInteractor)
-    : ApiPresenter<User, AuthContract.View>(), AuthContract.Presenter {
+    : ApiPresenter<AuthContract.View>(), AuthContract.Presenter {
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
@@ -32,20 +31,17 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
     override fun checkLogin(resultIntent: Intent?) {
         val userCode: String? = resultIntent?.data?.getQueryParameter("code")
         userCode?.let {
-            this fetch userInteractor.getUser(userCode)
+            fetch(userInteractor.getUser(userCode)) {
+                userInteractor.logIn()
+                view?.hideLoading()
+                view?.openHomeActivity()
+            }
         }
     }
 
     override fun onRequestStart() {
         super.onRequestStart()
         view?.showLoading()
-    }
-
-    override fun onRequestSuccess(data: User) {
-        super.onRequestSuccess(data)
-        userInteractor.logIn()
-        view?.hideLoading()
-        view?.openHomeActivity()
     }
 
     override fun onRequestError(errorMessage: String?) {

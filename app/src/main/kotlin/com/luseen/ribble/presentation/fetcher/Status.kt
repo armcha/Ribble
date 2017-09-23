@@ -1,4 +1,4 @@
-package com.luseen.ribble.presentation.base_mvp.api
+package com.luseen.ribble.presentation.fetcher
 
 /**
  * Created by Chatikyan on 18.09.2017.

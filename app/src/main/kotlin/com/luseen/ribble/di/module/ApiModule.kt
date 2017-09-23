@@ -4,6 +4,7 @@ import com.luseen.ribble.BuildConfig
 import com.luseen.ribble.data.network.*
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -104,4 +105,8 @@ class ApiModule {
     fun provideAuthApiService(@Named("authRetrofit") retrofit: Retrofit): AuthApiService {
         return retrofit.create(AuthApiService::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideCompositeDisposable() = CompositeDisposable()
 }

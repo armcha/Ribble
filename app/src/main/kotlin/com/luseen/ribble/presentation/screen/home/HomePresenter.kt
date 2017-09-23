@@ -18,7 +18,7 @@ import javax.inject.Inject
  */
 @PerActivity
 class HomePresenter @Inject constructor(private val userInteractor: UserInteractor)
-    : ApiPresenter<User, HomeContract.View>(), HomeContract.Presenter {
+    : ApiPresenter<HomeContract.View>(), HomeContract.Presenter {
 
     private var state: NavigationState? = null
     private var isArcIcon = false
@@ -41,18 +41,11 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        this fetch userInteractor.getAuthenticatedUser()
+        fetch(userInteractor.getAuthenticatedUser()){
+            user = it
+            view?.updateDrawerInfo(it)
+        }
         view?.openShotFragment()
-    }
-
-    override fun onRequestSuccess(data: User) {
-        super.onRequestSuccess(data)
-        user = data
-        view?.updateDrawerInfo(data)
-    }
-
-    override fun onRequestError(errorMessage: String?) {
-        super.onRequestError(errorMessage)
     }
 
     override fun handleFragmentChanges(currentTag: String, fragment: Fragment) {

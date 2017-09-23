@@ -4,21 +4,26 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.interactor.CommentInteractor
+import com.luseen.ribble.domain.interactor.ShotLikeInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.base_mvp.api.Status
+import com.luseen.ribble.presentation.fetcher.Status
+import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
 import javax.inject.Inject
 
 /**
  * Created by Chatikyan on 05.08.2017.
  */
-class ShotDetailPresenter @Inject constructor(private val commentInteractor: CommentInteractor)
-    : ApiPresenter<List<Comment>, ShotDetailContract.View>(), ShotDetailContract.Presenter {
+class ShotDetailPresenter @Inject constructor(
+        private val commentInteractor: CommentInteractor,
+        private val shotLikeInteractor: ShotLikeInteractor)
+    : ApiPresenter<ShotDetailContract.View>(), ShotDetailContract.Presenter {
 
     private var commentList = listOf<Comment>()
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        when (status) {
+        val commentStatus = requestStatus(RequestType.COMMENTS)
+        when (commentStatus) {
             Status.LOADING -> view?.showLoading()
             Status.EMPTY, Status.ERROR -> view?.showNoComments()
             else -> view?.onDataReceive(commentList)
@@ -27,29 +32,39 @@ class ShotDetailPresenter @Inject constructor(private val commentInteractor: Com
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        val shotId = view?.getShotId()
-        if (shotId != null)
-            this fetch commentInteractor.getComments(shotId)
+        view?.getShotId()?.apply {
+            fetchComments(this)
+        }
     }
 
-    override fun onRequestStart() {
-        super.onRequestStart()
+    override fun handleShotLike(shotId: String) {
+        fetch<Unit>(shotLikeInteractor.likeShot(shotId), RequestType.LIKE) {
+
+        }
+    }
+
+    private fun fetchComments(shotId: String) {
+        fetch(commentInteractor.getComments(shotId), RequestType.COMMENTS) {
+            commentList = it
+            with(view) {
+                hideLoading()
+                if (it.isNotEmpty())
+                    onDataReceive(it)
+                else
+                    showNoComments()
+            }
+        }
+    }
+
+    override fun onRequestStart(requestType: RequestType) {
+        super.onRequestStart(requestType)
         view?.showLoading()
     }
 
-    override fun onRequestSuccess(data: List<Comment>) {
-        super.onRequestSuccess(data)
-        commentList = data
-        view?.hideLoading()
-        if (data.isNotEmpty())
-            view?.onDataReceive(data)
-        else
-            view?.showNoComments()
-    }
-
-    override fun onRequestError(errorMessage: String?) {
-        super.onRequestError(errorMessage)
+    override fun onRequestError(requestType: RequestType, errorMessage: String?) {
+        super.onRequestError(requestType, errorMessage)
         view?.hideLoading()
         view?.showError(errorMessage)
+        view?.showNoComments()
     }
 }

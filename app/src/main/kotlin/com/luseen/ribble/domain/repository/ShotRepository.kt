@@ -3,6 +3,7 @@ package com.luseen.ribble.domain.repository
 import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.domain.entity.Shot
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 
@@ -11,9 +12,11 @@ import io.reactivex.Single
  */
 interface ShotRepository {
 
-    fun getShotList(shotType:String,count:Int): Flowable<List<Shot>>
+    fun getShotList(shotType: String, count: Int): Flowable<List<Shot>>
 
-    fun getShotLikes(shotId:String): Flowable<List<Like>>
+    fun getShotLikes(shotId: String): Flowable<List<Like>>
 
-    fun getShotComments(shotId:String): Single<List<Comment>>
+    fun getShotComments(shotId: String): Single<List<Comment>>
+
+    fun likeShot(shotId: String): Completable
 }

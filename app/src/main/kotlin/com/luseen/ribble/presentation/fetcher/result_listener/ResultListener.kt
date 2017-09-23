@@ -1,13 +1,17 @@
-package com.luseen.ribble.presentation.base_mvp.result_listener
+package com.luseen.ribble.presentation.fetcher.result_listener
 
 /**
  * Created by Chatikyan on 04.08.2017.
  */
-interface ResultListener<in T> {
+interface ResultListener {
 
     fun onRequestStart()
 
-    fun onRequestSuccess(data: T)
+    fun onRequestStart(requestType: RequestType)
+
+    fun <T> onRequestSuccess(data: T)
 
     fun onRequestError(errorMessage: String?)
+
+    fun onRequestError(requestType: RequestType, errorMessage: String?)
 }

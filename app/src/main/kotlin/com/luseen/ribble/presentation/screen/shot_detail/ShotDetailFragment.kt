@@ -38,10 +38,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
         }
     }
 
-    private val items = listOf(
-            R.drawable.heart_full to C.colorPrimary,
-            R.drawable.eye to C.cyan,
-            R.drawable.bucket to C.blue_gray)
+    private val items = listOf(R.drawable.heart_full, R.drawable.eye, R.drawable.bucket)
 
     @Inject
     protected lateinit var shotDetailPresenter: ShotDetailPresenter
@@ -81,9 +78,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
                 .map { linearLayout[it] }
                 .map { it as TextImageLayout }
                 .forEachIndexed { index, child ->
-                    val (image, color) = items[index]
-                    child.imageResId = image
-                    child.imageTint = color
+                    child.imageResId = items[index]
                 }
         likeLayout.layoutText = shot.likesCount
         viewCountLayout.layoutText = shot.viewsCount

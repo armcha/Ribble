@@ -69,11 +69,11 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         state.clear()
 
         fragmentMap.clear()
-        fragmentManager.fragments.forEach {
-            log {
-                "Fragment manager fragment - ${it::class.java.simpleName}"
-            }
-        }
+//        fragmentManager.fragments.forEach {
+//            log {
+//                "Fragment manager fragment - ${it::class.java.simpleName}"
+//            }
+//        }
         fragmentManager.fragments
                 .filter { it.tag.contains(activity.applicationContext.packageName) }
                 .forEach {

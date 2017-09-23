@@ -10,8 +10,9 @@ inline fun log(message: () -> Any?) {
     Logger.log(message())
 }
 
-fun Any.makeLog() {
-    Logger.log("${this.javaClass.simpleName} $this")
+inline fun <reified T> T.withLog(): T {
+    Logger.log("${T::class.java.simpleName} $this")
+    return this
 }
 
 fun log(vararg message: () -> Any?) {

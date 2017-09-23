@@ -35,6 +35,11 @@ class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogS
         setCanceledOnTouchOutside(true)
     }
 
+    override fun onDetachedFromWindow() {
+        dismiss()
+        super.onDetachedFromWindow()
+    }
+
     infix fun title(title: String): MaterialDialog {
         titleText.text = title
         return this

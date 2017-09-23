@@ -32,7 +32,6 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.*
 import com.luseen.ribble.utils.AnimationUtils
-import com.luseen.ribble.utils.extensions.log
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -175,7 +174,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
         }
 
         if (a.hasValue(android.support.design.R.styleable.TabLayout_tabSelectedTextColor)) {
-            // We have an explicit selected text color set, so we need to make merge it with the
+            // We have an explicit selected text color set, so we need to make merge it withLog the
             // current colors. This is exposed so that developers can use theme attributes to set
             // this (theme attrs in ColorStateLists are Lollipop+)
             val selected = a.getColor(android.support.design.R.styleable.TabLayout_tabSelectedTextColor, 0)
@@ -361,7 +360,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
     }
 
     /**
-     * Returns the number of tabs currently registered with the action bar.
+     * Returns the number of tabs currently registered withLog the action bar.
      *
      * @return Tab count
      */
@@ -450,11 +449,11 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
      * Set the behavior mode for the Tabs in this layout. The valid input options are:
      *
      *  * [.MODE_FIXED]: Fixed tabs display all tabs concurrently and are best used
-     * with content that benefits from quick pivots between tabs.
+     * withLog content that benefits from quick pivots between tabs.
      *  * [.MODE_SCROLLABLE]: Scrollable tabs display a subset of tabs at any given moment,
      * and can contain longer tab labels and a larger number of tabs. They are best used for
      * browsing contexts in touch interfaces when users don’t need to directly compare the tab
-     * labels. This mode is commonly used with a [android.support.v4.view.ViewPager].
+     * labels. This mode is commonly used withLog a [android.support.v4.view.ViewPager].
      *
      *
      * @param mode one of [.MODE_FIXED] or [.MODE_SCROLLABLE].
@@ -519,7 +518,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
     }
 
     /**
-     * The one-stop shop for setting up this [CustomTabLayout] with a [ViewPager].
+     * The one-stop shop for setting up this [CustomTabLayout] withLog a [ViewPager].
      *
      *
      *
@@ -550,7 +549,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
     private fun setupWithViewPager(viewPager: ViewPager?, autoRefresh: Boolean,
                                    implicitSetup: Boolean) {
         if (mViewPager != null) {
-            // If we've already been setup with a ViewPager, remove us from it
+            // If we've already been setup withLog a ViewPager, remove us from it
             if (mPageChangeListener != null) {
                 mViewPager!!.removeOnPageChangeListener(mPageChangeListener)
             }
@@ -621,7 +620,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
 
         if (mViewPager == null) {
             // If we don't have a ViewPager already, check if our parent is a ViewPager to
-            // setup with it automatically
+            // setup withLog it automatically
             val vp = parent
             if (vp is ViewPager) {
                 // If we have a ViewPager parent and we've been added as part of its decor, let's
@@ -635,7 +634,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
         super.onDetachedFromWindow()
 
         if (mSetupViewPagerImplicitly) {
-            // If we've been setup with a ViewPager implicitly, let's clear out any listeners, etc
+            // If we've been setup withLog a ViewPager implicitly, let's clear out any listeners, etc
             setupWithViewPager(null)
             mSetupViewPagerImplicitly = false
         }
@@ -795,7 +794,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
             }
 
             if (remeasure) {
-                // Re-measure the child with a widthSpec set to be exactly our measure width
+                // Re-measure the child withLog a widthSpec set to be exactly our measure width
                 val childHeightMeasureSpec = ViewGroup.getChildMeasureSpec(heightMeasureSpec, paddingTop + paddingBottom, child.layoutParams.height)
                 val childWidthMeasureSpec = View.MeasureSpec.makeMeasureSpec(
                         measuredWidth, View.MeasureSpec.EXACTLY)
@@ -1017,10 +1016,10 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
          * Set a custom view to be used for this tab.
          *
          *
-         * If the provided view contains a [TextView] with an ID of
-         * [android.R.id.text1] then that will be updated with the value given
+         * If the provided view contains a [TextView] withLog an ID of
+         * [android.R.id.text1] then that will be updated withLog the value given
          * to [.setText]. Similarly, if this layout contains an
-         * [ImageView] with ID [android.R.id.icon] then it will be updated with
+         * [ImageView] withLog ID [android.R.id.icon] then it will be updated withLog
          * the value given to [.setIcon].
          *
          *
@@ -1037,10 +1036,10 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
          * Set a custom view to be used for this tab.
          *
          *
-         * If the inflated layout contains a [TextView] with an ID of
-         * [android.R.id.text1] then that will be updated with the value given
+         * If the inflated layout contains a [TextView] withLog an ID of
+         * [android.R.id.text1] then that will be updated withLog the value given
          * to [.setText]. Similarly, if this layout contains an
-         * [ImageView] with ID [android.R.id.icon] then it will be updated with
+         * [ImageView] withLog ID [android.R.id.icon] then it will be updated withLog
          * the value given to [.setIcon].
          *
          *
@@ -1053,7 +1052,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
         }
 
         /**
-         * Return the icon associated with this tab.
+         * Return the icon associated withLog this tab.
          *
          * @return The tab's icon
          */
@@ -1468,7 +1467,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
         }
 
         /**
-         * Approximates a given lines width with the new provided text size.
+         * Approximates a given lines width withLog the new provided text size.
          */
         private fun approximateLineWidth(layout: Layout, line: Int, textSize: Float): Float {
             return layout.getLineWidth(line) * (textSize / layout.paint.textSize)
@@ -1552,7 +1551,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
             if (View.MeasureSpec.getMode(widthMeasureSpec) != View.MeasureSpec.EXACTLY) {
-                // HorizontalScrollView will first measure use with UNSPECIFIED, and then with
+                // HorizontalScrollView will first measure use withLog UNSPECIFIED, and then withLog
                 // EXACTLY. Ignore the first call since anything we do will be overwritten anyway
                 return
             }
@@ -1612,7 +1611,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
 
             if (mIndicatorAnimator != null && mIndicatorAnimator!!.isRunning) {
                 // If we're currently running an animation, lets cancel it and start a
-                // new animation with the remaining duration
+                // new animation withLog the remaining duration
                 mIndicatorAnimator!!.cancel()
                 val duration = mIndicatorAnimator!!.duration
                 animateIndicatorToPosition(mSelectedPosition,
@@ -1727,9 +1726,6 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
         override fun draw(canvas: Canvas) {
             super.draw(canvas)
             // Thick colored underline below the current selection
-            log {
-                width / tabCount / 4
-            }
             val isPortrait = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
             val divideFraction: Float = if (isPortrait) 2.5F else 4F
             val indicatorWidth = width / tabCount / divideFraction
@@ -1892,7 +1888,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
         val MODE_SCROLLABLE = 0
 
         /**
-         * Fixed tabs display all tabs concurrently and are best used with content that benefits from
+         * Fixed tabs display all tabs concurrently and are best used withLog content that benefits from
          * quick pivots between tabs. The maximum number of tabs is limited by the view’s width.
          * Fixed tabs have equal width, based on the widest tab label.
          *
@@ -1903,7 +1899,7 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
 
         /**
          * Gravity used to fill the [CustomTabLayout] as much as possible. This option only takes effect
-         * when used with [.MODE_FIXED].
+         * when used withLog [.MODE_FIXED].
          *
          * @see .setTabGravity
          * @see .getTabGravity

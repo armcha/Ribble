@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import com.luseen.ribble.di.scope.PerActivity
 import dagger.Module
 import dagger.Provides
-import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Created by Chatikyan on 31.07.2017.
@@ -29,8 +28,4 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun providesFragmentManager(activity: AppCompatActivity): FragmentManager {
         return activity.supportFragmentManager
     }
-
-    @PerActivity
-    @Provides
-    fun provideCompositeDisposable() = CompositeDisposable()
 }

@@ -6,7 +6,9 @@ import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.base_mvp.api.Status
+import com.luseen.ribble.presentation.fetcher.Status
+import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
+import com.luseen.ribble.utils.extensions.log
 import javax.inject.Inject
 
 /**
@@ -14,38 +16,38 @@ import javax.inject.Inject
  */
 @PerActivity
 class UserFollowPresenter @Inject constructor(private val userInteractor: UserInteractor)
-    : ApiPresenter<List<Shot>, UserFollowingContract.View>(), UserFollowingContract.Presenter {
+    : ApiPresenter<UserFollowingContract.View>(), UserFollowingContract.Presenter {
 
     private var shotList: List<Shot> = arrayListOf()
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        when (status) {
+        val requestStatus = requestStatus(RequestType.FOLLOWINGS_SHOTS)
+        log { requestStatus }
+        log { fetcher.requestMap }
+        when (requestStatus) {
             Status.LOADING -> view?.showLoading()
-            Status.EMPTY,Status.ERROR -> view?.showNoShots()
+            Status.EMPTY, Status.ERROR -> view?.showNoShots()
             else -> view?.onShotListReceive(shotList)
         }
     }
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        this fetch userInteractor.getFollowing(100)
+        fetch(userInteractor.getFollowing(100), RequestType.FOLLOWINGS_SHOTS) {
+            this.shotList = it
+            view?.hideLoading()
+            if (shotList.isNotEmpty()) {
+                view?.onShotListReceive(shotList)
+            } else {
+                view?.showNoShots()
+            }
+        }
     }
 
     override fun onRequestStart() {
         super.onRequestStart()
         view?.showLoading()
-    }
-
-    override fun onRequestSuccess(data: List<Shot>) {
-        super.onRequestSuccess(data)
-        this.shotList = data
-        view?.hideLoading()
-        if (shotList.isNotEmpty()) {
-            view?.onShotListReceive(shotList)
-        } else {
-            view?.showNoShots()
-        }
     }
 
     override fun onRequestError(errorMessage: String?) {

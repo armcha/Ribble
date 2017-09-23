@@ -5,14 +5,14 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.base_mvp.api.Status
+import com.luseen.ribble.presentation.fetcher.Status
 import javax.inject.Inject
 
 /**
  * Created by Chatikyan on 13.08.2017.
  */
 class UserLikePresenter @Inject constructor(private val userInteractor: UserInteractor)
-    : ApiPresenter<List<Like>, UserLikeContract.View>(), UserLikeContract.Presenter {
+    : ApiPresenter<UserLikeContract.View>(), UserLikeContract.Presenter {
 
     private var likeList: List<Like> = emptyList()
 
@@ -27,23 +27,16 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        fetch(userInteractor.getUserLikes(count = 100))
+        fetch(userInteractor.getUserLikes(count = 100)) {
+            likeList = it
+            view?.hideLoading()
+            if (likeList.isNotEmpty()) view?.onDataReceive(likeList) else view?.showNoShots()
+        }
     }
 
     override fun onRequestStart() {
         super.onRequestStart()
         view?.showLoading()
-    }
-
-    override fun onRequestSuccess(data: List<Like>) {
-        super.onRequestSuccess(data)
-        likeList = data
-        view?.hideLoading()
-        if (likeList.isNotEmpty())
-            view?.onDataReceive(likeList)
-        else {
-            view?.showNoShots()
-        }
     }
 
     override fun onRequestError(errorMessage: String?) {

@@ -9,23 +9,22 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
         android:background="@android:color/transparent"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:background="@color/bg_color"
-            app:contentInsetStart="0dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            android:padding="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp">
+                android:layout_height="match_parent">
 
                 <com.luseen.ribble.presentation.widget.ArcView
                     android:id="@+id/arcView"
@@ -44,23 +43,24 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="22dp"
                     android:layout_marginStart="22dp"
                     android:contentDescription="@string/arc_view_image"
                     android:tint="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/toolbarTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/toolbarTitle"
-                    app:layout_constraintVertical_bias="0.50"
-                    android:layout_marginLeft="22dp" />
+                    app:layout_constraintVertical_bias="0.50" />
 
                 <com.luseen.ribble.presentation.widget.AnimatedTextView
                     android:id="@+id/toolbarTitle"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:ellipsize="end"
                     android:gravity="center"
-                    android:maxLength="19"
+                    android:maxLength="18"
                     android:maxLines="1"
                     android:textAllCaps="true"
                     android:textColor="@android:color/black"
@@ -69,8 +69,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginRight="8dp" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 

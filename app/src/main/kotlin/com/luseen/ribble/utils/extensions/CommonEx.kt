@@ -53,6 +53,13 @@ inline fun LorAbove(body: () -> Unit) {
     }
 }
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+inline fun MorAbove(body: () -> Unit) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        body()
+    }
+}
+
 @TargetApi(Build.VERSION_CODES.N)
 inline fun NorAbove(body: () -> Unit) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

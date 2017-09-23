@@ -8,11 +8,13 @@ import com.luseen.ribble.BuildConfig
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
-import com.luseen.ribble.utils.C
 import com.luseen.ribble.utils.D
 import com.luseen.ribble.utils.L
 import com.luseen.ribble.utils.S
-import com.luseen.ribble.utils.extensions.*
+import com.luseen.ribble.utils.extensions.actionView
+import com.luseen.ribble.utils.extensions.leftIcon
+import com.luseen.ribble.utils.extensions.sendEmail
+import com.luseen.ribble.utils.extensions.text
 import kotlinx.android.synthetic.main.fragment_about.*
 import javax.inject.Inject
 
@@ -30,11 +32,10 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
     protected lateinit var aboutPresenter: AboutPresenter
 
     private val items = mutableListOf(
-            Triple(S.email, R.drawable.email, C.colorAccent),
-            Triple(S.twitter, R.drawable.twitter, C.twitter),
-            Triple(S.facebook, R.drawable.facebook, C.facebook),
-            Triple(S.github, R.drawable.github, C.github)
-    )
+            S.email to R.drawable.email,
+            S.twitter to R.drawable.twitter,
+            S.facebook to R.drawable.facebook,
+            S.github to R.drawable.github)
 
     override fun injectDependencies() {
         activityComponent.inject(this)
@@ -54,17 +55,15 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
                 .map { rootView.getChildAt(it) as TextView }
                 .onEach { it.setOnClickListener(this) }
                 .forEachIndexed { current, textView ->
-                    val (stringRes, icon, tintColor) = items[current]
+                    val (stringRes, icon) = items[current]
                     with(textView) {
                         text = getString(stringRes)
                         leftIcon(icon)
-                        iconTint(tintColor)
                         id = current
                     }
                 }
         with(appInfo) {
             leftIcon(D.about)
-            iconTint(C.cyan)
             text = """${getString(S.app_name)} ${BuildConfig.VERSION_NAME}
             |Copyright © 2014-2017
             |Arman Chatikyan""".trimMargin()

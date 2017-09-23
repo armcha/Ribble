@@ -58,11 +58,11 @@ class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogS
         val view = findViewById<View>(R.id.container)
         with(view) {
             alpha = 0F
-            scale = .8F
+            scale = .85F
             animate()
                     .scale(1F)
                     .alpha(1F)
-                    .setDuration(130)
+                    .setDuration(120)
                     .setInterpolator(AnimationUtils.FAST_OUT_LINEAR_IN_INTERPOLATOR)
                     .withLayer()
                     .start()
@@ -73,7 +73,7 @@ class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogS
         val view = findViewById<View>(R.id.container)
         with(view) {
             animate()
-                    .scale(.8F)
+                    .scale(.85F)
                     .alpha(0F)
                     .setDuration(120)
                     .setInterpolator(AnimationUtils.FAST_OUT_LINEAR_IN_INTERPOLATOR)

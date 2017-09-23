@@ -7,10 +7,12 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.drawable.Animatable
+import android.support.annotation.DimenRes
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
+import com.luseen.ribble.R
 import com.luseen.ribble.utils.AnimationUtils
 import com.luseen.ribble.utils.extensions.hide
 import com.luseen.ribble.utils.extensions.show
@@ -44,10 +46,13 @@ class CircleProgressView : View, Animatable {
             field = value
             backgroundPaint.color = field
         }
-    var progresTicknes = 11F
-        set(value) {
+    var progresTicknes: Int = R.dimen.progress_tickness
+        set(@DimenRes value) {
             field = value
-            paint.strokeWidth = field
+            paint.strokeWidth = resources.getDimension(field)
+        }
+        get() {
+            return resources.getDimension(field).toInt()
         }
 
     constructor(context: Context) : super(context)
@@ -59,7 +64,7 @@ class CircleProgressView : View, Animatable {
             hide()
         with(paint) {
             color = progressColor
-            strokeWidth = progresTicknes
+            strokeWidth = progresTicknes.toFloat()
             style = Paint.Style.STROKE
             strokeCap = Paint.Cap.ROUND
         }

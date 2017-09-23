@@ -20,7 +20,7 @@ fun TextView.leftIcon(drawableId: Int) {
 
 @SuppressLint("NewApi")
 fun TextView.iconTint(colorId: Int) {
-    LorAbove {
+    MorAbove {
         compoundDrawableTintList = ColorStateList.valueOf(ContextCompat.getColor(context, colorId))
     }
 }

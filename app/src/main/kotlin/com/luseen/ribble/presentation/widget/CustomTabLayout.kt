@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.database.DataSetObserver
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -31,7 +32,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.*
 import com.luseen.ribble.utils.AnimationUtils
-import com.luseen.ribble.utils.extensions.toPx
+import com.luseen.ribble.utils.extensions.log
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -1726,9 +1727,14 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
         override fun draw(canvas: Canvas) {
             super.draw(canvas)
             // Thick colored underline below the current selection
-            val indicatorWidth = 90.toPx(context)
-            indicatorRect.set((mIndicatorLeft + indicatorWidth).toFloat(), (height - mSelectedIndicatorHeight).toFloat(),
-                    (mIndicatorRight - indicatorWidth).toFloat(), height.toFloat())
+            log {
+                width / tabCount / 4
+            }
+            val isPortrait = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+            val divideFraction: Float = if (isPortrait) 2.5F else 4F
+            val indicatorWidth = width / tabCount / divideFraction
+            indicatorRect.set((mIndicatorLeft + indicatorWidth), (height - mSelectedIndicatorHeight).toFloat(),
+                    (mIndicatorRight - indicatorWidth), height.toFloat())
             if (mIndicatorLeft in 0..(mIndicatorRight - 1)) {
                 canvas.drawRoundRect(indicatorRect, 15f, 15f, mSelectedIndicatorPaint)
             }

@@ -22,7 +22,7 @@ class ShotDetailPresenter @Inject constructor(
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        val commentStatus = requestStatus(RequestType.COMMENTS)
+        val commentStatus = requestStatus(COMMENTS)
         when (commentStatus) {
             Status.LOADING -> view?.showLoading()
             Status.EMPTY, Status.ERROR -> view?.showNoComments()
@@ -39,14 +39,13 @@ class ShotDetailPresenter @Inject constructor(
 
     override fun handleShotLike(shotId: String?) {
         shotId?.let {
-            complete(shotLikeInteractor.likeShot(shotId), RequestType.LIKE) {
-
+            complete(shotLikeInteractor.likeShot(shotId), LIKE) {
             }
         }
     }
 
     private fun fetchComments(shotId: String) {
-        fetch(commentInteractor.getComments(shotId), RequestType.COMMENTS) {
+        fetch(commentInteractor.getComments(shotId), COMMENTS) {
             commentList = it
             with(view) {
                 hideLoading()

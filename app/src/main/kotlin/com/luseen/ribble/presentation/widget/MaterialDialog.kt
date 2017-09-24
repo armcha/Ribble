@@ -13,6 +13,7 @@ import com.luseen.ribble.presentation.utils.AnimationUtils
 import com.luseen.ribble.presentation.utils.extensions.nonSafeLazy
 import com.luseen.ribble.presentation.utils.extensions.onClick
 import com.luseen.ribble.presentation.utils.extensions.scale
+import kotlinx.android.synthetic.main.dialog_item.*
 
 /**
  * Created by Chatikyan on 10.09.2017.
@@ -33,6 +34,7 @@ class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogS
         setContentView(R.layout.dialog_item)
         setCancelable(true)
         setCanceledOnTouchOutside(true)
+        dialogContainer.onClick { hide() }
     }
 
     override fun onDetachedFromWindow() {

@@ -80,12 +80,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
                 .forEachIndexed { index, child ->
                     child.imageResId = items[index]
                 }
-        likeLayout.apply {
-            layoutText = shot.likesCount
-            onClick {
-                presenter.handleShotLike(shot.id)
-            }
-        }
+        likeLayout.layoutText = shot.likesCount
         viewCountLayout.layoutText = shot.viewsCount
         bucketLayout.layoutText = shot.bucketCount
     }

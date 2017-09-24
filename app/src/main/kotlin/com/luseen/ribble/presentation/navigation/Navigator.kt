@@ -51,8 +51,8 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
 
     private fun invokeFragmentChangeListener(tag: String?) {
         tag?.let {
-            val fragment = fragmentMap[it]
-            fragment?.let {
+            val screen = fragmentMap[it]
+            screen?.let {
                 fragmentChangeListener.onFragmentChanged(tag, it.fragment)
             }
         }
@@ -77,7 +77,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         fragmentManager.fragments
                 .filter { it.tag.contains(activity.applicationContext.packageName) }
                 .forEach {
-                    fragmentMap.put(it.tag, Screen(it, BackStrategy.DESTROY)) //FIXME
+                    fragmentMap.put(it.tag, Screen(it, BackStrategy.KEEP)) //FIXME
                 }
 
         fragmentManager.inTransaction {

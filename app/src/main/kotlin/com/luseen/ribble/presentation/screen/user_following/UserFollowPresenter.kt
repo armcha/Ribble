@@ -7,8 +7,6 @@ import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
 import com.luseen.ribble.presentation.fetcher.Status
-import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
-import com.luseen.ribble.presentation.utils.extensions.log
 import javax.inject.Inject
 
 /**
@@ -22,9 +20,7 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        val requestStatus = requestStatus(RequestType.FOLLOWINGS_SHOTS)
-        log { requestStatus }
-        log { fetcher.requestMap }
+        val requestStatus = requestStatus(FOLLOWINGS_SHOTS)
         when (requestStatus) {
             Status.LOADING -> view?.showLoading()
             Status.EMPTY, Status.ERROR -> view?.showNoShots()
@@ -34,7 +30,7 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        fetch(userInteractor.getFollowing(100), RequestType.FOLLOWINGS_SHOTS) {
+        fetch(userInteractor.getFollowing(100), FOLLOWINGS_SHOTS) {
             this.shotList = it
             view?.hideLoading()
             if (shotList.isNotEmpty()) {

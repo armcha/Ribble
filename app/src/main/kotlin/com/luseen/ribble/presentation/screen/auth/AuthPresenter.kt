@@ -9,7 +9,6 @@ import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
 import com.luseen.ribble.presentation.fetcher.Status
-import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
 import javax.inject.Inject
 
 /**
@@ -21,7 +20,7 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        if (requestStatus(RequestType.AUTH) == Status.LOADING)
+        if (requestStatus(AUTH) == Status.LOADING)
             view?.showLoading()
     }
 
@@ -32,7 +31,7 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
     override fun checkLogin(resultIntent: Intent?) {
         val userCode: String? = resultIntent?.data?.getQueryParameter("code")
         userCode?.let {
-            fetch(userInteractor.getUser(it), RequestType.AUTH) {
+            fetch(userInteractor.getUser(it), AUTH) {
                 view?.hideLoading()
                 view?.openHomeActivity()
             }

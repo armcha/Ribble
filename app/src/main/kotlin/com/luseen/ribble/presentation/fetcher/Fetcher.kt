@@ -2,7 +2,6 @@ package com.luseen.ribble.presentation.fetcher
 
 import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
 import com.luseen.ribble.presentation.fetcher.result_listener.ResultListener
-import com.luseen.ribble.presentation.utils.extensions.log
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -33,7 +32,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { resultListener startAndAdd requestType }
                 .subscribe(onSuccess<T>(requestType, success),
-                        onError(requestType, resultListener)))
+                        resultListener.onError(requestType)))
     }
 
     fun <T> fetch(observable: Observable<T>, requestType: RequestType,
@@ -43,7 +42,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { resultListener startAndAdd requestType }
                 .subscribe(onSuccess<T>(requestType, success),
-                        onError(requestType, resultListener)))
+                        resultListener.onError(requestType)))
     }
 
     fun <T> fetch(single: Single<T>, requestType: RequestType,
@@ -52,7 +51,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
                 .compose(getIOToMainTransformer())
                 .doOnSubscribe { resultListener startAndAdd requestType }
                 .subscribe(onSuccess<T>(requestType, success),
-                        onError(requestType, resultListener)))
+                        resultListener.onError(requestType)))
     }
 
     fun complete(completable: Completable, requestType: RequestType,
@@ -64,7 +63,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
                 .subscribe({
                     requestMap.replace(requestType, Status.SUCCESS)
                     success()
-                }, onError(requestType, resultListener)))
+                }, resultListener.onError(requestType)))
     }
 
     private infix fun ResultListener.startAndAdd(requestType: RequestType) {
@@ -73,18 +72,14 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
             requestMap.put(requestType, Status.LOADING)
     }
 
-    private fun onError(requestType: RequestType, resultListener: ResultListener): (Throwable) -> Unit {
+    private fun ResultListener.onError(requestType: RequestType): (Throwable) -> Unit {
         return {
-            log {
-                "onError $requestType"
-            }
             requestMap.replace(requestType, Status.ERROR)
-            resultListener.onRequestError(requestType, it.message)
+            onRequestError(requestType, it.message)
         }
     }
 
-    private inline fun <T> onSuccess(requestType: RequestType,
-                                     crossinline success: (T) -> Unit): (T) -> Unit {
+    private fun <T> onSuccess(requestType: RequestType, success: (T) -> Unit): (T) -> Unit {
         return {
             val status = if (it is List<*> && it.isEmpty()) {
                 Status.EMPTY

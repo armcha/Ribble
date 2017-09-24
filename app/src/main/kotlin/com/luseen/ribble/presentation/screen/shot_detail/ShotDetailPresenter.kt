@@ -37,9 +37,11 @@ class ShotDetailPresenter @Inject constructor(
         }
     }
 
-    override fun handleShotLike(shotId: String) {
-        fetch<Unit>(shotLikeInteractor.likeShot(shotId), RequestType.LIKE) {
+    override fun handleShotLike(shotId: String?) {
+        shotId?.let {
+            complete(shotLikeInteractor.likeShot(shotId), RequestType.LIKE) {
 
+            }
         }
     }
 
@@ -58,13 +60,22 @@ class ShotDetailPresenter @Inject constructor(
 
     override fun onRequestStart(requestType: RequestType) {
         super.onRequestStart(requestType)
-        view?.showLoading()
+        if (requestType == RequestType.COMMENTS)
+            view?.showLoading()
+        else if (requestType == RequestType.LIKE) {
+
+        }
     }
 
     override fun onRequestError(requestType: RequestType, errorMessage: String?) {
         super.onRequestError(requestType, errorMessage)
+        if (requestType == RequestType.COMMENTS) {
+            view?.showNoComments()
+        } else if (requestType == RequestType.LIKE) {
+
+        }
         view?.hideLoading()
         view?.showError(errorMessage)
-        view?.showNoComments()
+
     }
 }

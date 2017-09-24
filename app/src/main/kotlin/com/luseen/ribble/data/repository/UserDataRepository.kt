@@ -10,6 +10,7 @@ import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.domain.repository.UserRepository
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -35,15 +36,16 @@ class UserDataRepository @Inject constructor(
     }
 
     override fun logIn() {
-        preferences saveUserLoggedIn true
+        preferences.saveUserLoggedIn()
     }
 
     override fun logOut() {
-        preferences saveUserLoggedIn false
+        preferences.saveUserLoggedOut()
+        preferences.deleteToken()
     }
 
     override fun isUserLoggedIn(): Boolean {
-        return preferences.isUserLoggedIn()
+        return preferences.isUserLoggedIn
     }
 
     override fun getUserLikes(count: Int): Single<List<Like>> {
@@ -54,5 +56,9 @@ class UserDataRepository @Inject constructor(
     override fun getFollowing(count: Int): Single<List<Shot>> {
         return userApiService.getFollowing(count)
                 .map { mapper.translate(it) }
+    }
+
+    override fun follow(userName: String): Completable {
+        return userApiService.follow(userName)
     }
 }

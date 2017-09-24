@@ -6,10 +6,10 @@ import android.os.Bundle
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
 import com.luseen.ribble.presentation.screen.home.HomeActivity
-import com.luseen.ribble.utils.extensions.onClick
-import com.luseen.ribble.utils.extensions.showToast
-import com.luseen.ribble.utils.extensions.start
-import com.luseen.ribble.utils.extensions.takeColor
+import com.luseen.ribble.presentation.utils.extensions.onClick
+import com.luseen.ribble.presentation.utils.extensions.showToast
+import com.luseen.ribble.presentation.utils.extensions.start
+import com.luseen.ribble.presentation.utils.extensions.takeColor
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import javax.inject.Inject

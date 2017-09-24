@@ -1,4 +1,4 @@
-package com.luseen.ribble.utils.extensions
+package com.luseen.ribble.presentation.utils.extensions
 
 import android.content.res.Configuration
 import android.os.Bundle

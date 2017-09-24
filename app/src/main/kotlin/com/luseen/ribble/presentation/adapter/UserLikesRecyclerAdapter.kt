@@ -4,7 +4,7 @@ import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
-import com.luseen.ribble.utils.glide.load
+import com.luseen.ribble.presentation.utils.glide.load
 import kotlinx.android.synthetic.main.liked_shot_item.view.*
 
 /**

@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import com.luseen.ribble.R
 import com.luseen.ribble.di.scope.PerActivity
-import com.luseen.ribble.utils.extensions.log
+import com.luseen.ribble.presentation.utils.extensions.log
 import javax.inject.Inject
 
 /**

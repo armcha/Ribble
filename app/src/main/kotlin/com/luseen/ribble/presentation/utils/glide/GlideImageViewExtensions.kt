@@ -1,4 +1,4 @@
-package com.luseen.ribble.utils.glide
+package com.luseen.ribble.presentation.utils.glide
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable

@@ -10,9 +10,9 @@ import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.di.component.ApplicationComponent
 import com.luseen.ribble.di.module.ActivityModule
 import com.luseen.ribble.presentation.navigation.Navigator
+import com.luseen.ribble.presentation.utils.S
+import com.luseen.ribble.presentation.utils.extensions.emptyString
 import com.luseen.ribble.presentation.widget.MaterialDialog
-import com.luseen.ribble.utils.S
-import com.luseen.ribble.utils.extensions.emptyString
 import javax.inject.Inject
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>

@@ -1,7 +1,7 @@
 package com.luseen.ribble.presentation.widget
 
 import android.view.View
-import com.luseen.ribble.utils.AnimationUtils
+import com.luseen.ribble.presentation.utils.AnimationUtils
 
 /**
  * Created by Chatikyan on 17.09.2017.

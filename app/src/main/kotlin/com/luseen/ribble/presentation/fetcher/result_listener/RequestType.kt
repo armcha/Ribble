@@ -5,6 +5,7 @@ package com.luseen.ribble.presentation.fetcher.result_listener
  */
 enum class RequestType {
 
+    AUTH,
     POPULAR_SHOTS,
     RECENT_SHOTS,
     FOLLOWINGS_SHOTS,

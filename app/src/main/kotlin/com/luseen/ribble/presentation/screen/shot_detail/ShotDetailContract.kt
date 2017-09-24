@@ -19,6 +19,6 @@ interface ShotDetailContract {
 
     interface Presenter : ApiContract.Presenter<View> {
 
-        fun handleShotLike(shotId: String)
+        fun handleShotLike(shotId: String?)
     }
 }

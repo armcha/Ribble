@@ -1,4 +1,4 @@
-package com.luseen.ribble.utils
+package com.luseen.ribble.presentation.utils
 
 import com.luseen.ribble.R
 

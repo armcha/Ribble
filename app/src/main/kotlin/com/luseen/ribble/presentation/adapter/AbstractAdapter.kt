@@ -3,7 +3,7 @@ package com.luseen.ribble.presentation.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.luseen.ribble.utils.extensions.inflate
+import com.luseen.ribble.presentation.utils.extensions.inflate
 
 /**
  * Created by Chatikyan on 14.08.2017.

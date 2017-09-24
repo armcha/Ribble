@@ -31,7 +31,7 @@ import android.view.*
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.*
-import com.luseen.ribble.utils.AnimationUtils
+import com.luseen.ribble.presentation.utils.AnimationUtils
 import java.lang.ref.WeakReference
 import java.util.*
 

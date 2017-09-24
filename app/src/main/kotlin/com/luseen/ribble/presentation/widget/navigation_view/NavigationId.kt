@@ -1,7 +1,7 @@
 package com.luseen.ribble.presentation.widget.navigation_view
 
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
-import com.luseen.ribble.utils.extensions.emptyString
+import com.luseen.ribble.presentation.utils.extensions.emptyString
 
 /**
  * Created by Chatikyan on 21.08.2017.

@@ -12,8 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.luseen.ribble.R
-import com.luseen.ribble.utils.extensions.delay
-import com.luseen.ribble.utils.extensions.nonSafeLazy
+import com.luseen.ribble.presentation.utils.extensions.delay
+import com.luseen.ribble.presentation.utils.extensions.nonSafeLazy
 
 /**
  * Created by Chatikyan on 20.08.2017.

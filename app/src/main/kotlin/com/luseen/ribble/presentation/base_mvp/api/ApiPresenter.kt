@@ -4,7 +4,6 @@ import android.support.annotation.CallSuper
 import com.luseen.ribble.presentation.base_mvp.base.BaseContract
 import com.luseen.ribble.presentation.base_mvp.base.BasePresenter
 import com.luseen.ribble.presentation.fetcher.Fetcher
-import com.luseen.ribble.presentation.fetcher.Status
 import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
 import com.luseen.ribble.presentation.fetcher.result_listener.ResultListener
 import io.reactivex.Completable
@@ -20,10 +19,6 @@ abstract class ApiPresenter<VIEW : BaseContract.View> : BasePresenter<VIEW>(), R
 
     @Inject
     protected lateinit var fetcher: Fetcher
-
-    @Deprecated("Use requestStatus instead", level = DeprecationLevel.WARNING)
-    protected var status: Status = Status.IDLE
-        private set
 
     protected fun requestStatus(requestType: RequestType) = fetcher.getRequestStatus(requestType)
 
@@ -42,9 +37,9 @@ abstract class ApiPresenter<VIEW : BaseContract.View> : BasePresenter<VIEW>(), R
         fetcher.fetch(single, requestType, this, success)
     }
 
-    fun <TYPE> fetch(completable: Completable,
-                     requestType: RequestType = RequestType.TYPE_NONE, success: (TYPE) -> Unit) {
-        fetcher.fetch(completable, requestType, this, success)
+    fun complete(completable: Completable,
+                 requestType: RequestType = RequestType.TYPE_NONE, success: () -> Unit = {}) {
+        fetcher.complete(completable, requestType, this, success)
     }
 
     @CallSuper
@@ -56,23 +51,6 @@ abstract class ApiPresenter<VIEW : BaseContract.View> : BasePresenter<VIEW>(), R
     @CallSuper
     override fun onRequestStart(requestType: RequestType) {
         onRequestStart()
-    }
-
-    override fun onRequestStart() {
-        status = Status.LOADING
-    }
-
-    @CallSuper
-    override fun <T> onRequestSuccess(data: T) {
-        status = if (data is List<*> && data.isEmpty()) {
-            Status.EMPTY
-        } else {
-            Status.SUCCESS
-        }
-    }
-
-    override fun onRequestError(errorMessage: String?) {
-        status = Status.ERROR
     }
 
     @CallSuper

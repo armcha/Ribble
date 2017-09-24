@@ -2,6 +2,7 @@ package com.luseen.ribble.di.module
 
 import com.luseen.ribble.BuildConfig
 import com.luseen.ribble.data.network.*
+import com.luseen.ribble.data.pref.Preferences
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -36,8 +37,8 @@ class ApiModule {
 
     @Singleton
     @Provides
-    fun interceptor(): TokenInterceptor {
-        return TokenInterceptor(ApiConstants.TOKEN)
+    fun interceptor(preferences: Preferences): TokenInterceptor {
+        return TokenInterceptor(preferences)
     }
 
     @Singleton

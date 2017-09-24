@@ -3,7 +3,7 @@ package com.luseen.ribble.domain.entity
 import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
-import com.luseen.ribble.utils.extensions.emptyString
+import com.luseen.ribble.presentation.utils.extensions.emptyString
 import kotlinx.android.parcel.Parcelize
 
 /**

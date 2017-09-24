@@ -3,9 +3,9 @@ package com.luseen.ribble.presentation.adapter
 import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.Comment
-import com.luseen.ribble.utils.glide.TransformationType
-import com.luseen.ribble.utils.glide.clear
-import com.luseen.ribble.utils.glide.load
+import com.luseen.ribble.presentation.utils.glide.TransformationType
+import com.luseen.ribble.presentation.utils.glide.clear
+import com.luseen.ribble.presentation.utils.glide.load
 import kotlinx.android.synthetic.main.comment_item.view.*
 
 /**

@@ -6,6 +6,7 @@ import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.interactor.ShotListInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
 import com.luseen.ribble.presentation.fetcher.Status
+import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
 import javax.inject.Inject
 
 /**
@@ -18,7 +19,12 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        when (status) {
+        val requestStatus = if (view?.getShotType() == TYPE_POPULAR)
+            requestStatus(RequestType.POPULAR_SHOTS)
+        else
+            requestStatus(RequestType.RECENT_SHOTS)
+
+        when (requestStatus) {
             Status.LOADING -> view?.showLoading()
             Status.EMPTY, Status.ERROR -> view?.showNoShots()
             else -> view?.onShotListReceive(shotList)
@@ -39,18 +45,16 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
         }
 
         if (view?.getShotType() == TYPE_POPULAR)
-            fetch(shotListInteractor.getPopularShotList(100),success =  success)
+            fetch(shotListInteractor.getPopularShotList(100), RequestType.POPULAR_SHOTS, success)
         else
-            fetch(shotListInteractor.getRecentShotList(100),success =  success)
+            fetch(shotListInteractor.getRecentShotList(100), RequestType.RECENT_SHOTS, success)
     }
 
     override fun onRequestStart() {
-        super.onRequestStart()
         view?.showLoading()
     }
 
     override fun onRequestError(errorMessage: String?) {
-        super.onRequestError(errorMessage)
         if (view?.getShotType() == TYPE_POPULAR)
             view?.showError(errorMessage)
         view?.showNoShots()

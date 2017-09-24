@@ -2,8 +2,8 @@ package com.luseen.ribble.data.mapper
 
 import com.luseen.ribble.data.response.*
 import com.luseen.ribble.domain.entity.*
-import com.luseen.ribble.utils.extensions.emptyString
-import com.luseen.ribble.utils.extensions.toHtml
+import com.luseen.ribble.presentation.utils.extensions.emptyString
+import com.luseen.ribble.presentation.utils.extensions.toHtml
 import java.text.SimpleDateFormat
 import java.util.*
 

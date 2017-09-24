@@ -13,9 +13,9 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import com.luseen.ribble.R
-import com.luseen.ribble.utils.AnimationUtils
-import com.luseen.ribble.utils.extensions.hide
-import com.luseen.ribble.utils.extensions.show
+import com.luseen.ribble.presentation.utils.AnimationUtils
+import com.luseen.ribble.presentation.utils.extensions.hide
+import com.luseen.ribble.presentation.utils.extensions.show
 
 /**
  * Created by Chatikyan on 04.09.2017.

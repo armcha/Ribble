@@ -1,4 +1,4 @@
-package com.luseen.ribble.utils.extensions
+package com.luseen.ribble.presentation.utils.extensions
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
@@ -26,43 +26,43 @@ fun TextView.iconTint(colorId: Int) {
 }
 
 var View.scale: Float
-    get() = this.scaleX
+    get() = scaleX
     set(value) {
-        this.scaleY = value
-        this.scaleX = value
+        scaleY = value
+        scaleX = value
     }
 
 fun View.addTopMargin(marginInDp: Int) {
-    (this.layoutParams as ViewGroup.MarginLayoutParams).topMargin = marginInDp.toPx(this.context)
+    (layoutParams as ViewGroup.MarginLayoutParams).topMargin = marginInDp.toPx(this.context)
 }
 
 fun View.addBottomMargin(marginInDp: Int) {
-    (this.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = marginInDp.toPx(this.context)
+    (layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = marginInDp.toPx(this.context)
 }
 
 fun View.show() {
-    this.visibility = View.VISIBLE
+    visibility = View.VISIBLE
 }
 
 fun View.hide() {
-    this.visibility = View.GONE
+    visibility = View.GONE
 }
 
 fun View.invisible() {
-    this.visibility = View.INVISIBLE
+    visibility = View.INVISIBLE
 }
 
 fun View.onClick(function: () -> Unit) {
-    this.setOnClickListener {
+    setOnClickListener {
         function()
     }
 }
 
 infix fun ViewGroup.inflate(layoutResId: Int): View =
-        LayoutInflater.from(this.context).inflate(layoutResId, this, false)
+        LayoutInflater.from(context).inflate(layoutResId, this, false)
 
 fun ImageView.tint(colorId: Int) {
-    this.setColorFilter(this.context.takeColor(colorId), PorterDuff.Mode.SRC_IN)
+    setColorFilter(context.takeColor(colorId), PorterDuff.Mode.SRC_IN)
 }
 
 operator fun ViewGroup.get(index: Int): View = getChildAt(index)

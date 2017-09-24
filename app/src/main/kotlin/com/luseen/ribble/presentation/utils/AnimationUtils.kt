@@ -1,4 +1,4 @@
-package com.luseen.ribble.utils
+package com.luseen.ribble.presentation.utils
 
 import android.support.v4.view.animation.FastOutLinearInInterpolator
 import android.support.v4.view.animation.FastOutSlowInInterpolator

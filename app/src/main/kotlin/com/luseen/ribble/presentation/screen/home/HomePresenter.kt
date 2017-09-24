@@ -9,8 +9,8 @@ import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.navigation.NavigationState
+import com.luseen.ribble.presentation.utils.extensions.emptyString
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
-import com.luseen.ribble.utils.extensions.emptyString
 import javax.inject.Inject
 
 /**

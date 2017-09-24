@@ -34,6 +34,6 @@ class ShotDataRepository @Inject constructor(private var shotApiService: ShotApi
     }
 
     override fun likeShot(shotId: String): Completable {
-        TODO("Likes not implemented yet, go away")
+        return shotApiService.likeShot(shotId)
     }
 }

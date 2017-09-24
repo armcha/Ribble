@@ -6,6 +6,7 @@ import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
 import com.luseen.ribble.presentation.fetcher.Status
+import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
 import javax.inject.Inject
 
 /**
@@ -18,7 +19,7 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        when (status) {
+        when (requestStatus(RequestType.LIKED_SHOTS)) {
             Status.LOADING -> view?.showLoading()
             Status.EMPTY, Status.ERROR -> view?.showNoShots()
             else -> view?.onDataReceive(likeList)
@@ -27,10 +28,18 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        fetch(userInteractor.getUserLikes(count = 100)) {
+//        complate<Unit>(userInteractor.follow("weiming")){
+//            log {
+//                "Follow"
+//            }
+//        }
+        fetch(userInteractor.getUserLikes(count = 100), RequestType.LIKED_SHOTS) {
             likeList = it
             view?.hideLoading()
-            if (likeList.isNotEmpty()) view?.onDataReceive(likeList) else view?.showNoShots()
+            if (likeList.isNotEmpty())
+                view?.onDataReceive(likeList)
+            else
+                view?.showNoShots()
         }
     }
 

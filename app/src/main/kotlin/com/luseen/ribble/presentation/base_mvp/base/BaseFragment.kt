@@ -10,7 +10,7 @@ import com.luseen.arch.BaseMVPFragment
 import com.luseen.ribble.R
 import com.luseen.ribble.di.component.ActivityComponent
 import com.luseen.ribble.presentation.navigation.Navigator
-import com.luseen.ribble.utils.extensions.emptyString
+import com.luseen.ribble.presentation.utils.extensions.emptyString
 import javax.inject.Inject
 
 /**

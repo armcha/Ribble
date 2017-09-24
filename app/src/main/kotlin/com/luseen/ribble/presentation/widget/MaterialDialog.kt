@@ -9,10 +9,10 @@ import android.view.ViewPropertyAnimator
 import android.widget.Button
 import android.widget.TextView
 import com.luseen.ribble.R
-import com.luseen.ribble.utils.AnimationUtils
-import com.luseen.ribble.utils.extensions.nonSafeLazy
-import com.luseen.ribble.utils.extensions.onClick
-import com.luseen.ribble.utils.extensions.scale
+import com.luseen.ribble.presentation.utils.AnimationUtils
+import com.luseen.ribble.presentation.utils.extensions.nonSafeLazy
+import com.luseen.ribble.presentation.utils.extensions.onClick
+import com.luseen.ribble.presentation.utils.extensions.scale
 
 /**
  * Created by Chatikyan on 10.09.2017.

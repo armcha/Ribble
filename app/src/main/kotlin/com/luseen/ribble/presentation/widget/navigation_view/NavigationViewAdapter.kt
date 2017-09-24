@@ -3,8 +3,8 @@ package com.luseen.ribble.presentation.widget.navigation_view
 import android.graphics.Color
 import android.view.View
 import com.luseen.ribble.presentation.adapter.AbstractAdapter
-import com.luseen.ribble.utils.L
-import com.luseen.ribble.utils.extensions.tint
+import com.luseen.ribble.presentation.utils.L
+import com.luseen.ribble.presentation.utils.extensions.tint
 import kotlinx.android.synthetic.main.navigation_view_item.view.*
 
 /**

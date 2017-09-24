@@ -7,14 +7,14 @@ import android.widget.TextView
 import com.luseen.ribble.BuildConfig
 import com.luseen.ribble.R
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
+import com.luseen.ribble.presentation.utils.D
+import com.luseen.ribble.presentation.utils.L
+import com.luseen.ribble.presentation.utils.S
+import com.luseen.ribble.presentation.utils.extensions.actionView
+import com.luseen.ribble.presentation.utils.extensions.leftIcon
+import com.luseen.ribble.presentation.utils.extensions.sendEmail
+import com.luseen.ribble.presentation.utils.extensions.text
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
-import com.luseen.ribble.utils.D
-import com.luseen.ribble.utils.L
-import com.luseen.ribble.utils.S
-import com.luseen.ribble.utils.extensions.actionView
-import com.luseen.ribble.utils.extensions.leftIcon
-import com.luseen.ribble.utils.extensions.sendEmail
-import com.luseen.ribble.utils.extensions.text
 import kotlinx.android.synthetic.main.fragment_about.*
 import javax.inject.Inject
 

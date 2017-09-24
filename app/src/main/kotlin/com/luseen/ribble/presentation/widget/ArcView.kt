@@ -5,7 +5,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import com.luseen.ribble.R
-import com.luseen.ribble.utils.extensions.takeColor
+import com.luseen.ribble.presentation.utils.extensions.takeColor
 
 class ArcView constructor(context: Context, attrs: AttributeSet) : View(context, attrs) {
 

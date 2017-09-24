@@ -8,7 +8,7 @@ import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
 import com.luseen.ribble.presentation.fetcher.Status
 import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
-import com.luseen.ribble.utils.extensions.log
+import com.luseen.ribble.presentation.utils.extensions.log
 import javax.inject.Inject
 
 /**
@@ -46,12 +46,10 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
     }
 
     override fun onRequestStart() {
-        super.onRequestStart()
         view?.showLoading()
     }
 
     override fun onRequestError(errorMessage: String?) {
-        super.onRequestError(errorMessage)
         view?.showNoShots()
         view?.hideLoading()
         view?.showError(errorMessage)

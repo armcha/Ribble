@@ -10,10 +10,10 @@ import com.luseen.ribble.presentation.adapter.ShotRecyclerViewAdapter
 import com.luseen.ribble.presentation.adapter.listener.ShotClickListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseFragment
 import com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment
+import com.luseen.ribble.presentation.utils.S
+import com.luseen.ribble.presentation.utils.extensions.isPortrait
+import com.luseen.ribble.presentation.utils.extensions.takeColor
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId
-import com.luseen.ribble.utils.S
-import com.luseen.ribble.utils.extensions.isPortrait
-import com.luseen.ribble.utils.extensions.takeColor
 import kotlinx.android.synthetic.main.fragment_user_following.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import javax.inject.Inject

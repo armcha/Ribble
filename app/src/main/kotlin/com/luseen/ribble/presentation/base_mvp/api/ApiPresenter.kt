@@ -1,11 +1,11 @@
 package com.luseen.ribble.presentation.base_mvp.api
 
 import android.support.annotation.CallSuper
+import com.luseen.ribble.domain.fetcher.Fetcher
+import com.luseen.ribble.domain.fetcher.result_listener.RequestType
+import com.luseen.ribble.domain.fetcher.result_listener.ResultListener
 import com.luseen.ribble.presentation.base_mvp.base.BaseContract
 import com.luseen.ribble.presentation.base_mvp.base.BasePresenter
-import com.luseen.ribble.presentation.fetcher.Fetcher
-import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
-import com.luseen.ribble.presentation.fetcher.result_listener.ResultListener
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable

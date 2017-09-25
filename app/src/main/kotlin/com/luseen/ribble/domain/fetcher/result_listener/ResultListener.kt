@@ -1,4 +1,4 @@
-package com.luseen.ribble.presentation.fetcher.result_listener
+package com.luseen.ribble.domain.fetcher.result_listener
 
 /**
  * Created by Chatikyan on 04.08.2017.

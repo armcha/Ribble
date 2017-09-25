@@ -12,6 +12,7 @@ import com.luseen.ribble.di.module.ActivityModule
 import com.luseen.ribble.presentation.navigation.Navigator
 import com.luseen.ribble.presentation.utils.S
 import com.luseen.ribble.presentation.utils.extensions.emptyString
+import com.luseen.ribble.presentation.utils.extensions.nonSafeLazy
 import com.luseen.ribble.presentation.widget.MaterialDialog
 import javax.inject.Inject
 
@@ -26,7 +27,7 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     private var dialog: MaterialDialog? = null
 
-    val activityComponent: ActivityComponent by lazy(LazyThreadSafetyMode.NONE) {
+    val activityComponent: ActivityComponent by nonSafeLazy {
         getAppComponent().plus(ActivityModule(this))
     }
 

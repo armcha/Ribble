@@ -3,11 +3,11 @@ package com.luseen.ribble.presentation.screen.shot_detail
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Comment
+import com.luseen.ribble.domain.fetcher.Status
+import com.luseen.ribble.domain.fetcher.result_listener.RequestType
 import com.luseen.ribble.domain.interactor.CommentInteractor
 import com.luseen.ribble.domain.interactor.ShotLikeInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.fetcher.Status
-import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
 import javax.inject.Inject
 
 /**
@@ -25,7 +25,7 @@ class ShotDetailPresenter @Inject constructor(
         val commentStatus = requestStatus(COMMENTS)
         when (commentStatus) {
             Status.LOADING -> view?.showLoading()
-            Status.EMPTY, Status.ERROR -> view?.showNoComments()
+            Status.EMPTY_SUCCESS, Status.ERROR -> view?.showNoComments()
             else -> view?.onDataReceive(commentList)
         }
     }
@@ -47,13 +47,11 @@ class ShotDetailPresenter @Inject constructor(
     private fun fetchComments(shotId: String) {
         fetch(commentInteractor.getComments(shotId), COMMENTS) {
             commentList = it
-            with(view) {
-                hideLoading()
-                if (it.isNotEmpty())
-                    onDataReceive(it)
-                else
-                    showNoComments()
-            }
+            view?.hideLoading()
+            if (it.isNotEmpty())
+                view?.onDataReceive(it)
+            else
+                view?.showNoComments()
         }
     }
 

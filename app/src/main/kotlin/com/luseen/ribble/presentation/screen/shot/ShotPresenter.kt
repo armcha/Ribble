@@ -3,9 +3,9 @@ package com.luseen.ribble.presentation.screen.shot
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Shot
+import com.luseen.ribble.domain.fetcher.Status
 import com.luseen.ribble.domain.interactor.ShotListInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.fetcher.Status
 import javax.inject.Inject
 
 /**
@@ -25,7 +25,7 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
 
         when (requestStatus) {
             Status.LOADING -> view?.showLoading()
-            Status.EMPTY, Status.ERROR -> view?.showNoShots()
+            Status.EMPTY_SUCCESS, Status.ERROR -> view?.showNoShots()
             else -> view?.onShotListReceive(shotList)
         }
     }

@@ -3,9 +3,9 @@ package com.luseen.ribble.presentation.screen.user_likes
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.luseen.ribble.domain.entity.Like
+import com.luseen.ribble.domain.fetcher.Status
 import com.luseen.ribble.domain.interactor.UserInteractor
 import com.luseen.ribble.presentation.base_mvp.api.ApiPresenter
-import com.luseen.ribble.presentation.fetcher.Status
 import javax.inject.Inject
 
 /**
@@ -20,7 +20,7 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
     fun onStart() {
         when (requestStatus(LIKED_SHOTS)) {
             Status.LOADING -> view?.showLoading()
-            Status.EMPTY, Status.ERROR -> view?.showNoShots()
+            Status.EMPTY_SUCCESS, Status.ERROR -> view?.showNoShots()
             else -> view?.onDataReceive(likeList)
         }
     }

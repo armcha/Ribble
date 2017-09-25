@@ -9,6 +9,8 @@
     <color name="green">#009f5a</color>
     <color name="red">#F44336</color>
     <color name="cyan">#00BCD4</color>
+    <color name="log_out_color">#3F51B5</color>
+    <color name="shot_color">#3F51B5</color>
     <color name="blue_gray">#607D8B</color>
     <color name="progressBg">#30FF4081</color>
     <color name="aboutItemDividerColor">#30dadada</color>

@@ -1,7 +1,7 @@
-package com.luseen.ribble.presentation.fetcher
+package com.luseen.ribble.domain.fetcher
 
-import com.luseen.ribble.presentation.fetcher.result_listener.RequestType
-import com.luseen.ribble.presentation.fetcher.result_listener.ResultListener
+import com.luseen.ribble.domain.fetcher.result_listener.RequestType
+import com.luseen.ribble.domain.fetcher.result_listener.ResultListener
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @Singleton
 class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
 
-    val requestMap = ConcurrentHashMap<RequestType, Status>()
+    private val requestMap = ConcurrentHashMap<RequestType, Status>()
 
     private fun <T> getIOToMainTransformer(): SingleTransformer<T, T> {
         return SingleTransformer {
@@ -82,7 +82,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
     private fun <T> onSuccess(requestType: RequestType, success: (T) -> Unit): (T) -> Unit {
         return {
             val status = if (it is List<*> && it.isEmpty()) {
-                Status.EMPTY
+                Status.EMPTY_SUCCESS
             } else {
                 Status.SUCCESS
             }

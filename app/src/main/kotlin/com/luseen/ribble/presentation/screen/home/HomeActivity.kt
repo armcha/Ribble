@@ -1,9 +1,11 @@
 package com.luseen.ribble.presentation.screen.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
+import android.view.View
 import com.luseen.ribble.R
 import com.luseen.ribble.domain.entity.User
 import com.luseen.ribble.presentation.base_mvp.base.BaseActivity
@@ -12,9 +14,7 @@ import com.luseen.ribble.presentation.screen.auth.AuthActivity
 import com.luseen.ribble.presentation.screen.shot_root.ShotRootFragment
 import com.luseen.ribble.presentation.screen.user_following.UserFollowingFragment
 import com.luseen.ribble.presentation.screen.user_likes.UserLikesFragment
-import com.luseen.ribble.presentation.utils.extensions.onClick
-import com.luseen.ribble.presentation.utils.extensions.showToast
-import com.luseen.ribble.presentation.utils.extensions.start
+import com.luseen.ribble.presentation.utils.extensions.*
 import com.luseen.ribble.presentation.utils.glide.TransformationType
 import com.luseen.ribble.presentation.utils.glide.load
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationItem
@@ -25,25 +25,47 @@ import kotlinx.android.synthetic.main.nav_header_main.view.*
 import javax.inject.Inject
 import com.luseen.ribble.presentation.widget.navigation_view.NavigationId as Id
 
+
 class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), HomeContract.View,
         NavigationItemSelectedListener {
 
-    @Inject
-    protected lateinit var homePresenter: HomePresenter
+    private val TRANSLATION_X_KEY = "TRANSLATION_X_KEY"
+    private val CARDELEVATION_KEY = "CARDELEVATION_KEY"
+    private val SCALE_KEY = "SCALE_KEY"
 
     @Inject
-    protected lateinit var fragmentManager: FragmentManager
+    protected lateinit var homePresenter: HomePresenter
 
     override fun initPresenter() = homePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
         initViews()
 
         presenter.getNavigatorState()?.let {
             navigator.restore(it)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        fun put(key: String, value: Float) = outState?.putFloat(key, value)
+        with(mainView) {
+            put(TRANSLATION_X_KEY, translationX)
+            put(CARDELEVATION_KEY, scale)
+            put(SCALE_KEY, cardElevation)
+        }
+    }
+
+    override fun onRestoreInstanceState(savedState: Bundle?) {
+        super.onRestoreInstanceState(savedState)
+        savedState?.let {
+            with(mainView) {
+                translationX = it.getFloat(TRANSLATION_X_KEY)
+                scale = it.getFloat(CARDELEVATION_KEY)
+                cardElevation = it.getFloat(SCALE_KEY)
+            }
         }
     }
 
@@ -57,6 +79,18 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         supportActionBar?.setDisplayShowTitleEnabled(false)
         navView.navigationItemSelectListener = this
         navView.header.userName
+
+        drawerLayout.drawerElevation = 0F
+        drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                super.onDrawerSlide(drawerView, slideOffset)
+                val moveFactor = navView.width * slideOffset
+                mainView.translationX = moveFactor
+                mainView.scale = 1 - slideOffset / 4
+                mainView.cardElevation = slideOffset * 10.toPx(this@HomeActivity)
+            }
+        })
+        drawerLayout.setScrimColor(Color.TRANSPARENT)
     }
 
     override fun setArcArrowState() {

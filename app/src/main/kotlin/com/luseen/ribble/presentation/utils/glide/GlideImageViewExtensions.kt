@@ -6,6 +6,7 @@ import android.widget.ImageView
 import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 /**
@@ -49,6 +50,7 @@ enum class TransformationType {
     fun getTransformation(): Transformation<Bitmap> {
         return when (this) {
             CIRCLE -> CircleCrop()
+            ROUND -> RoundedCorners(20)
             else -> {
                 TODO()
             }

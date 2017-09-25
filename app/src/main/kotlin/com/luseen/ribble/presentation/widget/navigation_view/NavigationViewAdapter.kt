@@ -1,9 +1,10 @@
 package com.luseen.ribble.presentation.widget.navigation_view
 
-import android.graphics.Color
 import android.view.View
 import com.luseen.ribble.presentation.adapter.AbstractAdapter
+import com.luseen.ribble.presentation.utils.C
 import com.luseen.ribble.presentation.utils.L
+import com.luseen.ribble.presentation.utils.extensions.takeColor
 import com.luseen.ribble.presentation.utils.extensions.tint
 import kotlinx.android.synthetic.main.navigation_view_item.view.*
 
@@ -22,9 +23,10 @@ class NavigationViewAdapter constructor(navigationItemList: MutableList<Navigati
         itemText.text = item.name
         itemIcon.setImageResource(item.icon)
         itemIcon.tint(item.itemIconColor)
-        if (item.isSelected)
-            setBackgroundColor(Color.LTGRAY)
-        else
-            setBackgroundColor(Color.WHITE)
+        if (item.isSelected) {
+            itemText.setTextColor(context.takeColor(C.colorAccent))
+        } else {
+            itemText.setTextColor(context.takeColor(C.blue_gray))
+        }
     }
 }

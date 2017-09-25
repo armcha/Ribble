@@ -26,18 +26,18 @@ fun TextView.iconTint(colorId: Int) {
 }
 
 var View.scale: Float
-    get() = scaleX
+    get() = Math.min(scaleX, scaleY)
     set(value) {
         scaleY = value
         scaleX = value
     }
 
 fun View.addTopMargin(marginInDp: Int) {
-    (layoutParams as ViewGroup.MarginLayoutParams).topMargin = marginInDp.toPx(this.context)
+    (layoutParams as ViewGroup.MarginLayoutParams).topMargin = marginInDp.toPx(context)
 }
 
 fun View.addBottomMargin(marginInDp: Int) {
-    (layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = marginInDp.toPx(this.context)
+    (layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = marginInDp.toPx(context)
 }
 
 fun View.show() {

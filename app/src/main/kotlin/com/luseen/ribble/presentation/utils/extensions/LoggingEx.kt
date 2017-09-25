@@ -11,7 +11,7 @@ inline fun log(message: () -> Any?) {
 }
 
 inline fun <reified T> T.withLog(): T {
-    Logger.log("${T::class.java.simpleName} $this")
+    log("${T::class.java.simpleName} $this")
     return this
 }
 

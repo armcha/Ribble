@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Created by Chatikyan on 26.08.2017.
  */
 @PerActivity
-class CommentInteractor @Inject constructor(private val shotRepository: ShotDataRepository) {
+class CommentInteractor @Inject constructor(private val shotRepository: ShotDataRepository)  {
 
     fun getComments(shotId: String): Single<List<Comment>> {
         return shotRepository.getShotComments(shotId)

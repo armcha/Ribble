@@ -33,6 +33,7 @@
     <string name="easter_title">Easter egg</string>
     <string name="easter_message">There should be an easter egg, what do you think?</string>
     <string name="easter_button_text">Not funny</string>
+    <string name="navigation_drawer_icon">Navigation drawer icon</string>
 
 
 </resources>

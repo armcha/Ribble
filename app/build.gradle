@@ -70,10 +70,10 @@ dependencies {
     implementation "com.android.support:design:${supportLibVersion}"
     implementation "com.android.support.constraint:constraint-layout:1.0.2"
 
-//    //Architecture components
-//    implementation "android.arch.lifecycle:runtime:${archVersion}"
-//    implementation "android.arch.lifecycle:extensions:${archVersion}"
-//    kapt "android.arch.lifecycle:compiler:${archVersion}"
+    //Database
+    implementation "android.arch.persistence.room:runtime:1.0.0-beta1"
+    implementation "android.arch.persistence.room:rxjava2:1.0.0-beta1"
+    kapt "android.arch.persistence.room:compiler:1.0.0-beta1"
 
     //RX
     implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"

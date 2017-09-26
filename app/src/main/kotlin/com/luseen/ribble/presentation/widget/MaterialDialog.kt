@@ -38,7 +38,7 @@ class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogS
     }
 
     override fun onDetachedFromWindow() {
-        dismiss()
+        super.dismiss()
         super.onDetachedFromWindow()
     }
 

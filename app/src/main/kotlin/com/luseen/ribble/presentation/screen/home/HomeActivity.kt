@@ -30,7 +30,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         NavigationItemSelectedListener {
 
     private val TRANSLATION_X_KEY = "TRANSLATION_X_KEY"
-    private val CARDELEVATION_KEY = "CARDELEVATION_KEY"
+    private val CARD_ELEVATION_KEY = "CARD_ELEVATION_KEY"
     private val SCALE_KEY = "SCALE_KEY"
 
     @Inject
@@ -53,7 +53,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         fun put(key: String, value: Float) = outState?.putFloat(key, value)
         with(mainView) {
             put(TRANSLATION_X_KEY, translationX)
-            put(CARDELEVATION_KEY, scale)
+            put(CARD_ELEVATION_KEY, scale)
             put(SCALE_KEY, cardElevation)
         }
     }
@@ -63,7 +63,7 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
         savedState?.let {
             with(mainView) {
                 translationX = it.getFloat(TRANSLATION_X_KEY)
-                scale = it.getFloat(CARDELEVATION_KEY)
+                scale = it.getFloat(CARD_ELEVATION_KEY)
                 cardElevation = it.getFloat(SCALE_KEY)
             }
         }
@@ -72,6 +72,10 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
     override fun onDestroy() {
         presenter.saveNavigatorState(navigator.getState())
         super.onDestroy()
+    }
+
+    override fun injectDependencies() {
+        activityComponent.inject(this)
     }
 
     private fun initViews() {
@@ -88,6 +92,16 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
                 mainView.translationX = moveFactor
                 mainView.scale = 1 - slideOffset / 4
                 mainView.cardElevation = slideOffset * 10.toPx(this@HomeActivity)
+            }
+
+            override fun onDrawerOpened(drawerView: View?) {
+                super.onDrawerOpened(drawerView)
+                presenter.handleDrawerOpen()
+            }
+
+            override fun onDrawerClosed(drawerView: View?) {
+                super.onDrawerClosed(drawerView)
+                presenter.handleDrawerClose()
             }
         })
         drawerLayout.setScrimColor(Color.TRANSPARENT)
@@ -107,10 +121,6 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
             }
             arcImage.setAnimatedImage(R.drawable.hamb)
         }
-    }
-
-    override fun injectDependencies() {
-        activityComponent.inject(this)
     }
 
     override fun openShotFragment() {

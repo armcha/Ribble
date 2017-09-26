@@ -16,7 +16,9 @@ class NavigationViewAdapter constructor(navigationItemList: MutableList<Navigati
     : AbstractAdapter<NavigationItem>(navigationItemList, L.navigation_view_item) {
 
     override fun onItemClick(itemView: View, position: Int) {
-        itemClickListener?.onNavigationItemClick(itemList[position], position)
+        itemClickListener?.let {
+            it(itemList[position], position)
+        }
     }
 
     override fun View.bind(item: NavigationItem) {

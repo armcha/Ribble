@@ -20,15 +20,16 @@ import javax.inject.Inject
 class HomePresenter @Inject constructor(private val userInteractor: UserInteractor)
     : ApiPresenter<HomeContract.View>(), HomeContract.Presenter {
 
-    private var state: NavigationState? = null
     private var isArcIcon = false
-    private var activeTitle = emptyString
     private var user: User? = null
+    private var isDrawerOpened = false
+    private var activeTitle = emptyString
+    private var state: NavigationState? = null
     private var currentNavigationSelectedItem = 0
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        if (isArcIcon) {
+        if (isArcIcon || isDrawerOpened) {
             view?.setArcArrowState()
         } else {
             view?.setArcHamburgerIconState()
@@ -41,7 +42,7 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        fetch(userInteractor.getAuthenticatedUser()){
+        fetch(userInteractor.getAuthenticatedUser()) {
             user = it
             view?.updateDrawerInfo(it)
         }
@@ -77,6 +78,18 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
             currentNavigationSelectedItem = checkPosition
             view?.checkNavigationItem(currentNavigationSelectedItem)
         }
+    }
+
+    override fun handleDrawerOpen() {
+        if (!isArcIcon)
+            view?.setArcArrowState()
+        isDrawerOpened = true
+    }
+
+    override fun handleDrawerClose() {
+        if (!isArcIcon &&isDrawerOpened)
+            view?.setArcHamburgerIconState()
+        isDrawerOpened = false
     }
 
     override fun logOut() {

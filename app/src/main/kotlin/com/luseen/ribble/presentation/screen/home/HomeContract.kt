@@ -36,5 +36,9 @@ interface HomeContract {
         fun getNavigatorState(): NavigationState?
 
         fun handleFragmentChanges(currentTag: String,fragment: Fragment)
+
+        fun handleDrawerOpen()
+
+        fun handleDrawerClose()
     }
 }

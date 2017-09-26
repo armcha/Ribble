@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import com.luseen.ribble.R
 import com.luseen.ribble.di.scope.PerActivity
+import com.luseen.ribble.presentation.utils.Experimental
 import com.luseen.ribble.presentation.utils.extensions.log
 import javax.inject.Inject
 
@@ -45,7 +46,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
             transaction.setCustomAnimations(R.anim.slide_in_start, 0)
         } else {
             isCustomAnimationUsed = false
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         }
     }
 
@@ -183,7 +184,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
 
         fragmentManager.inTransaction {
             if (!isCustomAnimationUsed) {
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             }
             show(fragmentMap[currentTag]?.fragment)
         }

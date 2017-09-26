@@ -16,7 +16,7 @@ class TokenInterceptor constructor(private val preferences: Preferences) : Inter
         else
             ApiConstants.TOKEN
         val request = chain.request().newBuilder()
-                .addHeader("Authorization", "Bearer " + accessToken)
+                .addHeader("Authorization", "Bearer $accessToken")
                 .build()
         return chain.proceed(request)
     }

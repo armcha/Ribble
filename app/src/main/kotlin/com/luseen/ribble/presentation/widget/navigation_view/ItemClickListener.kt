@@ -5,5 +5,5 @@ package com.luseen.ribble.presentation.widget.navigation_view
  */
 interface ItemClickListener {
 
-    fun onNavigationItemClick(item: NavigationItem, position: Int)
+    operator fun invoke(item: NavigationItem, position: Int)
 }

@@ -8,6 +8,9 @@
         android:id="@+id/shotRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@drawable/scrollbar"
         android:layoutAnimation="@anim/grid_layout_animation_from_bottom" />
 
     <com.luseen.ribble.presentation.widget.AnimatedTextView

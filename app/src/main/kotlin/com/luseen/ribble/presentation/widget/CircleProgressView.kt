@@ -72,8 +72,8 @@ class CircleProgressView : View, Animatable {
     }
 
     override fun onDetachedFromWindow() {
+        dismiss()
         super.onDetachedFromWindow()
-        stop()
     }
 
     override fun isRunning(): Boolean {
@@ -82,9 +82,7 @@ class CircleProgressView : View, Animatable {
 
     override fun stop() {
         startAlpha(isReverse = true) {
-            hide()
-            progressAnimator.cancel()
-            rotateAnimation.cancel()
+            dismiss()
         }
     }
 
@@ -93,6 +91,13 @@ class CircleProgressView : View, Animatable {
         startAlpha {}
         startProgress()
         startRotation()
+    }
+
+    fun dismiss() {
+        progressAnimator.cancel()
+        rotateAnimation.cancel()
+        clearAnimation()
+        hide()
     }
 
     override fun onDraw(canvas: Canvas) {

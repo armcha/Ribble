@@ -1732,7 +1732,11 @@ class CustomTabLayout @JvmOverloads constructor(context: Context,
             indicatorRect.set((mIndicatorLeft + indicatorWidth), (height - mSelectedIndicatorHeight).toFloat(),
                     (mIndicatorRight - indicatorWidth), height.toFloat())
             if (mIndicatorLeft in 0..(mIndicatorRight - 1)) {
-                canvas.drawRoundRect(indicatorRect, 15f, 15f, mSelectedIndicatorPaint)
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                    canvas.drawRoundRect(indicatorRect, 15f, 15f, mSelectedIndicatorPaint)
+                else
+                    canvas.drawRect(indicatorRect, mSelectedIndicatorPaint)
             }
         }
     }

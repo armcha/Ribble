@@ -40,7 +40,7 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     @CallSuper
     override fun onDestroy() {
-        dialog?.hide()
+        dialog?.dismiss()
         super.onDestroy()
     }
 

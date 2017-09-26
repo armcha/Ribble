@@ -82,7 +82,7 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
         this setCurrentSelected savedState.currentPosition
     }
 
-    override fun onNavigationItemClick(item: NavigationItem, position: Int) {
+    override fun invoke(item: NavigationItem, position: Int) {
         this setCurrentSelected position
         navigationItemSelectListener?.onNavigationItemSelected(item)
     }

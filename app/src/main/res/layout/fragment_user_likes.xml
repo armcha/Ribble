@@ -9,6 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_color"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@drawable/scrollbar"
         android:id="@+id/likesRecyclerView"/>
 
     <com.luseen.ribble.presentation.widget.AnimatedTextView

@@ -11,7 +11,7 @@ import android.text.Html
 import android.text.Spanned
 import android.widget.Toast
 import com.luseen.ribble.App
-import com.luseen.ribble.presentation.navigation.Experimental
+import com.luseen.ribble.presentation.utils.Experimental
 
 
 /**

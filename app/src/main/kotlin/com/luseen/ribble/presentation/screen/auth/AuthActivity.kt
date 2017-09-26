@@ -45,6 +45,11 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
         login.isClickable = true
     }
 
+    override fun onDestroy() {
+        progressBar.dismiss()
+        super.onDestroy()
+    }
+
     override fun showError(message: String?) {
         showErrorDialog(message)
     }

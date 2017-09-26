@@ -2,7 +2,6 @@ package com.luseen.ribble.presentation.screen.shot_detail
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import com.luseen.ribble.domain.entity.Comment
 import com.luseen.ribble.domain.fetcher.Status
 import com.luseen.ribble.domain.fetcher.result_listener.RequestType
 import com.luseen.ribble.domain.interactor.CommentInteractor
@@ -18,15 +17,13 @@ class ShotDetailPresenter @Inject constructor(
         private val shotLikeInteractor: ShotLikeInteractor)
     : ApiPresenter<ShotDetailContract.View>(), ShotDetailContract.Presenter {
 
-    private var commentList = listOf<Comment>()
-
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
         val commentStatus = requestStatus(COMMENTS)
         when (commentStatus) {
             Status.LOADING -> view?.showLoading()
             Status.EMPTY_SUCCESS, Status.ERROR -> view?.showNoComments()
-            else -> view?.onDataReceive(commentList)
+            else -> view?.onDataReceive(commentInteractor.getCommentsFromMemory())
         }
     }
 
@@ -46,7 +43,6 @@ class ShotDetailPresenter @Inject constructor(
 
     private fun fetchComments(shotId: String) {
         fetch(commentInteractor.getComments(shotId), COMMENTS) {
-            commentList = it
             view?.hideLoading()
             if (it.isNotEmpty())
                 view?.onDataReceive(it)

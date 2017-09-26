@@ -14,19 +14,22 @@ import javax.inject.Inject
 class ShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor)
     : ApiPresenter<ShotContract.View>(), ShotContract.Presenter {
 
-    private var shotList: List<Shot> = listOf()
-
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        val requestStatus = if (view?.getShotType() == TYPE_POPULAR)
+        val isPopularType = view?.getShotType() == TYPE_POPULAR
+        val status = if (isPopularType)
             requestStatus(POPULAR_SHOTS)
         else
             requestStatus(RECENT_SHOTS)
 
-        when (requestStatus) {
+        when (status) {
             Status.LOADING -> view?.showLoading()
             Status.EMPTY_SUCCESS, Status.ERROR -> view?.showNoShots()
-            else -> view?.onShotListReceive(shotList)
+            else -> {
+                view?.onShotListReceive(if (isPopularType)
+                    shotListInteractor.getPopularShotFromMemory()
+                else shotListInteractor.getRecentShotFromMemory())
+            }
         }
     }
 
@@ -34,7 +37,6 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
         super.onPresenterCreate()
 
         val success = { it: List<Shot> ->
-            this.shotList = it
             view?.hideLoading()
             if (it.isNotEmpty()) {
                 view?.onShotListReceive(it) ?: Unit

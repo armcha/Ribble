@@ -93,9 +93,9 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
     }
 
     inline fun <reified T : Fragment> goTo(keepState: Boolean = true,
-                                           withCustomAnimation: Boolean = false,
-                                           arg: Bundle = Bundle.EMPTY,
-                                           @Experimental
+                                                    withCustomAnimation: Boolean = false,
+                                                    arg: Bundle = Bundle.EMPTY,
+                                                    @Experimental
                                            backStrategy: BackStrategy = BackStrategy.KEEP) {
         val tag = T::class.java.name
         goTo(tag, keepState, withCustomAnimation, arg, backStrategy)

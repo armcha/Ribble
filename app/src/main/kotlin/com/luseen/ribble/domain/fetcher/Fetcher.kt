@@ -1,5 +1,6 @@
 package com.luseen.ribble.domain.fetcher
 
+import com.luseen.ribble.data.cache.MemoryCache
 import com.luseen.ribble.domain.fetcher.result_listener.RequestType
 import com.luseen.ribble.domain.fetcher.result_listener.ResultListener
 import io.reactivex.*
@@ -14,7 +15,8 @@ import javax.inject.Singleton
  * Created by Chatikyan on 04.08.2017.
  */
 @Singleton
-class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
+class Fetcher @Inject constructor(private val disposable: CompositeDisposable,
+                                  private val memoryCache: MemoryCache) {
 
     private val requestMap = ConcurrentHashMap<RequestType, Status>()
 
@@ -84,6 +86,7 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
             val status = if (it is List<*> && it.isEmpty()) {
                 Status.EMPTY_SUCCESS
             } else {
+                memoryCache.put(requestType, it)
                 Status.SUCCESS
             }
             requestMap.replace(requestType, status)

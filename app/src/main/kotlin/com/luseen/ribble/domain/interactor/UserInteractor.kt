@@ -1,11 +1,13 @@
 package com.luseen.ribble.domain.interactor
 
+import com.luseen.ribble.data.cache.MemoryCache
 import com.luseen.ribble.data.pref.Preferences
 import com.luseen.ribble.data.repository.UserDataRepository
 import com.luseen.ribble.di.scope.PerActivity
 import com.luseen.ribble.domain.entity.Like
 import com.luseen.ribble.domain.entity.Shot
 import com.luseen.ribble.domain.entity.User
+import com.luseen.ribble.domain.fetcher.result_listener.RequestType
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -16,7 +18,8 @@ import javax.inject.Inject
  */
 @PerActivity
 class UserInteractor @Inject constructor(private val userDataRepository: UserDataRepository,
-                                         private val preferences: Preferences) {
+                                         private val preferences: Preferences,
+                                         private val memoryCache: MemoryCache) {
 
     fun getUser(code: String): Flowable<User> {
         return userDataRepository.getToken(code)
@@ -26,6 +29,7 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
     }
 
     fun logOut() {
+        memoryCache.evictAll()
         userDataRepository.logOut()
     }
 
@@ -46,4 +50,8 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
     fun follow(userName: String): Completable {
         return userDataRepository.follow(userName)
     }
+
+    fun getFollowingFromMemory(): List<Shot> = memoryCache getCacheForType RequestType.FOLLOWINGS_SHOTS
+
+    fun getUserLikesFromMemory(): List<Like> = memoryCache getCacheForType RequestType.LIKED_SHOTS
 }

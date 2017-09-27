@@ -3,6 +3,7 @@ package com.luseen.ribble.presentation.utils.extensions
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
+import android.support.annotation.Px
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
@@ -32,12 +33,12 @@ var View.scale: Float
         scaleX = value
     }
 
-fun View.addTopMargin(marginInDp: Int) {
-    (layoutParams as ViewGroup.MarginLayoutParams).topMargin = marginInDp.toPx(context)
+fun View.addTopMargin(@Px marginInPx: Int) {
+    (layoutParams as ViewGroup.MarginLayoutParams).topMargin = marginInPx
 }
 
-fun View.addBottomMargin(marginInDp: Int) {
-    (layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = marginInDp.toPx(context)
+fun View.addBottomMargin(@Px marginInPx: Int) {
+    (layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = marginInPx
 }
 
 fun View.show() {

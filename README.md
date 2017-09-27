@@ -9,7 +9,7 @@
 ## Simple Dribbble Client using Dribbble API, work in progress...
 
 ## Features
-:white_check_mark:  Kotlin: Yes, fully written in Kotlin(~95%). :scream: :heart: <br/>
+:white_check_mark:  Kotlin: Yes, fully written in Kotlin(~96%). :scream: :heart: <br/>
 :white_check_mark:  Clean architecture: The whole project is based on uncle Bob's clean architecture approach. <br/>
 :white_check_mark:  Configuration change: Handles configuration changes <br/>
 :white_check_mark:  Material Design: Not a fully Material Design App, but I am trying my best. <br/>
@@ -28,7 +28,10 @@
     
 ## TODO list:
 :white_large_square: Adding/removing favourite shot <br/>
-:white_large_square: Add user profile screen <br/>
+:white_large_square: User profile screen <br/>
+:white_large_square: Data base for offline use <br/>
+:white_large_square: Fonts <br/>
+:white_large_square: Endless scroll <br/>
 :white_large_square: Design improvements <br/>
 :white_large_square: Add unit tests & integration tests <br/> 
 :white_large_square: More features using Dribbble API <br/>

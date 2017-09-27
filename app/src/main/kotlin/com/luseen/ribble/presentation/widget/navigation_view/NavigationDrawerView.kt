@@ -1,6 +1,7 @@
 package com.luseen.ribble.presentation.widget.navigation_view
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.design.widget.NavigationView
@@ -12,10 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.luseen.ribble.R
-import com.luseen.ribble.presentation.utils.C
 import com.luseen.ribble.presentation.utils.extensions.delay
 import com.luseen.ribble.presentation.utils.extensions.nonSafeLazy
-import com.luseen.ribble.presentation.utils.extensions.takeColor
 
 /**
  * Created by Chatikyan on 20.08.2017.
@@ -55,7 +54,7 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
     }
 
     init {
-        setBackgroundColor(context.takeColor(C.bg_color))
+        setBackgroundColor(Color.TRANSPARENT)
         val layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT)
         layoutParams.topMargin = context.resources.getDimension(R.dimen.nav_header_height).toInt()

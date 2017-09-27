@@ -105,6 +105,12 @@ class HomeActivity : BaseActivity<HomeContract.View, HomeContract.Presenter>(), 
             }
         })
         drawerLayout.setScrimColor(Color.TRANSPARENT)
+
+//        ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
+//            v.addTopMargin(insets.systemWindowInsetTop)
+//            navView.addBottomMargin(insets.systemWindowInsetBottom)
+//            insets
+//        }
     }
 
     override fun setArcArrowState() {

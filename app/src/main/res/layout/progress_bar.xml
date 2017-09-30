@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge>
-    <com.luseen.ribble.presentation.widget.CircleProgressView xmlns:android="http://schemas.android.com/apk/res/android"
+    <io.armcha.ribble.presentation.widget.CircleProgressView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/progressBar"
         android:layout_width="37dp"

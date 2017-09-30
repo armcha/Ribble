@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.luseen.ribble.presentation.widget.SquareCardView
+    <io.armcha.ribble.presentation.widget.SquareCardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:scaleType="centerCrop"
             android:contentDescription="@string/shot_image" />
 
-    </com.luseen.ribble.presentation.widget.SquareCardView>
+    </io.armcha.ribble.presentation.widget.SquareCardView>
 
     <TextView
         android:id="@+id/shotTitle"

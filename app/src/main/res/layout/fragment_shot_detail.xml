@@ -7,7 +7,7 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    tools:context="com.luseen.ribble.presentation.screen.shot_detail.ShotDetailFragment">
+    tools:context="io.armcha.ribble.presentation.screen.shot_detail.ShotDetailFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <com.luseen.ribble.presentation.widget.AnimatedTextView
+    <io.armcha.ribble.presentation.widget.AnimatedTextView
         android:id="@+id/noCommentsText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
-    <com.luseen.ribble.presentation.widget.CircleProgressView
+    <io.armcha.ribble.presentation.widget.CircleProgressView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/progressBar"
         android:layout_width="37dp"
@@ -88,7 +88,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.luseen.ribble.presentation.widget.TextImageLayout
+                <io.armcha.ribble.presentation.widget.TextImageLayout
                     android:id="@+id/likeLayout"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_marginRight="4dp" />
 
-                <com.luseen.ribble.presentation.widget.TextImageLayout
+                <io.armcha.ribble.presentation.widget.TextImageLayout
                     android:id="@+id/viewCountLayout"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_marginRight="4dp" />
 
-                <com.luseen.ribble.presentation.widget.TextImageLayout
+                <io.armcha.ribble.presentation.widget.TextImageLayout
                     android:id="@+id/bucketLayout"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
@@ -136,7 +136,6 @@
                 android:layout_marginStart="16dp"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
-                android:text="aaaaaaaaa"
                 app:layout_constraintStart_toEndOf="@+id/authorImage"
                 app:layout_constraintTop_toTopOf="@+id/authorImage" />
 
@@ -145,7 +144,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="bbbbbb"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:textSize="14sp"

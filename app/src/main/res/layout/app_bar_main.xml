@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.luseen.ribble.presentation.widget.ArcView
+                <io.armcha.ribble.presentation.widget.ArcView
                     android:id="@+id/arcView"
                     android:layout_width="85dp"
                     android:layout_height="63dp"
@@ -41,7 +41,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.luseen.ribble.presentation.widget.AnimatedImageView
+                <io.armcha.ribble.presentation.widget.AnimatedImageView
                     android:id="@+id/arcImage"
                     android:layout_width="28dp"
                     android:layout_height="0dp"
@@ -56,7 +56,7 @@
                     app:layout_constraintTop_toTopOf="@+id/toolbarTitle"
                     app:layout_constraintVertical_bias="0.50" />
 
-                <com.luseen.ribble.presentation.widget.AnimatedTextView
+                <io.armcha.ribble.presentation.widget.AnimatedTextView
                     android:id="@+id/toolbarTitle"
                     android:layout_width="0dp"
                     android:layout_height="0dp"

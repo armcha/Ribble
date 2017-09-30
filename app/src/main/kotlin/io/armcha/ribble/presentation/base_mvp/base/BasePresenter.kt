@@ -1,0 +1,8 @@
+package io.armcha.ribble.presentation.base_mvp.base
+
+import io.luseen.arch.BaseMVPPresenter
+
+/**
+ * Created by Chatikyan on 31.07.2017.
+ */
+abstract class BasePresenter<V : BaseContract.View> : io.luseen.arch.BaseMVPPresenter<V>()

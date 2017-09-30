@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.luseen.ribble.presentation.widget.navigation_view.NavigationDrawerView
+    <io.armcha.ribble.presentation.widget.navigation_view.NavigationDrawerView
         android:id="@+id/navView"
         android:layout_width="250dp"
         android:layout_height="match_parent"

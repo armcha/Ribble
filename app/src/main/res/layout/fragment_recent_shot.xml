@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.luseen.ribble.presentation.screen.recent_shot.RecentShotFragment">
+    tools:context="io.armcha.ribble.presentation.screen.recent_shot.RecentShotFragment">
 
 
     <FrameLayout
@@ -11,7 +11,7 @@
         android:background="@color/colorPrimary"
         android:layout_height="150dp">
 
-        <com.luseen.ribble.presentation.widget.CircleProgressView
+        <io.armcha.ribble.presentation.widget.CircleProgressView
             android:id="@+id/progressBar"
             android:layout_width="37dp"
             android:layout_height="37dp"
@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </FrameLayout>
 
-    <com.luseen.ribble.presentation.widget.ArcView
+    <io.armcha.ribble.presentation.widget.ArcView
         android:layout_width="175dp"
         android:layout_height="100dp"
         android:layout_gravity="center" />

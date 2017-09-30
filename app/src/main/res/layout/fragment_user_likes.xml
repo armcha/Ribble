@@ -14,7 +14,7 @@
         android:scrollbarThumbVertical="@drawable/scrollbar"
         android:id="@+id/likesRecyclerView"/>
 
-    <com.luseen.ribble.presentation.widget.AnimatedTextView
+    <io.armcha.ribble.presentation.widget.AnimatedTextView
         android:id="@+id/noShotsText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

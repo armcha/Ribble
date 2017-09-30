@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.screen.shot.ShotFragment">
 
-    <com.luseen.ribble.presentation.widget.GridRecyclerView
+    <io.armcha.ribble.presentation.widget.GridRecyclerView
         android:id="@+id/shotRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +13,7 @@
         android:scrollbarThumbVertical="@drawable/scrollbar"
         android:layoutAnimation="@anim/grid_layout_animation_from_bottom" />
 
-    <com.luseen.ribble.presentation.widget.AnimatedTextView
+    <io.armcha.ribble.presentation.widget.AnimatedTextView
         android:id="@+id/noShotsText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

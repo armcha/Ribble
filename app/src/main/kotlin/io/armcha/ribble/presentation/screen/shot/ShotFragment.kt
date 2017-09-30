@@ -3,6 +3,7 @@ package io.armcha.ribble.presentation.screen.shot
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import io.armcha.ribble.R
 import io.armcha.ribble.domain.entity.Shot
 import io.armcha.ribble.presentation.adapter.ShotRecyclerViewAdapter
 import io.armcha.ribble.presentation.adapter.listener.ShotClickListener
@@ -22,12 +23,8 @@ class ShotFragment : BaseFragment<ShotContract.View, ShotContract.Presenter>(),
     companion object {
         private const val SHOT_TYPE = "shot_type"
 
-        fun newInstance(shotFragmentType: String): ShotFragment {
-            val bundle = Bundle()
-            bundle.putString(SHOT_TYPE, shotFragmentType)
-            val shotFragment = ShotFragment()
-            shotFragment.arguments = bundle
-            return shotFragment
+        fun newInstance(shotFragmentType: String) = ShotFragment().apply {
+            arguments = Bundle().apply { putString(SHOT_TYPE, shotFragmentType) }
         }
     }
 
@@ -37,13 +34,13 @@ class ShotFragment : BaseFragment<ShotContract.View, ShotContract.Presenter>(),
 
     override fun initPresenter() = shotPresenter
 
-    override fun layoutResId() = io.armcha.ribble.R.layout.fragment_shot
+    override fun layoutResId() = R.layout.fragment_shot
 
     override fun injectDependencies() = activityComponent.inject(this)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBar.backgroundCircleColor = takeColor(io.armcha.ribble.R.color.colorPrimary)
+        progressBar.backgroundCircleColor = takeColor(R.color.colorPrimary)
     }
 
     override fun getShotType() = extraWithKey<String>(SHOT_TYPE)

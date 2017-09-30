@@ -8,7 +8,6 @@ import io.armcha.ribble.domain.entity.Like
 import io.armcha.ribble.domain.entity.Shot
 import io.armcha.ribble.domain.entity.User
 import io.armcha.ribble.domain.fetcher.result_listener.RequestType
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -33,23 +32,15 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
         userDataRepository.logOut()
     }
 
-    fun getAuthenticatedUser(): Flowable<User> {
-        return userDataRepository.getUser()
-    }
+    fun getAuthenticatedUser(): Flowable<User> = userDataRepository.getUser()
 
     fun isUserLoggedIn(): Boolean = userDataRepository.isUserLoggedIn()
 
-    fun getUserLikes(count: Int): Single<List<Like>> {
-        return userDataRepository.getUserLikes(count)
-    }
+    fun getUserLikes(count: Int): Single<List<Like>> = userDataRepository.getUserLikes(count)
 
-    fun getFollowing(count: Int): Single<List<Shot>> {
-        return userDataRepository.getFollowing(count)
-    }
+    fun getFollowing(count: Int) = userDataRepository.getFollowing(count)
 
-    fun follow(userName: String): Completable {
-        return userDataRepository.follow(userName)
-    }
+    fun follow(userName: String) = userDataRepository.follow(userName)
 
     fun getFollowingFromMemory(): List<Shot> = memoryCache getCacheForType RequestType.FOLLOWINGS_SHOTS
 

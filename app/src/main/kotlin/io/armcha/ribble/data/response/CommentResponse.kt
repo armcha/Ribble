@@ -8,13 +8,6 @@ import com.google.gson.annotations.SerializedName
  */
 class CommentResponse {
 
-//        "id": 6497629,
-//        "body": "<p>Welcome to the game! Great job :)</p>",
-//        "likes_count": 1,
-//        "likes_url": "https://api.dribbble.com/v1/shots/3761078/comments/6497629/likes",
-//        "created_at": "2017-08-25T11:29:35Z",
-//        "updated_at": "2017-08-25T11:29:59Z",
-
     @SerializedName("id")
     @Expose
     val id: Int? = null

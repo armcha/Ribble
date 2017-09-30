@@ -31,11 +31,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     companion object {
         const val SHOT_EXTRA_KEY = "shot_extra_key"
 
-        fun getBundle(shot: Shot): Bundle {
-            val bundle = Bundle()
-            bundle.putParcelable(SHOT_EXTRA_KEY, shot)
-            return bundle
-        }
+        fun getBundle(shot: Shot) = Bundle().apply { putParcelable(SHOT_EXTRA_KEY, shot) }
     }
 
     private val items = intArrayOf(R.drawable.heart_full, R.drawable.eye, R.drawable.bucket)

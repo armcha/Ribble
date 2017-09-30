@@ -20,7 +20,5 @@ class ShotLikeInteractor @Inject constructor(private val shotRepository: ShotDat
                 .doOnNext { shotLikeCount = it.count() }
     }
 
-    fun likeShot(shotId: String): Completable {
-        return shotRepository.likeShot(shotId)
-    }
+    fun likeShot(shotId: String) = shotRepository.likeShot(shotId)
 }

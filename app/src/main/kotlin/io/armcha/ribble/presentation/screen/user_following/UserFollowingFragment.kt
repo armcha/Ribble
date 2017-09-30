@@ -29,20 +29,20 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBar.backgroundCircleColor = takeColor(io.armcha.ribble.R.color.colorPrimary)
+        progressBar.backgroundCircleColor = takeColor(R.color.colorPrimary)
     }
 
     override fun injectDependencies() {
         activityComponent.inject(this)
     }
 
-    override fun layoutResId() = io.armcha.ribble.R.layout.fragment_user_following
+    override fun layoutResId() = R.layout.fragment_user_following
 
     override fun initPresenter() = followingPresenter
 
     override fun onShotClicked(shot: Shot) {
         val bundle = ShotDetailFragment.getBundle(shot)
-        goTo<ShotDetailFragment>(keepState = false,withCustomAnimation = true, arg = bundle)
+        goTo<ShotDetailFragment>(keepState = false, withCustomAnimation = true, arg = bundle)
     }
 
     override fun showLoading() {
@@ -66,18 +66,18 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
     }
 
     private fun updateAdapter(shotList: List<Shot>) {
-        recyclerAdapter?.update(shotList) ?: this setUpRecyclerView shotList
+        recyclerAdapter?.update(shotList) ?: setUpRecyclerView(shotList)
     }
 
-    private infix fun setUpRecyclerView(shotList: List<Shot>) {
+    private fun setUpRecyclerView(shotList: List<Shot>) {
         recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)
-        shotRecyclerView.layoutManager = GridLayoutManager(activity, if (isPortrait()) 2 else 3)
-        shotRecyclerView.setHasFixedSize(true)
-        shotRecyclerView.adapter = recyclerAdapter
-        shotRecyclerView.scheduleLayoutAnimation()
+        with(shotRecyclerView) {
+            layoutManager = GridLayoutManager(activity, if (isPortrait()) 2 else 3)
+            setHasFixedSize(true)
+            adapter = recyclerAdapter
+            scheduleLayoutAnimation()
+        }
     }
 
-    override fun getTitle(): String {
-        return NavigationId.FOLLOWING.name
-    }
+    override fun getTitle() = NavigationId.FOLLOWING.name
 }

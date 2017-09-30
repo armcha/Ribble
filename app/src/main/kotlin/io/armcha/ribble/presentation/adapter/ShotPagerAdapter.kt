@@ -26,7 +26,5 @@ class ShotPagerAdapter @Inject constructor(fragmentManager: FragmentManager) : F
 
     override fun getCount(): Int = titles.count()
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return titles[position]
-    }
+    override fun getPageTitle(position: Int) = titles[position]
 }

@@ -31,15 +31,11 @@ class ApiModule {
     @Singleton
     @Provides
     @Named("authEndpoint")
-    fun authEndpoint(): String {
-        return ApiConstants.AUTH_ENDPOINT
-    }
+    fun authEndpoint() = ApiConstants.AUTH_ENDPOINT
 
     @Singleton
     @Provides
-    fun interceptor(preferences: Preferences): TokenInterceptor {
-        return TokenInterceptor(preferences)
-    }
+    fun interceptor(preferences: Preferences) = TokenInterceptor(preferences)
 
     @Singleton
     @Provides

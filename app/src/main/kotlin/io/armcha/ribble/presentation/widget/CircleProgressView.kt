@@ -51,9 +51,7 @@ class CircleProgressView : View, Animatable {
             field = value
             paint.strokeWidth = resources.getDimension(field)
         }
-        get() {
-            return resources.getDimension(field).toInt()
-        }
+        get() = resources.getDimension(field).toInt()
 
     constructor(context: Context) : super(context)
 
@@ -76,9 +74,7 @@ class CircleProgressView : View, Animatable {
         super.onDetachedFromWindow()
     }
 
-    override fun isRunning(): Boolean {
-        return progressAnimator.isRunning && !rotateAnimation.hasEnded()
-    }
+    override fun isRunning() = progressAnimator.isRunning && !rotateAnimation.hasEnded()
 
     override fun stop() {
         startAlpha(isReverse = true) {

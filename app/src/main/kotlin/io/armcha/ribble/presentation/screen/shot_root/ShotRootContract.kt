@@ -9,8 +9,5 @@ interface ShotRootContract {
 
     interface View : BaseContract.View
 
-    interface Presenter : BaseContract.Presenter<View>{
-
-    }
-
+    interface Presenter : BaseContract.Presenter<View>
 }

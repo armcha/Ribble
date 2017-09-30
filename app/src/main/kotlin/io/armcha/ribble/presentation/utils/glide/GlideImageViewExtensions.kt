@@ -26,7 +26,7 @@ fun ImageView.load(url: String?, transformationType: TransformationType) {
 private fun load(view: ImageView,
                  url: String?,
                  transformationType: TransformationType = TransformationType.NOTHING) {
-    val glideRequest: io.armcha.ribble.presentation.utils.glide.GlideRequest<Drawable> = io.armcha.ribble.presentation.utils.glide.GlideApp.with(view.context)
+    val glideRequest: GlideRequest<Drawable> = GlideApp.with(view.context)
             .load(url)
             .transition(DrawableTransitionOptions.withCrossFade(DEFAULT_DURATION_MS))
             .centerCrop()
@@ -38,7 +38,7 @@ private fun load(view: ImageView,
 }
 
 fun ImageView.clear() {
-    io.armcha.ribble.presentation.utils.glide.GlideApp.with(this.context)
+    GlideApp.with(context)
             .clear(this)
 }
 
@@ -47,13 +47,11 @@ enum class TransformationType {
     ROUND,
     NOTHING;
 
-    fun getTransformation(): Transformation<Bitmap> {
-        return when (this) {
-            CIRCLE -> CircleCrop()
-            ROUND -> RoundedCorners(20)
-            else -> {
-                TODO()
-            }
+    fun getTransformation(): Transformation<Bitmap> = when (this) {
+        CIRCLE -> CircleCrop()
+        ROUND -> RoundedCorners(20)
+        else -> {
+            TODO()
         }
     }
 }

@@ -33,7 +33,6 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
             NavigationItem(NavigationId.LOG_OUT, io.armcha.ribble.R.drawable.logout,
                     itemIconColor = io.armcha.ribble.R.color.blue_gray))
 
-    private var attr: AttributeSet? = null
     private var currentSelectedItem: Int = 0
     private val adapter by nonSafeLazy {
         NavigationViewAdapter(itemList,this)
@@ -49,9 +48,7 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
 
     constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        this.attr = attr
-    }
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     init {
         setBackgroundColor(Color.TRANSPARENT)

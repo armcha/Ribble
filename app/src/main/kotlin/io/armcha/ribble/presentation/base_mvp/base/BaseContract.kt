@@ -1,5 +1,6 @@
 package io.armcha.ribble.presentation.base_mvp.base
 
+import android.os.Bundle
 import io.luseen.arch.BaseMVPContract
 
 /**
@@ -7,7 +8,7 @@ import io.luseen.arch.BaseMVPContract
  */
 interface BaseContract {
 
-    interface View : io.luseen.arch.BaseMVPContract.View
+    interface View : BaseMVPContract.View
 
-    interface Presenter<V : io.luseen.arch.BaseMVPContract.View> : io.luseen.arch.BaseMVPContract.Presenter<V>
+    interface Presenter<V : BaseMVPContract.View> : BaseMVPContract.Presenter<V>
 }

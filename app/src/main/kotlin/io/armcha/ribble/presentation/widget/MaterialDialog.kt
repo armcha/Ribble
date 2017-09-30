@@ -18,20 +18,20 @@ import kotlinx.android.synthetic.main.dialog_item.*
 /**
  * Created by Chatikyan on 10.09.2017.
  */
-class MaterialDialog(context: Context) : Dialog(context, io.armcha.ribble.R.style.MaterialDialogSheet) {
+class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogSheet) {
 
     private val titleText by nonSafeLazy {
-        findViewById<TextView>(io.armcha.ribble.R.id.title)
+        findViewById<TextView>(R.id.title)
     }
     private val messageText by nonSafeLazy {
-        findViewById<TextView>(io.armcha.ribble.R.id.message)
+        findViewById<TextView>(R.id.message)
     }
     private val positiveButton by nonSafeLazy {
-        findViewById<Button>(io.armcha.ribble.R.id.positiveButton)
+        findViewById<Button>(R.id.positiveButton)
     }
 
     init {
-        setContentView(io.armcha.ribble.R.layout.dialog_item)
+        setContentView(R.layout.dialog_item)
         setCancelable(true)
         setCanceledOnTouchOutside(true)
         dialogContainer.onClick { hide() }

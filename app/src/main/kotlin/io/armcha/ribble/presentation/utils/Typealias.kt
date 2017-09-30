@@ -1,6 +1,7 @@
 package io.armcha.ribble.presentation.utils
 
 import io.armcha.ribble.R
+import io.armcha.ribble.domain.fetcher.result_listener.RequestType
 
 
 /**

@@ -75,7 +75,5 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
         likesRecyclerView.adapter = recyclerAdapter
     }
 
-    override fun getTitle(): String {
-        return NavigationId.USER_LIKES.name
-    }
+    override fun getTitle() = NavigationId.USER_LIKES.name
 }

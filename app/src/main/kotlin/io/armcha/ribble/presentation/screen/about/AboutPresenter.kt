@@ -8,6 +8,4 @@ import javax.inject.Inject
  * Created by Chatikyan on 06.08.2017.
  */
 @PerActivity
-class AboutPresenter @Inject constructor() : BasePresenter<AboutContract.View>(),
-        AboutContract.Presenter {
-}
+class AboutPresenter @Inject constructor() : BasePresenter<AboutContract.View>(), AboutContract.Presenter

@@ -19,13 +19,11 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @PerActivity
     @Provides
-    fun providesLayoutInflater(activity: AppCompatActivity): LayoutInflater {
-        return LayoutInflater.from(activity)
-    }
+    fun providesLayoutInflater(activity: AppCompatActivity): LayoutInflater =
+            LayoutInflater.from(activity)
 
     @PerActivity
     @Provides
-    fun providesFragmentManager(activity: AppCompatActivity): FragmentManager {
-        return activity.supportFragmentManager
-    }
+    fun providesFragmentManager(activity: AppCompatActivity): FragmentManager =
+            activity.supportFragmentManager
 }

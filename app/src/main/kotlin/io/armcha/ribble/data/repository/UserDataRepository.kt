@@ -25,9 +25,7 @@ class UserDataRepository @Inject constructor(
         private var preferences: Preferences,
         private val mapper: Mapper) : UserRepository {
 
-    fun getToken(authCode: String): Flowable<TokenResponse> {
-        return authApiService.getToken(authCode)
-    }
+    fun getToken(authCode: String) = authApiService.getToken(authCode)
 
     override fun getUser(): Flowable<User> {
         return userApiService.getUser().map {
@@ -58,7 +56,5 @@ class UserDataRepository @Inject constructor(
                 .map { mapper.translate(it) }
     }
 
-    override fun follow(userName: String): Completable {
-        return userApiService.follow(userName)
-    }
+    override fun follow(userName: String) = userApiService.follow(userName)
 }

@@ -26,7 +26,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
     private var fragmentMap: LinkedHashMap<String, Screen> = linkedMapOf()
     lateinit var fragmentChangeListener: FragmentChangeListener
 
-    private val containerId = io.armcha.ribble.R.id.container //TODO add to builder
+    private val containerId = R.id.container //TODO add to builder
     private var activeTag: String? = null
     private var rootTag: String? = null
     private var isCustomAnimationUsed = false
@@ -94,9 +94,9 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
     }
 
     inline fun <reified T : Fragment> goTo(keepState: Boolean = true,
-                                                    withCustomAnimation: Boolean = false,
-                                                    arg: Bundle = Bundle.EMPTY,
-                                                    @Experimental
+                                           withCustomAnimation: Boolean = false,
+                                           arg: Bundle = Bundle.EMPTY,
+                                           @Experimental
                                            backStrategy: BackStrategy = BackStrategy.KEEP) {
         val tag = T::class.java.name
         goTo(tag, keepState, withCustomAnimation, arg, backStrategy)

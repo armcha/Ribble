@@ -13,6 +13,9 @@ import java.io.Serializable
 fun Fragment.withArgument(key: String, value: Any) {
     val args = Bundle()
     when (value) {
+        is Int -> args.putInt(key, value)
+        is Long -> args.putLong(key, value)
+        is String -> args.putString(key, value)
         is Parcelable -> args.putParcelable(key, value)
         is Serializable -> args.putSerializable(key, value)
         else -> throw UnsupportedOperationException("${value.javaClass.simpleName} type not supported yet!!!")
@@ -25,6 +28,6 @@ inline infix fun <reified T> Fragment.extraWithKey(key: String): T {
     return value as T
 }
 
-fun Fragment.isPortrait() = this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+fun Fragment.isPortrait() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
-infix fun Fragment.takeColor(colorId: Int) = ContextCompat.getColor(this.context, colorId)
+infix fun Fragment.takeColor(colorId: Int) = ContextCompat.getColor(context, colorId)

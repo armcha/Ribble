@@ -24,7 +24,7 @@ class ShotRootFragment : BaseFragment<ShotRootContract.View, ShotRootContract.Pr
 
     override fun initPresenter() = shotRootPresenter
 
-    override fun layoutResId() = io.armcha.ribble.R.layout.fragment_shot_root
+    override fun layoutResId() = R.layout.fragment_shot_root
 
     override fun injectDependencies() = activityComponent.inject(this)
 

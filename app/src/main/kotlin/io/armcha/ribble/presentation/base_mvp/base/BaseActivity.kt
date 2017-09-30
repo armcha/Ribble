@@ -54,9 +54,7 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     protected abstract fun injectDependencies()
 
-    private fun getAppComponent(): ApplicationComponent {
-        return io.armcha.ribble.App.instance.applicationComponent
-    }
+    private fun getAppComponent() = App.instance.applicationComponent
 
     inline protected fun <reified T : Fragment> goTo(keepState: Boolean = true,
                                                      withCustomAnimation: Boolean = false,

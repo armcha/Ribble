@@ -28,7 +28,7 @@ class App : Application() {
         super.onCreate()
         if (LeakCanary.isInAnalyzerProcess(this)) return
         LeakCanary.install(this)
-        App.Companion.instance = this
+        App.instance = this
         initLogger()
     }
 

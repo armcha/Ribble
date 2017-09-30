@@ -36,6 +36,10 @@
 :white_large_square: Add unit tests & integration tests <br/> 
 :white_large_square: More features using Dribbble API <br/>
 
+### Download sample [apk](https://github.com/armcha/Ribble/blob/master/art/Ribble.apk)
+
+![Gif](art/ribble_demo.gif)
+
 ## Screenshots
 
 | Login     | Popular/Recent     | Likes     |

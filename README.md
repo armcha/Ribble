@@ -29,7 +29,7 @@
 ## TODO list:
 :white_large_square: Adding/removing favourite shot <br/>
 :white_large_square: User profile screen <br/>
-:white_large_square: Data base for offline use <br/>
+:white_large_square: Data base for offline usage <br/>
 :white_large_square: Fonts <br/>
 :white_large_square: Endless scroll <br/>
 :white_large_square: Design improvements <br/>

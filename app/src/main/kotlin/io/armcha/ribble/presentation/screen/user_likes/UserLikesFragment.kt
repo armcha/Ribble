@@ -35,7 +35,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
         activityComponent.inject(this)
     }
 
-    override fun layoutResId() = L.fragment_user_likes
+    override val layoutResId = L.fragment_user_likes
 
     override fun initPresenter() = userLikePresenter
 

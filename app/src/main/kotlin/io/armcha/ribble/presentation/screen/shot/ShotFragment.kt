@@ -34,7 +34,7 @@ class ShotFragment : BaseFragment<ShotContract.View, ShotContract.Presenter>(),
 
     override fun initPresenter() = shotPresenter
 
-    override fun layoutResId() = R.layout.fragment_shot
+    override val layoutResId = R.layout.fragment_shot
 
     override fun injectDependencies() = activityComponent.inject(this)
 

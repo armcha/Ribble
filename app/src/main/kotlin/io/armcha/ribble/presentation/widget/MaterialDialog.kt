@@ -82,7 +82,7 @@ class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogS
             animate()
                     .scale(.85F)
                     .alpha(0F)
-                    .setDuration(120)
+                    .setDuration(110)
                     .setInterpolator(AnimationUtils.FAST_OUT_LINEAR_IN_INTERPOLATOR)
                     .withLayer()
                     .setListener(object : AnimatorListenerAdapter() {

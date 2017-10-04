@@ -41,7 +41,7 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
         activityComponent.inject(this)
     }
 
-    override fun layoutResId() = L.fragment_about
+    override val layoutResId = L.fragment_about
 
     override fun initPresenter() = aboutPresenter
 

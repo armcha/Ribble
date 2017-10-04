@@ -1,4 +1,4 @@
-package io.luseen.arch;
+package io.armcha.arch;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

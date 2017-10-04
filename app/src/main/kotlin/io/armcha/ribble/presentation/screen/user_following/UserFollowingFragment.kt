@@ -36,7 +36,7 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
         activityComponent.inject(this)
     }
 
-    override fun layoutResId() = R.layout.fragment_user_following
+    override val layoutResId = R.layout.fragment_user_following
 
     override fun initPresenter() = followingPresenter
 

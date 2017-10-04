@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import io.luseen.arch.BaseMVPActivity
+import io.armcha.arch.BaseMVPActivity
 import io.armcha.ribble.App
 import io.armcha.ribble.di.component.ActivityComponent
-import io.armcha.ribble.di.component.ApplicationComponent
 import io.armcha.ribble.di.module.ActivityModule
 import io.armcha.ribble.presentation.navigation.Navigator
 import io.armcha.ribble.presentation.utils.S
@@ -17,7 +16,7 @@ import io.armcha.ribble.presentation.widget.MaterialDialog
 import javax.inject.Inject
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
-    : io.luseen.arch.BaseMVPActivity<V, P>(), Navigator.FragmentChangeListener {
+    : BaseMVPActivity<V, P>(), Navigator.FragmentChangeListener {
 
     @Inject
     lateinit var navigator: Navigator

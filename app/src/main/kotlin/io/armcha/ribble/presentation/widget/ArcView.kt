@@ -21,7 +21,7 @@ class ArcView constructor(context: Context, attrs: AttributeSet) : View(context,
     init {
         setBackgroundColor(Color.TRANSPARENT)
         with(paint) {
-            color = context takeColor io.armcha.ribble.R.color.colorAccent
+            color = context takeColor R.color.colorAccent
             style = Paint.Style.FILL
             strokeCap = Paint.Cap.ROUND
             isDither = true

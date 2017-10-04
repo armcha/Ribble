@@ -1,6 +1,6 @@
 package io.armcha.ribble.presentation.base_mvp.base
 
-import io.luseen.arch.BaseMVPPresenter
+import io.armcha.arch.BaseMVPPresenter
 
 /**
  * Created by Chatikyan on 31.07.2017.

@@ -46,7 +46,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
         activityComponent.inject(this)
     }
 
-    override fun layoutResId() = L.fragment_shot_detail
+    override val layoutResId = L.fragment_shot_detail
 
     override fun initPresenter() = shotDetailPresenter
 

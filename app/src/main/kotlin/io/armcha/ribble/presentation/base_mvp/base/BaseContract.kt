@@ -1,7 +1,6 @@
 package io.armcha.ribble.presentation.base_mvp.base
 
-import android.os.Bundle
-import io.luseen.arch.BaseMVPContract
+import io.armcha.arch.BaseMVPContract
 
 /**
  * Created by Chatikyan on 31.07.2017.

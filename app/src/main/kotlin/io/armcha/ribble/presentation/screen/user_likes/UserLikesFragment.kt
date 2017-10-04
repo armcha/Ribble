@@ -4,28 +4,27 @@ package io.armcha.ribble.presentation.screen.user_likes
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import io.armcha.ribble.R
 import io.armcha.ribble.domain.entity.Like
-import io.armcha.ribble.domain.entity.Shot
-import io.armcha.ribble.presentation.adapter.UserLikesRecyclerAdapter
-import io.armcha.ribble.presentation.adapter.listener.ShotClickListener
+import io.armcha.ribble.presentation.adapter.RibbleAdapter
 import io.armcha.ribble.presentation.base_mvp.base.BaseFragment
 import io.armcha.ribble.presentation.screen.shot_detail.ShotDetailFragment
 import io.armcha.ribble.presentation.utils.L
 import io.armcha.ribble.presentation.utils.S
 import io.armcha.ribble.presentation.utils.extensions.takeColor
+import io.armcha.ribble.presentation.utils.glide.load
 import io.armcha.ribble.presentation.widget.navigation_view.NavigationId
 import kotlinx.android.synthetic.main.fragment_user_likes.*
+import kotlinx.android.synthetic.main.liked_shot_item.view.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import javax.inject.Inject
 
 class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.Presenter>(),
-        UserLikeContract.View, ShotClickListener {
+        UserLikeContract.View {
 
     @Inject
     protected lateinit var userLikePresenter: UserLikePresenter
 
-    private var recyclerAdapter: UserLikesRecyclerAdapter? = null
+    private var recyclerAdapter: RibbleAdapter<Like>? = null
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,19 +59,26 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
         noShotsText.setAnimatedText(getString(S.no_shots))
     }
 
-    override fun onShotClicked(shot: Shot) {
-        val bundle = ShotDetailFragment.getBundle(shot)
-        goTo<ShotDetailFragment>(keepState = false, withCustomAnimation = true, arg = bundle)
-    }
-
     private fun updateAdapter(likeList: List<Like>) {
         recyclerAdapter?.update(likeList) ?: this setUpRecyclerView likeList
     }
 
     private infix fun setUpRecyclerView(likeList: List<Like>) {
-        val recyclerAdapter = UserLikesRecyclerAdapter(likeList, this)
-        likesRecyclerView.layoutManager = LinearLayoutManager(activity)
-        likesRecyclerView.adapter = recyclerAdapter
+        likesRecyclerView.apply {
+            recyclerAdapter = RibbleAdapter(likeList, L.liked_shot_item, {
+                it.shot?.apply {
+                    shotTitle.text = title
+                    shotAuthor.text = user.name
+                    likeCount.text = likesCount.toString()
+                    shotImage.load(image.normal)
+                }
+            }, {
+                goTo<ShotDetailFragment>(keepState = false, withCustomAnimation = true,
+                        arg = ShotDetailFragment.getBundle(shot))
+            })
+            layoutManager = LinearLayoutManager(activity)
+            adapter = recyclerAdapter
+        }
     }
 
     override fun getTitle() = NavigationId.USER_LIKES.name

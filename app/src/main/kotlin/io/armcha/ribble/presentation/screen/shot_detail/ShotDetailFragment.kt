@@ -31,7 +31,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     companion object {
         const val SHOT_EXTRA_KEY = "shot_extra_key"
 
-        fun getBundle(shot: Shot) = Bundle().apply { putParcelable(SHOT_EXTRA_KEY, shot) }
+        fun getBundle(shot: Shot?) = Bundle().apply { putParcelable(SHOT_EXTRA_KEY, shot) }
     }
 
     private val items = intArrayOf(R.drawable.heart_full, R.drawable.eye, R.drawable.bucket)
@@ -122,26 +122,23 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     private infix fun setUpRecyclerView(commentList: List<Comment>) {
-
-        recyclerAdapter = RibbleAdapter(commentList, L.comment_item, {
-            commentDate.text = it.commentDate
-            comment.text = it.commentText
-            comment.movementMethod = LinkMovementMethod.getInstance()
-            commentAuthor.text = it.user?.username
-            userImage.load(it.user?.avatarUrl, TransformationType.CIRCLE)
-            if (it.likeCount.isZero()) {
-                userCommentLikeCount.invisible()
-            } else {
-                userCommentLikeCount.show()
-                userCommentLikeCount.text = it.likeCount.toString()
+        recyclerView.apply {
+            adapter = RibbleAdapter(commentList, L.comment_item) {
+                commentDate.text = it.commentDate
+                comment.text = it.commentText
+                comment.movementMethod = LinkMovementMethod.getInstance()
+                commentAuthor.text = it.user?.username
+                userImage.load(it.user?.avatarUrl, TransformationType.CIRCLE)
+                if (it.likeCount.isZero()) {
+                    userCommentLikeCount.invisible()
+                } else {
+                    userCommentLikeCount.show()
+                    userCommentLikeCount.text = it.likeCount.toString()
+                }
             }
-        })
-
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = recyclerAdapter
+            layoutManager = LinearLayoutManager(activity)
+        }
     }
 
-    override fun getTitle(): String {
-        return shot.title ?: NavigationId.SHOT_DETAIL.name
-    }
+    override fun getTitle() = shot.title ?: NavigationId.SHOT_DETAIL.name
 }

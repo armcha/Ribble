@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.liked_shot_item.view.*
  */
 class UserLikesRecyclerAdapter constructor(likeList: List<Like>,
                                            private val shotClickListener: ShotClickListener)
-    : AbstractAdapter<Like>(likeList, io.armcha.ribble.R.layout.liked_shot_item) {
+    : AbstractAdapter<Like>(likeList,R.layout.liked_shot_item) {
 
     override fun onItemClick(itemView: View, position: Int) {
         val shot = itemList[position].shot

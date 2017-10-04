@@ -1,10 +1,10 @@
 package io.armcha.ribble.presentation.screen.about
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import io.armcha.ribble.BuildConfig
 import io.armcha.ribble.R
 import io.armcha.ribble.presentation.base_mvp.base.BaseFragment
 import io.armcha.ribble.presentation.utils.D
@@ -45,10 +45,9 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
 
     override fun initPresenter() = aboutPresenter
 
-    override fun getTitle(): String {
-        return NavigationId.ABOUT.name
-    }
+    override fun getTitle() = NavigationId.ABOUT.name
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (3 until 10 step 2)
@@ -65,7 +64,7 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
         with(appInfo) {
             leftIcon(D.about)
             text = """${getString(S.app_name)} ${io.armcha.ribble.BuildConfig.VERSION_NAME}
-            |Copyright © 2014-2017
+            |Copyright ${Typography.copyright} 2014-2017
             |Arman Chatikyan""".trimMargin()
             id = INFO
             setOnClickListener(this@AboutFragment)

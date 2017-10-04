@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Ribble.iml" filepath="$PROJECT_DIR$/.idea/Ribble.iml" />
       <module fileurl="file://C:\Users\Chati\AndroidStudioProjects\Ribble_android\Ribble.iml" filepath="C:\Users\Chati\AndroidStudioProjects\Ribble_android\Ribble.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Ribble_android.iml" filepath="$PROJECT_DIR$/Ribble_android.iml" />
+      <module fileurl="file://C:\Users\Arman.Chatikyan\AndroidStudioProjects\Ribble\Ribble_android.iml" filepath="C:\Users\Arman.Chatikyan\AndroidStudioProjects\Ribble\Ribble_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baseMVP/baseMVP.iml" filepath="$PROJECT_DIR$/baseMVP/baseMVP.iml" />
     </modules>

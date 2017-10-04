@@ -23,7 +23,6 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     protected lateinit var activityComponent: ActivityComponent
     protected lateinit var activity: BaseActivity<*, *>
-    val basePresenter = presenter
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)

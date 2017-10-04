@@ -15,8 +15,9 @@ public abstract class BaseAnnotatedMVPActivity<V extends BaseMVPContract.View, P
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int layoutResId = getClass().getAnnotation(Viewable.class).layout();
-        if (layoutResId != Viewable.LAYOUT_NOT_DEFINED)
-            setContentView(layoutResId);
+        if (layoutResId == Viewable.LAYOUT_NOT_DEFINED)
+            throw new MvpException("Can't find layout res Id");
+        setContentView(layoutResId);
     }
 
     @SuppressWarnings("unchecked")

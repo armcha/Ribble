@@ -4,7 +4,6 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import io.armcha.ribble.di.scope.PerActivity
 import io.armcha.ribble.domain.entity.Shot
-import io.armcha.ribble.domain.fetcher.Status
 import io.armcha.ribble.domain.interactor.UserInteractor
 import io.armcha.ribble.presentation.base_mvp.api.ApiPresenter
 import javax.inject.Inject
@@ -18,10 +17,9 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        val requestStatus = requestStatus(FOLLOWINGS_SHOTS)
-        when (requestStatus) {
-            Status.LOADING -> view?.showLoading()
-            Status.EMPTY_SUCCESS, Status.ERROR -> view?.showNoShots()
+        when (FOLLOWINGS_SHOTS.status) {
+            LOADING -> view?.showLoading()
+            EMPTY_SUCCESS, ERROR -> view?.showNoShots()
             else -> view?.onShotListReceive(userInteractor.getFollowingFromMemory())
         }
     }

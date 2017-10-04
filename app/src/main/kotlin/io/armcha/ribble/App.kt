@@ -21,14 +21,14 @@ class App : Application() {
     }
 
     companion object {
-        var instance = App()
+        lateinit var instance: App
     }
 
     override fun onCreate() {
         super.onCreate()
         if (LeakCanary.isInAnalyzerProcess(this)) return
         LeakCanary.install(this)
-        App.instance = this
+        instance = this
         initLogger()
     }
 

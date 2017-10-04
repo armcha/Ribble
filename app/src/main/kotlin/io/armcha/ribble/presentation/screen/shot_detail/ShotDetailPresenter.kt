@@ -2,7 +2,6 @@ package io.armcha.ribble.presentation.screen.shot_detail
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import io.armcha.ribble.domain.fetcher.Status
 import io.armcha.ribble.domain.fetcher.result_listener.RequestType
 import io.armcha.ribble.domain.interactor.CommentInteractor
 import io.armcha.ribble.domain.interactor.ShotLikeInteractor
@@ -19,10 +18,9 @@ class ShotDetailPresenter @Inject constructor(
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        val commentStatus = requestStatus(COMMENTS)
-        when (commentStatus) {
-            Status.LOADING -> view?.showLoading()
-            Status.EMPTY_SUCCESS, Status.ERROR -> view?.showNoComments()
+        when {
+            COMMENTS statusIs LOADING || LIKE statusIs LOADING -> view?.showLoading()
+            COMMENTS statusIs EMPTY_SUCCESS || COMMENTS statusIs ERROR -> view?.showNoComments()
             else -> view?.onDataReceive(commentInteractor.getCommentsFromMemory())
         }
     }
@@ -37,6 +35,7 @@ class ShotDetailPresenter @Inject constructor(
     override fun handleShotLike(shotId: String?) {
         shotId?.let {
             complete(shotLikeInteractor.likeShot(shotId), LIKE) {
+                TODO()
             }
         }
     }
@@ -53,7 +52,7 @@ class ShotDetailPresenter @Inject constructor(
 
     override fun onRequestStart(requestType: RequestType) {
         super.onRequestStart(requestType)
-        if (requestType == RequestType.COMMENTS)
+        if (requestType == COMMENTS)
             view?.showLoading()
         else if (requestType == RequestType.LIKE) {
 
@@ -62,7 +61,7 @@ class ShotDetailPresenter @Inject constructor(
 
     override fun onRequestError(requestType: RequestType, errorMessage: String?) {
         super.onRequestError(requestType, errorMessage)
-        if (requestType == RequestType.COMMENTS) {
+        if (requestType == COMMENTS) {
             view?.showNoComments()
         } else if (requestType == RequestType.LIKE) {
 

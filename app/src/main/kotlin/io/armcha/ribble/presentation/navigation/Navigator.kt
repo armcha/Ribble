@@ -117,6 +117,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
                 fragment.arguments = arg
             }
 
+
             if (!keepState) {
                 val weakFragment = fragmentManager.findFragmentByTag(tag)
                 weakFragment?.let {

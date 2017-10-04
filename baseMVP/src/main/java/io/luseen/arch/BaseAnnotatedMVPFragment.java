@@ -17,9 +17,10 @@ public class BaseAnnotatedMVPFragment<V extends BaseMVPContract.View, P extends 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int layoutResId = getClass().getAnnotation(Viewable.class).layout();
-        if (layoutResId != Viewable.LAYOUT_NOT_DEFINED)
-            return inflater.inflate(layoutResId, container, false);
-        return null;
+        if (layoutResId == Viewable.LAYOUT_NOT_DEFINED)
+            throw new MvpException("Can't find layout res Id");
+        return inflater.inflate(layoutResId, container, false);
+
     }
 
     @SuppressWarnings("unchecked")

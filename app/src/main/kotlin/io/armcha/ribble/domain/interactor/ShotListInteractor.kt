@@ -16,15 +16,15 @@ import javax.inject.Inject
 class ShotListInteractor @Inject constructor(private val shotRepository: ShotDataRepository,
                                              private val memoryCache: MemoryCache) {
 
-    fun getPopularShotList(count: Int = 500): Flowable<List<Shot>> {
+    fun popularShotList(count: Int = 500): Flowable<List<Shot>> {
         return shotRepository.getShotList(ApiConstants.TYPE_POPULAR, count)
     }
 
-    fun getRecentShotList(count: Int = 500): Flowable<List<Shot>> {
+    fun recentShotList(count: Int = 500): Flowable<List<Shot>> {
         return shotRepository.getShotList(ApiConstants.TYPE_RECENT, count)
     }
 
-    fun getPopularShotFromMemory(): List<Shot> = memoryCache getCacheForType RequestType.POPULAR_SHOTS
+    fun popularShotFromMemory(): List<Shot> = memoryCache getCacheForType RequestType.POPULAR_SHOTS
 
-    fun getRecentShotFromMemory(): List<Shot> = memoryCache getCacheForType RequestType.RECENT_SHOTS
+    fun recentShotFromMemory(): List<Shot> = memoryCache getCacheForType RequestType.RECENT_SHOTS
 }

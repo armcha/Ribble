@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import io.armcha.ribble.data.network.ApiConstants
 import io.armcha.ribble.di.scope.PerActivity
-import io.armcha.ribble.domain.fetcher.Status
 import io.armcha.ribble.domain.interactor.UserInteractor
 import io.armcha.ribble.presentation.base_mvp.api.ApiPresenter
 import javax.inject.Inject
@@ -20,7 +19,7 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        if (requestStatus(AUTH) == Status.LOADING)
+        if (AUTH statusIs SUCCESS)
             view?.showLoading()
     }
 
@@ -43,7 +42,9 @@ class AuthPresenter @Inject constructor(private val userInteractor: UserInteract
     }
 
     override fun onRequestError(errorMessage: String?) {
-        view?.hideLoading()
-        view?.showError(errorMessage)
+        view?.apply {
+            hideLoading()
+            showError(errorMessage)
+        }
     }
 }

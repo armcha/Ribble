@@ -24,7 +24,7 @@ class AuthActivity : BaseActivity<AuthContract.View, AuthContract.Presenter>(), 
 
     override fun injectDependencies() {
         activityComponent.inject(this)
-    }
+    } 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

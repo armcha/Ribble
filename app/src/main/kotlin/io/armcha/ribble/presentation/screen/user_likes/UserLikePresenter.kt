@@ -15,9 +15,9 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
-        when (requestStatus(LIKED_SHOTS)) {
-            Status.LOADING -> view?.showLoading()
-            Status.EMPTY_SUCCESS, Status.ERROR -> view?.showNoShots()
+        when (LIKED_SHOTS.status) {
+            LOADING -> view?.showLoading()
+            EMPTY_SUCCESS, ERROR -> view?.showNoShots()
             else -> view?.onDataReceive(userInteractor.getUserLikesFromMemory())
         }
     }

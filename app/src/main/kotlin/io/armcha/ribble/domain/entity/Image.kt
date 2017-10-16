@@ -13,10 +13,4 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Image(val small: String = emptyString,
                  val normal: String = emptyString,
-                 val big: String = emptyString) : Parcelable {
-
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString())
-}
+                 val big: String = emptyString) : Parcelable

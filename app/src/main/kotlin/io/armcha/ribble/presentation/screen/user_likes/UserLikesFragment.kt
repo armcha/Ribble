@@ -8,6 +8,7 @@ import io.armcha.ribble.domain.entity.Like
 import io.armcha.ribble.presentation.adapter.RibbleAdapter
 import io.armcha.ribble.presentation.base_mvp.base.BaseFragment
 import io.armcha.ribble.presentation.screen.shot_detail.ShotDetailFragment
+import io.armcha.ribble.presentation.utils.C
 import io.armcha.ribble.presentation.utils.L
 import io.armcha.ribble.presentation.utils.S
 import io.armcha.ribble.presentation.utils.extensions.takeColor
@@ -28,7 +29,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBar.backgroundCircleColor = takeColor(io.armcha.ribble.R.color.colorPrimary)
+        progressBar.backgroundCircleColor = takeColor(C.colorPrimary)
     }
 
     override fun injectDependencies() {
@@ -60,7 +61,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
     }
 
     private fun updateAdapter(likeList: List<Like>) {
-        recyclerAdapter?.update(likeList) ?: this setUpRecyclerView likeList
+        recyclerAdapter?.addAll(likeList) ?: this setUpRecyclerView likeList
     }
 
     private infix fun setUpRecyclerView(likeList: List<Like>) {

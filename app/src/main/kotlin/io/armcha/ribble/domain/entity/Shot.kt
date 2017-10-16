@@ -17,15 +17,4 @@ data class Shot constructor(val title: String?,
                             var description: String? = null,
                             var likesCount: Int? = null,
                             var viewsCount: Int? = null,
-                            var bucketCount: Int? = null) : Parcelable {
-
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readParcelable(Image::class.java.classLoader),
-            parcel.readParcelable(User::class.java.classLoader),
-            parcel.readString(),
-            parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readValue(Int::class.java.classLoader) as? Int)
-}
+                            var bucketCount: Int? = null) : Parcelable

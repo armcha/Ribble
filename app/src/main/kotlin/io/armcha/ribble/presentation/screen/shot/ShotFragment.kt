@@ -46,7 +46,7 @@ class ShotFragment : BaseFragment<ShotContract.View, ShotContract.Presenter>(),
     override fun getShotType() = extraWithKey<String>(SHOT_TYPE)
 
     private fun updateAdapter(shotList: List<Shot>) {
-        recyclerAdapter?.update(shotList) ?: this setUpRecyclerView shotList
+        recyclerAdapter?.addAll(shotList) ?: this setUpRecyclerView shotList
     }
 
     private infix fun setUpRecyclerView(shotList: List<Shot>) {

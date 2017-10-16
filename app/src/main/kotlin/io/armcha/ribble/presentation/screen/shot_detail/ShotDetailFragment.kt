@@ -118,7 +118,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     private fun updateAdapter(commentList: List<Comment>) {
-        recyclerAdapter?.update(commentList) ?: this setUpRecyclerView commentList
+        recyclerAdapter?.addAll(commentList) ?: this setUpRecyclerView commentList
     }
 
     private infix fun setUpRecyclerView(commentList: List<Comment>) {

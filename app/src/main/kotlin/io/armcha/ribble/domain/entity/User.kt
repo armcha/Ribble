@@ -14,11 +14,4 @@ import kotlinx.android.parcel.Parcelize
 data class User constructor(val name: String?,
                             val avatarUrl: String = emptyString,
                             val username: String?,
-                            val location: String?) : Parcelable {
-
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString())
-}
+                            val location: String?) : Parcelable

@@ -66,7 +66,7 @@ class UserFollowingFragment : BaseFragment<UserFollowingContract.View, UserFollo
     }
 
     private fun updateAdapter(shotList: List<Shot>) {
-        recyclerAdapter?.update(shotList) ?: setUpRecyclerView(shotList)
+        recyclerAdapter?.addAll(shotList) ?: setUpRecyclerView(shotList)
     }
 
     private fun setUpRecyclerView(shotList: List<Shot>) {

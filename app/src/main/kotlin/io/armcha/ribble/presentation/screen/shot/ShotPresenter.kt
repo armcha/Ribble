@@ -5,6 +5,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import io.armcha.ribble.domain.entity.Shot
 import io.armcha.ribble.domain.interactor.ShotListInteractor
 import io.armcha.ribble.presentation.base_mvp.api.ApiPresenter
+import io.armcha.ribble.presentation.utils.extensions.log
 import javax.inject.Inject
 
 /**
@@ -13,10 +14,9 @@ import javax.inject.Inject
 class ShotPresenter @Inject constructor(private val shotListInteractor: ShotListInteractor)
     : ApiPresenter<ShotContract.View>(), ShotContract.Presenter {
 
-    private val isPopularType = view?.getShotType() == TYPE_POPULAR
-
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
     fun onStart() {
+        val isPopularType = view?.getShotType() == TYPE_POPULAR
         val requestType = if (isPopularType) POPULAR_SHOTS else RECENT_SHOTS
 
         when (requestType.status) {
@@ -42,7 +42,7 @@ class ShotPresenter @Inject constructor(private val shotListInteractor: ShotList
                 view?.showNoShots() ?: Unit
             }
         }
-
+        val isPopularType = view?.getShotType() == TYPE_POPULAR
         if (isPopularType)
             fetch(shotListInteractor.popularShotList(100), POPULAR_SHOTS, success)
         else

@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import io.armcha.ribble.R
 import io.armcha.ribble.presentation.utils.AnimationUtils
-import io.armcha.ribble.presentation.utils.extensions.nonSafeLazy
+import io.armcha.ribble.presentation.utils.extensions.unSafeLazy
 import io.armcha.ribble.presentation.utils.extensions.onClick
 import io.armcha.ribble.presentation.utils.extensions.scale
 import kotlinx.android.synthetic.main.dialog_item.*
@@ -20,13 +20,13 @@ import kotlinx.android.synthetic.main.dialog_item.*
  */
 class MaterialDialog(context: Context) : Dialog(context, R.style.MaterialDialogSheet) {
 
-    private val titleText by nonSafeLazy {
+    private val titleText by unSafeLazy {
         findViewById<TextView>(R.id.title)
     }
-    private val messageText by nonSafeLazy {
+    private val messageText by unSafeLazy {
         findViewById<TextView>(R.id.message)
     }
-    private val positiveButton by nonSafeLazy {
+    private val positiveButton by unSafeLazy {
         findViewById<Button>(R.id.positiveButton)
     }
 

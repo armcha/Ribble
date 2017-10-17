@@ -12,7 +12,7 @@ import io.armcha.ribble.presentation.utils.extensions.takeColor
 /**
  * Created by Chatikyan on 29.08.2017.
  */
-class TextImageLayout : LinearLayout {
+class TextImageLayout(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
     private val circleImage: CircleLinedImageView
     private val textView: TextView
@@ -31,10 +31,6 @@ class TextImageLayout : LinearLayout {
             val wrap = DrawableCompat.wrap(circleImage.drawable)
             DrawableCompat.setTint(wrap, context.takeColor(value))
         }
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     init {
         orientation = VERTICAL

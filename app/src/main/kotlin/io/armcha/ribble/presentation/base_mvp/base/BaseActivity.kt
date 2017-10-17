@@ -11,7 +11,7 @@ import io.armcha.ribble.di.module.ActivityModule
 import io.armcha.ribble.presentation.navigation.Navigator
 import io.armcha.ribble.presentation.utils.S
 import io.armcha.ribble.presentation.utils.extensions.emptyString
-import io.armcha.ribble.presentation.utils.extensions.nonSafeLazy
+import io.armcha.ribble.presentation.utils.extensions.unSafeLazy
 import io.armcha.ribble.presentation.widget.MaterialDialog
 import javax.inject.Inject
 
@@ -26,7 +26,7 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     private var dialog: MaterialDialog? = null
 
-    val activityComponent: ActivityComponent by nonSafeLazy {
+    val activityComponent: ActivityComponent by unSafeLazy {
         getAppComponent().plus(ActivityModule(this))
     }
 

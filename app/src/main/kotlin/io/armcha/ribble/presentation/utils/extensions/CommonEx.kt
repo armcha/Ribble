@@ -4,21 +4,14 @@ import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
-import android.os.Bundle
 import android.os.Handler
-import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.text.Html
 import android.text.Spanned
 import android.widget.Toast
 import io.armcha.ribble.App
-import io.armcha.ribble.presentation.base_mvp.base.BaseFragment
-import io.armcha.ribble.presentation.base_mvp.base.BasePresenter
 import io.armcha.ribble.presentation.utils.Experimental
-import java.io.Serializable
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
 
 
 /**
@@ -83,10 +76,17 @@ fun Int.toPx(context: Context): Int {
     return (this * density).toInt()
 }
 
-fun <T> nonSafeLazy(initializer: () -> T): Lazy<T> {
+fun <T> unSafeLazy(initializer: () -> T): Lazy<T> {
     return lazy(LazyThreadSafetyMode.NONE) {
         initializer()
     }
 }
 
 fun Int.isZero(): Boolean = this == 0
+
+inline fun <F, S> doubleWith(first: F, second: S, runWith: F.(S) -> Unit) {
+    first.runWith(second)
+}
+
+val Any?.isNull: Boolean
+    get() = this == null

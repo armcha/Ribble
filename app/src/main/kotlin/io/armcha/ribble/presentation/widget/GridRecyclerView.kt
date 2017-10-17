@@ -12,11 +12,7 @@ import android.view.animation.GridLayoutAnimationController
 /**
  * Created by Chatikyan on 17.09.2017.
  */
-class GridRecyclerView : RecyclerView {
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+class GridRecyclerView (context: Context, attrs: AttributeSet) : RecyclerView(context, attrs) {
 
     override fun attachLayoutAnimationParameters(child: View, params: ViewGroup.LayoutParams,
                                                  index: Int, count: Int) {

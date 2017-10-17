@@ -7,14 +7,14 @@ import com.squareup.leakcanary.LeakCanary
 import io.armcha.ribble.di.component.ApplicationComponent
 import io.armcha.ribble.di.component.DaggerApplicationComponent
 import io.armcha.ribble.di.module.ApplicationModule
-import io.armcha.ribble.presentation.utils.extensions.nonSafeLazy
+import io.armcha.ribble.presentation.utils.extensions.unSafeLazy
 
 /**
  * Created by Chatikyan on 29.07.2017.
  */
 class App : Application() {
 
-    val applicationComponent: ApplicationComponent by nonSafeLazy {
+    val applicationComponent: ApplicationComponent by unSafeLazy {
         DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
                 .build()

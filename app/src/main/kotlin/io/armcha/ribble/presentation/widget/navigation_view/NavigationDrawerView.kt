@@ -12,9 +12,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import io.armcha.ribble.R
 import io.armcha.ribble.presentation.utils.extensions.delay
-import io.armcha.ribble.presentation.utils.extensions.nonSafeLazy
+import io.armcha.ribble.presentation.utils.extensions.unSafeLazy
 
 /**
  * Created by Chatikyan on 20.08.2017.
@@ -34,10 +33,10 @@ class NavigationDrawerView : NavigationView, ItemClickListener {
                     itemIconColor = io.armcha.ribble.R.color.blue_gray))
 
     private var currentSelectedItem: Int = 0
-    private val adapter by nonSafeLazy {
+    private val adapter by unSafeLazy {
         NavigationViewAdapter(itemList,this)
     }
-    private val recyclerView by nonSafeLazy {
+    private val recyclerView by unSafeLazy {
         RecyclerView(context).apply {
             layoutManager = LinearLayoutManager(context)
         }

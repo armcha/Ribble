@@ -8,7 +8,7 @@ import android.util.AttributeSet
  * Created by Chatikyan on 08.08.2017.
  */
 
-class SquareCardView constructor(context: Context, attrs: AttributeSet? = null) : CardView(context, attrs) {
+class SquareCardView constructor(context: Context, attrs: AttributeSet) : CardView(context, attrs) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec)

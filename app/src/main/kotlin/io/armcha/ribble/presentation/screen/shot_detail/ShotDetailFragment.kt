@@ -3,6 +3,7 @@ package io.armcha.ribble.presentation.screen.shot_detail
 
 import android.animation.StateListAnimator
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -16,7 +17,6 @@ import io.armcha.ribble.presentation.base_mvp.base.BaseFragment
 import io.armcha.ribble.presentation.utils.C
 import io.armcha.ribble.presentation.utils.L
 import io.armcha.ribble.presentation.utils.S
-import io.armcha.ribble.presentation.utils.delegates.args
 import io.armcha.ribble.presentation.utils.extensions.*
 import io.armcha.ribble.presentation.utils.glide.TransformationType
 import io.armcha.ribble.presentation.utils.glide.load
@@ -29,7 +29,9 @@ import javax.inject.Inject
 class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContract.Presenter>(), ShotDetailContract.View {
 
     companion object {
-        fun getBundle(shot: Shot?) = Bundle().apply { putParcelable("shot", shot) }
+        const val SHOT_EXTRA_KEY = "shot_extra_key"
+
+        fun getBundle(shot: Shot?) = Bundle().apply { putParcelable(SHOT_EXTRA_KEY, shot) }
     }
 
     private val items = intArrayOf(R.drawable.heart_full, R.drawable.eye, R.drawable.bucket)
@@ -38,8 +40,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     protected lateinit var shotDetailPresenter: ShotDetailPresenter
 
     private var recyclerAdapter: RibbleAdapter<Comment>? = null
-
-    val shot: Shot by args()
+    private lateinit var shot: Shot
 
     override fun injectDependencies() {
         activityComponent.inject(this)
@@ -48,6 +49,11 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     override val layoutResId = L.fragment_shot_detail
 
     override fun initPresenter() = shotDetailPresenter
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        shot = this extraWithKey SHOT_EXTRA_KEY
+    }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -20,7 +20,7 @@ import io.armcha.ribble.presentation.utils.extensions.show
 /**
  * Created by Chatikyan on 04.09.2017.
  */
-class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, attrs), Animatable {
+class CircleProgressView : View, Animatable {
 
     private val MAX_VALUE = 360F
     private val END_VALUE = 280F
@@ -52,6 +52,10 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
             paint.strokeWidth = resources.getDimension(field)
         }
         get() = resources.getDimension(field).toInt()
+
+    constructor(context: Context) : super(context)
+
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     init {
         if (!isInEditMode)

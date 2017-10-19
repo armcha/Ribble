@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import io.armcha.ribble.data.network.ApiConstants
 import io.armcha.ribble.presentation.utils.extensions.emptyString
-import io.armcha.ribble.presentation.utils.extensions.unSafeLazy
+import io.armcha.ribble.presentation.utils.extensions.nonSafeLazy
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,7 +21,7 @@ class Preferences @Inject constructor(app: Application) {
     private val USER_LOGGED_IN = "user_logged_in"
     private val USER_TOKEN = "user_token"
 
-    private val sharedPreferences by unSafeLazy {
+    private val sharedPreferences by nonSafeLazy {
         app.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
     }
     val isUserLoggedIn

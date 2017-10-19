@@ -7,7 +7,7 @@ import android.view.View
 import io.armcha.ribble.R
 import io.armcha.ribble.presentation.utils.extensions.takeColor
 
-class ArcView constructor(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
+class ArcView constructor(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private val SHADOW_OFFSET = 15F
     private val START_ANGLE = 270F
@@ -31,16 +31,16 @@ class ArcView constructor(context: Context, attrs: AttributeSet? = null) : View(
     }
 
     override fun onDraw(canvas: Canvas) {
-        val width = width.toFloat() - SHADOW_OFFSET
-        val height = height.toFloat() - SHADOW_OFFSET
-        rect.set(width / arcStartPoint, SHADOW_OFFSET, width, height)
-        with(path) {
-            val halfWidth = width / 2
-            lineTo(halfWidth + halfWidth / arcStartPoint, SHADOW_OFFSET)
-            addArc(rect, START_ANGLE, SWEEP_ANGLE)
-            lineTo(0F, height)
-            lineTo(0F, SHADOW_OFFSET)
-        }
-        canvas.drawPath(path, paint)
+            val width = width.toFloat() - SHADOW_OFFSET
+            val height = height.toFloat() - SHADOW_OFFSET
+            rect.set(width / arcStartPoint, SHADOW_OFFSET, width, height)
+            with(path) {
+                val halfWidth = width / 2
+                lineTo(halfWidth + halfWidth / arcStartPoint, SHADOW_OFFSET)
+                addArc(rect, START_ANGLE, SWEEP_ANGLE)
+                lineTo(0F, height)
+                lineTo(0F, SHADOW_OFFSET)
+            }
+            canvas.drawPath(path, paint)
     }
 }

@@ -66,3 +66,7 @@ freeline.py
 freeline/
 freeline_project_description.json
 >>>>>>> 5b081d3cead548a9cc28ce0392977be61bfaee1c
+
+.idea/
+idea/
+art/

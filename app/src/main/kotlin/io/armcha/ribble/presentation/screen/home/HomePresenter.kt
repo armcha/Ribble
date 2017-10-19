@@ -35,9 +35,9 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
             view?.setArcHamburgerIconState()
         }
         view?.setToolBarTitle(activeTitle)
-        user?.let {
-            view?.updateDrawerInfo(it)
-        }
+//        user?.let {
+//            view?.updateDrawerInfo(it)
+//        }
     }
 
     override fun onPresenterCreate() {

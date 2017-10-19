@@ -20,9 +20,9 @@ android {
 
 ext.archVersion = '1.0.0-beta2'
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation "android.arch.lifecycle:runtime:${archVersion}"
-    implementation "android.arch.lifecycle:extensions:${archVersion}"
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile "android.arch.lifecycle:runtime:${archVersion}"
+    compile "android.arch.lifecycle:extensions:${archVersion}"
     annotationProcessor "android.arch.lifecycle:compiler:${archVersion}"
 }

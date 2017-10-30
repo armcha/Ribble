@@ -6,11 +6,13 @@ import io.armcha.ribble.domain.fetcher.result_listener.RequestType
 import io.armcha.ribble.domain.interactor.CommentInteractor
 import io.armcha.ribble.domain.interactor.ShotLikeInteractor
 import io.armcha.ribble.presentation.base_mvp.api.ApiPresenter
+import io.armcha.ribble.presentation.utils.extensions.log
 import javax.inject.Inject
 
 /**
  * Created by Chatikyan on 05.08.2017.
  */
+typealias OnActivityLifecycleEvent = OnLifecycleEvent
 class ShotDetailPresenter @Inject constructor(
         private val commentInteractor: CommentInteractor,
         private val shotLikeInteractor: ShotLikeInteractor)
@@ -25,22 +27,9 @@ class ShotDetailPresenter @Inject constructor(
         }
     }
 
-    @OnLifecycleEvent(value = Lifecycle.Event.ON_STOP)
-    fun onStop() {
-        commentInteractor.deleteCommentsCache()
-    }
-
     override fun onPresenterCreate() {
         super.onPresenterCreate()
         fetchComments()
-    }
-
-    override fun handleShotLike(shotId: String?) {
-        shotId?.let {
-            complete(shotLikeInteractor.likeShot(shotId), LIKE) {
-                TODO()
-            }
-        }
     }
 
     private fun fetchComments() {
@@ -54,6 +43,20 @@ class ShotDetailPresenter @Inject constructor(
             }
         }
     }
+
+    override fun handleShotLike(shotId: String?) {
+        shotId?.let {
+            complete(shotLikeInteractor.likeShot(shotId), LIKE) {
+                TODO()
+            }
+        }
+    }
+
+    override fun onPresenterDestroy() {
+        super.onPresenterDestroy()
+        commentInteractor.deleteCommentsCache()
+    }
+
 
     override fun onRequestStart(requestType: RequestType) {
         super.onRequestStart(requestType)
@@ -73,6 +76,5 @@ class ShotDetailPresenter @Inject constructor(
         }
         view?.hideLoading()
         view?.showError(errorMessage)
-
     }
 }

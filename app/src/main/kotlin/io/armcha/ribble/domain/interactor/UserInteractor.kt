@@ -25,7 +25,7 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
 
     fun logOut() {
         userDataRepository.clearCache()
-        userDataRepository.logOut()
+        userDataRepository.clearLoginData()
     }
 
     fun getAuthenticatedUser(): Flowable<User> = userDataRepository.getUser()

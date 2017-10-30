@@ -34,14 +34,12 @@ class UserDataRepository @Inject constructor(
         preferences.saveUserLoggedIn()
     }
 
-    override fun logOut() {
+    override fun clearLoginData() {
         preferences.saveUserLoggedOut()
         preferences.deleteToken()
     }
 
-    override fun isUserLoggedIn(): Boolean {
-        return preferences.isUserLoggedIn
-    }
+    override fun isUserLoggedIn() = preferences.isUserLoggedIn
 
     override fun getUserLikes(count: Int): Single<List<Like>> {
         val requestType = RequestType.LIKED_SHOTS

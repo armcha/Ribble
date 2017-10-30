@@ -14,8 +14,6 @@ interface UserRepository {
 
     fun logIn()
 
-    fun logOut()
-
     fun isUserLoggedIn(): Boolean
 
     fun getUser(): Flowable<User>
@@ -27,4 +25,6 @@ interface UserRepository {
     fun follow(userName: String): Completable
 
     fun clearCache()
+
+    fun clearLoginData()
 }

@@ -19,7 +19,7 @@
         <activity
             android:name=".presentation.screen.auth.AuthActivity"
             android:exported="true"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:theme="@style/AuthTheme">
             <intent-filter>
                 <data

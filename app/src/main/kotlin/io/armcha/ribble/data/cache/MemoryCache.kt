@@ -12,4 +12,10 @@ import javax.inject.Singleton
 class MemoryCache @Inject constructor() : LruCache<RequestType, Any>(1024 * 1024 * 2)/* 2 MB */ {
 
     inline infix fun <reified V> getCacheForType(key: RequestType) = get(key) as V
+
+    infix fun hasCacheFor(requestType: RequestType) = getCacheForType<Any?>(requestType) != null
+
+    fun clearCacheFor(requestType: RequestType) {
+        remove(requestType)
+    }
 }

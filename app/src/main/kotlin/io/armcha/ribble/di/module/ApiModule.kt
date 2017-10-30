@@ -5,6 +5,7 @@ import io.armcha.ribble.data.network.*
 import io.armcha.ribble.data.pref.Preferences
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoSet
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,9 +25,7 @@ class ApiModule {
     @Singleton
     @Provides
     @Named("shotEndpoint")
-    fun shotEndpoint(): String {
-        return ApiConstants.SHOT_ENDPOINT
-    }
+    fun shotEndpoint() = ApiConstants.SHOT_ENDPOINT
 
     @Singleton
     @Provides
@@ -41,7 +40,7 @@ class ApiModule {
     @Provides
     fun provideOkHttpBuilder(): OkHttpClient.Builder {
         val okHttpBuilder = OkHttpClient.Builder()
-        if (io.armcha.ribble.BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             val logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.BASIC
             okHttpBuilder.addInterceptor(logging)

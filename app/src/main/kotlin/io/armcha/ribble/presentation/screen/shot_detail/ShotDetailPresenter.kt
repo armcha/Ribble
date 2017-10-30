@@ -21,15 +21,18 @@ class ShotDetailPresenter @Inject constructor(
         when {
             COMMENTS statusIs LOADING || LIKE statusIs LOADING -> view?.showLoading()
             COMMENTS statusIs EMPTY_SUCCESS || COMMENTS statusIs ERROR -> view?.showNoComments()
-            else -> view?.onDataReceive(commentInteractor.getCommentsFromMemory())
+            else -> fetchComments()
         }
+    }
+
+    @OnLifecycleEvent(value = Lifecycle.Event.ON_STOP)
+    fun onStop() {
+        commentInteractor.deleteCommentsCache()
     }
 
     override fun onPresenterCreate() {
         super.onPresenterCreate()
-        view?.getShotId()?.apply {
-            fetchComments(this)
-        }
+        fetchComments()
     }
 
     override fun handleShotLike(shotId: String?) {
@@ -40,13 +43,15 @@ class ShotDetailPresenter @Inject constructor(
         }
     }
 
-    private fun fetchComments(shotId: String) {
-        fetch(commentInteractor.getComments(shotId), COMMENTS) {
-            view?.hideLoading()
-            if (it.isNotEmpty())
-                view?.onDataReceive(it)
-            else
-                view?.showNoComments()
+    private fun fetchComments() {
+        view?.getShotId()?.let {
+            fetch(commentInteractor.getComments(it), COMMENTS) {
+                view?.hideLoading()
+                if (it.isNotEmpty())
+                    view?.onDataReceive(it)
+                else
+                    view?.showNoComments()
+            }
         }
     }
 

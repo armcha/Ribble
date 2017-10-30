@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import io.armcha.ribble.BuildConfig
 import io.armcha.ribble.R
 import io.armcha.ribble.presentation.base_mvp.base.BaseFragment
 import io.armcha.ribble.presentation.utils.D
@@ -63,7 +64,7 @@ class AboutFragment : BaseFragment<AboutContract.View, AboutContract.Presenter>(
                 }
         with(appInfo) {
             leftIcon(D.about)
-            text = """${getString(S.app_name)} ${io.armcha.ribble.BuildConfig.VERSION_NAME}
+            text = """${getString(S.app_name)} ${BuildConfig.VERSION_NAME}
             |Copyright ${Typography.copyright} 2014-2017
             |Arman Chatikyan""".trimMargin()
             id = INFO

@@ -16,7 +16,8 @@ import io.armcha.ribble.presentation.base_mvp.base.BaseFragment
 import io.armcha.ribble.presentation.utils.C
 import io.armcha.ribble.presentation.utils.L
 import io.armcha.ribble.presentation.utils.S
-import io.armcha.ribble.presentation.utils.delegates.args
+import io.armcha.ribble.presentation.utils.delegates.bundle
+import io.armcha.ribble.presentation.utils.delegates.bundleWith
 import io.armcha.ribble.presentation.utils.extensions.*
 import io.armcha.ribble.presentation.utils.glide.TransformationType
 import io.armcha.ribble.presentation.utils.glide.load
@@ -29,7 +30,7 @@ import javax.inject.Inject
 class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContract.Presenter>(), ShotDetailContract.View {
 
     companion object {
-        fun getBundle(shot: Shot?) = Bundle().apply { putParcelable("shot", shot) }
+        fun getBundle(shot: Shot?) = "shot" bundleWith shot
     }
 
     private val items = intArrayOf(R.drawable.heart_full, R.drawable.eye, R.drawable.bucket)
@@ -39,7 +40,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
 
     private var recyclerAdapter: RibbleAdapter<Comment>? = null
 
-    val shot: Shot by args()
+    val shot: Shot by bundle()
 
     override fun injectDependencies() {
         activityComponent.inject(this)
@@ -79,9 +80,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
         updateAdapter(commentList)
     }
 
-    override fun getShotId(): String? {
-        return shot.id
-    }
+    override fun getShotId() = shot.id
 
     override fun showNoComments() {
         lockAppBar()
@@ -112,7 +111,7 @@ class ShotDetailFragment : BaseFragment<ShotDetailContract.View, ShotDetailContr
     }
 
     private fun updateAdapter(commentList: List<Comment>) {
-        recyclerAdapter?.addAll(commentList) ?: this setUpRecyclerView commentList
+        recyclerAdapter?.update(commentList) ?: this setUpRecyclerView commentList
     }
 
     private infix fun setUpRecyclerView(commentList: List<Comment>) {

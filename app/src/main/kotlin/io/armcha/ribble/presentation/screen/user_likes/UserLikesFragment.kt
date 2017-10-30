@@ -14,6 +14,8 @@ import io.armcha.ribble.presentation.utils.S
 import io.armcha.ribble.presentation.utils.extensions.takeColor
 import io.armcha.ribble.presentation.utils.glide.load
 import io.armcha.ribble.presentation.widget.navigation_view.NavigationId
+import kotlinx.android.extensions.CacheImplementation
+import kotlinx.android.extensions.ContainerOptions
 import kotlinx.android.synthetic.main.fragment_user_likes.*
 import kotlinx.android.synthetic.main.liked_shot_item.view.*
 import kotlinx.android.synthetic.main.progress_bar.*
@@ -61,7 +63,7 @@ class UserLikesFragment : BaseFragment<UserLikeContract.View, UserLikeContract.P
     }
 
     private fun updateAdapter(likeList: List<Like>) {
-        recyclerAdapter?.addAll(likeList) ?: this setUpRecyclerView likeList
+        recyclerAdapter?.update(likeList) ?: this setUpRecyclerView likeList
     }
 
     private infix fun setUpRecyclerView(likeList: List<Like>) {

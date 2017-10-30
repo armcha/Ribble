@@ -19,4 +19,6 @@ interface ShotRepository {
     fun getShotComments(shotId: String): Single<List<Comment>>
 
     fun likeShot(shotId: String): Completable
+
+    fun deleteCommentsCache()
 }

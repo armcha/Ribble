@@ -10,10 +10,8 @@ import javax.inject.Singleton
  * Created by Chatikyan on 29.07.2017.
  */
 @Singleton
-@Component(modules = arrayOf(
-        ApplicationModule::class,
-        ApiModule::class))
+@Component(modules = [(ApplicationModule::class), (ApiModule::class)])
 interface ApplicationComponent {
 
-    fun plus(activityModule: ActivityModule): ActivityComponent
+    operator fun plus(activityModule: ActivityModule): ActivityComponent
 }

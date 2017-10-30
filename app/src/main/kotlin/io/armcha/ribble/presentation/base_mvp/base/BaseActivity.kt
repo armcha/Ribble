@@ -13,8 +13,11 @@ import io.armcha.ribble.presentation.utils.S
 import io.armcha.ribble.presentation.utils.extensions.emptyString
 import io.armcha.ribble.presentation.utils.extensions.unSafeLazy
 import io.armcha.ribble.presentation.widget.MaterialDialog
+import kotlinx.android.extensions.CacheImplementation
+import kotlinx.android.extensions.ContainerOptions
 import javax.inject.Inject
 
+@ContainerOptions(CacheImplementation.SPARSE_ARRAY)
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
     : BaseMVPActivity<V, P>(), Navigator.FragmentChangeListener {
 
@@ -27,7 +30,7 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
     private var dialog: MaterialDialog? = null
 
     val activityComponent: ActivityComponent by unSafeLazy {
-        getAppComponent().plus(ActivityModule(this))
+        getAppComponent() + ActivityModule(this)
     }
 
     @CallSuper

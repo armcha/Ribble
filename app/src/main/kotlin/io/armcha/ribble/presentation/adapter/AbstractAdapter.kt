@@ -1,11 +1,10 @@
 package io.armcha.ribble.presentation.adapter
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import io.armcha.ribble.presentation.utils.extensions.inflate
-import io.reactivex.annotations.Experimental
-import kotlin.system.measureNanoTime
 
 /**
  * Created by Chatikyan on 14.08.2017.
@@ -34,11 +33,16 @@ abstract class AbstractAdapter<ITEM> constructor(protected var itemList: List<IT
         holder.itemView.bind(item)
     }
 
-    fun addAll(itemList: List<ITEM>) {
-        val startPosition = this.itemList.size
-        this.itemList.toMutableList().addAll(itemList)
-        notifyItemRangeInserted(startPosition, this.itemList.size)
+    fun update(items: List<ITEM>) {
+        updateAdapterWithDiffResult(calculateDiff(items))
     }
+
+    private fun updateAdapterWithDiffResult(result: DiffUtil.DiffResult) {
+        result.dispatchUpdatesTo(this)
+    }
+
+    private fun calculateDiff(newItems: List<ITEM>) =
+            DiffUtil.calculateDiff(DiffUtilCallback(itemList, newItems))
 
     fun add(item: ITEM) {
         itemList.toMutableList().add(item)

@@ -3,6 +3,7 @@ package io.armcha.ribble.domain.fetcher
 import io.armcha.ribble.data.cache.MemoryCache
 import io.armcha.ribble.domain.fetcher.result_listener.RequestType
 import io.armcha.ribble.domain.fetcher.result_listener.ResultListener
+import io.armcha.ribble.presentation.utils.extensions.log
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -86,7 +87,10 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable,
             val status = if (it is List<*> && it.isEmpty()) {
                 Status.EMPTY_SUCCESS
             } else {
-                memoryCache.put(requestType, it)
+                if (requestType == RequestType.COMMENTS) {
+                    memoryCache.put(requestType, Single.fromCallable { it })
+                } else
+                    memoryCache.put(requestType, it)
                 Status.SUCCESS
             }
             requestMap.replace(requestType, status)

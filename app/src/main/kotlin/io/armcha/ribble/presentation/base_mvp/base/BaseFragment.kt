@@ -10,11 +10,14 @@ import io.armcha.arch.BaseMVPFragment
 import io.armcha.ribble.di.component.ActivityComponent
 import io.armcha.ribble.presentation.navigation.Navigator
 import io.armcha.ribble.presentation.utils.extensions.emptyString
+import kotlinx.android.extensions.CacheImplementation
+import kotlinx.android.extensions.ContainerOptions
 import javax.inject.Inject
 
 /**
  * Created by Chatikyan on 01.08.2017.
  */
+@ContainerOptions(CacheImplementation.SPARSE_ARRAY)
 abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>> : BaseMVPFragment<V, P>() {
 
     @Inject

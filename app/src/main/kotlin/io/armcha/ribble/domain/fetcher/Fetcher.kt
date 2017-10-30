@@ -1,9 +1,7 @@
 package io.armcha.ribble.domain.fetcher
 
-import io.armcha.ribble.data.cache.MemoryCache
 import io.armcha.ribble.domain.fetcher.result_listener.RequestType
 import io.armcha.ribble.domain.fetcher.result_listener.ResultListener
-import io.armcha.ribble.presentation.utils.extensions.log
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -16,8 +14,7 @@ import javax.inject.Singleton
  * Created by Chatikyan on 04.08.2017.
  */
 @Singleton
-class Fetcher @Inject constructor(private val disposable: CompositeDisposable,
-                                  private val memoryCache: MemoryCache) {
+class Fetcher @Inject constructor(private val disposable: CompositeDisposable) {
 
     private val requestMap = ConcurrentHashMap<RequestType, Status>()
 
@@ -87,10 +84,6 @@ class Fetcher @Inject constructor(private val disposable: CompositeDisposable,
             val status = if (it is List<*> && it.isEmpty()) {
                 Status.EMPTY_SUCCESS
             } else {
-                if (requestType == RequestType.COMMENTS) {
-                    memoryCache.put(requestType, Single.fromCallable { it })
-                } else
-                    memoryCache.put(requestType, it)
                 Status.SUCCESS
             }
             requestMap.replace(requestType, status)

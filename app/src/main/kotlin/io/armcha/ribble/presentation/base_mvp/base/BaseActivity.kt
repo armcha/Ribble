@@ -17,7 +17,6 @@ import kotlinx.android.extensions.CacheImplementation
 import kotlinx.android.extensions.ContainerOptions
 import javax.inject.Inject
 
-@ContainerOptions(CacheImplementation.SPARSE_ARRAY)
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
     : BaseMVPActivity<V, P>(), Navigator.FragmentChangeListener {
 

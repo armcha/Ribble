@@ -1,9 +1,9 @@
 package io.armcha.ribble.domain.interactor
 
-import io.armcha.ribble.data.cache.MemoryCache
 import io.armcha.ribble.data.repository.ShotDataRepository
 import io.armcha.ribble.di.scope.PerActivity
 import io.armcha.ribble.domain.entity.Comment
+import io.armcha.ribble.domain.fetcher.result_listener.RequestType
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -18,6 +18,6 @@ class CommentInteractor @Inject constructor(private val shotRepository: ShotData
     }
 
     fun deleteCommentsCache() {
-        shotRepository.deleteCommentsCache()
+        shotRepository.deleteCacheFor(RequestType.COMMENTS)
     }
 }

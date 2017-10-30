@@ -20,13 +20,8 @@ class UserFollowPresenter @Inject constructor(private val userInteractor: UserIn
         when (FOLLOWINGS_SHOTS.status) {
             LOADING -> view?.showLoading()
             EMPTY_SUCCESS, ERROR -> view?.showNoShots()
-            else -> view?.onShotListReceive(userInteractor.getFollowingFromMemory())
+            else -> fetch(userInteractor.getFollowing(100), FOLLOWINGS_SHOTS, success)
         }
-    }
-
-    override fun onPresenterCreate() {
-        super.onPresenterCreate()
-        fetch(userInteractor.getFollowing(100), FOLLOWINGS_SHOTS, success)
     }
 
     private val success: (shotList: List<Shot>) -> Unit = {

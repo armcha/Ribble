@@ -3,6 +3,7 @@ package io.armcha.ribble.domain.repository
 import io.armcha.ribble.domain.entity.Comment
 import io.armcha.ribble.domain.entity.Like
 import io.armcha.ribble.domain.entity.Shot
+import io.armcha.ribble.domain.fetcher.result_listener.RequestType
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -20,5 +21,5 @@ interface ShotRepository {
 
     fun likeShot(shotId: String): Completable
 
-    fun deleteCommentsCache()
+    fun deleteCacheFor(requestType: RequestType)
 }

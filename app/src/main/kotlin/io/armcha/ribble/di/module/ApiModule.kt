@@ -1,13 +1,13 @@
 package io.armcha.ribble.di.module
 
+import dagger.Module
+import dagger.Provides
 import io.armcha.ribble.BuildConfig
 import io.armcha.ribble.data.network.*
 import io.armcha.ribble.data.pref.Preferences
-import dagger.Module
-import dagger.Provides
-import dagger.multibindings.IntoSet
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -45,9 +45,11 @@ class ApiModule {
             logging.level = HttpLoggingInterceptor.Level.BASIC
             okHttpBuilder.addInterceptor(logging)
         }
-        okHttpBuilder.readTimeout(15.toLong(), TimeUnit.SECONDS)
-        okHttpBuilder.connectTimeout(15.toLong(), TimeUnit.SECONDS)
-        return okHttpBuilder
+        return okHttpBuilder.apply {
+            protocols(listOf(Protocol.HTTP_1_1))
+            readTimeout(15.toLong(), TimeUnit.SECONDS)
+            connectTimeout(15.toLong(), TimeUnit.SECONDS)
+        }
     }
 
     @Singleton

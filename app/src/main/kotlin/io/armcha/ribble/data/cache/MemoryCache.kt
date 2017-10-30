@@ -15,7 +15,7 @@ class MemoryCache @Inject constructor() : LruCache<RequestType, Any>(1024 * 1024
 
     infix fun hasCacheFor(requestType: RequestType) = getCacheForType<Any?>(requestType) != null
 
-    fun clearCacheFor(requestType: RequestType) {
+    infix fun clearCacheFor(requestType: RequestType) {
         remove(requestType)
     }
 }

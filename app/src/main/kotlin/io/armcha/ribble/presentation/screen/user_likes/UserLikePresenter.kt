@@ -2,7 +2,6 @@ package io.armcha.ribble.presentation.screen.user_likes
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import io.armcha.ribble.domain.fetcher.Status
 import io.armcha.ribble.domain.interactor.UserInteractor
 import io.armcha.ribble.presentation.base_mvp.api.ApiPresenter
 import javax.inject.Inject
@@ -18,12 +17,11 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
         when (LIKED_SHOTS.status) {
             LOADING -> view?.showLoading()
             EMPTY_SUCCESS, ERROR -> view?.showNoShots()
-            else -> view?.onDataReceive(userInteractor.getUserLikesFromMemory())
+            else -> fetchUserLikes()
         }
     }
 
-    override fun onPresenterCreate() {
-        super.onPresenterCreate()
+    private fun fetchUserLikes() {
         fetch(userInteractor.getUserLikes(count = 100), LIKED_SHOTS) {
             view?.hideLoading()
             if (it.isNotEmpty())
@@ -40,8 +38,10 @@ class UserLikePresenter @Inject constructor(private val userInteractor: UserInte
 
     override fun onRequestError(errorMessage: String?) {
         super.onRequestError(errorMessage)
-        view?.showNoShots()
-        view?.hideLoading()
-        view?.showError(errorMessage)
+        view?.run {
+            showNoShots()
+            hideLoading()
+            showError(errorMessage)
+        }
     }
 }

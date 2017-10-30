@@ -24,5 +24,7 @@ interface UserRepository {
 
     fun getFollowing(count: Int): Single<List<Shot>>
 
-    fun follow(userName:String) :Completable
+    fun follow(userName: String): Completable
+
+    fun clearCache()
 }

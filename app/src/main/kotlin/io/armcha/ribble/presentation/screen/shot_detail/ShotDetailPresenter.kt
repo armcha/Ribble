@@ -12,7 +12,6 @@ import javax.inject.Inject
 /**
  * Created by Chatikyan on 05.08.2017.
  */
-typealias OnActivityLifecycleEvent = OnLifecycleEvent
 class ShotDetailPresenter @Inject constructor(
         private val commentInteractor: CommentInteractor,
         private val shotLikeInteractor: ShotLikeInteractor)
@@ -25,11 +24,6 @@ class ShotDetailPresenter @Inject constructor(
             COMMENTS statusIs EMPTY_SUCCESS || COMMENTS statusIs ERROR -> view?.showNoComments()
             else -> fetchComments()
         }
-    }
-
-    override fun onPresenterCreate() {
-        super.onPresenterCreate()
-        fetchComments()
     }
 
     private fun fetchComments() {

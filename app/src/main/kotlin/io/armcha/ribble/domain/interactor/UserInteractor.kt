@@ -1,13 +1,10 @@
 package io.armcha.ribble.domain.interactor
 
-import io.armcha.ribble.data.cache.MemoryCache
 import io.armcha.ribble.data.pref.Preferences
 import io.armcha.ribble.data.repository.UserDataRepository
 import io.armcha.ribble.di.scope.PerActivity
 import io.armcha.ribble.domain.entity.Like
-import io.armcha.ribble.domain.entity.Shot
 import io.armcha.ribble.domain.entity.User
-import io.armcha.ribble.domain.fetcher.result_listener.RequestType
 import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -17,8 +14,7 @@ import javax.inject.Inject
  */
 @PerActivity
 class UserInteractor @Inject constructor(private val userDataRepository: UserDataRepository,
-                                         private val preferences: Preferences,
-                                         private val memoryCache: MemoryCache) {
+                                         private val preferences: Preferences) {
 
     fun getUser(code: String): Flowable<User> {
         return userDataRepository.getToken(code)
@@ -28,7 +24,7 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
     }
 
     fun logOut() {
-        memoryCache.evictAll()
+        userDataRepository.clearCache()
         userDataRepository.logOut()
     }
 
@@ -41,8 +37,4 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserDat
     fun getFollowing(count: Int) = userDataRepository.getFollowing(count)
 
     fun follow(userName: String) = userDataRepository.follow(userName)
-
-    fun getFollowingFromMemory(): List<Shot> = memoryCache getCacheForType RequestType.FOLLOWINGS_SHOTS
-
-    fun getUserLikesFromMemory(): List<Like> = memoryCache getCacheForType RequestType.LIKED_SHOTS
 }

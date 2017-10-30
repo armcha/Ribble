@@ -17,7 +17,6 @@ import javax.inject.Inject
 /**
  * Created by Chatikyan on 01.08.2017.
  */
-@ContainerOptions(CacheImplementation.SPARSE_ARRAY)
 abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>> : BaseMVPFragment<V, P>() {
 
     @Inject

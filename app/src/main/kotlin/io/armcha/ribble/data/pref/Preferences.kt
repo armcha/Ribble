@@ -13,7 +13,6 @@ import javax.inject.Singleton
 /**
  * Created by Chatikyan on 29.07.2017.
  */
-@SuppressLint("CommitPrefEdits")
 @Singleton
 class Preferences @Inject constructor(app: Application) {
 

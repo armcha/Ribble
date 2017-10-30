@@ -106,7 +106,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
     private fun startProgress() {
         var started = true
         with(progressAnimator) {
-            duration = 650L
+            duration = 600L
             repeatMode = ValueAnimator.REVERSE
             repeatCount = ValueAnimator.INFINITE
 
@@ -131,7 +131,7 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
 
     private fun startRotation() {
         with(rotateAnimation) {
-            duration = 1100
+            duration = 1000
             repeatCount = Animation.INFINITE
             interpolator = AnimationUtils.LINEAR_INTERPOLATOR
         }
@@ -147,7 +147,6 @@ class CircleProgressView(context: Context, attrs: AttributeSet) : View(context, 
         this.animate()
                 .alpha(to)
                 .setDuration(160)
-                .withLayer()
                 .withEndAction { endBody() }
                 .start()
     }

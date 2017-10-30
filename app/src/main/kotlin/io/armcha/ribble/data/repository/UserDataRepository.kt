@@ -1,7 +1,5 @@
 package io.armcha.ribble.data.repository
 
-import io.armcha.ribble.data.cache.MemoryCache
-import io.armcha.ribble.data.mapper.Mapper
 import io.armcha.ribble.data.network.AuthApiService
 import io.armcha.ribble.data.network.UserApiService
 import io.armcha.ribble.data.pref.Preferences
@@ -22,9 +20,7 @@ import javax.inject.Inject
 class UserDataRepository @Inject constructor(
         private val authApiService: AuthApiService,
         private val userApiService: UserApiService,
-        private var preferences: Preferences,
-        private val mapper: Mapper,
-        private val memoryCache: MemoryCache) : UserRepository {
+        private var preferences: Preferences) : UserRepository, Repository() {
 
     fun getToken(authCode: String) = authApiService.getToken(authCode)
 

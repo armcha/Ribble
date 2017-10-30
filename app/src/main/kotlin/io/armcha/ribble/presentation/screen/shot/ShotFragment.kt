@@ -51,10 +51,13 @@ class ShotFragment : BaseFragment<ShotContract.View, ShotContract.Presenter>(),
 
     private infix fun setUpRecyclerView(shotList: List<Shot>) {
         recyclerAdapter = ShotRecyclerViewAdapter(shotList, this)
-        shotRecyclerView.layoutManager = GridLayoutManager(activity, if (isPortrait()) 2 else 3)
-        shotRecyclerView.setHasFixedSize(true)
-        shotRecyclerView.adapter = recyclerAdapter
-        shotRecyclerView.scheduleLayoutAnimation()
+
+        with(shotRecyclerView) {
+            layoutManager = GridLayoutManager(activity, if (isPortrait()) 2 else 3)
+            setHasFixedSize(true)
+            adapter = recyclerAdapter
+            scheduleLayoutAnimation()
+        }
     }
 
     override fun onShotClicked(shot: Shot) {

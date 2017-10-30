@@ -1,7 +1,5 @@
 package io.armcha.ribble.data.repository
 
-import io.armcha.ribble.data.cache.MemoryCache
-import io.armcha.ribble.data.mapper.Mapper
 import io.armcha.ribble.data.network.ApiConstants
 import io.armcha.ribble.data.network.ShotApiService
 import io.armcha.ribble.di.scope.PerActivity
@@ -10,21 +8,16 @@ import io.armcha.ribble.domain.entity.Like
 import io.armcha.ribble.domain.entity.Shot
 import io.armcha.ribble.domain.fetcher.result_listener.RequestType
 import io.armcha.ribble.domain.repository.ShotRepository
-import io.armcha.ribble.presentation.utils.extensions.log
-import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Created by Chatikyan on 02.08.2017.
  */
 @PerActivity
-class ShotDataRepository @Inject constructor(private var shotApiService: ShotApiService,
-                                             private val memoryCache: MemoryCache,
-                                             private var mapper: Mapper) : ShotRepository {
+class ShotDataRepository @Inject constructor(private var shotApiService: ShotApiService)
+    : ShotRepository, Repository() {
 
     override fun getShotList(shotType: String, count: Int): Flowable<List<Shot>> {
         val requestType = if (shotType == ApiConstants.TYPE_POPULAR)

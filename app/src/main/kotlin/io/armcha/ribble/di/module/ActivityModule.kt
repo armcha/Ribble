@@ -3,9 +3,9 @@ package io.armcha.ribble.di.module
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import io.armcha.ribble.di.scope.PerActivity
 import dagger.Module
 import dagger.Provides
+import io.armcha.ribble.di.scope.PerActivity
 
 /**
  * Created by Chatikyan on 31.07.2017.
@@ -26,4 +26,5 @@ class ActivityModule(private val activity: AppCompatActivity) {
     @Provides
     fun providesFragmentManager(activity: AppCompatActivity): FragmentManager =
             activity.supportFragmentManager
+
 }

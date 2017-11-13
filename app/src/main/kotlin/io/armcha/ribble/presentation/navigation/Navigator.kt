@@ -43,7 +43,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
     private fun addOpenTransition(transaction: FragmentTransaction, withCustomAnimation: Boolean) {
         if (withCustomAnimation) {
             isCustomAnimationUsed = true
-            transaction.setCustomAnimations(io.armcha.ribble.R.anim.slide_in_start, 0)
+            transaction.setCustomAnimations(R.anim.slide_in_start, 0)
         } else {
             isCustomAnimationUsed = false
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -166,7 +166,7 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity,
         val isKeep = backStrategy is BackStrategy.KEEP
         fragmentManager.inTransaction {
             if (isCustomAnimationUsed)
-                setCustomAnimations(0, io.armcha.ribble.R.anim.slide_out_finish)
+                setCustomAnimations(0, R.anim.slide_out_finish)
             if (isKeep) {
                 hide(screen?.fragment)
             } else if (backStrategy is BackStrategy.DESTROY) {

@@ -40,6 +40,11 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
         }
     }
 
+    @OnLifecycleEvent(value = Lifecycle.Event.ON_DESTROY)
+    fun onDestroy() {
+        userInteractor.clearCache()
+    }
+
     override fun onPresenterCreate() {
         super.onPresenterCreate()
         fetch(userInteractor.getAuthenticatedUser()) {
@@ -87,7 +92,7 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
     }
 
     override fun handleDrawerClose() {
-        if (!isArcIcon &&isDrawerOpened)
+        if (!isArcIcon && isDrawerOpened)
             view?.setArcHamburgerIconState()
         isDrawerOpened = false
     }

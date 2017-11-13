@@ -1,5 +1,6 @@
 package io.armcha.ribble.domain.repository
 
+import io.armcha.ribble.data.response.TokenResponse
 import io.armcha.ribble.domain.entity.Like
 import io.armcha.ribble.domain.entity.Shot
 import io.armcha.ribble.domain.entity.User
@@ -27,4 +28,6 @@ interface UserRepository {
     fun clearCache()
 
     fun clearLoginData()
+
+    fun getToken(authCode: String):Flowable<TokenResponse>
 }

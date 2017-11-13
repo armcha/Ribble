@@ -30,4 +30,6 @@ interface UserRepository {
     fun clearLoginData()
 
     fun getToken(authCode: String):Flowable<TokenResponse>
+
+    fun saveToken(token:String?)
 }

@@ -1,7 +1,6 @@
 package io.armcha.ribble.domain.interactor
 
 import io.armcha.ribble.data.network.ApiConstants
-import io.armcha.ribble.data.repository.ShotDataRepository
 import io.armcha.ribble.di.scope.PerActivity
 import io.armcha.ribble.domain.entity.Shot
 import io.armcha.ribble.domain.repository.ShotRepository

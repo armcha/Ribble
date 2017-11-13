@@ -1,10 +1,8 @@
 package io.armcha.ribble.domain.interactor
 
-import io.armcha.ribble.data.repository.ShotDataRepository
 import io.armcha.ribble.di.scope.PerActivity
 import io.armcha.ribble.domain.entity.Like
 import io.armcha.ribble.domain.repository.ShotRepository
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import javax.inject.Inject
 

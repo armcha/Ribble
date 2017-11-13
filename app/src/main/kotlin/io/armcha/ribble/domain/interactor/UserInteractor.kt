@@ -1,6 +1,5 @@
 package io.armcha.ribble.domain.interactor
 
-import io.armcha.ribble.data.pref.Preferences
 import io.armcha.ribble.di.scope.PerActivity
 import io.armcha.ribble.domain.entity.Like
 import io.armcha.ribble.domain.entity.User
@@ -13,12 +12,11 @@ import javax.inject.Inject
  * Created by Chatikyan on 10.08.2017.
  */
 @PerActivity
-class UserInteractor @Inject constructor(private val userDataRepository: UserRepository,
-                                         private val preferences: Preferences) {
+class UserInteractor @Inject constructor(private val userDataRepository: UserRepository) {
 
     fun getUser(code: String): Flowable<User> {
         return userDataRepository.getToken(code)
-                .doOnNext { preferences saveUserToken it.token }
+                .doOnNext { userDataRepository.saveToken(it.token) }
                 .flatMap { userDataRepository.getUser() }
                 .doOnNext { userDataRepository.logIn() }
     }
@@ -28,7 +26,7 @@ class UserInteractor @Inject constructor(private val userDataRepository: UserRep
         userDataRepository.clearLoginData()
     }
 
-    fun clearCache(){
+    fun clearCache() {
         userDataRepository.clearCache()
     }
 

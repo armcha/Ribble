@@ -1,6 +1,5 @@
 package io.armcha.ribble.domain.interactor
 
-import io.armcha.ribble.data.repository.ShotDataRepository
 import io.armcha.ribble.di.scope.PerActivity
 import io.armcha.ribble.domain.entity.Comment
 import io.armcha.ribble.domain.fetcher.result_listener.RequestType
@@ -14,9 +13,7 @@ import javax.inject.Inject
 @PerActivity
 class CommentInteractor @Inject constructor(private val shotRepository: ShotRepository) {
 
-    fun getComments(shotId: String): Single<List<Comment>> {
-        return shotRepository.getShotComments(shotId)
-    }
+    fun getComments(shotId: String) = shotRepository.getShotComments(shotId)
 
     fun deleteCommentsCache() {
         shotRepository.deleteCacheFor(RequestType.COMMENTS)

@@ -26,6 +26,10 @@ class UserDataRepository(
 
     override fun getToken(authCode: String): Flowable<TokenResponse> = authApiService.getToken(authCode)
 
+    override fun saveToken(token: String?) {
+        preferences.saveUserToken(token)
+    }
+
     override fun getUser(): Flowable<User> {
         return userApiService.getUser().map {
             mapper.translate(it)

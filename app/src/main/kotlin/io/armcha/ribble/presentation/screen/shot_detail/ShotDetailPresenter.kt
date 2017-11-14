@@ -6,7 +6,6 @@ import io.armcha.ribble.domain.fetcher.result_listener.RequestType
 import io.armcha.ribble.domain.interactor.CommentInteractor
 import io.armcha.ribble.domain.interactor.ShotLikeInteractor
 import io.armcha.ribble.presentation.base_mvp.api.ApiPresenter
-import io.armcha.ribble.presentation.utils.extensions.log
 import javax.inject.Inject
 
 /**

@@ -71,9 +71,9 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:1.0.2"
 
     //Database
-    implementation "android.arch.persistence.room:runtime:1.0.0-rc1"
-    implementation "android.arch.persistence.room:rxjava2:1.0.0-rc1"
-    kapt "android.arch.persistence.room:compiler:1.0.0-rc1"
+    implementation "android.arch.persistence.room:runtime:1.0.0"
+    implementation "android.arch.persistence.room:rxjava2:1.0.0"
+    kapt "android.arch.persistence.room:compiler:1.0.0"
 
     //RX
     implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
@@ -103,7 +103,7 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:${glideVersion}"
 
     //Leak canary
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 
     //Testing
     testImplementation 'junit:junit:4.12'

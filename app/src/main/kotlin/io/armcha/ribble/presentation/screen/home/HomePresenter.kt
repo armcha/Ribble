@@ -40,11 +40,6 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
         }
     }
 
-    @OnLifecycleEvent(value = Lifecycle.Event.ON_DESTROY)
-    fun onDestroy() {
-        userInteractor.clearCache()
-    }
-
     override fun onPresenterCreate() {
         super.onPresenterCreate()
         fetch(userInteractor.getAuthenticatedUser()) {
@@ -52,6 +47,11 @@ class HomePresenter @Inject constructor(private val userInteractor: UserInteract
             view?.updateDrawerInfo(it)
         }
         view?.openShotFragment()
+    }
+
+    override fun onPresenterDestroy() {
+        super.onPresenterDestroy()
+        userInteractor.clearCache()
     }
 
     override fun handleFragmentChanges(currentTag: String, fragment: Fragment) {

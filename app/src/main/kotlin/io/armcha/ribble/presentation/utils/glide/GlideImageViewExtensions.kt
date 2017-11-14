@@ -8,6 +8,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.target.DrawableImageViewTarget
 
 /**
  * Created by Chatikyan on 28.08.2017.
@@ -34,7 +35,7 @@ private fun load(view: ImageView,
     if (transformationType != TransformationType.NOTHING) {
         glideRequest.transform(transformationType.getTransformation())
     }
-    glideRequest.into(view)
+    glideRequest.into(DrawableImageViewTarget(view))
 }
 
 fun ImageView.clear() {

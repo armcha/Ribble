@@ -46,7 +46,6 @@ class ApiModule {
             okHttpBuilder.addInterceptor(logging)
         }
         return okHttpBuilder.apply {
-            protocols(listOf(Protocol.HTTP_1_1))
             readTimeout(15.toLong(), TimeUnit.SECONDS)
             connectTimeout(15.toLong(), TimeUnit.SECONDS)
         }
